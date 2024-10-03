@@ -44,11 +44,11 @@ create table users (
   email varchar unique not null
 );
 
-create table sessions(
+create table sessions (
   session_id serial primary key,
   created_at timestamp,
   last_seen timestamp,
-  expiration_token varchar
+  expiration_token varchar default null
 );
 
 create table customization(
