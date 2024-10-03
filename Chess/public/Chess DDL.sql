@@ -5,6 +5,7 @@ drop table if exists chess_game_moves;
 drop table if exists player_chessgame;
 drop table if exists play_move;
 drop table if exists player_session;
+drop table if exists player_customization;
 
 
 
@@ -38,9 +39,9 @@ create table chess_moves (
 
 create table player (
   p_id serial primary key,
-  username varchar not null,
+  username varchar unique not null,
   password varchar not null,
-  email varchar not null
+  email varchar unique not null
 );
 
 create table sessions(
@@ -52,10 +53,10 @@ create table sessions(
 
 create table customization(
   cust_id serial primary key,
-  board_pref varchar,
-  piece_pref varchar,
-  dark_mode bool,
-  sound_volume int
+  board_pref varchar default 'normal',
+  piece_pref varchar default 'normal',
+  dark_mode bool default false,
+  sound_volume int default 100
 );
 
 -- relations
@@ -71,8 +72,8 @@ create table chess_game_moves (
 create table player_chessgame (
   p_id int,
   chess_id int,
-  primary key(p_id, chess_id),
-  foreign key (p_id) references player,
+  primary key(chess_id),
+  foreign key (p_id) references player on delete set null,
   foreign key (chess_id) references chess_game
 );
 
@@ -81,7 +82,7 @@ create table play_move (
   move_id varchar,
   move varchar,
   primary key(p_id, move_id),
-  foreign key (p_id) references player,
+  foreign key (p_id) references player on delete set null,
   foreign key (move_id) references chess_moves
 );
 
