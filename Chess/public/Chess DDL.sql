@@ -2,17 +2,17 @@
 
 -- r
 drop table if exists chess_game_moves;
-drop table if exists player_chessgame;
+drop table if exists user_chessgame;
 drop table if exists play_move;
-drop table if exists player_session;
-drop table if exists player_customization;
+drop table if exists user_session;
+drop table if exists user_customization;
 
 
 
 -- e
 drop table if exists chess_game;
 drop table if exists chess_moves;
-drop table if exists player;
+drop table if exists users;
 drop table if exists sessions;
 drop table if exists customization;
 
@@ -32,13 +32,13 @@ create table chess_game (
 
 create table chess_moves (
   move_id varchar primary key not null,
-  player int not null,
+  u_id int not null,
   move varchar not null,
   move_number int not null
 );
 
-create table player (
-  p_id serial primary key,
+create table users (
+  u_id serial primary key,
   username varchar unique not null,
   password varchar not null,
   email varchar unique not null
@@ -69,36 +69,36 @@ create table chess_game_moves (
   foreign key (chess_id) references chess_game
 );
 
-create table player_chessgame (
-  p_id int,
+create table user_chessgame (
+  u_id int,
   chess_id int,
   primary key(chess_id),
-  foreign key (p_id) references player on delete set null,
+  foreign key (u_id) references users on delete set null,
   foreign key (chess_id) references chess_game
 );
 
 create table play_move (
-  p_id int,
+  u_id int,
   move_id varchar,
   move varchar,
-  primary key(p_id, move_id),
-  foreign key (p_id) references player on delete set null,
+  primary key(u_id, move_id),
+  foreign key (u_id) references users on delete set null,
   foreign key (move_id) references chess_moves
 );
 
-create table player_session (
+create table user_session (
   u_id int,
   session_id int,
   primary key (u_id, session_id),
-  foreign key (u_id) references player,
+  foreign key (u_id) references users,
   foreign key (session_id) references sessions
 
 );
 
-create table player_customization (
+create table user_customization (
   u_id int,
   cust_id int,
   primary key (u_id, cust_id),
-  foreign key (u_id) references player,
+  foreign key (u_id) references users,
   foreign key (cust_id) references customization
 );

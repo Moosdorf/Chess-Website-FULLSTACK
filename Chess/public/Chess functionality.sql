@@ -9,11 +9,11 @@ create procedure create_user(in p_username varchar, in p_password varchar, in p_
 language plpgsql as $$
 begin
   if exists ( select 1 
-                  from player 
+                  from users 
                   where username = p_username)
   then results := false; 
   else 
-    insert into player (username, password, email) 
+    insert into users (username, password, email) 
     values (p_username, p_password, p_email);
     results := true;
   end if;
@@ -31,11 +31,11 @@ do $$
 $$;
 
 -- check results
-select * from player;
+select * from users;
 
 
 -- trigger for creating the customization after the user has been created
-drop trigger if exists create_cust on player;
+drop trigger if exists create_cust on users;
 drop function if exists create_customization;
 create function create_customization()
 returns trigger as $$
@@ -45,20 +45,21 @@ begin
   values (default, default, default, default)
   returning cust_id into new_id;
 
-  insert into player_customization values (new.p_id, new_id);
+  insert into user_customization values (new.u_id, new_id);
   return null;
 end; $$
 language plpgsql;
 
--- must be after insert on player
+-- must be after insert on users
 create trigger create_cust 
-after insert on player
+after insert on users
 for each row execute procedure create_customization();
   
 -- create a new user and check that it has customizations
-call create_user('Kongo', 'hashed', 'kongomail@email.com', results);
+call create_user('Kongo', 'hashed', 'kongomail@email.com', null);
 
-select * from player natural join player_customization natural join customization;
+select * from users natural join user_customization natural join customization;
+select * from users;
 
 
 /*
@@ -72,12 +73,12 @@ select * from player natural join player_customization natural join customizatio
 
 /*- logout -> logout and expire the session
 
-- play chess -> create chess table with the players
+- play chess -> create chess table with the userss
 - play move -> insert move into tables with relation to the chess game
 - calculate_rating -> on update of win in chess
 
 - get chess history -> all chess games played in order
-- get leaderboard -> get all players and their rating in descending order
+- get leaderboard -> get all userss and their rating in descending order
 - get move history from specific game -> get move history from
 
 
