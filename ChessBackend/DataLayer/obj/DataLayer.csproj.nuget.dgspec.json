@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Moosdorf\\source\\repos\\ChessBackend\\DataLayer\\DataLayer.csproj": {}
+    "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\DataLayer.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Moosdorf\\source\\repos\\ChessBackend\\DataLayer\\DataLayer.csproj": {
+    "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\DataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Moosdorf\\source\\repos\\ChessBackend\\DataLayer\\DataLayer.csproj",
+        "projectUniqueName": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\DataLayer.csproj",
         "projectName": "DataLayer",
-        "projectPath": "C:\\Users\\Moosdorf\\source\\repos\\ChessBackend\\DataLayer\\DataLayer.csproj",
+        "projectPath": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\DataLayer.csproj",
         "packagesPath": "C:\\Users\\Moosdorf\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Moosdorf\\source\\repos\\ChessBackend\\DataLayer\\obj\\",
+        "outputPath": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Moosdorf\\AppData\\Roaming\\NuGet\\NuGet.Config",

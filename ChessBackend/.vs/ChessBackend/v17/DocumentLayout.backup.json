@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{AF960613-2DD9-4C73-9B57-D075E5EDD2F4}|ChessServer\\ChessServer.csproj|solutionrelative:chessserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|c:\\users\\moosdorf\\source\\repos\\chessbackend\\datalayer\\chesscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|solutionrelative:datalayer\\chesscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{AF960613-2DD9-4C73-9B57-D075E5EDD2F4}|ChessServer\\ChessServer.csproj|c:\\users\\moosdorf\\source\\repos\\chessbackend\\chessserver\\chessserver.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
       "RelativeMoniker": "D:0:0:{AF960613-2DD9-4C73-9B57-D075E5EDD2F4}|ChessServer\\ChessServer.csproj|solutionrelative:chessserver\\chessserver.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     }
@@ -18,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -27,6 +31,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChessContext.cs",
+              "DocumentMoniker": "C:\\Users\\Moosdorf\\source\\repos\\ChessBackend\\DataLayer\\ChessContext.cs",
+              "RelativeDocumentMoniker": "DataLayer\\ChessContext.cs",
+              "ToolTip": "C:\\Users\\Moosdorf\\source\\repos\\ChessBackend\\DataLayer\\ChessContext.cs",
+              "RelativeToolTip": "DataLayer\\ChessContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-19T20:08:31.749Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -43,7 +60,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "ChessServer.http",
               "DocumentMoniker": "C:\\Users\\Moosdorf\\source\\repos\\ChessBackend\\ChessServer\\ChessServer.http",
               "RelativeDocumentMoniker": "ChessServer\\ChessServer.http",

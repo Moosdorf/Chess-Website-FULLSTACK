@@ -1,4 +1,11 @@
+using DataLayer;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var db = new ChessContext();
+
+
+
 
 // Add services to the container.
 

@@ -205,31 +205,116 @@ $$;
 /*
 - play move -> insert move into tables with relation to the chess game. check if on-going
 */
-create procedure move(in move_from, in move_to)
+drop procedure if exists move;
+create procedure move(in player_move text, in uid int, in in_chess_id int)
 language plpgsql
 as $$
 declare 
+  new_move_number int;
+  new_move_id int;
 begin
+  select (move_number + 1) into new_move_number
+  from chess_moves natural join chess_game_moves
+  where chess_id = in_chess_id 
+  order by move_id desc limit 1;
+  
+  if (new_move_number is null) then 
+    new_move_number := 1;
+  end if;
+  
+  insert into chess_moves (u_id, move, move_number)
+  values (uid, player_move, new_move_number)
+  returning move_id into new_move_id;
+  
+  insert into chess_game_moves values (new_move_id, in_chess_id);
+  
+  insert into play_move values (uid, new_move_id, player_move);
   
 end;
 $$;
 
-select * from chess_moves;
-select * from play_move;
+
+
 /*
+end game
+*/
+drop procedure if exists end_game;
+create procedure end_game(in in_chess_id int, in winner_id int)
+language plpgsql
+as $$
+declare
+  winner text;
+  not_ended bool;
+begin
+  
+  select on_going into not_ended
+  from chess_game 
+  where chess_id = in_chess_id;
+  
+  if not_ended then 
+  
+    if winner_id > 0 then 
+      winner := cast(winner_id as text);
+    else 
+      winner := 'tied';
+    end if;
+    
+    update chess_game
+    set (win, on_going, ended) = (winner, false, current_timestamp)
+    where chess_id = in_chess_id;
+    
+  end if;
+  
+end;
+$$;
 
+
+
+
+/*
 - get chess history -> get all chess games a player has played, in order desc
+*/
 
+drop function if exists get_user_chess_history;
+create function get_user_chess_history(in_u_id int)
+returns table (out_chess_id int, out_on_going bool, out_win varchar, out_ended timestamp)
+language plpgsql as $$
+begin 
+  return query
+    select chess_id, on_going, win, ended from users 
+    natural join user_chessgame
+    natural join chess_game
+    where u_id = in_u_id
+    order by ended desc;
 
+end;
+$$;
+
+/*
 - get move history from specific game -> get move history from
+
+*/
+
+drop function if exists get_moves_chess_id;
+create function get_moves_chess_id(in_chess_id int)
+returns table (out_move varchar, out_move_number int, out_chess_id int)
+language plpgsql as $$
+begin 
+  return query
+    select move, move_number, chess_id from chess_moves 
+    natural join chess_game_moves
+    where chess_id = in_chess_id order by move_id desc;
+end;
+$$;
+
+
+
+
+
+/*
 
 - calculate_rating -> on update of win in chess
 - get leaderboard -> get all userss and their rating in descending order
-
-
-
-
-
 
 - friends?
 - searching for usernames
