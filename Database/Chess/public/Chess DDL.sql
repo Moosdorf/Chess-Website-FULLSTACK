@@ -31,7 +31,7 @@ create table chess_game (
 );
 
 create table chess_moves (
-  move_id varchar primary key not null,
+  move_id serial primary key,
   u_id int not null,
   move varchar not null,
   move_number int not null
@@ -47,7 +47,7 @@ create table users (
 create table sessions (
   session_id serial primary key,
   created_at timestamp,
-  last_seen timestamp,
+  ended_at timestamp,
   expiration_token varchar default null
 );
 
@@ -61,26 +61,26 @@ create table customization(
 
 -- relations
 
+create table user_chessgame (
+  u_id int,
+  chess_id int,
+  foreign key (u_id) references users on delete set null,
+  foreign key (chess_id) references chess_game
+);
+
 create table chess_game_moves (
-  move_id varchar not null,
+  move_id int not null,
   chess_id int not null,
   primary key(move_id, chess_id),
   foreign key (move_id) references chess_moves,
   foreign key (chess_id) references chess_game
 );
 
-create table user_chessgame (
-  u_id int,
-  chess_id int,
-  primary key(chess_id),
-  foreign key (u_id) references users on delete set null,
-  foreign key (chess_id) references chess_game
-);
-
 create table play_move (
   u_id int,
-  move_id varchar,
-  move varchar,
+  move_id int,
+  move_from varchar,
+  move_to varchar,
   primary key(u_id, move_id),
   foreign key (u_id) references users on delete set null,
   foreign key (move_id) references chess_moves
