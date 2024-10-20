@@ -1,10 +1,14 @@
 using DataLayer;
+using DataLayer.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var db = new ChessContext();
+var dataservice = new DataService();
 
 var users = db.Users.Select(x => x).ToList();
+
+dataservice.CreateGame(2, 3);
 
 users.ForEach(x => Console.WriteLine(x.username));
 

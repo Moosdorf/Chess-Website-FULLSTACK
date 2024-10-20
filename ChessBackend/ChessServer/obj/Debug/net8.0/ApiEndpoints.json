@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "ContainingType": "ChessServer.Controllers.ChessController",
+    "Method": "CreateGame",
+    "RelativePath": "api/chess",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "ChessServer.Models.CreateChessModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

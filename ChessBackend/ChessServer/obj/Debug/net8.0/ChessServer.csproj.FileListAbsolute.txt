@@ -30,13 +30,6 @@ C:\Users\Moosdorf\source\repos\ChessBackend\ChessServer\obj\Debug\net8.0\refint\
 C:\Users\Moosdorf\source\repos\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.pdb
 C:\Users\Moosdorf\source\repos\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.genruntimeconfig.cache
 C:\Users\Moosdorf\source\repos\ChessBackend\ChessServer\obj\Debug\net8.0\ref\ChessServer.dll
-C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.csproj.AssemblyReference.cache
-C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.AssemblyInfoInputs.cache
-C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.AssemblyInfo.cs
-C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.csproj.CoreCompileInputs.cache
-C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.sourcelink.json
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\bin\Debug\net8.0\appsettings.json
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\bin\Debug\net8.0\ChessServer.exe
@@ -63,6 +56,14 @@ C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\bin\Debug\net8.0\DataLayer.dll
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\bin\Debug\net8.0\DataLayer.pdb
+C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.csproj.AssemblyReference.cache
+C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.AssemblyInfoInputs.cache
+C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.AssemblyInfo.cs
+C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.csproj.CoreCompileInputs.cache
+C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.sourcelink.json
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\staticwebassets\msbuild.ChessServer.Microsoft.AspNetCore.StaticWebAssets.props
@@ -77,4 +78,3 @@ C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.pdb
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.genruntimeconfig.cache
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ref\ChessServer.dll
-C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\ChessBackend\ChessServer\obj\Debug\net8.0\ChessServer.MvcApplicationPartsAssemblyInfo.cs

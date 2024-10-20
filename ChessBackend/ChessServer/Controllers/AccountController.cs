@@ -1,6 +1,12 @@
-﻿namespace ChessServer.Controllers
+﻿using DataLayer;
+using Mapster;
+using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
+namespace ChessServer.Controllers
 {
-    public class AccountController
+    [ApiController]
+    [Route("api/auth")]
+    public class AccountController : ControllerBase
     {
         // log in
         // sign up
