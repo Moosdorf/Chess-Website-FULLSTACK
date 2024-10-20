@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "YAdE7OZgygQ=",
-  "success": false,
+  "dgSpecHash": "rwLLKdSJNg0=",
+  "success": true,
   "projectFilePath": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\ChessServer\\ChessServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Moosdorf\\.nuget\\packages\\mapster\\7.4.0\\mapster.7.4.0.nupkg.sha512",
@@ -23,20 +23,10 @@
     "C:\\Users\\Moosdorf\\.nuget\\packages\\microsoft.openapi\\1.6.14\\microsoft.openapi.1.6.14.nupkg.sha512",
     "C:\\Users\\Moosdorf\\.nuget\\packages\\npgsql\\8.0.5\\npgsql.8.0.5.nupkg.sha512",
     "C:\\Users\\Moosdorf\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.10\\npgsql.entityframeworkcore.postgresql.8.0.10.nupkg.sha512",
-    "C:\\Users\\Moosdorf\\.nuget\\packages\\swashbuckle.aspnetcore\\6.6.2\\swashbuckle.aspnetcore.6.6.2.nupkg.sha512",
-    "C:\\Users\\Moosdorf\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.6.2\\swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
-    "C:\\Users\\Moosdorf\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.6.2\\swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",
-    "C:\\Users\\Moosdorf\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.6.2\\swashbuckle.aspnetcore.swaggerui.6.6.2.nupkg.sha512"
+    "C:\\Users\\Moosdorf\\.nuget\\packages\\swashbuckle.aspnetcore\\6.9.0\\swashbuckle.aspnetcore.6.9.0.nupkg.sha512",
+    "C:\\Users\\Moosdorf\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.9.0\\swashbuckle.aspnetcore.swagger.6.9.0.nupkg.sha512",
+    "C:\\Users\\Moosdorf\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.9.0\\swashbuckle.aspnetcore.swaggergen.6.9.0.nupkg.sha512",
+    "C:\\Users\\Moosdorf\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.9.0\\swashbuckle.aspnetcore.swaggerui.6.9.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1605",
-      "level": "Error",
-      "message": "Warning As Error: Detected package downgrade: Swashbuckle.AspNetCore from 6.9.0 to 6.6.2. Reference the package directly from the project to select a different version. \r\n ChessServer -> DataLayer -> Swashbuckle.AspNetCore (>= 6.9.0) \r\n ChessServer -> Swashbuckle.AspNetCore (>= 6.6.2)",
-      "libraryId": "Swashbuckle.AspNetCore",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    }
-  ]
+  "logs": []
 }

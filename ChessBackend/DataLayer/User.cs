@@ -1,6 +1,10 @@
-﻿namespace DataLayer
+﻿namespace DataLayer;
+
+public class User
 {
-    public class Player
-    {
-    }
+    public int userId { get; set; }
+    public string username { get; set; } = String.Empty;
+    public virtual List<ChessGame> chessGames { get; set; }
+    public virtual Customization customization { get; set; }
+    public virtual List<Session> sessions { get; set; }
 }

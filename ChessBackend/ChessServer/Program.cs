@@ -4,8 +4,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 var db = new ChessContext();
 
+var users = db.Users.Select(x => x).ToList();
 
-
+users.ForEach(x => Console.WriteLine(x.username));
 
 // Add services to the container.
 
