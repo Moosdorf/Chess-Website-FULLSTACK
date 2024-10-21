@@ -2,9 +2,10 @@
 
 public class User
 {
-    public int userId { get; set; }
-    public string username { get; set; } = string.Empty;
-    public virtual List<ChessGame> chessGames { get; set; }
-    public virtual Customization customization { get; set; }
-    public virtual List<Session> sessions { get; set; }
+    public int UserId { get; set; }
+    public string Username { get; set; } = string.Empty;
+    public virtual List<UserChessGames> ChessGames { get; set; }
+    public virtual UserCustomization UserCustomization { get; set; }
+    public virtual UserSession UserSession { get; set; }
+    public virtual List<Session> Sessions { get; set; }
 }

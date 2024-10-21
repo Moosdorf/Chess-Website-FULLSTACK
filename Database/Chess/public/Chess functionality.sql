@@ -20,7 +20,30 @@ begin
 end;
 $$;
 
+-- function to get all users and get a single user
 
+drop function if exists get_users;
+create function get_users()
+returns table (user_id int, username_ int)
+language plpgsql as $$
+begin 
+  select u_id, username
+  from users
+  order by u_id;
+end;
+$$;
+
+drop function if exists get_user;
+create function get_user(id int)
+returns table (user_id int, username_ int)
+language plpgsql as $$
+begin 
+  select u_id, username
+  from users
+  where u_id = id
+  order by u_id;
+end;
+$$;
 
 -- trigger for creating the customization after the user has been created
 drop trigger if exists create_cust on users;
@@ -52,7 +75,7 @@ for each row execute procedure create_customization();
 
 -- procedure to log in and create the session
 drop procedure if exists login;
-create procedure login(in p_username varchar, in p_password varchar, out results boolean)
+create procedure login(in p_username varchar, in p_password varchar)
 LANGUAGE plpgsql
 as $$
 declare 
@@ -78,19 +101,33 @@ begin
     insert into user_session (u_id, session_id) 
     values (user_id, sess_id);
     
-    results := true;
     raise notice 'Sign in successful %, %', user_id, sess_id;
 
    else
     raise notice 'Does not match, cannot sign in';
-    results := false;
   end if;
 end;
 $$;
 
 
 
--- tests
+-- check if log in matches
+drop function if exists check_login_credentials;
+create function check_login_credentials(in p_username varchar, in p_password varchar)
+returns bool
+language plpgsql as $$
+declare 
+  matches bool;
+BEGIN
+  select (count(username) > 0) into matches
+  from users 
+  where username = p_username 
+  and password = p_password;
+  
+  return matches;
+end;
+$$;
+
 
 
 /*

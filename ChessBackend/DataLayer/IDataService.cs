@@ -19,9 +19,9 @@ namespace DataLayer
 
         ChessGame EndGame(int chessId);
 
-        IList<ChessGame> GetGames(int userId);
+        IList<UserChessGames> GetGames(int userId);
 
-        IList<ChessGame> GetGames();
+        IList<UserChessGames> GetGames();
 
         IList<ChessMove> GetMoves(int chessId);
         ChessGame? GetGame(int chessId);
@@ -32,6 +32,8 @@ namespace DataLayer
         User GetUser(int userId);
 
         bool UpdateCustomization();
+
+
 
 
         // authentication stuff

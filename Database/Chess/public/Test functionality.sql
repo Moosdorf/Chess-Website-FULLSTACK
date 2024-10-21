@@ -17,9 +17,10 @@ select * from customization;
 
 -- tests
 
-call login('Kongo', 'hashed', null);
+call login('Kongo', 'hashed');
 
 select * from get_session_history('Kongo');
+
 
 
 /*

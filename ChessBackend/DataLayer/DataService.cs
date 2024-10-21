@@ -16,6 +16,7 @@ public class DataService : IDataService
         db = new ChessContext();
     }
 
+    // chess stuff
     public ChessGame CreateGame(int userId1, int userId2)
     {
         int newId = db.ChessGames.Max(x => x.chessId) + 1;
@@ -42,22 +43,21 @@ public class DataService : IDataService
     {
         throw new NotImplementedException();
     }
-    public ChessGame? GetGame(int chessId)
+    public ChessGame GetGame(int chessId)
     {
-        var game = db.ChessGames.Include(x => x.players)
+        var game = db.ChessGames.Include(x => x.Players)
                                 .Where(x => x.chessId == chessId)
                                 .Select(x => x)
                                 .FirstOrDefault();
 
-        if (game == null) return null;
         return game;
     }
-    public IList<ChessGame> GetGames(int userId)
+    public IList<UserChessGames> GetGames(int userId)
     {
-        return db.Users.Where(x => x.userId == userId).Select(x => x.chessGames).First();
+        return db.Users.Where(x => x.UserId == userId).Select(x => x.ChessGames).First();
     }
 
-    public IList<ChessGame> GetGames()
+    public IList<UserChessGames> GetGames()
     {
         throw new NotImplementedException();
     }
@@ -67,6 +67,7 @@ public class DataService : IDataService
         throw new NotImplementedException();
     }
 
+    // users
     public User GetUser(int userId)
     {
         throw new NotImplementedException();
@@ -74,12 +75,33 @@ public class DataService : IDataService
 
     public IList<User> GetUsers()
     {
-        throw new NotImplementedException();
+        IList<User> users = db.Users.Include(x => x.UserCustomization)
+                                    .Include(x => x.ChessGames)
+                                    .AsSplitQuery()
+                                    .ToList();
+
+        return users;
     }
 
+    // authentication
     public bool LogIn(string username, string password)
     {
-        throw new NotImplementedException();
+        bool loggedIn = false;
+
+        loggedIn = db.Database
+                  .SqlQueryRaw<bool>("select * from check_login_credentials({0}, {1})", username, password)
+                  .AsEnumerable()
+                  .FirstOrDefault();
+        
+        
+
+        if (loggedIn)
+        {
+            db.Database.ExecuteSqlRaw("call login({0}, {1})", username, password);
+            return true;
+        }
+
+        return false;
     }
 
     public bool LogOut(string username)

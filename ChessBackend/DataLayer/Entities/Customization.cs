@@ -10,5 +10,6 @@
         public int userId { get; set; }
         public int customizationId { get; set; }
 
+        public UserCustomization UserCustomization { get; set; }
     }
 }

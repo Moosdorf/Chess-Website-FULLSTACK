@@ -6,11 +6,24 @@ var builder = WebApplication.CreateBuilder(args);
 var db = new ChessContext();
 var dataservice = new DataService();
 
-var users = db.Users.Select(x => x).ToList();
+// var users = db.Users.Select(x => x).ToList();
 
-dataservice.CreateGame(2, 3);
+// dataservice.CreateGame(2, 3);
 
-users.ForEach(x => Console.WriteLine(x.username));
+// users.ForEach(x => Console.WriteLine(x.username));
+
+// Console.WriteLine(dataservice.LogIn("Kongo", "hashed")); 
+
+var users = dataservice.GetUsers();
+
+foreach (var user in users)
+{
+    Console.WriteLine("user: " + user.Username);
+}
+
+var games = dataservice.GetGame(1);
+
+Console.WriteLine("game id " + games.chessId + " player1 = " + games.Players[0].UserId + " player2 = " + games.Players[1].UserId);
 
 // Add services to the container.
 
