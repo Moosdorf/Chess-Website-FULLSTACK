@@ -16,6 +16,10 @@ var dataservice = new DataService();
 
 var users = dataservice.GetUsers();
 
+
+
+
+
 foreach (var user in users)
 {
     Console.WriteLine("user: " + user.Username);

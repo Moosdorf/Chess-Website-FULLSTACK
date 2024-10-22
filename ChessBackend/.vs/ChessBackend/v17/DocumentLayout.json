@@ -7,48 +7,32 @@
       "RelativeMoniker": "D:0:0:{AF960613-2DD9-4C73-9B57-D075E5EDD2F4}|ChessServer\\ChessServer.csproj|solutionrelative:chessserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|c:\\users\\moosdorf\\desktop\\sem1\\chess-website-fullstack\\chessbackend\\datalayer\\entities\\chessgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|solutionrelative:datalayer\\entities\\chessgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|c:\\users\\moosdorf\\desktop\\sem1\\chess-website-fullstack\\chessbackend\\datalayer\\dataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|solutionrelative:datalayer\\dataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{AF960613-2DD9-4C73-9B57-D075E5EDD2F4}|ChessServer\\ChessServer.csproj|c:\\users\\moosdorf\\desktop\\sem1\\chess-website-fullstack\\chessbackend\\chessserver\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{AF960613-2DD9-4C73-9B57-D075E5EDD2F4}|ChessServer\\ChessServer.csproj|solutionrelative:chessserver\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|c:\\users\\moosdorf\\desktop\\sem1\\chess-website-fullstack\\chessbackend\\datalayer\\idataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|solutionrelative:datalayer\\idataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|c:\\users\\moosdorf\\desktop\\sem1\\chess-website-fullstack\\chessbackend\\datalayer\\chesscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|solutionrelative:datalayer\\chesscontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|c:\\users\\moosdorf\\desktop\\sem1\\chess-website-fullstack\\chessbackend\\datalayer\\entities\\userchessgames.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|solutionrelative:datalayer\\entities\\userchessgames.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|c:\\users\\moosdorf\\desktop\\sem1\\chess-website-fullstack\\chessbackend\\datalayer\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|solutionrelative:datalayer\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|c:\\users\\moosdorf\\desktop\\sem1\\chess-website-fullstack\\chessbackend\\datalayer\\entities\\chessgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|solutionrelative:datalayer\\entities\\chessgame.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|c:\\users\\moosdorf\\desktop\\sem1\\chess-website-fullstack\\chessbackend\\datalayer\\idataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|solutionrelative:datalayer\\idataservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AF960613-2DD9-4C73-9B57-D075E5EDD2F4}|ChessServer\\ChessServer.csproj|c:\\users\\moosdorf\\desktop\\sem1\\chess-website-fullstack\\chessbackend\\chessserver\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AF960613-2DD9-4C73-9B57-D075E5EDD2F4}|ChessServer\\ChessServer.csproj|solutionrelative:chessserver\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|c:\\users\\moosdorf\\desktop\\sem1\\chess-website-fullstack\\chessbackend\\datalayer\\entities\\customization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|solutionrelative:datalayer\\entities\\customization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|c:\\users\\moosdorf\\desktop\\sem1\\chess-website-fullstack\\chessbackend\\datalayer\\entities\\usercustomization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|solutionrelative:datalayer\\entities\\usercustomization.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|c:\\users\\moosdorf\\desktop\\sem1\\chess-website-fullstack\\chessbackend\\datalayer\\entities\\usersession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|solutionrelative:datalayer\\entities\\usersession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|c:\\users\\moosdorf\\desktop\\sem1\\chess-website-fullstack\\chessbackend\\datalayer\\entities\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E45CEED-0E9A-475A-92D4-7A2762916BF8}|DataLayer\\DataLayer.csproj|solutionrelative:datalayer\\entities\\session.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,34 +42,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 7,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ChessGame.cs",
-              "DocumentMoniker": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\Entities\\ChessGame.cs",
-              "RelativeDocumentMoniker": "DataLayer\\Entities\\ChessGame.cs",
-              "ToolTip": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\Entities\\ChessGame.cs",
-              "RelativeToolTip": "DataLayer\\Entities\\ChessGame.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T21:40:00.748Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UserChessGames.cs",
-              "DocumentMoniker": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\Entities\\UserChessGames.cs",
-              "RelativeDocumentMoniker": "DataLayer\\Entities\\UserChessGames.cs",
-              "ToolTip": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\Entities\\UserChessGames.cs",
-              "RelativeToolTip": "DataLayer\\Entities\\UserChessGames.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T21:35:58.386Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -96,46 +54,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Session.cs",
-              "DocumentMoniker": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\Entities\\Session.cs",
-              "RelativeDocumentMoniker": "DataLayer\\Entities\\Session.cs",
-              "ToolTip": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\Entities\\Session.cs",
-              "RelativeToolTip": "DataLayer\\Entities\\Session.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T21:12:43.639Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "UserSession.cs",
-              "DocumentMoniker": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\Entities\\UserSession.cs",
-              "RelativeDocumentMoniker": "DataLayer\\Entities\\UserSession.cs",
-              "ToolTip": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\Entities\\UserSession.cs",
-              "RelativeToolTip": "DataLayer\\Entities\\UserSession.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T21:11:05.945Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "UserCustomization.cs",
-              "DocumentMoniker": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\Entities\\UserCustomization.cs",
-              "RelativeDocumentMoniker": "DataLayer\\Entities\\UserCustomization.cs",
-              "ToolTip": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\Entities\\UserCustomization.cs",
-              "RelativeToolTip": "DataLayer\\Entities\\UserCustomization.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T20:53:12.909Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "Customization.cs",
               "DocumentMoniker": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\Entities\\Customization.cs",
               "RelativeDocumentMoniker": "DataLayer\\Entities\\Customization.cs",
@@ -143,25 +62,24 @@
               "RelativeToolTip": "DataLayer\\Entities\\Customization.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T20:51:27.714Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-21T20:51:27.714Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "ChessContext.cs",
               "DocumentMoniker": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\ChessContext.cs",
               "RelativeDocumentMoniker": "DataLayer\\ChessContext.cs",
               "ToolTip": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\ChessContext.cs",
               "RelativeToolTip": "DataLayer\\ChessContext.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAuwDkAAABCAAAAAAAAAA==",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAswEIAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-21T20:49:16.796Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\Entities\\User.cs",
               "RelativeDocumentMoniker": "DataLayer\\Entities\\User.cs",
@@ -174,7 +92,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "UserModel.cs",
               "DocumentMoniker": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\ChessServer\\Models\\UserModel.cs",
               "RelativeDocumentMoniker": "ChessServer\\Models\\UserModel.cs",
@@ -182,12 +100,11 @@
               "RelativeToolTip": "ChessServer\\Models\\UserModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T20:27:38.527Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-21T20:27:38.527Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "IDataService.cs",
               "DocumentMoniker": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\IDataService.cs",
               "RelativeDocumentMoniker": "DataLayer\\IDataService.cs",
@@ -195,8 +112,7 @@
               "RelativeToolTip": "DataLayer\\IDataService.cs",
               "ViewState": "AgIAAAoAAAAAAAAAAAA8wBcAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-21T20:26:24.09Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-21T20:26:24.09Z"
             },
             {
               "$type": "Document",
@@ -213,15 +129,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "DataService.cs",
               "DocumentMoniker": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\DataService.cs",
               "RelativeDocumentMoniker": "DataLayer\\DataService.cs",
               "ToolTip": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\DataService.cs",
               "RelativeToolTip": "DataLayer\\DataService.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAowC0AAAApAAAAAAAAAA==",
+              "ViewState": "AgIAAE4AAAAAAAAAAAAkwGMAAABQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-21T19:52:31.213Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ChessGame.cs",
+              "DocumentMoniker": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\Entities\\ChessGame.cs",
+              "RelativeDocumentMoniker": "DataLayer\\Entities\\ChessGame.cs",
+              "ToolTip": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\DataLayer\\Entities\\ChessGame.cs",
+              "RelativeToolTip": "DataLayer\\Entities\\ChessGame.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-21T21:40:00.748Z",
               "EditorCaption": ""
             }
           ]
