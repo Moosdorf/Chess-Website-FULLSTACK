@@ -21,7 +21,7 @@ namespace DataLayer
 
         IList<UserChessGames> GetGames(int userId);
 
-        IList<UserChessGames> GetGames();
+        IList<ChessGame> GetGames();
 
         IList<ChessMove> GetMoves(int chessId);
         ChessGame? GetGame(int chessId);

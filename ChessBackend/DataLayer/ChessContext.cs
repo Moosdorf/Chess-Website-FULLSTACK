@@ -13,6 +13,7 @@ public class ChessContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<ChessGame> ChessGames { get; set; }
+    public DbSet<UserChessGames> UserChessGames { get; set; }
     public DbSet<ChessMove> ChessMoves { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<Customization> Customizations { get; set; }
@@ -33,6 +34,7 @@ public class ChessContext : DbContext
         MapSessions(builder);
         MapUserCustomization(builder);
         MapChessMoves(builder);
+        MapChessPlayerMove(builder);
         //MapChessGameMoves(builder); 
         //MapUserChessGames(builder); 
         //MapPlayMove(builder);       
@@ -152,25 +154,30 @@ public class ChessContext : DbContext
 
 
     }
+ 
+    private static void MapChessPlayerMove(ModelBuilder builder)
+    {
+        builder.Entity<ChessPlayerMove>().ToTable("chess_game_moves");
+        builder.Entity<ChessPlayerMove>().HasKey(x => new { x.chessId, x.userId});
+
+        builder.Entity<ChessPlayerMove>().Property(x => x.chessId).HasColumnName("chess_id");
+        builder.Entity<ChessPlayerMove>().Property(x => x.userId).HasColumnName("user_id");
+
+    }
     /*
-    private static void MapPlayMove(ModelBuilder builder)
-    {
-        throw new NotImplementedException();
-    }
+ private static void MapChessGameMoves(ModelBuilder builder)
+ {
+     throw new NotImplementedException();
+ }
 
-    private static void MapChessGameMoves(ModelBuilder builder)
-    {
-        throw new NotImplementedException();
-    }
+ private static void MapUserChessGames(ModelBuilder builder)
+ {
+     throw new NotImplementedException();
+ }
 
-    private static void MapUserChessGames(ModelBuilder builder)
-    {
-        throw new NotImplementedException();
-    }
-
-    private static void MapUserSession(ModelBuilder builder)
-    { 
-        throw new NotImplementedException();
-    }*/
+ private static void MapUserSession(ModelBuilder builder)
+ { 
+     throw new NotImplementedException();
+ }*/
 
 }

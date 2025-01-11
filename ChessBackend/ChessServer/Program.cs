@@ -14,20 +14,20 @@ var dataservice = new DataService();
 
 // Console.WriteLine(dataservice.LogIn("Kongo", "hashed")); 
 
-var users = dataservice.GetUsers();
+// var users = dataservice.GetUsers();
+var games = dataservice.GetGames();
 
-
-
-
-
-foreach (var user in users)
+foreach (var item in games)
 {
-    Console.WriteLine("user: " + user.Username);
+    Console.WriteLine("chess id " + item.chessId);
 }
 
-var games = dataservice.GetGame(1);
 
-Console.WriteLine("game id " + games.chessId + " player1 = " + games.Players[0].UserId + " player2 = " + games.Players[1].UserId);
+
+
+//var game = dataservice.GetGame(1);
+
+//Console.WriteLine("game id " + game.chessId + " player1 = " + game.Players[0].UserId + " player2 = " + game.Players[1].UserId);
 
 // Add services to the container.
 

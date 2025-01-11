@@ -57,9 +57,12 @@ public class DataService : IDataService
         return db.Users.Where(x => x.UserId == userId).Select(x => x.ChessGames).First();
     }
 
-    public IList<UserChessGames> GetGames()
+    public IList<ChessGame> GetGames()
     {
-        throw new NotImplementedException();
+        return db.ChessGames
+                        .Include(x => x.Players)
+                        .Include(x => x.moves)
+                        .Select(x => x).ToList();
     }
 
     public IList<ChessMove> GetMoves(int chessId)
@@ -70,7 +73,11 @@ public class DataService : IDataService
     // users
     public User GetUser(int userId)
     {
-        throw new NotImplementedException();
+        User user = db.Users.Include(x => x.UserCustomization)
+                            .Include(x => x.ChessGames)
+                            .Where(x => x.UserId == userId)
+                            .First();
+        return user;
     }
 
     public IList<User> GetUsers()
