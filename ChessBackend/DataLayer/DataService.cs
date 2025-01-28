@@ -16,65 +16,12 @@ public class DataService : IDataService
         db = new ChessContext();
     }
 
-    // chess stuff
-    public ChessGame CreateGame(int userId1, int userId2)
-    {
-        int newId = db.ChessGames.Max(x => x.chessId) + 1;
-        var chessGame =  db.ChessGames
-                        .FromSqlRaw("call create_chess_game({0}, {1})", userId1, userId2)
-                        .AsEnumerable()
-                        .FirstOrDefault();
-
-
-        if (chessGame == null)
-        {
-            return null;
-        }
-        return chessGame;
-
-    }
-
-    public ChessMove CreateMove(string move, int chessId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public ChessGame EndGame(int chessId)
-    {
-        throw new NotImplementedException();
-    }
-    public ChessGame GetGame(int chessId)
-    {
-        var game = db.ChessGames.Include(x => x.Players)
-                                .Where(x => x.chessId == chessId)
-                                .Select(x => x)
-                                .FirstOrDefault();
-
-        return game;
-    }
-    public IList<UserChessGames> GetGames(int userId)
-    {
-        return db.Users.Where(x => x.UserId == userId).Select(x => x.ChessGames).First();
-    }
-
-    public IList<ChessGame> GetGames()
-    {
-        return db.ChessGames
-                        .Include(x => x.Players)
-                        .Include(x => x.moves)
-                        .Select(x => x).ToList();
-    }
-
-    public IList<ChessMove> GetMoves(int chessId)
-    {
-        throw new NotImplementedException();
-    }
+   
 
     // users
     public User GetUser(int userId)
     {
-        User user = db.Users.Include(x => x.UserCustomization)
-                            .Include(x => x.ChessGames)
+        User user = db.Users.Include(x => x.ChessGames)
                             .Where(x => x.UserId == userId)
                             .First();
         return user;
@@ -82,8 +29,7 @@ public class DataService : IDataService
 
     public IList<User> GetUsers()
     {
-        IList<User> users = db.Users.Include(x => x.UserCustomization)
-                                    .Include(x => x.ChessGames)
+        IList<User> users = db.Users.Include(x => x.ChessGames)
                                     .AsSplitQuery()
                                     .ToList();
 

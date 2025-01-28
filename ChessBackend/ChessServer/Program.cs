@@ -2,39 +2,23 @@ using DataLayer;
 using DataLayer.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddTransient<IDataService, DataService>();
+builder.Services.AddTransient<IChessDataService, ChessDataService>();
 
-var db = new ChessContext();
-var dataservice = new DataService();
-
-// var users = db.Users.Select(x => x).ToList();
-
-// dataservice.CreateGame(2, 3);
-
-// users.ForEach(x => Console.WriteLine(x.username));
-
-// Console.WriteLine(dataservice.LogIn("Kongo", "hashed")); 
-
-// var users = dataservice.GetUsers();
-var games = dataservice.GetGames();
-
-foreach (var item in games)
-{
-    Console.WriteLine("chess id " + item.chessId);
-}
-
-
-
-
-//var game = dataservice.GetGame(1);
-
-//Console.WriteLine("game id " + game.chessId + " player1 = " + game.Players[0].UserId + " player2 = " + game.Players[1].UserId);
-
-// Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddCors(options => // https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-9.0
+{
+    options.AddPolicy(name: "AllowSpecificOrigin",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader();
+        });
+});
 
 var app = builder.Build();
 
@@ -45,9 +29,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+
 
 app.UseAuthorization();
+app.UseCors("AllowSpecificOrigin");
 
 app.MapControllers();
 

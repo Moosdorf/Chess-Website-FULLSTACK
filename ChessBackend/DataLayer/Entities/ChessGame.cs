@@ -2,7 +2,7 @@
 
 public class ChessGame
 {
-    public int chessId { get; set; }
+    public int ChessId { get; set; }
     public virtual List<UserChessGames> Players { get; set; }
-    public List<ChessMove> moves = new List<ChessMove>();
+    public List<ChessGameMoves> moves = new List<ChessGameMoves>();
 }

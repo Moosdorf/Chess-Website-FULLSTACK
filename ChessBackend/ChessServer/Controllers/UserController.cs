@@ -7,8 +7,7 @@ namespace ChessServer.Controllers;
 [Route("api/user")]
 public class UserController : ControllerBase
 {
-    // get customization
-    // update customization
+
     // rating stuff
     // games? maybe just in chess controller
 
