@@ -4,6 +4,7 @@ using DataLayer.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
 namespace ChessServer.Controllers
@@ -36,8 +37,14 @@ namespace ChessServer.Controllers
             {
                 return NotFound();
             }
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true, // Optional: Makes the JSON output more readable
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull // Include properties even if they are null
+            };
 
-            return Ok(JsonSerializer.Serialize(game));
+            var serializedOutput = JsonSerializer.Serialize(game, options);
+            return Ok(serializedOutput);
         }
 
         [HttpPut]
@@ -46,19 +53,19 @@ namespace ChessServer.Controllers
         {
             var chessState = JsonSerializer.Deserialize<PieceModel[][]>(moveModel.ChessState);
 
-            Console.WriteLine(chessState);
-            string pattern = @"\D"; 
+            string pattern = @"\D"; // pattern for removing all non ints
             string moves = Regex.Replace(moveModel.Move, pattern, "");
 
-            int attackerRow = Int32.Parse(moves.Substring(0, 1));
-            int attackerCol = Int32.Parse(moves.Substring(1, 1)); 
+            int attackerRow = Int32.Parse(moves.Substring(0, 1)); // parse ints attackrow, attackcol, victimrow, victimcol)
+            int attackerCol = Int32.Parse(moves.Substring(1, 1));
             int victimRow = Int32.Parse(moves.Substring(2, 1));
             int victimCol = Int32.Parse(moves.Substring(3, 1));
 
-            chessState[victimRow][victimCol] = chessState[attackerRow][attackerCol];
-            chessState[attackerRow][attackerCol] = new PieceModel { piece = "blank", color = "blank" };
+            chessState = db.Move(chessState, (attackerRow, attackerCol), (victimRow, victimCol));
 
-            Console.WriteLine(moves);
+            if (chessState == null) return BadRequest("Cannot move");
+
+            
 
             return Ok(JsonSerializer.Serialize(chessState));
         }
@@ -67,6 +74,7 @@ namespace ChessServer.Controllers
         {
             throw new NotImplementedException();
         }
+
 
 
 

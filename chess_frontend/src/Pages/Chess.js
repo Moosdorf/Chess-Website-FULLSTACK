@@ -22,8 +22,10 @@ async function createBoard() {
 
     var jsonText = await res.text();
     var chessBoard = await JSON.parse(jsonText);
+    await console.log(chessBoard);
+
     chessBoard = chessBoard.map(row => (
-        row.map(piece => new Piece(piece.piece, piece.color, piece.id))
+        row.map(piece => new Piece(piece.id, piece.piece, piece.color, piece.row, piece.col, piece.moves, piece.availableMoves))
     ));
     return chessBoard;
 }
@@ -49,10 +51,14 @@ const convertPosition = (row, col) => {
 const ReversedContext = createContext(null);
 function Chess() {
     const [chessBoard, setChessBoard] = useState(null);
+    const [chessBoardHistory, setChessBoardHistory] = useState([]); 
     const [reversed, setReversed] = useState(false);
     
     useEffect(() => {
-        createBoard().then(board => setChessBoard(board))
+        createBoard().then(board => {
+            setChessBoard(board);
+            setChessBoardHistory([[board]]);
+        })
     }, []);
 
     const move = (e, target) => {
@@ -61,6 +67,22 @@ function Chess() {
 
         var attackerPosition = findPosition(chessBoard, data);
         var victimPosition = findPosition(chessBoard, target);
+
+        var attacker = chessBoard[attackerPosition.row][attackerPosition.col];
+
+        
+        for (let move = 0; move < attacker.availableMoves.length; move++) { // check if the move is in the available moves list
+            if (attacker.availableMoves[move] === [victimPosition.row, victimPosition.col]) {
+
+            }
+        }
+        attacker.availableMoves.every((move) => move.includes([victimPosition.row, victimPosition.col])) 
+        {
+            console.log([victimPosition.row, victimPosition.col]);
+            console.log(attacker);
+            console.log("cant move");
+            return;
+        }
 
         const request = new Request(`http://localhost:5121/api/chess/${1}/move`, {
             method: "PUT",
@@ -76,25 +98,29 @@ function Chess() {
         .then(data => JSON.parse(data))
         .then(results => {
             let chessBoard = results.map(row => (
-                row.map(piece => new Piece(piece.piece, piece.color, piece.id))
+                row.map(piece => new Piece(piece.id, piece.piece, piece.color, piece.row, piece.col, piece.moves, piece.availableMoves))
             ));
             setChessBoard(chessBoard);
+            setChessBoardHistory(history => [...history, chessBoard]);
         })
         .catch(e => console.log(e));
+        
     }
     
-
+    var black = chessBoardHistory.length % 2 === 0;
+    var turn = (black) ? "black" : "white";
     return ( // give info if board is reveresed or not.
         <ReversedContext.Provider value={reversed}> 
             <Container className='center'>
                 <Row>
                     <Col>
                         <Title message="Chess Game"/>
+                <p>{(black) ? "black" : "white"}</p>
+
                     </Col>
                 </Row>
-                {chessBoard && <ChessBoard chessState={chessBoard} move={move}/>}
+                {chessBoard && <ChessBoard chessState={chessBoard} move={move} turnColor={turn}/>}
 
-                
                 <br/>
                 {chessBoard && <Button onClick={() => {
                     setReversed(c => !c);

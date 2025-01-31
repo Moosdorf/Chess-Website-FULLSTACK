@@ -11,6 +11,7 @@ namespace DataLayer
     public interface IChessDataService
     {
         PieceModel[][] CreateGame(int userId1, int userId2);
+        PieceModel[][]? Move(PieceModel[][] chessBoard, (int, int) attacker, (int, int) victim);
 
         ChessMove CreateMove(string move, int chessId);
 
