@@ -70,18 +70,12 @@ function Chess() {
 
         var attacker = chessBoard[attackerPosition.row][attackerPosition.col];
 
-        
-        for (let move = 0; move < attacker.availableMoves.length; move++) { // check if the move is in the available moves list
-            if (attacker.availableMoves[move] === [victimPosition.row, victimPosition.col]) {
 
-            }
-        }
         attacker.availableMoves.every((move) => move.includes([victimPosition.row, victimPosition.col])) 
         {
             console.log([victimPosition.row, victimPosition.col]);
             console.log(attacker);
             console.log("cant move");
-            return;
         }
 
         const request = new Request(`http://localhost:5121/api/chess/${1}/move`, {
