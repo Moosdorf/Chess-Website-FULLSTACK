@@ -13,5 +13,12 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Build and start all services
+        run: docker compose up -d --build
+
       - name: Run backend tests
-        run: docker compose run backend dotnet test ./Testing/Testing.csproj
+        run: docker compose exec backend dotnet test ./Testing/Testing.csproj
+
+      - name: Shutdown services
+        run: docker compose down
+
