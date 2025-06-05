@@ -17,7 +17,7 @@ jobs:
         run: docker compose up -d --build
 
       - name: Run backend tests
-        run: docker exec backend dotnet test ./Testing/Testing.csproj
+        run: docker exec backend-1 dotnet test ./Testing/Testing.csproj
 
       - name: Shutdown containers
         run: docker-compose down
