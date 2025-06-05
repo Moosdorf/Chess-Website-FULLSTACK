@@ -1,0 +1,23 @@
+name: Backend Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Start Docker services
+        run: docker-compose up -d --build
+
+      - name: Run backend tests
+        run: docker exec backend dotnet test ./Testing/Testing.csproj
+
+      - name: Shutdown containers
+        run: docker-compose down
