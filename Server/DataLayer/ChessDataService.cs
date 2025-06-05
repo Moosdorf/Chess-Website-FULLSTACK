@@ -183,7 +183,7 @@ public class ChessDataService : IChessDataService
 
             return chessBoard; // return new state
         }
-        return null;
+        // return null;
 
     }
 

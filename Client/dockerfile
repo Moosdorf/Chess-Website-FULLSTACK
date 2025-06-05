@@ -1,0 +1,22 @@
+# use the official Node.js 22 image as the base image
+FROM node:22
+
+# set the working directory inside the container to /app
+WORKDIR /app
+
+# copy package.json and package-lock.json to /app
+# this lets us install dependencies before copying all source files
+COPY package*.json ./
+
+# install the Node.js dependencies declared in package.json
+RUN npm install
+
+# copy the app’s source code into the container
+COPY . .
+
+# tell Docker that the container will listen on port 3000 at runtime
+EXPOSE 3000
+
+# Define the command to run your app when the container starts
+# This runs the "start" script from your package.json (usually starts the React dev server)
+CMD ["npm", "start"]

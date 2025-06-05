@@ -17,6 +17,7 @@ function Frontpage() {
                     <Button variant='primary' onClick={() => navigate("/chess_game")}>
                         Play Chess
                     </Button>
+                    
                 </Col>
             </Row>
         </Container>)

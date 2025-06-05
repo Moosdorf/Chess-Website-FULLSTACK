@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rwLLKdSJNg0=",
+  "dgSpecHash": "G7UdpPZ8iBI=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\ChessBackend\\ChessServer\\ChessServer.csproj",
+  "projectFilePath": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\Server\\ChessServer\\ChessServer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Moosdorf\\.nuget\\packages\\mapster\\7.4.0\\mapster.7.4.0.nupkg.sha512",
     "C:\\Users\\Moosdorf\\.nuget\\packages\\mapster.core\\1.2.1\\mapster.core.1.2.1.nupkg.sha512",

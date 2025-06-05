@@ -1,0 +1,9 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0
+
+WORKDIR /app
+
+# Copy everything so dotnet watch can see it
+COPY . .
+
+# Use dotnet watch for hot reload
+CMD ["dotnet", "watch", "run", "--project", "ChessServer/ChessServer.csproj"]

@@ -1,0 +1,23 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Docker
+      run: docker-compose up -d
+
+    - name: Run backend tests
+      run: docker exec <your_backend_service_name> pytest
+
+    - name: Run frontend lint
+      run: docker exec <your_frontend_service_name> npm run lint
+
+    - name: Shutdown
+      run: docker-compose down

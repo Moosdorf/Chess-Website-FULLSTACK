@@ -6,7 +6,7 @@ import ChessBoard from '../Components/ChessBoard.js';
 import Piece from '../Data/Piece.js';
 
 async function createBoard() {
-    let res = await fetch(`http://localhost:5121/api/chess/new`, {
+    let res = await fetch(`http://localhost:5000/api/chess/new`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -78,7 +78,7 @@ function Chess() {
             console.log("cant move");
         }
 
-        const request = new Request(`http://localhost:5121/api/chess/${1}/move`, {
+        const request = new Request(`http://localhost:5000/api/chess/${1}/move`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json", // Correct Content-Type for JSON

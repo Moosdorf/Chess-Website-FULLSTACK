@@ -21,17 +21,14 @@ public class DataService : IDataService
     // users
     public User GetUser(int userId)
     {
-        User user = db.Users.Include(x => x.ChessGames)
-                            .Where(x => x.UserId == userId)
+        User user = db.Users.Where(x => x.UserId == userId)
                             .First();
         return user;
     }
 
     public IList<User> GetUsers()
     {
-        IList<User> users = db.Users.Include(x => x.ChessGames)
-                                    .AsSplitQuery()
-                                    .ToList();
+        IList<User> users = db.Users.ToList();
 
         return users;
     }

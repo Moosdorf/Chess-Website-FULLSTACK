@@ -8,7 +8,5 @@ namespace ChessServer.Controllers;
 public class UserController : ControllerBase
 {
 
-    // rating stuff
-    // games? maybe just in chess controller
 
 }

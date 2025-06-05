@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./Server
+    ports:
+      - "5000:5000"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+      - ConnectionStrings__DefaultConnection=Host=db;Database=chessdb;Username=postgres;Password=moos
+    volumes:
+      - ./Server:/app
+    working_dir: /app
+    command: dotnet watch run --project ChessServer/ChessServer.csproj
+    depends_on:
+      - db
+
+  frontend:
+    build: ./Client
+    ports:
+      - "3000:3000"
+    environment:
+      - WATCHPACK_POLLING=true # for hot reloading
+      - HOST=0.0.0.0
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./Client:/app
+      - /app/node_modules  # <- This prevents overwriting installed dependencies
+    command: npm start
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: moos
+      POSTGRES_DB: chessdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
