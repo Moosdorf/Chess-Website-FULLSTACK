@@ -30,3 +30,9 @@ code {
   text-align: center;
 }
 
+
+.header-navbar{
+    position: fixed;
+    top: 0;
+    z-index: 1030; /* to prevent the navbar getting covered up by other content */
+}

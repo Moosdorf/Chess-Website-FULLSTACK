@@ -8,13 +8,13 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5000
-      - ConnectionStrings__DefaultConnection=Host=db;Database=chessdb;Username=postgres;Password=moos
+      - CONNECTION_STRING=Host=host.docker.internal;Database=chessdb;Username=postgres;Password=moos
     volumes:
       - ./Server:/app
     working_dir: /app
     command: dotnet watch run --project ChessServer/ChessServer.csproj
-    depends_on:
-      - db
+#    depends_on:
+ #     - db
 
   frontend:
     build: ./Client
@@ -30,16 +30,17 @@ services:
       - /app/node_modules  # <- This prevents overwriting installed dependencies
     command: npm start
 
-  db:
-    image: postgres:17
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: moos
-      POSTGRES_DB: chessdb
-    ports:
-      - "5432:5432"
-    volumes:
-      - pgdata:/var/lib/postgresql/data
 
-volumes:
-  pgdata:
+#  db:
+ #   image: postgres:17
+  #  environment:
+   #   POSTGRES_USER: postgres
+    #  POSTGRES_PASSWORD: moos
+     # POSTGRES_DB: chessdb
+    #ports:
+     # - "5432:5432"
+    #volumes:
+     # - pgdata:/var/lib/postgresql/data
+
+#volumes:
+#  pgdata:

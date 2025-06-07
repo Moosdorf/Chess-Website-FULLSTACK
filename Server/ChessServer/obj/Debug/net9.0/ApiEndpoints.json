@@ -1,0 +1,55 @@
+[
+  {
+    "ContainingType": "ChessServer.Controllers.ChessController",
+    "Method": "Move",
+    "RelativePath": "api/chess/{id}/move",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "moveModel",
+        "Type": "DataLayer.Models.Chess.MoveModel",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChessServer.Controllers.ChessController",
+    "Method": "CreateGame",
+    "RelativePath": "api/chess/new",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "DataLayer.Models.Chess.CreateChessModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChessServer.Controllers.UserController",
+    "Method": "CreateUser",
+    "RelativePath": "api/user/new",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userModel",
+        "Type": "DataLayer.Models.User.UserCreateModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

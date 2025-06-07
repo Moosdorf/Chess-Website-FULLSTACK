@@ -17,9 +17,17 @@ function Frontpage() {
                     <Button variant='primary' onClick={() => navigate("/chess_game")}>
                         Play Chess
                     </Button>
-                    
                 </Col>
             </Row>
+
+            <Row>
+                <Col className='text-center'>
+                    <Button variant='primary' onClick={() => navigate("/sign_up")}>
+                        sign up
+                    </Button>
+                </Col>
+            </Row>
+
         </Container>)
 }
   

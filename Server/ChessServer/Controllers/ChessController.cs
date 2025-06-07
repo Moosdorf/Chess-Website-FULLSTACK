@@ -1,6 +1,6 @@
-﻿using ChessServer.Models;
-using DataLayer;
-using DataLayer.Entities;
+﻿using DataLayer.DataServices;
+using DataLayer.Entities.Chess;
+using DataLayer.Models.Chess;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
 using System.Text.Json;
@@ -11,7 +11,7 @@ namespace ChessServer.Controllers
 {
     [ApiController]
     [Route("api/chess")]
-    public class ChessController : ControllerBase
+    public class ChessController : BaseController
     {
         IChessDataService db;
         readonly LinkGenerator _linkGenerator;

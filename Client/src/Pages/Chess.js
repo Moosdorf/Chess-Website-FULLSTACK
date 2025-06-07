@@ -98,7 +98,6 @@ function Chess() {
             setChessBoardHistory(history => [...history, chessBoard]);
         })
         .catch(e => console.log(e));
-        
     }
     
     var black = chessBoardHistory.length % 2 === 0;
