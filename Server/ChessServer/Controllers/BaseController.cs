@@ -42,16 +42,12 @@ namespace ChessServer.Controllers
         }
 
         [NonAction]
-        public JwtSecurityToken GetDecodedToken()
+        public JwtSecurityToken decodeToken(string token)
         {
-            var encodedToken = HttpContext.Request.Headers.Authorization.FirstOrDefault();
-            if (encodedToken == "null" || encodedToken == null) return null;
             var handler = new JwtSecurityTokenHandler();
+            JwtSecurityToken jwtToken = handler.ReadJwtToken(token);
 
-            var trimmedEncodedToken = encodedToken.Replace("Bearer ", "");
-            JwtSecurityToken token = handler.ReadJwtToken(trimmedEncodedToken);
-
-            return token;
+            return jwtToken;
         }
     }
 }

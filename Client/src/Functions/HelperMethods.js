@@ -10,7 +10,7 @@ export function GetCookies() {
     })
 
     return cookieData;
-}
+} 
 
 
 export function ClearCookies() {

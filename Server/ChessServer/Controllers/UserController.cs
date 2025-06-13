@@ -47,6 +47,19 @@ public class UserController : BaseController
         return BadRequest(new { error = "Username or password is incorrect"});
     }
 
+    [HttpPost]
+    [Authorize]
+    [Route("signout")]
+    public IActionResult SignOut()
+    {
+        if (Request.Cookies.TryGetValue("access_token", out var token))
+        {
+            ClearJwtCookie(Response);
+            return Ok(new { message = "Signed out" });
+        }
+        return Unauthorized("No token cookie found");
+    }
+
     [HttpPut]
     [Authorize]
     [Route("test")]
@@ -54,14 +67,29 @@ public class UserController : BaseController
     {
         if (Request.Cookies.TryGetValue("access_token", out var token))
         {
-            return Ok(new { message = "Token received", token });
+            var decodedToken = decodeToken(token);
+            
+            return Ok(new { message = "Token received", token, decodedToken});
         }
 
         return Unauthorized("No token cookie found");
     }
 
+    [NonAction]
+    public void ClearJwtCookie(HttpResponse response)
+    {
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,              // Only send cookie over HTTPS
+            SameSite = SameSiteMode.None,
+            Path = "/",                 // Cookie path scope
+            Expires = DateTimeOffset.UtcNow.AddHours(-1) // Expiration time
+        };
 
-
+        response.Cookies.Append("access_token", "0", cookieOptions);
+    }
+    [NonAction]
     public void SetJwtCookie(HttpResponse response, string token)
     {
         var cookieOptions = new CookieOptions

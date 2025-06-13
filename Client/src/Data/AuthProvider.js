@@ -17,7 +17,19 @@ export function AuthProvider({ children }) {
     setUser(cookies.user || null);
   };
 
-  const signout = () => {
+  const signout = async () => {
+    console.log("sign out....");
+    const request = new Request(`http://localhost:5000/api/user/signout`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+          "Content-Type": "application/json", // Correct Content-Type for JSON
+        }
+      });
+    await fetch(request)
+      .then(res => res.text())
+      .then(data => JSON.parse(data))
+      .then(results => { console.log(results) });
     ClearCookies();
     setUser(null);
   };

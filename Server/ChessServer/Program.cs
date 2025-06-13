@@ -25,29 +25,29 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var secret = builder.Configuration.GetSection("Auth:Secret").Value;
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // tjek om det her er fint ellers gå tilbage
-        .AddJwtBearer(options =>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) 
+    .AddJwtBearer(options =>
+    {
+        options.Events = new JwtBearerEvents
         {
-            options.Events = new JwtBearerEvents
+            OnMessageReceived = context =>
             {
-                OnMessageReceived = context =>
+                if (context.Request.Cookies.ContainsKey("access_token"))
                 {
-                    if (context.Request.Cookies.ContainsKey("access_token"))
-                    {
-                        context.Token = context.Request.Cookies["access_token"];
-                    }
-                    return Task.CompletedTask;
+                    context.Token = context.Request.Cookies["access_token"];
                 }
-            };
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
-                ClockSkew = TimeSpan.Zero
-            };
-        });
+                return Task.CompletedTask;
+            }
+        };
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)),
+            ClockSkew = TimeSpan.Zero
+        };
+    });
 
 builder.Services.AddCors(options => // https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-9.0
 {
