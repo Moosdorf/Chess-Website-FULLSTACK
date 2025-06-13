@@ -1,29 +1,82 @@
-.vs/
-.vsidx/
+# ============================
+# Node / React stuff
+# ============================
+node_modules/
+build/
+dist/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
 
-# Ignore build outputs
-/bin/
-/obj/
+# React JSX / Bootstrap files (no special ignore needed, handled by node_modules/build)
 
-# Ignore user-specific files
+# ============================
+# ASP.NET Core / C# stuff
+# ============================
+
+# Build output folders
+bin/
+obj/
+
+# User-specific files
 *.user
 *.suo
 *.userosscache
 *.sln.docstates
 
-# Ignore NuGet package files
+# Debug files
+*.pdb
+*.dll
+.vs/
+
+*.exe
+*.app
+
+# Rider files
+.idea/
+
+# Visual Studio Code files
+.vscode/
+
+# NuGet packages
 *.nupkg
 *.snupkg
 *.nuget.cache
 
-# Ignore VS Code files
-.vscode/
+# EF Core migrations and generated files
+# Usually you want to commit migrations, but you can ignore compiled migrations if any
+# Uncomment if needed:
+# Migrations/**/bin/
+# Migrations/**/obj/
 
-# Ignore JetBrains Rider files
-.idea/
+# ============================
+# Postgres / Database
+# ============================
 
-# Ignore debug symbols and pdb files
-*.pdb
+# Postgres data directory (if you accidentally keep local db files here)
+pgdata/
 
-# Ignore other common logs/temp
+# Dump files, backups
+*.dump
+*.bak
+*.sql
+
+# ============================
+# Logs and temp files
+# ============================
 *.log
+*.tmp
+*.temp
+
+# ============================
+# Misc
+# ============================
+.DS_Store
+Thumbs.db
