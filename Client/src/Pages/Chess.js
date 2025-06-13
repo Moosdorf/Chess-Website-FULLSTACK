@@ -115,7 +115,7 @@ function Chess() {
                 {chessBoard && <ChessBoard chessState={chessBoard} move={move} turnColor={turn}/>}
 
                 <br/>
-                {chessBoard && <Button onClick={() => {
+                {chessBoard && <Button variant='secondary' onClick={() => {
                     setReversed(c => !c);
                 }}> 
                     Reverse 

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataLayer.Entities.Users;
-using Microsoft.OpenApi.Models;
 
 namespace DataLayer.DataServices
 {
@@ -12,7 +11,7 @@ namespace DataLayer.DataServices
     {
         // user stuff
         IList<User> GetUsers();
-        User GetUser(int userId);
+        User GetUser(string username);
         User? CreateUser(string username, string password);
         bool UpdateCustomization();
 
@@ -20,7 +19,7 @@ namespace DataLayer.DataServices
         // authentication stuff
         bool StartSession();
 
-        bool LogIn(string username, string password);
+        bool SignInUser(string username, string password);
 
         bool LogOut(string username);
 

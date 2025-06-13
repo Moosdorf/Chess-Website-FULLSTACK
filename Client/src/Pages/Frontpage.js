@@ -14,7 +14,7 @@ function Frontpage() {
             </Row>
             <Row>
                 <Col className='text-center'>
-                    <Button variant='primary' onClick={() => navigate("/chess_game")}>
+                    <Button variant='secondary' onClick={() => navigate("/chess_game")}>
                         Play Chess
                     </Button>
                 </Col>
@@ -22,7 +22,7 @@ function Frontpage() {
 
             <Row>
                 <Col className='text-center'>
-                    <Button variant='primary' onClick={() => navigate("/sign_up")}>
+                    <Button variant='secondary' onClick={() => navigate("/sign_up")}>
                         sign up
                     </Button>
                 </Col>

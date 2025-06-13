@@ -38,6 +38,33 @@
   },
   {
     "ContainingType": "ChessServer.Controllers.UserController",
+    "Method": "SetJwtCookie",
+    "RelativePath": "api/user",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "response",
+        "Type": "Microsoft.AspNetCore.Http.HttpResponse",
+        "IsRequired": true
+      },
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ChessServer.Controllers.UserController",
     "Method": "CreateUser",
     "RelativePath": "api/user/new",
     "HttpMethod": "POST",
@@ -50,6 +77,32 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChessServer.Controllers.UserController",
+    "Method": "SignInRequest",
+    "RelativePath": "api/user/sign_in",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userModel",
+        "Type": "DataLayer.Models.User.UserSignInModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ChessServer.Controllers.UserController",
+    "Method": "test",
+    "RelativePath": "api/user/test",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

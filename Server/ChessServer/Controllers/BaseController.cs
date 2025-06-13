@@ -14,7 +14,7 @@ namespace ChessServer.Controllers
         }
 
         [NonAction]
-        public JwtSecurityToken CreateToken(UserModel user, IConfiguration configuration)
+        public string CreateToken(User user, IConfiguration configuration)
         {
             // create claims
             var claims = new List<Claim>
@@ -36,7 +36,9 @@ namespace ChessServer.Controllers
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: creds
                 );
-            return token;
+            var handler = new JwtSecurityTokenHandler();
+            string tokenString = handler.WriteToken(token);
+            return tokenString;
         }
 
         [NonAction]

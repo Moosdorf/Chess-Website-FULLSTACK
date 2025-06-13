@@ -21,9 +21,9 @@ public class DataService : IDataService
 
 
     // users
-    public User GetUser(int userId)
+    public User GetUser(string username)
     {
-        User user = _db.Users.Where(x => x.Id == userId)
+        User user = _db.Users.Where(x => x.Username == username)
                             .First();
         return user;
     }
@@ -48,7 +48,8 @@ public class DataService : IDataService
         user = new User
         {
             Username = username,
-            Password = hashedPassword
+            Password = hashedPassword,
+            Salt = salt
         };
         _db.Add<User>(user);
         _db.SaveChanges();
@@ -58,24 +59,17 @@ public class DataService : IDataService
     }
 
     // authentication
-    public bool LogIn(string username, string password)
+    public bool SignInUser(string username, string password)
     {
-        bool loggedIn = false;
+        User? user = _db.Users.Where(user => user.Username == username).FirstOrDefault(); // default refers to the types default value, User is null. int is 0....
 
-        loggedIn = _db.Database
-                  .SqlQueryRaw<bool>("select * from check_login_credentials({0}, {1})", username, password)
-                  .AsEnumerable()
-                  .FirstOrDefault();
-        
-        
-
-        if (loggedIn)
+        if (user == null)
         {
-            _db.Database.ExecuteSqlRaw("call login({0}, {1})", username, password);
-            return true;
+            return false;
         }
+        var hasher = new Hashing();
 
-        return false;
+        return hasher.Verify(password, user.Password, user.Salt);
     }
 
     public bool LogOut(string username)

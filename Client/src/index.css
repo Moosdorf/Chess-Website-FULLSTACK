@@ -12,8 +12,13 @@ code {
     monospace;
 }
 
+body, html {
+  height: 100%;
+  background-color: rgb(99, 99, 99) !important; 
+}
+
 .border {
-  border: 1px solid black;
+  border: 1px solid black; 
 }
 
 .titles {
