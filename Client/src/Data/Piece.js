@@ -1,13 +1,13 @@
 class Piece {
-    static tempId = 0;
-    constructor(id, piece, color, row, col, moves, availableMoves) {
-        this.id = id; 
-        this.piece = piece;
-        this.color = color;
-        this.row = row;
-        this.col = col;
-        this.moves = moves;
-        this.availableMoves = availableMoves;
+    constructor(Type, IsWhite, Position, Moves, AvailableMoves, Defenders, Attackers, IsAlive) {
+        this.Type = Type; 
+        this.IsWhite = IsWhite;
+        this.Position = Position;
+        this.Moves = Moves;
+        this.AvailableMoves = AvailableMoves;
+        this.Defenders = Defenders;
+        this.Attackers = Attackers;
+        this.IsAlive = IsAlive;
     }
 }
 

@@ -14,7 +14,6 @@ async function createBoard() {
 
         },
         body: JSON.stringify({
-            "id": 1,
             "player1": 0,
             "player2": 1
         })
@@ -22,11 +21,20 @@ async function createBoard() {
 
     var jsonText = await res.text();
     var chessBoard = await JSON.parse(jsonText);
-    await console.log(chessBoard);
 
     chessBoard = chessBoard.map(row => (
-        row.map(piece => new Piece(piece.id, piece.piece, piece.color, piece.row, piece.col, piece.moves, piece.availableMoves))
+        row.map(piece => new Piece(
+            piece.Type, 
+            piece.IsWhite, 
+            piece.Position, 
+            piece.Moves,
+            piece.AvailableMoves,
+            piece.Defenders, 
+            piece.Attackers,
+            piece.IsAlive))
     ));
+
+    console.log(chessBoard);
     return chessBoard;
 }
 
@@ -61,44 +69,6 @@ function Chess() {
         })
     }, []);
 
-    const move = (e, target) => {
-        e.preventDefault();
-        var data = JSON.parse(e.dataTransfer.getData("text")); // decode JSON
-
-        var attackerPosition = findPosition(chessBoard, data);
-        var victimPosition = findPosition(chessBoard, target);
-
-        var attacker = chessBoard[attackerPosition.row][attackerPosition.col];
-
-
-        attacker.availableMoves.every((move) => move.includes([victimPosition.row, victimPosition.col])) 
-        {
-            console.log([victimPosition.row, victimPosition.col]);
-            console.log(attacker);
-            console.log("cant move");
-        }
-
-        const request = new Request(`http://localhost:5000/api/chess/${1}/move`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json", // Correct Content-Type for JSON
-              },
-            body: JSON.stringify({chessState: JSON.stringify(chessBoard), 
-                                  move: JSON.stringify({attacker: attackerPosition, victim: victimPosition})})
-        });
-        
-        fetch(request)
-        .then(res => res.text())
-        .then(data => JSON.parse(data))
-        .then(results => {
-            let chessBoard = results.map(row => (
-                row.map(piece => new Piece(piece.id, piece.piece, piece.color, piece.row, piece.col, piece.moves, piece.availableMoves))
-            ));
-            setChessBoard(chessBoard);
-            setChessBoardHistory(history => [...history, chessBoard]);
-        })
-        .catch(e => console.log(e));
-    }
     
     var black = chessBoardHistory.length % 2 === 0;
     var turn = (black) ? "black" : "white";
@@ -112,7 +82,7 @@ function Chess() {
 
                     </Col>
                 </Row>
-                {chessBoard && <ChessBoard chessState={chessBoard} move={move} turnColor={turn}/>}
+                {chessBoard && <ChessBoard key={chessBoard} chessState={chessBoard} turnColor={turn}/>}
 
                 <br/>
                 {chessBoard && <Button variant='secondary' onClick={() => {

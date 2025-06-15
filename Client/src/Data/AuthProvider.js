@@ -18,8 +18,7 @@ export function AuthProvider({ children }) {
   };
 
   const signout = async () => {
-    console.log("sign out....");
-    const request = new Request(`http://localhost:5000/api/user/signout`, {
+    const request = new Request(`http://localhost:5000/api/user/sign_out`, {
       method: "POST",
       credentials: "include",
       headers: {

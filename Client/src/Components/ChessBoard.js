@@ -4,7 +4,7 @@ import { useContext, useState } from 'react';
 import { ReversedContext } from '../Pages/Chess';
 import Image from 'react-bootstrap/Image';
 
-function ChessBoard({chessState, move, turnColor}) {
+function ChessBoard({chessState, turnColor}) {
     const reversed = useContext(ReversedContext);
     const chessBoard = (reversed) ? [...chessState].reverse() : chessState;
     var lightBrown = "rgb(239, 222, 205)";
@@ -40,8 +40,8 @@ function ChessBoard({chessState, move, turnColor}) {
     }
 
     const addSelected = (id) => {
-        const squareId = `${id}`;
-        setSelectedPiece(squareId);
+        const selectedPosition = `${id}`;
+        setSelectedPiece(selectedPosition);
     };
 
     return (
@@ -49,19 +49,19 @@ function ChessBoard({chessState, move, turnColor}) {
             <div className='chessboard'>
                 {chessState && chessBoard.map((row, rowIndex) => (
                     row.map((piece, colIndex) => {
-                        const isSelected = `${piece.id}` === selectedPiece;
-                        let className = `square ${piece.piece} ${piece.color} ${isSelected ? 'selected' : ''}`;
+                        const isSelected = `${piece.Position}` === selectedPiece;
+                        let className = `square ${piece.Type} ${piece.IsWhite} ${isSelected ? 'selected' : ''}`;
 
                         let color = ((rowIndex + colIndex) % 2 === 0 ? darkBrown : lightBrown);
                         if (reversed) {color = (color === lightBrown) ? darkBrown : lightBrown;}
 
                         let style = {backgroundColor: color};
-                        let image = `/images/${piece.color}-${piece.piece}.png`;
-                        let draggablePiece = piece.color === turnColor;
+                        let image = `/images/${(piece.IsWhite) ? "white" : "black"}-${piece.Type}.png`;
+                        let draggablePiece = (piece.IsWhite) ? "white" : "black" === turnColor;
                         return (
                         <div onDragOver={e => dragOver(e, piece)} 
-                             onDrop={e => move(e, piece)} 
-                             onClick={() => addSelected(piece.id)} 
+                             onDrop={e => console.log("move", e, piece)} 
+                             onClick={() => addSelected(piece.Position)} 
                              style={style}  
                              className={className}       
                              key={piece.id}

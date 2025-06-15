@@ -1,5 +1,6 @@
 ﻿using DataLayer.DataServices;
 using DataLayer.Entities.Chess;
+using DataLayer.Entities.Chess.Piece;
 using DataLayer.Models.Chess;
 using Microsoft.AspNetCore.Mvc;
 using System.Drawing;
@@ -31,7 +32,7 @@ namespace ChessServer.Controllers
             {
                 return NotFound();
             }
-            PieceModel[][] game = db.CreateGame(model.player1, model.player2);
+            Piece[][] game = db.CreateGame(model.player1, model.player2);
 
             if (game == null)
             {
@@ -51,7 +52,7 @@ namespace ChessServer.Controllers
         [Route("{id}/move")]
         public IActionResult Move([FromBody] MoveModel moveModel)
         {
-            var chessState = JsonSerializer.Deserialize<PieceModel[][]>(moveModel.ChessState);
+            var chessState = JsonSerializer.Deserialize<Piece[][]>(moveModel.ChessState);
 
             string pattern = @"\D"; // pattern for removing all non ints
             string moves = Regex.Replace(moveModel.Move, pattern, "");
@@ -61,7 +62,7 @@ namespace ChessServer.Controllers
             int victimRow = Int32.Parse(moves.Substring(2, 1));
             int victimCol = Int32.Parse(moves.Substring(3, 1));
 
-            chessState = db.Move(chessState, (attackerRow, attackerCol), (victimRow, victimCol));
+            // chessState = db.Move(chessState, (attackerRow, attackerCol), (victimRow, victimCol));
 
             if (chessState == null) return BadRequest("Cannot move");
 

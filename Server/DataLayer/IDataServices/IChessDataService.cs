@@ -1,5 +1,6 @@
 ﻿using DataLayer.Entities;
 using DataLayer.Entities.Chess;
+using DataLayer.Entities.Chess.Piece;
 using DataLayer.Models.Chess;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,8 @@ namespace DataLayer.DataServices
 {
     public interface IChessDataService
     {
-        PieceModel[][] CreateGame(int userId1, int userId2);
-        PieceModel[][]? Move(PieceModel[][] chessBoard, (int, int) attacker, (int, int) victim);
+        Piece[][] CreateGame(int userId1, int userId2);
+        Piece[][]? Move(Piece[][] chessBoard, (int, int) attacker, (int, int) victim);
 
 
         bool RemoveLastMove(int chessId);

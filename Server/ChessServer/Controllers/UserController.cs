@@ -49,8 +49,8 @@ public class UserController : BaseController
 
     [HttpPost]
     [Authorize]
-    [Route("signout")]
-    public IActionResult SignOut()
+    [Route("sign_out")]
+    public IActionResult SignUserOut()
     {
         if (Request.Cookies.TryGetValue("access_token", out var token))
         {
@@ -60,20 +60,6 @@ public class UserController : BaseController
         return Unauthorized("No token cookie found");
     }
 
-    [HttpPut]
-    [Authorize]
-    [Route("test")]
-    public IActionResult test()
-    {
-        if (Request.Cookies.TryGetValue("access_token", out var token))
-        {
-            var decodedToken = decodeToken(token);
-            
-            return Ok(new { message = "Token received", token, decodedToken});
-        }
-
-        return Unauthorized("No token cookie found");
-    }
 
     [NonAction]
     public void ClearJwtCookie(HttpResponse response)
