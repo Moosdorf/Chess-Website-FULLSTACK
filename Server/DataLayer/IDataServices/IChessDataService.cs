@@ -13,7 +13,7 @@ namespace DataLayer.DataServices
     public interface IChessDataService
     {
         Piece[][] CreateGame(int userId1, int userId2);
-        Piece[][]? Move(Piece[][] chessBoard, (int, int) attacker, (int, int) victim);
+        Piece[][]? Move(int chessId, Piece[][] chessBoard, (int, int) from, (int, int) to);
 
 
         bool RemoveLastMove(int chessId);

@@ -84,7 +84,7 @@ public class UserController : BaseController
             Secure = true,              // Only send cookie over HTTPS
             SameSite = SameSiteMode.None, 
             Path = "/",                 // Cookie path scope
-            Expires = DateTimeOffset.UtcNow.AddHours(1) // Expiration time
+            Expires = DateTimeOffset.UtcNow.AddHours(24) // Expiration time
         };
 
         response.Cookies.Append("access_token", token, cookieOptions);

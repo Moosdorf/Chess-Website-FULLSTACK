@@ -17,20 +17,22 @@ function ChessBoard({chessState, turnColor}) {
     }
     
     const drag = (e, piece) => {
-
+        // Hide original image temporarily
+        e.target.style.opacity = '0.6';
         // create new image from react and put it on cursor
         const dragImage = document.createElement('div');
-        dragImage.style.backgroundImage = `url(/images/${piece.color}-${piece.piece}.png)`;
+        dragImage.style.backgroundImage = `url(/images/${piece.IsWhite ? "white" : "black" }-${piece.Type}.png)`;
         dragImage.style.backgroundSize = 'cover';
-        dragImage.style.width = '50px';
-        dragImage.style.height = '50px';
+        dragImage.style.width = '75px';
+        dragImage.style.height = '75px';
         dragImage.style.position = 'absolute';
         dragImage.style.top = '-9999px'; // Move off-screen
+        dragImage.style.opacity = '1'; 
 
         document.body.appendChild(dragImage);
     
         // Center the drag image on the cursor
-        e.dataTransfer.setDragImage(dragImage, 25, 25);
+        e.dataTransfer.setDragImage(dragImage, 37, 37);
     
         // Clean up the drag image after the drag operation
         setTimeout(() => document.body.removeChild(dragImage), 0);
@@ -42,6 +44,13 @@ function ChessBoard({chessState, turnColor}) {
     const addSelected = (id) => {
         const selectedPosition = `${id}`;
         setSelectedPiece(selectedPosition);
+    };
+    const removeSelected = () => {
+        setSelectedPiece(null);
+    };
+    const dragEnd = (e) => {
+        e.target.style.opacity = '1';
+        removeSelected();
     };
 
     return (
@@ -64,13 +73,18 @@ function ChessBoard({chessState, turnColor}) {
                              onClick={() => addSelected(piece.Position)} 
                              style={style}  
                              className={className}       
-                             key={piece.id}
+                             key={piece.Position}
                         >
-                            <img className='piece' 
+                            {piece.Type != "empty" && <img className='piece' 
                                  src={image}
                                  alt=''
                                  draggable={draggablePiece} 
-                                 onDragStart={(e) => drag(e, piece)}/>
+                                 onDragStart={(e) => {
+                                    drag(e, piece)
+                                    addSelected(piece.Position)}
+                                }
+                                 onDragEnd={(e) => dragEnd(e)}/>}  
+                            
                         </div>)
                     })
                 ))}

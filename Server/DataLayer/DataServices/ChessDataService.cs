@@ -166,7 +166,7 @@ public class ChessDataService : IChessDataService
         
         return chessBoard;
     }
-    public Piece[][]? Move(Piece[][] chessBoard, (int, int) attacker, (int, int) victim)
+    public Piece[][]? Move(int chessId, Piece[][] chessBoard, (int, int) from, (int, int) to)
     {
         
         return null;

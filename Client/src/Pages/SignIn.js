@@ -25,7 +25,7 @@ function SignIn() {
         .then(data => JSON.parse(data))
         .then(results => {
             if (results.userSignedIn) {
-                document.cookie = `user=${results.userSignedIn.username};max-age=604800;domain=localhost;`;
+                document.cookie = `user=${results.userSignedIn.username};max-age=86400;domain=localhost;`;
                 signin(); 
                 navigate("/user");
             } else {
