@@ -18,10 +18,10 @@ public abstract class Piece
     public bool IsAlive { get; set; } = true;
     public bool IsWhite { get; set; }
     public bool CanMove { get; set; } = false;
-    public List<Piece> AvailableMoves { get; set; } = [];
-    public List<Piece> Attackers { get; set; } = [];
-    public List<Piece> Defenders { get; set; } = [];
-    public abstract void FindMoves();
+    public List<string> AvailableMoves { get; set; } = [];
+    public List<string> Attackers { get; set; } = [];
+    public List<string> Defenders { get; set; } = [];
+    public abstract void FindMoves(Piece[][] board);
     public abstract bool Move();
     public abstract bool Capture();
 

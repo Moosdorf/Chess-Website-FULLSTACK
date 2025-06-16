@@ -42,9 +42,7 @@ public class ChessDataService : IChessDataService
         };
         _db.Moves.Add(newMove);
         var result = await _db.SaveChangesAsync() > 0;
-        Console.WriteLine("making move? " + result);
         return result;
-
     }
 
 

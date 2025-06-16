@@ -8,9 +8,8 @@ namespace DataLayer.Entities.Chess.Piece
 {
     public class Queen(bool white) : Piece(white)   
     {
-        public override void FindMoves()
+        public override void FindMoves(Piece[][] board)
         {
-            throw new NotImplementedException();
         }
 
         public override bool Capture()

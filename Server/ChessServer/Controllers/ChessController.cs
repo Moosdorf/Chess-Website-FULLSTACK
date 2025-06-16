@@ -1,11 +1,12 @@
 ﻿using DataLayer.DataServices;
 using DataLayer.Entities.Chess;
 using DataLayer.Entities.Chess.Piece;
+using DataLayer.HelperMethods;
 using DataLayer.Models.Chess;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using DataLayer.HelperMethods;
 
 namespace ChessServer.Controllers
 {
@@ -44,7 +45,13 @@ namespace ChessServer.Controllers
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull // Include properties even if they are null
             };
 
-            var serializedOutput = JsonSerializer.Serialize(new { game, id }, options);
+            var serializedOutput = JsonSerializer.Serialize(new ChessModel{ 
+                Chessboard = game, 
+                Id = id, 
+                IsWhite = true, 
+                Moves = 0 }, 
+                options);
+
             return Ok(serializedOutput);
         }
 
@@ -59,15 +66,20 @@ namespace ChessServer.Controllers
             // replay game to get to current state
             var chessBoard = ChessMethods.CreateGameBoard(); 
             game.Moves.ForEach(m => ChessMethods.MakeMove(chessBoard, m.MoveString));
+            chessBoard = ChessMethods.findAvailableMoves(chessBoard);
 
             // validate move
+
 
             // make the move
             chessBoard = ChessMethods.MakeMove(chessBoard, moveModel.Move);
             var moveMade = await db.MoveAsync(id, moveModel.Move);
 
-            if (!moveMade) return BadRequest("Cannot make move"); 
-            return Ok(JsonSerializer.Serialize(new { chessBoard, game.Id }));
+            if (!moveMade) return BadRequest("Cannot make move");
+            var moves = (game.Moves.Count());
+            var isWhite = (moves % 2) == 0;
+            return Ok(JsonSerializer.Serialize(new ChessModel
+                                                { Chessboard = chessBoard, Id = game.Id, IsWhite = isWhite, Moves = moves }));
         }
 
         private object? CreateChessModel(ChessGame game)

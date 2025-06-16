@@ -38,9 +38,17 @@ namespace DataLayer.HelperMethods
             return false;
         }
 
-        public static void findAvailableMoves(Piece[][] chessBoard)
+        public static Piece[][] findAvailableMoves(Piece[][] chessBoard)
         {
-
+            foreach (var row in chessBoard)
+            {
+                foreach (var piece in row)
+                {
+                    piece.AvailableMoves = new();
+                    piece.FindMoves(chessBoard);
+                }
+            }
+            return chessBoard;
         }
         public static Piece[][] MakeMove(Piece[][] chessBoard, string move)
         {
@@ -55,7 +63,9 @@ namespace DataLayer.HelperMethods
 
             chessBoard[tRow][tCol] = chessBoard[fRow][fCol];
             chessBoard[tRow][tCol].Position = RowColToRankFile(tRow, tCol);
+            chessBoard[tRow][tCol].Moves++;
             chessBoard[fRow][fCol] = new Empty(false) { Type = "empty", Position = RowColToRankFile(fRow, fCol) };
+            chessBoard = ChessMethods.findAvailableMoves(chessBoard);
 
             return chessBoard;
         }
@@ -103,7 +113,7 @@ namespace DataLayer.HelperMethods
                     chessBoard[row][col] = new Empty(false) { Type = "empty", Position = RowColToRankFile(row, col) };
                 }
             }
-
+            chessBoard = findAvailableMoves(chessBoard);
             return chessBoard;
         }
     }
