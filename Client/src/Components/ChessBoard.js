@@ -74,7 +74,7 @@ function ChessBoard() {
                         return (
                         <div onDragOver={e => dragOver(e)} 
                              onDrop={() => movePiece(selectedPiece, piece)} 
-                             onClick={() => addSelected(piece)} 
+                             onClick={() => addSelected(piece)} // to do: check om der allerede er en selected, hvis der er, så check hvis den der klikkes på kan være et capture eller move
                              style={style}  
                              className={className}       
                              key={piece.Position}

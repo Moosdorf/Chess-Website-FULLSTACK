@@ -23,12 +23,11 @@ function Chess() {
 
         var jsonText = await res.text();
         var parsedJson = await JSON.parse(jsonText);
-        console.log("parsed json from create: ", parsedJson)
         handleSetChessBoard(parsedJson);
     }
 
     const handleSetChessBoard = (apiBoard) => {
-        console.log(apiBoard);
+        console.log("update chessboard ", apiBoard);
         var tempChessBoard = apiBoard.Chessboard;
         tempChessBoard = tempChessBoard.map(row => (
             row.map(piece => new Piece(
@@ -36,6 +35,7 @@ function Chess() {
                 piece.IsWhite, 
                 piece.Position, 
                 piece.Moves,
+                piece.Captures,
                 piece.AvailableMoves,
                 piece.Defenders, 
                 piece.Attackers,

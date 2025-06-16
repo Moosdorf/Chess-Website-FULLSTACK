@@ -60,9 +60,11 @@ namespace DataLayer.HelperMethods
 
             (int tRow, int tCol) = RankFileToRowCol(to);
             (int fRow, int fCol) = RankFileToRowCol(from);
-
+            var target = chessBoard[tRow][tCol];
             chessBoard[tRow][tCol] = chessBoard[fRow][fCol];
             chessBoard[tRow][tCol].Position = RowColToRankFile(tRow, tCol);
+
+            if (target.Type != "empty") chessBoard[tRow][tCol].Captures++;
             chessBoard[tRow][tCol].Moves++;
             chessBoard[fRow][fCol] = new Empty(false) { Type = "empty", Position = RowColToRankFile(fRow, fCol) };
             chessBoard = ChessMethods.findAvailableMoves(chessBoard);

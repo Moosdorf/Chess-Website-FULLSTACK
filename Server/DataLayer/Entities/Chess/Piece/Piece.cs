@@ -15,6 +15,7 @@ public abstract class Piece
     public string Type { get; set; }
     public string Position { get; set; } = string.Empty;
     public int Moves { get; set; } = 0;
+    public int Captures { get; set; } = 0;
     public bool IsAlive { get; set; } = true;
     public bool IsWhite { get; set; }
     public bool CanMove { get; set; } = false;
