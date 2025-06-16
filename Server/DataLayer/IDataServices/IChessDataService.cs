@@ -12,8 +12,8 @@ namespace DataLayer.DataServices
 {
     public interface IChessDataService
     {
-        Piece[][] CreateGame(int userId1, int userId2);
-        Piece[][]? Move(int chessId, Piece[][] chessBoard, (int, int) from, (int, int) to);
+        Task<(int, Piece[][])> CreateGameAsync(int userId1, int userId2);
+        Task<bool> MoveAsync(int chessId, string move);
 
 
         bool RemoveLastMove(int chessId);
@@ -23,6 +23,6 @@ namespace DataLayer.DataServices
 
         IList<ChessGame> GetGames();
 
-        ChessGame? GetGame(int chessId);
+        Task<ChessGame?> GetGameAsync(int chessId);
     }
 }

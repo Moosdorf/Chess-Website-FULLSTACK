@@ -1,20 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import './chessboard.css';
 import { useContext, useState } from 'react';
-import { ReversedContext } from '../Pages/Chess';
+import { ChessContext } from '../Pages/Chess';
 import Image from 'react-bootstrap/Image';
 
-function ChessBoard({chessState, turnColor}) {
-    const reversed = useContext(ReversedContext);
+function ChessBoard({turnColor}) {
+    const reversed = useContext(ChessContext);
     const chessBoard = (reversed) ? [...chessState].reverse() : chessState;
     var lightBrown = "rgb(239, 222, 205)";
     var darkBrown = "rgb(159, 129, 112)";
     const [selectedPiece, setSelectedPiece] = useState(null);
     
-    const dragOver = (e, piece) => { 
-        e.stopPropagation(); // parent wont get dragover
-        e.preventDefault(); // by default we cant drop stuff
-    }
+
     
     const drag = (e, piece) => {
         // Hide original image temporarily
@@ -40,10 +37,12 @@ function ChessBoard({chessState, turnColor}) {
 
         e.dataTransfer.setData("text", JSON.stringify(piece)); // stringify the data as JSON
     }
-
-    const addSelected = (id) => {
-        const selectedPosition = `${id}`;
-        setSelectedPiece(selectedPosition);
+    const dragOver = (e) => { 
+        e.stopPropagation(); // parent wont get dragover
+        e.preventDefault(); // by default we cant drop stuff
+    }
+    const addSelected = (selected) => {
+        setSelectedPiece(selected);
     };
     const removeSelected = () => {
         setSelectedPiece(null);
@@ -52,13 +51,43 @@ function ChessBoard({chessState, turnColor}) {
         e.target.style.opacity = '1';
         removeSelected();
     };
+    const movePiece = async (piece) => {
+        console.log("target piece: ", piece)
+        console.log("current piece:", selectedPiece);
+        console.log("id ", chessId);
+        let res = await fetch(`http://localhost:5000/api/chess/${chessId}/move`, {
+            method: "PUT",
+            credentials: 'include',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "*/*"
 
+            },
+            body: JSON.stringify({
+                "Move": `${selectedPiece.Position},${piece.Position}`
+            })
+        }).then(res => {
+            console.log(res)
+            return res.text()
+        })
+        .then(data => {
+            console.log(data);
+            return JSON.parse(data)
+        })
+        .then(results => {
+            console.log(results);
+        })
+        .catch(e => console.log(e));
+
+
+
+    };
     return (
         <div className='wrapper'>
             <div className='chessboard'>
                 {chessState && chessBoard.map((row, rowIndex) => (
                     row.map((piece, colIndex) => {
-                        const isSelected = `${piece.Position}` === selectedPiece;
+                        const isSelected = piece === selectedPiece;
                         let className = `square ${piece.Type} ${piece.IsWhite} ${isSelected ? 'selected' : ''}`;
 
                         let color = ((rowIndex + colIndex) % 2 === 0 ? darkBrown : lightBrown);
@@ -68,9 +97,9 @@ function ChessBoard({chessState, turnColor}) {
                         let image = `/images/${(piece.IsWhite) ? "white" : "black"}-${piece.Type}.png`;
                         let draggablePiece = (piece.IsWhite) ? "white" : "black" === turnColor;
                         return (
-                        <div onDragOver={e => dragOver(e, piece)} 
-                             onDrop={e => console.log("move", e, piece)} 
-                             onClick={() => addSelected(piece.Position)} 
+                        <div onDragOver={e => dragOver(e)} 
+                             onDrop={() => movePiece(piece)} 
+                             onClick={() => addSelected(piece)} 
                              style={style}  
                              className={className}       
                              key={piece.Position}
@@ -80,8 +109,8 @@ function ChessBoard({chessState, turnColor}) {
                                  alt=''
                                  draggable={draggablePiece} 
                                  onDragStart={(e) => {
-                                    drag(e, piece)
-                                    addSelected(piece.Position)}
+                                    drag(e, piece);
+                                    addSelected(piece);}
                                 }
                                  onDragEnd={(e) => dragEnd(e)}/>}  
                             

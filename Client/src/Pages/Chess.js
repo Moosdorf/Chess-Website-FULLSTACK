@@ -20,8 +20,10 @@ async function createBoard() {
     });
 
     var jsonText = await res.text();
-    var chessBoard = await JSON.parse(jsonText);
-
+    var parsedJson = await JSON.parse(jsonText);
+    console.log(parsedJson);
+    var chessBoard = parsedJson.game;
+    var chessId = parsedJson.id;
     chessBoard = chessBoard.map(row => (
         row.map(piece => new Piece(
             piece.Type, 
@@ -34,46 +36,30 @@ async function createBoard() {
             piece.IsAlive))
     ));
 
-    console.log(chessBoard);
-    return chessBoard;
+    return {chessBoard, chessId};
 }
 
 
-const findPosition = (chessState, piece) => {
-    for (let row = 0; row < chessState.length; row++) {
-        var chessRow = chessState[row];
-        for (let col = 0; col < chessRow.length; col++) {
-            if (chessState[row][col].id === piece.id) {
-                return {row: row, col: col};
-            }
-        }
-    }
-}
-
-const convertPosition = (row, col) => {
-    let file = row + 1;
-    let rank = String.fromCharCode(col + 65);
-    return file + rank;
-}
-
-const ReversedContext = createContext(null);
+const ChessContext = createContext(null);
 function Chess() {
     const [chessBoard, setChessBoard] = useState(null);
     const [chessBoardHistory, setChessBoardHistory] = useState([]); 
     const [reversed, setReversed] = useState(false);
     
     useEffect(() => {
-        createBoard().then(board => {
+        createBoard().then((board) => {
+            console.log(board);
             setChessBoard(board);
-            setChessBoardHistory([[board]]);
+            setChessBoardHistory([[board.chessBoard]]);
         })
     }, []);
 
     
     var black = chessBoardHistory.length % 2 === 0;
     var turn = (black) ? "black" : "white";
+    
     return ( // give info if board is reveresed or not.
-        <ReversedContext.Provider value={reversed}> 
+        <ChessContext value={{reversed, chessBoard}}> 
             <Container className='center'>
                 <Row>
                     <Col>
@@ -82,7 +68,7 @@ function Chess() {
 
                     </Col>
                 </Row>
-                {chessBoard && <ChessBoard key={chessBoard} chessState={chessBoard} turnColor={turn}/>}
+                {chessBoard && <ChessBoard key={chessBoard.id} turnColor={turn}/>}
 
                 <br/>
                 {chessBoard && <Button variant='secondary' onClick={() => {
@@ -92,8 +78,8 @@ function Chess() {
                 </Button>}
                 
             </Container>
-        </ReversedContext.Provider>)
+        </ChessContext>)
 }
   
 export default Chess;
-export { ReversedContext }; // export context, can be imported from children
+export { ChessContext }; // export context, can be imported from children

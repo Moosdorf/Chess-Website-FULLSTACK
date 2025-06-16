@@ -14,8 +14,7 @@ namespace DataLayer.Entities.Chess
 
         [Required]
         public string MoveString { get; set; } = ""; // for example: "e4,e5"
-
-        [Required]
-        public required ChessGame ChessGame { get; set; }
+        public int ChessGameId { get; set; }
+        public ChessGame ChessGame { get; set; } = null!;
     }
 }

@@ -3,10 +3,9 @@ using DataLayer.Entities.Chess;
 using DataLayer.Entities.Chess.Piece;
 using DataLayer.Models.Chess;
 using Microsoft.AspNetCore.Mvc;
-using System.Drawing;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
+using DataLayer.HelperMethods;
 
 namespace ChessServer.Controllers
 {
@@ -26,13 +25,14 @@ namespace ChessServer.Controllers
         // create game
         [HttpPost]
         [Route("new")]
-        public IActionResult CreateGame(CreateChessModel model)
+        public async Task<IActionResult> CreateGame(CreateChessModel model)
         {
             if (model == null)
             {
                 return NotFound();
             }
-            Piece[][] game = db.CreateGame(model.player1, model.player2);
+            (int id, Piece[][] game) = await db.CreateGameAsync(model.player1, model.player2);
+
 
             if (game == null)
             {
@@ -44,31 +44,30 @@ namespace ChessServer.Controllers
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull // Include properties even if they are null
             };
 
-            var serializedOutput = JsonSerializer.Serialize(game, options);
+            var serializedOutput = JsonSerializer.Serialize(new { game, id }, options);
             return Ok(serializedOutput);
         }
 
         [HttpPut]
         [Route("{id}/move")]
-        public IActionResult Move([FromBody] MoveModel moveModel)
+        public async Task<IActionResult> Move(int id, [FromBody] MoveModel moveModel)
         {
-            var chessState = JsonSerializer.Deserialize<Piece[][]>(moveModel.ChessState);
+            ChessGame? game = await db.GetGameAsync(id);
+            // check if user is part of the game here if (game.player1 || game.player2 == moveModel.id???) return BadRequest("user not part of game");
+            if (game == null) return BadRequest("CannotFindGame");
 
-            string pattern = @"\D"; // pattern for removing all non ints
-            string moves = Regex.Replace(moveModel.Move, pattern, "");
+            // replay game to get to current state
+            var chessBoard = ChessMethods.CreateGameBoard(); 
+            game.Moves.ForEach(m => ChessMethods.MakeMove(chessBoard, m.MoveString));
 
-            int attackerRow = Int32.Parse(moves.Substring(0, 1)); // parse ints attackrow, attackcol, victimrow, victimcol)
-            int attackerCol = Int32.Parse(moves.Substring(1, 1));
-            int victimRow = Int32.Parse(moves.Substring(2, 1));
-            int victimCol = Int32.Parse(moves.Substring(3, 1));
+            // validate move
 
-            // chessState = db.Move(chessState, (attackerRow, attackerCol), (victimRow, victimCol));
+            // make the move
+            chessBoard = ChessMethods.MakeMove(chessBoard, moveModel.Move);
+            var moveMade = await db.MoveAsync(id, moveModel.Move);
 
-            if (chessState == null) return BadRequest("Cannot move");
-
-            
-
-            return Ok(JsonSerializer.Serialize(chessState));
+            if (!moveMade) return BadRequest("Cannot make move"); 
+            return Ok(JsonSerializer.Serialize(new { chessBoard, game.Id }));
         }
 
         private object? CreateChessModel(ChessGame game)

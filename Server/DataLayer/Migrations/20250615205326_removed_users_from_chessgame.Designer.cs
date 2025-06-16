@@ -2,6 +2,7 @@
 using DataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DataLayer.Migrations
 {
     [DbContext(typeof(ChessContext))]
-    partial class ChessContextModelSnapshot : ModelSnapshot
+    [Migration("20250615205326_removed_users_from_chessgame")]
+    partial class removed_users_from_chessgame
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,17 +94,12 @@ namespace DataLayer.Migrations
             modelBuilder.Entity("DataLayer.Entities.Chess.Move", b =>
                 {
                     b.HasOne("DataLayer.Entities.Chess.ChessGame", "ChessGame")
-                        .WithMany("Moves")
+                        .WithMany()
                         .HasForeignKey("ChessGameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ChessGame");
-                });
-
-            modelBuilder.Entity("DataLayer.Entities.Chess.ChessGame", b =>
-                {
-                    b.Navigation("Moves");
                 });
 #pragma warning restore 612, 618
         }

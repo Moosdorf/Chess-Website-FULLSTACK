@@ -29,6 +29,12 @@ public class ChessContext : DbContext
         modelBuilder.Entity<User>()
             .HasIndex(u => u.Username)
             .IsUnique();
+
+
+        modelBuilder.Entity<ChessGame>()
+            .HasMany(g => g.Moves)
+            .WithOne(m => m.ChessGame)
+            .HasForeignKey(m => m.ChessGameId);
     }
 
 }
