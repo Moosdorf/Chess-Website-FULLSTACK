@@ -38,4 +38,18 @@ public abstract class Piece
         AvailableCaptures.Add(piece.Position);
         piece.Attackers.Add(this.Position);
     }
+
+
+    public bool CheckSquare(Piece[][] board, int iRow, int iCol)
+    {
+        var piece = board[iRow][iCol];
+        if (piece.Type == "empty") AddMove(piece);
+        else if (piece.IsWhite != this.IsWhite)
+        {
+            AddCaptures(piece);
+            return false;
+        }
+        else return false; // piece is not empty and not enemy
+        return true;
+    }
 }

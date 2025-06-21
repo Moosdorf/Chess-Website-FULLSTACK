@@ -14,71 +14,27 @@ namespace DataLayer.Entities.Chess.Piece
             (int row, int col) = ChessMethods.RankFileToRowCol(this.Position);
 
 
-            // up left
-            for (int iRow = row - 1, iCol = col - 1; iRow >= 0 && iCol >= 0; iRow--, iCol--)
-            {
-                if (iRow >= 0 && iCol >= 0)
-                {
-                    bool flowControl = CheckSquare(board, iRow, iCol);
-                    if (!flowControl)
-                    {
-                        break;
-                    }
-                }
-            }
+            int[][] directions =
+            [
+                [-1, -1], // up-left
+                [1, -1],  // down-left
+                [1, 1],   // down-right
+                [-1, 1],  // up-right
+            ];
 
-            // down left
-            for (int iRow = row + 1, iCol = col - 1; iRow < 8 && iCol >= 0; iRow++, iCol--)
+            foreach (var dir in directions)
             {
-                if (iRow < 8 && iCol >= 0)
+                int dRow = dir[0], dCol = dir[1];
+                for (int iRow = row + dRow, iCol = col + dCol;
+                     iRow >= 0 && iRow < 8 && iCol >= 0 && iCol < 8;
+                     iRow += dRow, iCol += dCol)
                 {
-                    bool flowControl = CheckSquare(board, iRow, iCol);
-                    if (!flowControl)
-                    {
-                        break;
-                    }
-                }
-            }
-
-            // down right
-            for (int iRow = row + 1, iCol = col + 1; iRow < 8 && iCol < 8; iRow++, iCol++)
-            {
-                if (iRow < 8 && iCol < 8)
-                {
-                    bool flowControl = CheckSquare(board, iRow, iCol);
-                    if (!flowControl)
-                    {
-                        break;
-                    }
-                }
-            }
-
-            // up right
-            for (int iRow = row - 1, iCol = col + 1; iRow >= 0 && iCol < 8; iRow--, iCol++)
-            {
-                if (iRow >= 0 && iCol < 8)
-                {
-                    bool flowControl = CheckSquare(board, iRow, iCol);
-                    if (!flowControl)
-                    {
-                        break;
-                    }
+                    if (!CheckSquare(board, iRow, iCol)) break;
                 }
             }
         }
 
-        private bool CheckSquare(Piece[][] board, int iRow, int iCol)
-        {
-            var piece = board[iRow][iCol];
-            if (piece.Type == "empty") AddMove(piece);
-            else if (piece.IsWhite != this.IsWhite)
-            {
-                AddCaptures(piece);
-                return false;
-            }
-            else return false; // piece is not empty and not enemy
-            return true;
-        }
+
 
         public override bool Capture()
         {
