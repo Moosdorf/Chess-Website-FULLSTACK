@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import { Col, Row, Container, Button} from 'react-bootstrap';
 import { Title } from '../Components/Title';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import ChessBoard from '../Components/ChessBoard.js';
 import Piece from '../Data/Piece.js';
 const ChessContext = createContext(null);
@@ -55,8 +55,9 @@ function Chess() {
     
 
     const movePiece = async (from, to) => {
-        if (!from.AvailableMoves.includes(to.Position)) return;
-        let res = await fetch(`http://localhost:5000/api/chess/${chessBoard.id}/move`, {
+        if (!from.AvailableMoves.includes(to.Position) && !from.AvailableCaptures.includes(to.Position) ) return;
+
+        await fetch(`http://localhost:5000/api/chess/${chessBoard.id}/move`, {
             method: "PUT",
             credentials: 'include',
             headers: {

@@ -2,7 +2,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './chessboard.css';
 import { useContext, useState } from 'react';
 import { ChessContext } from '../Pages/Chess';
-import Image from 'react-bootstrap/Image';
 
 function ChessBoard() {
     const {reversed, chessBoard, movePiece} = useContext(ChessContext);
@@ -42,26 +41,43 @@ function ChessBoard() {
         e.stopPropagation(); // parent wont get dragover
         e.preventDefault(); // by default we cant drop stuff
     }
+    const dragEnd = (e, piece) => {
+        e.target.style.opacity = '1';
+        if (piece === selectedPiece) return;
+        removeSelected();
+    };
+
     const addSelected = (selected) => {
         if (selected.IsWhite === chessBoard.isWhitesTurn && selected.Type !== "empty") setSelectedPiece(selected);
         else setSelectedPiece(null);
     };
+
     const removeSelected = () => {
         setSelectedPiece(null);
     };
-    const dragEnd = (e) => {
-        e.target.style.opacity = '1';
-        removeSelected();
+
+
+    const onDrop = (piece) => {
+        if (piece !== selectedPiece) {
+            if (selectedPiece.AvailableMoves.includes(piece.Position) || selectedPiece.AvailableCaptures.includes(piece.Position)) {
+                movePiece(selectedPiece, piece);
+                removeSelected();
+            } else {
+                addSelected(piece);
+            }
+            return;
+        } 
     };
+
     const handleOnClick = (clickedPiece) => {
-        // to do: check om der allerede er en selected, hvis der er, så check hvis den der klikkes på kan være et capture eller move
-        if (selectedPiece == null) {
+        if (selectedPiece === null) {
             addSelected(clickedPiece)
             return;
         };
-        if (clickedPiece != selectedPiece) {
-            if (selectedPiece.AvailableMoves.includes(clickedPiece.Position)) {
+        if (clickedPiece !== selectedPiece) {
+            if (selectedPiece.AvailableMoves.includes(clickedPiece.Position) || selectedPiece.AvailableCaptures.includes(clickedPiece.Position)) {
                 movePiece(selectedPiece, clickedPiece);
+                console.log(selectedPiece)
                 removeSelected();
             } else {
                 addSelected(clickedPiece);
@@ -73,13 +89,15 @@ function ChessBoard() {
 
 
 
+
     return (
         <div className='wrapper'>
             <div className='chessboard'>
                 {chessBoardDisplay && chessBoardDisplay.map((row, rowIndex) => (
                     row.map((piece, colIndex) => {
                         const isSelected = piece === selectedPiece;
-                        const isTarget = selectedPiece && selectedPiece.AvailableMoves.includes(piece.Position);
+                        const isMove = selectedPiece && selectedPiece.AvailableMoves.includes(piece.Position);
+                        const isTarget = selectedPiece && selectedPiece.AvailableCaptures.includes(piece.Position);
                         let className = `square ${piece.Type} ${piece.IsWhite ? "white" : "black"} ${isSelected && 'selected'}`;
 
                         let color = ((rowIndex + colIndex) % 2 === 0 ? darkBrown : lightBrown);
@@ -89,13 +107,13 @@ function ChessBoard() {
                         let image = `/images/${(piece.IsWhite) ? "white" : "black"}-${piece.Type}.png`;
                         return (
                         <div onDragOver={e => dragOver(e)} 
-                             onDrop={() => movePiece(selectedPiece, piece)} 
+                             onDrop={() => onDrop(piece)} 
                              onClick={() => handleOnClick(piece)} 
                              style={style}  
                              className={className}       
                              key={piece.Position}
                         >
-                            {piece.Type != "empty" && <img className={`piece`} 
+                            {piece.Type !== "empty" && <img className={`piece`} 
                                  src={image}
                                  alt=''
                                  draggable={piece.IsWhite === chessBoard.isWhitesTurn} 
@@ -103,8 +121,9 @@ function ChessBoard() {
                                     drag(e, piece);
                                     addSelected(piece);}
                                 }
-                                 onDragEnd={(e) => dragEnd(e)}/>}
+                                 onDragEnd={(e) => dragEnd(e, piece)}/>}
                             {isTarget && <div className='target'></div>}
+                            {isMove && <div className='move'></div>}
 
                             
                         </div>)
