@@ -12,39 +12,77 @@ namespace DataLayer.Entities.Chess.Piece
         public override void FindMoves(Piece[][] board)
         {
             (int row, int col) = ChessMethods.RankFileToRowCol(this.Position);
-            Piece piece;
+
             // moving 
+            board = MovePawnOneOrTwo(board, row, col);
+
+            // captures left
+            board = CaptureLeft(board, row, col);
+
+            // captures right
+            board = CaptureRight(board, row, col);
+        }
+
+        private Piece[][] MovePawnOneOrTwo(Piece[][] board, int row, int col)
+        {
+            Piece piece;
             if (this.Moves == 0) // can move two squares
             {
                 for (int i = 1; i < 3; i++)
                 {
-                    piece = board[(IsWhite) ? row + i : row - i][col]; // check two in front
-                    if (piece.Type == "empty") AvailableMoves.Add(piece.Position);
+                    piece = board[(this.IsWhite) ? row + i : row - i][col]; // check two in front
+                    if (piece.Type == "empty")
+                    {
+                        AddMove(piece);
+                    }
                     else break;
                 }
-            } else
+            }
+            else
             {
                 if (row + 1 < 8 && row - 1 >= 0)
                 {
-                    piece = board[(IsWhite) ? row + 1 : row - 1][col]; // check only one in front
-                    if (piece.Type == "empty") AvailableMoves.Add(piece.Position);
+                    piece = board[(this.IsWhite) ? row + 1 : row - 1][col]; // check only one in front
+                    if (piece.Type == "empty")
+                    {
+                        AddMove(piece);
+                    }
                 }
 
             }
 
-            // captures left
+            return board;
+        }
+
+
+
+        private Piece[][] CaptureLeft(Piece[][] board, int row, int col)
+        {
             if (col - 1 >= 0 && row + 1 < 8 && row - 1 >= 0)
             {
-                piece = board[(IsWhite) ? row + 1 : row - 1][col - 1]; // check left-side capture, if the piece is not at the edge
-                if (piece.Type != "empty" && piece.IsWhite != IsWhite) AvailableMoves.Add(piece.Position);
+                var piece = board[(this.IsWhite) ? row + 1 : row - 1][col - 1]; // check left-side capture, if the piece is not at the edge
+                if (piece.Type != "empty" && piece.IsWhite != this.IsWhite)
+                {
+                    AddCaptures(piece);
+                }
             }
 
-            // captures right
+            return board;
+        }
+
+
+
+        private Piece[][] CaptureRight(Piece[][] board, int row, int col)
+        {
             if (col + 1 <= 7 && row + 1 < 8 && row - 1 >= 0)
             {
-                piece = board[(IsWhite) ? row + 1 : row - 1][col + 1]; // same but for right-side
-                if (piece.Type != "empty" && piece.IsWhite != IsWhite) AvailableMoves.Add(piece.Position);
+                var piece = board[(this.IsWhite) ? row + 1 : row - 1][col + 1]; // same but for right-side
+                if (piece.Type != "empty" && piece.IsWhite != this.IsWhite)
+                {
+                    AddCaptures(piece);
+                }
             }
+            return board;
         }
 
         public override bool Capture()

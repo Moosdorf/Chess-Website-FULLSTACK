@@ -37,6 +37,7 @@ function Chess() {
                 piece.Moves,
                 piece.Captures,
                 piece.AvailableMoves,
+                piece.AvailableCaptures,
                 piece.Defenders, 
                 piece.Attackers,
                 piece.IsAlive))

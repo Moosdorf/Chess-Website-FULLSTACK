@@ -43,7 +43,7 @@ function ChessBoard() {
         e.preventDefault(); // by default we cant drop stuff
     }
     const addSelected = (selected) => {
-        if (selected.IsWhite === chessBoard.isWhitesTurn && selected.Type != "empty") setSelectedPiece(selected);
+        if (selected.IsWhite === chessBoard.isWhitesTurn && selected.Type !== "empty") setSelectedPiece(selected);
         else setSelectedPiece(null);
     };
     const removeSelected = () => {
@@ -53,7 +53,23 @@ function ChessBoard() {
         e.target.style.opacity = '1';
         removeSelected();
     };
-    
+    const handleOnClick = (clickedPiece) => {
+        // to do: check om der allerede er en selected, hvis der er, så check hvis den der klikkes på kan være et capture eller move
+        if (selectedPiece == null) {
+            addSelected(clickedPiece)
+            return;
+        };
+        if (clickedPiece != selectedPiece) {
+            if (selectedPiece.AvailableMoves.includes(clickedPiece.Position)) {
+                movePiece(selectedPiece, clickedPiece);
+                removeSelected();
+            } else {
+                addSelected(clickedPiece);
+            }
+            return;
+        } 
+        removeSelected();
+    }
 
 
 
@@ -74,7 +90,7 @@ function ChessBoard() {
                         return (
                         <div onDragOver={e => dragOver(e)} 
                              onDrop={() => movePiece(selectedPiece, piece)} 
-                             onClick={() => addSelected(piece)} // to do: check om der allerede er en selected, hvis der er, så check hvis den der klikkes på kan være et capture eller move
+                             onClick={() => handleOnClick(piece)} 
                              style={style}  
                              className={className}       
                              key={piece.Position}

@@ -443,4 +443,3 @@ C:/Users/Moosdorf/Desktop/sem1/Chess-Website-FULLSTACK/Server/ChessServer/obj/De
 /app/ChessServer/obj/Debug/net9.0/rjsmrazor.dswa.cache.json
 /app/ChessServer/obj/Debug/net9.0/rjsmcshtml.dswa.cache.json
 C:/Users/Moosdorf/Desktop/sem1/Chess-Website-FULLSTACK/Server/ChessServer/bin/Debug/net9.0/System.Text.Json.dll
-C:/Users/Moosdorf/Desktop/sem1/Chess-Website-FULLSTACK/Server/ChessServer/obj/Debug/net9.0/staticwebassets.upToDateCheck.txt

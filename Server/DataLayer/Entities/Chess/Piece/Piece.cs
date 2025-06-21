@@ -20,10 +20,22 @@ public abstract class Piece
     public bool IsWhite { get; set; }
     public bool CanMove { get; set; } = false;
     public List<string> AvailableMoves { get; set; } = [];
+    public List<string> AvailableCaptures { get; set; } = [];
     public List<string> Attackers { get; set; } = [];
     public List<string> Defenders { get; set; } = [];
     public abstract void FindMoves(Piece[][] board);
     public abstract bool Move();
     public abstract bool Capture();
+    public void AddMove(Piece piece)
+    {
+        AvailableMoves.Add(piece.Position);
+        if (piece.IsWhite == this.IsWhite) piece.Defenders.Add(this.Position);
+        else  piece.Attackers.Add(this.Position);
+    }
 
+    public void AddCaptures(Piece piece)
+    {
+        AvailableCaptures.Add(piece.Position);
+        piece.Attackers.Add(this.Position);
+    }
 }

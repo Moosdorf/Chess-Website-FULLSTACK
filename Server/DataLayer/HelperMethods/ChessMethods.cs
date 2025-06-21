@@ -45,6 +45,9 @@ namespace DataLayer.HelperMethods
                 foreach (var piece in row)
                 {
                     piece.AvailableMoves = new();
+                    piece.AvailableCaptures = new();
+                    piece.Attackers = new();
+                    piece.Defenders = new();
                     piece.FindMoves(chessBoard);
                 }
             }
