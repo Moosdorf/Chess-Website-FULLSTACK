@@ -30,7 +30,7 @@ namespace DataLayer.Entities.Chess.Piece
             {
                 int dRow = dir[0], dCol = dir[1];
                 for (int iRow = row + dRow, iCol = col + dCol;
-                     iRow >= 0 && iRow < 8 && iCol >= 0 && iCol < 8;
+                     iRow >= 0 && iRow < 8 && iCol >= 0 && iCol < 8; // within 
                      iRow += dRow, iCol += dCol)
                 {
                     if (!CheckSquare(board, iRow, iCol)) break;
