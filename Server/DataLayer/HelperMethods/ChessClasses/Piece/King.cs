@@ -22,7 +22,7 @@ public class King(bool white) : Piece(white)
                 if (iRow >= 0 && iRow < 8 && iCol >= 0 && iCol < 8)
                 {
                     if (board[iRow][iCol] == this) continue;
-                    ValidateSquare(board, iRow, iCol);
+                    UpdateMoves(board, iRow, iCol);
                 }
             }
         }

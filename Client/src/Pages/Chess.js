@@ -1,10 +1,26 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import { Col, Row, Container, Button} from 'react-bootstrap';
+import { Col, Row, Container, Button, Card} from 'react-bootstrap';
 import { Title } from '../Components/Title';
 import { createContext, useEffect, useState } from 'react';
 import ChessBoard from '../Components/ChessBoard.js';
 import Piece from '../Data/Piece.js';
 const ChessContext = createContext(null);
+
+const Stats = ({chessBoard}) => {
+    return (
+            <Card className="p-3 shadow-sm">
+                <Card.Body>
+                    <Card.Title>Game Stats for id: {chessBoard.id}</Card.Title>
+                    <Card.Text>Turn: {(chessBoard && chessBoard.isWhitesTurn) ? "white" : "black"}</Card.Text>
+                    <Card.Text>Moves: {chessBoard.moves}</Card.Text>
+                    
+                    {chessBoard.check && <Card.Text>In check</Card.Text>}
+                    {chessBoard.check && <Card.Text>Blocks: {chessBoard.checkBlockers}</Card.Text>}
+                </Card.Body>
+            </Card>
+    )
+}
+
 function Chess() {
 
     async function createBoard() {
@@ -42,7 +58,7 @@ function Chess() {
                 piece.Attackers,
                 piece.IsAlive))
         ));
-        setChessBoard({board: tempChessBoard, id: apiBoard.Id, isWhitesTurn: apiBoard.IsWhite, moves: apiBoard.Moves});
+        setChessBoard({board: tempChessBoard, id: apiBoard.Id, isWhitesTurn: apiBoard.IsWhite, moves: apiBoard.Moves, check: apiBoard.Check, checkBlockers: apiBoard.BlockCheckPositions});
     }  
 
     const [chessBoard, setChessBoard] = useState(null);
@@ -90,14 +106,25 @@ function Chess() {
                         <p>{(chessBoard && chessBoard.isWhitesTurn) ? "white" : "black"}</p>
                     </Col>
                 </Row>
-                {chessBoard && <ChessBoard/>}
+                <Row>
+                    <Col md="auto">
+                        {chessBoard && <Stats chessBoard={chessBoard}/>}
 
-                <br/>
-                {chessBoard && <Button variant='secondary' onClick={() => {
-                    setReversed(c => !c);
-                }}> 
-                    Reverse 
-                </Button>}
+                    </Col>
+                    <Col>
+                        {chessBoard && <ChessBoard/>}
+                    </Col>
+
+                </Row>
+                <Row>
+                    <Col>
+                        {chessBoard && <Button variant='secondary' onClick={() => {
+                            setReversed(c => !c);
+                        }}> 
+                            Reverse 
+                        </Button>}
+                    </Col>
+                </Row>
                 
             </Container>
         </ChessContext.Provider>)

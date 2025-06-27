@@ -54,6 +54,15 @@
   transform: translate(-50%, -50%);
 }
 
+.overlay {
+  position: absolute;
+  top: 80%;    
+  left: 0%;    
+  color: rgb(0, 0, 0);
+  font-size: 14px;
+  pointer-events: none; /* so it doesn’t interfere with clicks */
+}
+
 .move {
   background: rgba(76, 0, 255, 0.46);
   border-radius: 50%;

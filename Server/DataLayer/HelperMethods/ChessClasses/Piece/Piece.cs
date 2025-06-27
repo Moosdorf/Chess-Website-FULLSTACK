@@ -50,23 +50,25 @@ public abstract class Piece
     }
 
 
-    public bool ValidateSquare(Piece[][] board, int iRow, int iCol)
+    public bool UpdateMoves(Piece[][] board, int iRow, int iCol)
     {
         var piece = board[iRow][iCol];
-        if (piece.Type == PieceType.Empty) AddMove(piece);
+        if (piece.Type == PieceType.Empty)
+        {
+            AddMove(piece);
+            return true;
+        }
         else if (piece.IsWhite != IsWhite)
         {
             AddCaptures(piece);
-            if (piece.Type == PieceType.King) 
-            { 
-                King king = (King) piece;
+            if (piece.Type == PieceType.King)
+            {
+                King king = (King)piece;
                 Console.WriteLine("hitting king with with " + this);
-                king.Blockers = ChessMethods.FindCheckBlockers(board, (King) piece, this);
+                king.Blockers = ChessMethods.FindCheckBlockers(board, (King)piece, this);
             }
-            return true;
         }
-        else return false; // piece is not empty and not enemy
-        return true;
+        return false; 
     }
 
     public override string? ToString()

@@ -28,7 +28,7 @@ public class Bishop(bool white) : Piece(white)
                  iRow >= 0 && iRow < 8 && iCol >= 0 && iCol < 8;
                  iRow += dRow, iCol += dCol)
             {
-                if (!ValidateSquare(board, iRow, iCol)) break;
+                if (!UpdateMoves(board, iRow, iCol)) break; // will return true if the direction is not blocked by a piece
             }
         }
     }

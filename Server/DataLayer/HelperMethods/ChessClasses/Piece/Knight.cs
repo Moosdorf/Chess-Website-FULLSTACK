@@ -27,7 +27,7 @@ public class Knight(bool white) : Piece(white)
 
             if (targetRow >= 0 && targetRow < 8 && targetCol >= 0 && targetCol < 8)
             {
-                ValidateSquare(board, targetRow, targetCol);
+                UpdateMoves(board, targetRow, targetCol);
             }
         }
     }

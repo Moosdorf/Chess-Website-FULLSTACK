@@ -124,8 +124,8 @@ function ChessBoard() {
                                  onDragEnd={(e) => dragEnd(e, piece)}/>}
                             {isTarget && <div className='target'></div>}
                             {isMove && <div className='move'></div>}
+                            <div className='overlay'>{piece.Position}</div>
 
-                            
                         </div>)
                     })
                 ))}

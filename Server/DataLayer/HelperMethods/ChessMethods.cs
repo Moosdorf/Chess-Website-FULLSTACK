@@ -55,21 +55,18 @@ namespace DataLayer.HelperMethods
             (int aRow, int aCol) = ChessMethods.RankFileToRowCol(pieceChecked.Position);
             (int kRow, int kCol) = ChessMethods.RankFileToRowCol(king.Position);
             // check if they are diagonal to each other
-            if (Math.Abs(aRow - kRow) != Math.Abs(aCol - kCol)) return []; // return empty list
+            if (Math.Abs(aRow - kRow) != Math.Abs(aCol - kCol)) return blockers; // return empty list
 
             var verticalDirection = (aRow > kRow) ? -1 : 1; // true = king to the left of piece
             var horizontalDirection = (aCol > kCol) ? -1 : 1; // true = king "above" piece
-            var distance = (aRow > kRow) ? (aRow - kRow) - 1 : (kRow - aRow);
+            int distance = Math.Abs(aRow - kRow);
             Console.WriteLine("distance: " +  distance);
 
             for (int i = 1; i < distance; i++)
             {
-                var square = chessBoard[aRow + i*verticalDirection][aCol + i*horizontalDirection];
-                if (square != king && square.Type == PieceType.Empty)
-                {
-                    blockers.Add(square.Position);
-                }
-                else break;
+                var square = chessBoard[aRow + i * verticalDirection][aCol + i * horizontalDirection];
+                if (square.Type != PieceType.Empty) break;
+                blockers.Add(square.Position);
             }
 
             // true true = up right
@@ -85,6 +82,30 @@ namespace DataLayer.HelperMethods
             (int aRow, int aCol) = ChessMethods.RankFileToRowCol(pieceChecked.Position);
             (int kRow, int kCol) = ChessMethods.RankFileToRowCol(king.Position);
 
+            int deltaRow = 0, deltaCol = 0;
+            int distance;
+
+            if (aRow == kRow) // horizontal
+            {
+                distance = Math.Abs(aCol - kCol);
+                deltaCol = (aCol > kCol) ? -1 : 1;
+            }
+            else if (aCol == kCol) // vertical
+            {
+                distance = Math.Abs(aRow - kRow);
+                deltaRow = (aRow > kRow) ? -1 : 1;
+            }
+            else
+            {
+                return blockers; // Not in a straight line
+            }
+
+            for (int i = 1; i < distance; i++)
+            {
+                var square = chessBoard[aRow + i * deltaRow][aCol + i * deltaCol];
+                if (square.Type != PieceType.Empty) break;
+                blockers.Add(square.Position);
+            }
 
             return blockers;
         }
