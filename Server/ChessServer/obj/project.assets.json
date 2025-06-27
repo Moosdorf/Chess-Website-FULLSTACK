@@ -1476,9 +1476,9 @@
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "Mapster": "7.4.0",
-          "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.5",
-          "Microsoft.EntityFrameworkCore": "9.0.5",
-          "Microsoft.EntityFrameworkCore.InMemory": "9.0.5",
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.6",
+          "Microsoft.EntityFrameworkCore": "9.0.6",
+          "Microsoft.EntityFrameworkCore.InMemory": "9.0.6",
           "Microsoft.NET.Test.Sdk": "17.14.1",
           "Npgsql": "9.0.3",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",

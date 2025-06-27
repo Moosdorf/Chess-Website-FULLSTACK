@@ -1,10 +1,19 @@
-﻿using System;
+﻿using DataLayer.HelperMethods;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace DataLayer.Entities.Chess.Piece;
+public enum PieceType
+{
+    Empty,
+    Pawn,
+    Knight,
+    Bishop,
+    Rook,
+    Queen,
+    King
+}
 
 public abstract class Piece
 {
@@ -12,7 +21,7 @@ public abstract class Piece
     {
         IsWhite = white;
     }
-    public string Type { get; set; }
+    public PieceType Type { get; set; }
     public string Position { get; set; } = string.Empty;
     public int Moves { get; set; } = 0;
     public int Captures { get; set; } = 0;
@@ -26,30 +35,47 @@ public abstract class Piece
     public abstract void FindMoves(Piece[][] board);
     public abstract bool Move();
     public abstract bool Capture();
+
     public void AddMove(Piece piece)
     {
         AvailableMoves.Add(piece.Position);
-        if (piece.IsWhite == this.IsWhite) piece.Defenders.Add(this.Position);
-        else  piece.Attackers.Add(this.Position);
+        if (piece.IsWhite == IsWhite) piece.Defenders.Add(Position);
+        else  piece.Attackers.Add(Position);
     }
 
     public void AddCaptures(Piece piece)
     {
         AvailableCaptures.Add(piece.Position);
-        piece.Attackers.Add(this.Position);
+        piece.Attackers.Add(Position);
     }
 
 
-    public bool CheckSquare(Piece[][] board, int iRow, int iCol)
+    public bool ValidateSquare(Piece[][] board, int iRow, int iCol)
     {
         var piece = board[iRow][iCol];
-        if (piece.Type == "empty") AddMove(piece);
-        else if (piece.IsWhite != this.IsWhite)
+        if (piece.Type == PieceType.Empty) AddMove(piece);
+        else if (piece.IsWhite != IsWhite)
         {
             AddCaptures(piece);
-            return false;
+            if (piece.Type == PieceType.King) 
+            { 
+                King king = (King) piece;
+                Console.WriteLine("hitting king with with " + this);
+                king.Blockers = ChessMethods.FindCheckBlockers(board, (King) piece, this);
+            }
+            return true;
         }
         else return false; // piece is not empty and not enemy
         return true;
+    }
+
+    public override string? ToString()
+    {
+        return $"Type: {Type}, " +
+               $"Position: {Position}, " +
+               $"Moves: {Moves}, " +
+               $"Captures: {Captures}, " +
+               $"IsAlive: {IsAlive}, " +
+               $"Color: {(IsWhite ? "White" : "Black")}";
     }
 }

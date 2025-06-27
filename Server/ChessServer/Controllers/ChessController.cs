@@ -1,6 +1,5 @@
 ﻿using DataLayer.DataServices;
 using DataLayer.Entities.Chess;
-using DataLayer.Entities.Chess.Piece;
 using DataLayer.HelperMethods;
 using DataLayer.Models.Chess;
 using Microsoft.AspNetCore.Mvc;
@@ -45,11 +44,13 @@ namespace ChessServer.Controllers
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull // Include properties even if they are null
             };
 
-            var serializedOutput = JsonSerializer.Serialize(new ChessModel{ 
-                Chessboard = game, 
-                Id = id, 
-                IsWhite = true, 
-                Moves = 0 }, 
+            var serializedOutput = JsonSerializer.Serialize(new ChessModel 
+                { 
+                    Chessboard = game, 
+                    Id = id, 
+                    IsWhite = true, 
+                    Check = false
+                }, 
                 options);
 
             return Ok(serializedOutput);
@@ -63,32 +64,18 @@ namespace ChessServer.Controllers
             // check if user is part of the game here if (game.player1 || game.player2 == moveModel.id???) return BadRequest("user not part of game");
             if (game == null) return BadRequest("CannotFindGame");
 
-            // replay game to get to current state
-            var chessBoard = ChessMethods.CreateGameBoard(); 
-            game.Moves.ForEach(m => ChessMethods.MakeMove(chessBoard, m.MoveString));
-            chessBoard = ChessMethods.findAvailableMoves(chessBoard);
+            // create chess state from moves
+            var chessState = new ChessInfo(game.Moves);
 
-            // validate move
+            // validate if the move can be made
+            var canMove = chessState.Move(moveModel.Move);
+            if (!canMove) return BadRequest("Cannot make move - dataservice");
 
-
-            // make the move
-            chessBoard = ChessMethods.MakeMove(chessBoard, moveModel.Move);
+            // change in the database
             var moveMade = await db.MoveAsync(id, moveModel.Move);
-
-            if (!moveMade) return BadRequest("Cannot make move");
-            var moves = (game.Moves.Count());
-            var isWhite = (moves % 2) == 0;
-            return Ok(JsonSerializer.Serialize(new ChessModel
-                                                { Chessboard = chessBoard, Id = game.Id, IsWhite = isWhite, Moves = moves }));
+            if (!moveMade) return BadRequest("Cannot make move - database");
+            Console.WriteLine(chessState);
+            return Ok(JsonSerializer.Serialize(db.CreateChessModel(chessState, game)));
         }
-
-        private object? CreateChessModel(ChessGame game)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-
     }
 }

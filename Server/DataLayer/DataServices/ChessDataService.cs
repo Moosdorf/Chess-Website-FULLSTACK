@@ -1,6 +1,5 @@
 ﻿using DataLayer.Entities;
 using DataLayer.Entities.Chess;
-using DataLayer.Entities.Chess.Piece;
 using DataLayer.HelperMethods;
 using DataLayer.Models.Chess;
 using Microsoft.EntityFrameworkCore;
@@ -40,9 +39,21 @@ public class ChessDataService : IChessDataService
             ChessGameId = chessId,
             MoveString = move
         };
+
         _db.Moves.Add(newMove);
         var result = await _db.SaveChangesAsync() > 0;
         return result;
+    }
+
+    public ChessModel CreateChessModel(ChessInfo chessState, ChessGame game) 
+    {
+        var moves = (chessState.Moves);
+        var isWhite = (moves % 2) == 0;
+        var king = (isWhite) ? chessState.WhiteKing : chessState.BlackKing;
+        var inCheck = king.Check;
+        var blockers = king.Blockers;
+        return new ChessModel
+        { Chessboard = chessState.GameBoard, Id = game.Id, IsWhite = isWhite, Check = inCheck, BlockCheckPositions = blockers, Moves = moves };
     }
 
 

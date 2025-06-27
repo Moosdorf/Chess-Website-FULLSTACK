@@ -1,4 +1,4 @@
-﻿using DataLayer.Entities.Chess.Piece;
+﻿using DataLayer.Entities.Chess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +9,6 @@ namespace DataLayer.HelperMethods
 {
     public static class ChessMethods
     {
-        public enum PieceType
-        {
-            Rook, Knight, Bishop, Queen, King, Pawn, Empty
-        }
         public static string RowColToRankFile(int row,
                                               int col)
         {
@@ -30,32 +26,105 @@ namespace DataLayer.HelperMethods
             return (row, col);
         }
 
-
-        public static bool checkMove(Piece[][] chessBoard, (int, int) move, (int, int) from)
+        public static List<string> FindCheckBlockers(Piece[][] chessBoard, King king, Piece pieceChecked)
         {
-            bool whitesTurn = chessBoard[from.Item1][from.Item2].IsWhite;
+            king.Check = true;
+            var blockers = new List<string>() { pieceChecked.Position };
+            switch (pieceChecked.Type)
+                {
+                    case PieceType.Queen:
+                        blockers = blockers.Concat(DiagonalBlocks(chessBoard, king, pieceChecked)).ToList();
+                        blockers = blockers.Concat(StraightBlocks(chessBoard, king, pieceChecked)).ToList();
+                    break;
 
-            return false;
+                    case PieceType.Rook:
+                        blockers = blockers.Concat(StraightBlocks(chessBoard, king, pieceChecked)).ToList();
+                    break;
+
+                    case PieceType.Bishop:
+                        blockers = blockers.Concat(DiagonalBlocks(chessBoard, king, pieceChecked)).ToList();
+                    break;
+            }
+
+            return blockers;
         }
 
+        private static List<string> DiagonalBlocks(Piece[][] chessBoard, King king, Piece pieceChecked)
+        {
+            var blockers = new List<string>();
+            (int aRow, int aCol) = ChessMethods.RankFileToRowCol(pieceChecked.Position);
+            (int kRow, int kCol) = ChessMethods.RankFileToRowCol(king.Position);
+            // check if they are diagonal to each other
+            if (Math.Abs(aRow - kRow) != Math.Abs(aCol - kCol)) return []; // return empty list
+
+            var verticalDirection = (aRow > kRow) ? -1 : 1; // true = king to the left of piece
+            var horizontalDirection = (aCol > kCol) ? -1 : 1; // true = king "above" piece
+            var distance = (aRow > kRow) ? (aRow - kRow) - 1 : (kRow - aRow);
+            Console.WriteLine("distance: " +  distance);
+
+            for (int i = 1; i < distance; i++)
+            {
+                var square = chessBoard[aRow + i*verticalDirection][aCol + i*horizontalDirection];
+                if (square != king && square.Type == PieceType.Empty)
+                {
+                    blockers.Add(square.Position);
+                }
+                else break;
+            }
+
+            // true true = up right
+            // true false = up left
+            // false true = down right
+            // false false= down left
+
+            return blockers;
+        }
+        private static List<string> StraightBlocks(Piece[][] chessBoard, King king, Piece pieceChecked)
+        {
+            var blockers = new List<string>();
+            (int aRow, int aCol) = ChessMethods.RankFileToRowCol(pieceChecked.Position);
+            (int kRow, int kCol) = ChessMethods.RankFileToRowCol(king.Position);
+
+
+            return blockers;
+        }
+
+
+        public static bool ValidateMove(string move, Piece[][] board)
+        {
+            var (fRow, fCol, tRow, tCol) = ConvertMoveToColRow(move);
+            var attacker = board[fRow][fCol];
+            var victim = board[tRow][tCol];
+            if (attacker == null || victim == null)
+            {
+                Console.WriteLine("someone null");
+                return false;
+            }
+            if (!attacker.AvailableCaptures.Contains(victim.Position) && !attacker.AvailableMoves.Contains(victim.Position))
+            {
+                
+                Console.WriteLine("does not contain in list - " + attacker.AvailableCaptures.Count + " " + attacker.AvailableMoves.Count);
+                return false; 
+            }
+
+            return true;
+        }
         public static Piece[][] findAvailableMoves(Piece[][] chessBoard)
         {
-            foreach (var row in chessBoard)
+
+            foreach (var piece in chessBoard.SelectMany(row => row))
             {
-                foreach (var piece in row)
-                {
-                    piece.AvailableMoves = new();
-                    piece.AvailableCaptures = new();
-                    piece.Attackers = new();
-                    piece.Defenders = new();
-                    piece.FindMoves(chessBoard);
-                }
+                piece.AvailableMoves = new();
+                piece.AvailableCaptures = new();
+                piece.Attackers = new();
+                piece.Defenders = new();
+                piece.FindMoves(chessBoard);
             }
             return chessBoard;
         }
-        public static Piece[][] MakeMove(Piece[][] chessBoard, string move)
-        {
 
+        public static (int fromRow, int fromCol, int toRow, int toCol) ConvertMoveToColRow(string move)
+        {
             var fromTo = move.Split(',');
 
             var from = fromTo[0];
@@ -63,16 +132,26 @@ namespace DataLayer.HelperMethods
 
             (int tRow, int tCol) = RankFileToRowCol(to);
             (int fRow, int fCol) = RankFileToRowCol(from);
+            return (fRow, fCol, tRow, tCol);
+        }
+
+        public static void MakeMove(Piece[][] chessBoard, string move)
+        {
+
+            var (fRow, fCol, tRow, tCol) = ConvertMoveToColRow(move);
+
             var target = chessBoard[tRow][tCol];
-            chessBoard[tRow][tCol] = chessBoard[fRow][fCol];
+            var attacker = chessBoard[fRow][fCol];
+            Console.WriteLine("attacker: " + attacker.Position);
+            Console.WriteLine("target: " + target.Position);
+            Console.WriteLine();
+
+            chessBoard[tRow][tCol] = attacker;
             chessBoard[tRow][tCol].Position = RowColToRankFile(tRow, tCol);
+            attacker.Moves++;
+            if (target.Type != attacker.Type) attacker.Captures++;
 
-            if (target.Type != "empty") chessBoard[tRow][tCol].Captures++;
-            chessBoard[tRow][tCol].Moves++;
-            chessBoard[fRow][fCol] = new Empty(false) { Type = "empty", Position = RowColToRankFile(fRow, fCol) };
-            chessBoard = ChessMethods.findAvailableMoves(chessBoard);
-
-            return chessBoard;
+            chessBoard[fRow][fCol] = new Empty(false) { Type = PieceType.Empty, Position = RowColToRankFile(fRow, fCol) };
         }
         public static Piece[][] CreateGameBoard()
         {
@@ -83,31 +162,31 @@ namespace DataLayer.HelperMethods
                 chessBoard[row] = new Piece[8];
             }
 
-            chessBoard[0][0] = new Rook(true) { Type = "rook", Position = RowColToRankFile(0, 0) };
-            chessBoard[0][1] = new Knight(true) { Type = "knight", Position = RowColToRankFile(0, 1) };
-            chessBoard[0][2] = new Bishop(true) { Type = "bishop", Position = RowColToRankFile(0, 2) };
-            chessBoard[0][3] = new Queen(true) { Type = "queen", Position = RowColToRankFile(0, 3) };
-            chessBoard[0][4] = new King(true) { Type = "king", Position = RowColToRankFile(0, 4) };
-            chessBoard[0][5] = new Bishop(true) { Type = "bishop", Position = RowColToRankFile(0, 5) };
-            chessBoard[0][6] = new Knight(true) { Type = "knight", Position = RowColToRankFile(0, 6) };
-            chessBoard[0][7] = new Rook(true) { Type = "rook", Position = RowColToRankFile(0, 7) };
+            chessBoard[0][0] = new Rook(true) { Type = PieceType.Rook, Position = RowColToRankFile(0, 0) };
+            chessBoard[0][1] = new Knight(true) { Type = PieceType.Knight, Position = RowColToRankFile(0, 1) };
+            chessBoard[0][2] = new Bishop(true) { Type = PieceType.Bishop, Position = RowColToRankFile(0, 2) };
+            chessBoard[0][3] = new Queen(true) { Type = PieceType.Queen, Position = RowColToRankFile(0, 3) };
+            chessBoard[0][4] = new King(true) { Type = PieceType.King, Position = RowColToRankFile(0, 4) };
+            chessBoard[0][5] = new Bishop(true) { Type = PieceType.Bishop, Position = RowColToRankFile(0, 5) };
+            chessBoard[0][6] = new Knight(true) { Type = PieceType.Knight, Position = RowColToRankFile(0, 6) };
+            chessBoard[0][7] = new Rook(true) { Type = PieceType.Rook, Position = RowColToRankFile(0, 7) };
 
-            chessBoard[7][0] = new Rook(false) { Type = "rook", Position = RowColToRankFile(7, 0) };
-            chessBoard[7][1] = new Knight(false) { Type = "knight", Position = RowColToRankFile(7, 1) };
-            chessBoard[7][2] = new Bishop(false) { Type = "bishop", Position = RowColToRankFile(7, 2) };
-            chessBoard[7][3] = new Queen(false) { Type = "queen", Position = RowColToRankFile(7, 3) };
-            chessBoard[7][4] = new King(false) { Type = "king", Position = RowColToRankFile(7, 4) };
-            chessBoard[7][5] = new Bishop(false) { Type = "bishop", Position = RowColToRankFile(7, 5) };
-            chessBoard[7][6] = new Knight(false) { Type = "knight", Position = RowColToRankFile(7, 6) };
-            chessBoard[7][7] = new Rook(false) { Type = "rook", Position = RowColToRankFile(7, 7) };
+            chessBoard[7][0] = new Rook(false) { Type = PieceType.Rook, Position = RowColToRankFile(7, 0) };
+            chessBoard[7][1] = new Knight(false) { Type = PieceType.Knight, Position = RowColToRankFile(7, 1) };
+            chessBoard[7][2] = new Bishop(false) { Type = PieceType.Bishop, Position = RowColToRankFile(7, 2) };
+            chessBoard[7][3] = new Queen(false) { Type = PieceType.Queen, Position = RowColToRankFile(7, 3) };
+            chessBoard[7][4] = new King(false) { Type = PieceType.King, Position = RowColToRankFile(7, 4) };
+            chessBoard[7][5] = new Bishop(false) { Type = PieceType.Bishop, Position = RowColToRankFile(7, 5) };
+            chessBoard[7][6] = new Knight(false) { Type = PieceType.Knight, Position = RowColToRankFile(7, 6) };
+            chessBoard[7][7] = new Rook(false) { Type = PieceType.Rook, Position = RowColToRankFile(7, 7) };
 
 
 
             // creating and pushing black pawns
             for (int col = 0; col < 8; col++)
             {
-                chessBoard[1][col] = new Pawn(true) { Type = "pawn", Position = RowColToRankFile(1, col) }; // insert white pawns
-                chessBoard[6][col] = new Pawn(false) { Type = "pawn", Position = RowColToRankFile(6, col) }; // insert black pawns
+                chessBoard[1][col] = new Pawn(true) { Type = PieceType.Pawn, Position = RowColToRankFile(1, col) }; // insert white pawns
+                chessBoard[6][col] = new Pawn(false) { Type = PieceType.Pawn, Position = RowColToRankFile(6, col) }; // insert black pawns
 
             }
 
@@ -115,10 +194,11 @@ namespace DataLayer.HelperMethods
             {
                 for (int col = 0; col < 8; col++)
                 {
-                    chessBoard[row][col] = new Empty(false) { Type = "empty", Position = RowColToRankFile(row, col) };
+                    chessBoard[row][col] = new Empty(false) { Type = PieceType.Empty, Position = RowColToRankFile(row, col) };
                 }
             }
             chessBoard = findAvailableMoves(chessBoard);
+
             return chessBoard;
         }
     }

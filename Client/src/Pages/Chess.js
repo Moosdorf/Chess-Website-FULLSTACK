@@ -69,14 +69,12 @@ function Chess() {
                 Move: `${from.Position},${to.Position}`
             })
         }).then(res => {
-            console.log("response", res)
             return res.text()
         })
         .then(data => {
             return JSON.parse(data)
         })
         .then(results => {
-            console.log("parsed json from move", results);
             handleSetChessBoard(results);
         })
         .catch(e => console.log(e));    

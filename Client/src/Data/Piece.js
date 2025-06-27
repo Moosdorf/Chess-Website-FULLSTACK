@@ -1,6 +1,9 @@
 class Piece {
+    
     constructor(Type, IsWhite, Position, Moves, Captures, AvailableMoves, AvailableCaptures, Defenders, Attackers, IsAlive) {
-        this.Type = Type; 
+        const types = ["empty", "pawn", "knight", "bishop", "rook", "queen", "king"]
+
+        this.Type = types[Type]; 
         this.IsWhite = IsWhite;
         this.Position = Position;
         this.Moves = Moves;
