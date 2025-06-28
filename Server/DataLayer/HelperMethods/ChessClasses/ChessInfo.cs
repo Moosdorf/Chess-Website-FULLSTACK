@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 public class ChessInfo
 {
     public Piece[][] GameBoard { get; private set; }
+
+    // if it is whites turn then we must find moves for the black pieces first, these lists can be used for that.
     public List<Piece> BlackPieces { get; private set; } = [];
     public List<Piece> WhitePieces { get; private set; } = [];
     public King BlackKing { get; private set; } = null!;
@@ -23,45 +25,40 @@ public class ChessInfo
     public int Moves { get; set; }
     
 
-    public ChessInfo()
+    public ChessInfo() // used when the game starts initially
     {
-        this.GameBoard = CreateGameBoard();
-        InitializeInfo();
-        FindAvailableMoves();
+        this.GameBoard = CreateGameBoard(); // creates game board with pieces in default position
+        InitializeInfo(); // set information like kings
+        FindAvailableMoves(); // find all moves for all pieces
     }
-    public ChessInfo(List<Move> moves)
+    public ChessInfo(List<Move> moves) // list of moves already played, use this to catch up to the correct state
     {
         this.GameBoard = CreateGameBoard();
         InitializeInfo();
-        if (moves.Count == 0) FindAvailableMoves();
-        else ReplayMoves(moves);
+        ReplayMoves(moves); // not first move, then replay the game to get to the current state
+        FindAvailableMoves(); 
     }
 
     private void InitializeInfo()
     {
-        foreach (Piece[] pieces in GameBoard)
+        // need a list of pieces (black and white)
+        foreach (Piece piece in GameBoard.SelectMany(row => row))
         {
-            foreach (Piece piece in pieces)
-            {
-                if (piece.Type == PieceType.Empty) continue;
 
-                if (piece.IsWhite)
-                {
-                    WhitePieces.Add(piece);
-                    if (piece.Type == PieceType.King)
-                    {
-                        WhiteKing = (King)piece;
-                    }
-                }
-                else
-                {
-                    BlackPieces.Add(piece);
-                    if (piece.Type == PieceType.King)
-                    {
-                        BlackKing = (King) piece;
-                    }
-                }
+            if (piece.Type == PieceType.Empty) continue;
+
+            if (piece.IsWhite) // if piece is white
+            {
+                WhitePieces.Add(piece); // add to list of white pieces
+                if (piece.Type == PieceType.King) WhiteKing = (King)piece; // and set king
             }
+            else
+            {
+                BlackPieces.Add(piece);
+                if (piece.Type == PieceType.King) BlackKing = (King) piece;
+                
+            }
+            
         }
     }
 
@@ -71,11 +68,9 @@ public class ChessInfo
         // replay game to get to current state
         for (int i = 0; i < moves.Count; i++)
         {
-            ChessMethods.MakeMove(GameBoard, moves[i].MoveString);
+            ChessMethods.MakeMove(GameBoard, moves[i].MoveString); // as all moves are made, they are valid and can just be played
             Moves++;
-            FindAvailableMoves();
         }
-
     }
 
     public bool Move(string move)

@@ -110,60 +110,59 @@ namespace DataLayer.HelperMethods
         }
 
 
-        public static bool ValidateMove(string move, Piece[][] board)
+        public static bool ValidateMove(string move, Piece[][] chessBoard)
         {
-            var (fRow, fCol, tRow, tCol) = ConvertMoveToColRow(move);
-            var attacker = board[fRow][fCol];
-            var target = board[tRow][tCol];
-            Console.WriteLine("attacker: " + attacker); 
-            Console.WriteLine("target: " + target); 
+            var (fRow, fCol, tRow, tCol) = ConvertMoveToColRow(move); 
+            // find attacker and target from the chessBoard
+            var attacker = chessBoard[fRow][fCol];
+            var target = chessBoard[tRow][tCol];
 
+            // check if pieces are null
             if (attacker == null || target == null)
             {
                 Console.WriteLine("someone null");
                 return false;
             }
             if (attacker.AvailableCaptures.Contains(target.Position) || attacker.AvailableMoves.Contains(target.Position))
-            {
+            { // if the piece has the move in their list its a valid move
                 return true;
             }
-            Console.WriteLine("does not contain in list - " + attacker.AvailableCaptures.Count + " " + attacker.AvailableMoves.Count);
-            Console.WriteLine("in lists: ");
-            attacker.AvailableCaptures.ForEach(x => Console.WriteLine(x));
-            attacker.AvailableMoves.ForEach(x => Console.WriteLine(x));
             return false; 
         }
 
 
         public static (int fromRow, int fromCol, int toRow, int toCol) ConvertMoveToColRow(string move)
         {
-            var fromTo = move.Split(',');
+            // move can be e2,e4. (from,to)
+            var fromTo = move.Split(','); // split into [from, to]
 
             var from = fromTo[0];
             var to = fromTo[1];
 
-            (int tRow, int tCol) = RankFileToRowCol(to);
+            (int tRow, int tCol) = RankFileToRowCol(to); // convert to row,col to use as indexes
             (int fRow, int fCol) = RankFileToRowCol(from);
-            return (fRow, fCol, tRow, tCol);
+
+            return (fRow, fCol, tRow, tCol); // return all of the indexes
         }
 
         public static void MakeMove(Piece[][] chessBoard, string move)
         {
 
-            var (fRow, fCol, tRow, tCol) = ConvertMoveToColRow(move);
+            var (fRow, fCol, tRow, tCol) = ConvertMoveToColRow(move); // find indexes from the move
 
+            // find target and attacker
             var target = chessBoard[tRow][tCol];
             var attacker = chessBoard[fRow][fCol];
 
-            Console.WriteLine("attacker: " + attacker.Position);
-            Console.WriteLine("target: " + target.Position);
-            Console.WriteLine();
-
+            // put attacker on target and update the position
             chessBoard[tRow][tCol] = attacker;
             chessBoard[tRow][tCol].Position = RowColToRankFile(tRow, tCol);
-            attacker.Moves++;
-            if (target.Type != attacker.Type) attacker.Captures++;
 
+            //  increment moves of the attacker and captures if it is a capture
+            attacker.Moves++;
+            if (target.Type != PieceType.Empty) attacker.Captures++;
+
+            // replace the attackers square with a new empty piece
             chessBoard[fRow][fCol] = new Empty(false) { Type = PieceType.Empty, Position = RowColToRankFile(fRow, fCol) };
         }
 

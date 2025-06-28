@@ -67,6 +67,15 @@ public abstract class Piece
 
     public void AddCaptures(ChessInfo chessState, Piece target)
     {
+        if (target.Type == PieceType.King)
+        {
+            King king = (King) target;
+            Console.WriteLine("hitting king with with " + this);
+            ChessMethods.FindCheckBlockers(chessState, (King)target, this);
+            chessState.InCheck = true;
+            chessState.CheckedKing = king;
+        }
+
         if (chessState.InCheck && chessState.CheckedKing?.IsWhite == IsWhite && !chessState.Blockers.Contains(target.Position)) 
         {
             Console.WriteLine("does not kill checker");
@@ -98,14 +107,6 @@ public abstract class Piece
         else if (piece.IsWhite != IsWhite)
         {
             AddCaptures(chessState, piece);
-            if (piece.Type == PieceType.King)
-            {
-                King king = (King) piece;
-                Console.WriteLine("hitting king with with " + this);
-                ChessMethods.FindCheckBlockers(chessState, (King)piece, this);
-                chessState.InCheck = true;
-                chessState.CheckedKing = king;
-            }
         }
         return false; 
     }
