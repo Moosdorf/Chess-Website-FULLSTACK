@@ -7,31 +7,31 @@ using System.Threading.Tasks;
 
 public class Pawn(bool white) : Piece(white) 
 {
-    public override void FindMoves(Piece[][] board)
+    public override void FindMoves(ChessInfo chessState)
     {
         (int row, int col) = ChessMethods.RankFileToRowCol(this.Position);
 
         // moving 
-        board = MovePawnOneOrTwo(board, row, col);
+        MovePawnOneOrTwo(chessState, row, col);
 
         // captures left
-        board = CaptureLeft(board, row, col);
+        CaptureLeft(chessState, row, col);
 
         // captures right
-        board = CaptureRight(board, row, col);
+        CaptureRight(chessState, row, col);
     }
 
-    private Piece[][] MovePawnOneOrTwo(Piece[][] board, int row, int col)
+    private void MovePawnOneOrTwo(ChessInfo chessState, int row, int col)
     {
         Piece piece;
         if (this.Moves == 0) // can move two squares
         {
             for (int i = 1; i < 3; i++)
             {
-                piece = board[this.IsWhite ? row + i : row - i][col]; // check two in front
+                piece = chessState.GameBoard[this.IsWhite ? row + i : row - i][col]; // check two in front
                 if (piece.Type == PieceType.Empty)
                 {
-                    AddMove(piece);
+                    AddMove(chessState, piece);
                 }
                 else break;
             }
@@ -40,47 +40,34 @@ public class Pawn(bool white) : Piece(white)
         {
             if (row + 1 < 8 && row - 1 >= 0)
             {
-                piece = board[this.IsWhite ? row + 1 : row - 1][col]; // check only one in front
+                piece = chessState.GameBoard[this.IsWhite ? row + 1 : row - 1][col]; // check only one in front
                 if (piece.Type == PieceType.Empty)
                 {
-                    AddMove(piece);
+                    AddMove(chessState, piece);
                 }
             }
-
         }
-
-        return board;
     }
 
 
-
-    private Piece[][] CaptureLeft(Piece[][] board, int row, int col)
+    private void CaptureLeft(ChessInfo chessState, int row, int col)
     {
         if (col - 1 >= 0 && row + 1 < 8 && row - 1 >= 0)
         {
-            var piece = board[this.IsWhite ? row + 1 : row - 1][col - 1]; // check left-side capture, if the piece is not at the edge
-            if (piece.Type != PieceType.Empty && piece.IsWhite != this.IsWhite)
-            {
-                AddCaptures(piece);
-            }
+            var piece = chessState.GameBoard[this.IsWhite ? row + 1 : row - 1][col - 1]; // check left-side capture, if the piece is not at the edge
+            AddCaptures(chessState, piece);
         }
-
-        return board;
     }
 
 
 
-    private Piece[][] CaptureRight(Piece[][] board, int row, int col)
+    private void CaptureRight(ChessInfo chessState, int row, int col)
     {
-        if (col + 1 <= 7 && row + 1 < 8 && row - 1 >= 0)
+        if (col + 1 <= 7 && row + 1 <= 7 && row - 1 >= 0)
         {
-            var piece = board[this.IsWhite ? row + 1 : row - 1][col + 1]; // same but for right-side
-            if (piece.Type != PieceType.Empty && piece.IsWhite != this.IsWhite)
-            {
-                AddCaptures(piece);
-            }
+            var piece = chessState.GameBoard[this.IsWhite ? row + 1 : row - 1][col + 1]; // same but for right-side
+            AddCaptures(chessState, piece);
         }
-        return board;
     }
 
     public override bool Capture()

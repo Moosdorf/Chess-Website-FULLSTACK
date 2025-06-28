@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 public class Knight(bool white) : Piece(white)
 {
-    public override void FindMoves(Piece[][] board)
+    public override void FindMoves(ChessInfo chessState)
     {
         (int row, int col) = ChessMethods.RankFileToRowCol(this.Position);
         
@@ -27,7 +27,7 @@ public class Knight(bool white) : Piece(white)
 
             if (targetRow >= 0 && targetRow < 8 && targetCol >= 0 && targetCol < 8)
             {
-                UpdateMoves(board, targetRow, targetCol);
+                UpdateMoves(chessState, targetRow, targetCol);
             }
         }
     }

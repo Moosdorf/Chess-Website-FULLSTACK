@@ -8,7 +8,7 @@ const ChessContext = createContext(null);
 
 const Stats = ({chessBoard}) => {
     return (
-            <Card className="p-3 shadow-sm">
+            <Card className="p-3 shadow-sm" variant="flush">
                 <Card.Body>
                     <Card.Title>Game Stats for id: {chessBoard.id}</Card.Title>
                     <Card.Text>Turn: {(chessBoard && chessBoard.isWhitesTurn) ? "white" : "black"}</Card.Text>

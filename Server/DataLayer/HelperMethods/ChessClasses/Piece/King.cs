@@ -10,7 +10,7 @@ public class King(bool white) : Piece(white)
 {
     public bool Check { get; set; } = false;
     public List<string>? Blockers { get; set; } = null;
-    public override void FindMoves(Piece[][] board)
+    public override void FindMoves(ChessInfo chessState)
     {
         (int row, int col) = ChessMethods.RankFileToRowCol(this.Position);
 
@@ -21,8 +21,8 @@ public class King(bool white) : Piece(white)
             {
                 if (iRow >= 0 && iRow < 8 && iCol >= 0 && iCol < 8)
                 {
-                    if (board[iRow][iCol] == this) continue;
-                    UpdateMoves(board, iRow, iCol);
+                    if (chessState.GameBoard[iRow][iCol] == this) continue;
+                    UpdateMoves(chessState, iRow, iCol);
                 }
             }
         }

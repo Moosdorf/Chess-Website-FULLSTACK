@@ -30,7 +30,7 @@ function ChessBoard() {
     
         // Center the drag image on the cursor
         e.dataTransfer.setDragImage(dragImage, 37, 37);
-    
+        
         // Clean up the drag image after the drag operation
         setTimeout(() => document.body.removeChild(dragImage), 0);
     
@@ -70,6 +70,7 @@ function ChessBoard() {
     };
 
     const handleOnClick = (clickedPiece) => {
+        console.log(clickedPiece);
         if (selectedPiece === null) {
             addSelected(clickedPiece)
             return;

@@ -23,9 +23,9 @@ public class ChessDataService : IChessDataService
 
 
 
-    public async Task<(int, Piece[][])> CreateGameAsync(int userId1, int userId2)
+    public async Task<(int, ChessInfo)> CreateGameAsync(int userId1, int userId2)
     {
-        var chessBoard = ChessMethods.CreateGameBoard();
+        var chessBoard = new ChessInfo();
         var dbEntryChessGame = new ChessGame();
         _db.ChessGames.Add(dbEntryChessGame);
         await _db.SaveChangesAsync();
@@ -50,8 +50,8 @@ public class ChessDataService : IChessDataService
         var moves = (chessState.Moves);
         var isWhite = (moves % 2) == 0;
         var king = (isWhite) ? chessState.WhiteKing : chessState.BlackKing;
-        var inCheck = king.Check;
-        var blockers = king.Blockers;
+        var inCheck = chessState.InCheck;
+        var blockers = chessState.Blockers;
         return new ChessModel
         { Chessboard = chessState.GameBoard, Id = game.Id, IsWhite = isWhite, Check = inCheck, BlockCheckPositions = blockers, Moves = moves };
     }

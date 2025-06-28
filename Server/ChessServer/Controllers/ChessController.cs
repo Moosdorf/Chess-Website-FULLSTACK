@@ -31,7 +31,7 @@ namespace ChessServer.Controllers
             {
                 return NotFound();
             }
-            (int id, Piece[][] game) = await db.CreateGameAsync(model.player1, model.player2);
+            (int id, ChessInfo game) = await db.CreateGameAsync(model.player1, model.player2);
 
 
             if (game == null)
@@ -46,7 +46,7 @@ namespace ChessServer.Controllers
 
             var serializedOutput = JsonSerializer.Serialize(new ChessModel 
                 { 
-                    Chessboard = game, 
+                    Chessboard = game.GameBoard, 
                     Id = id, 
                     IsWhite = true, 
                     Check = false

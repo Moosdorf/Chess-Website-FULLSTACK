@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 public class Bishop(bool white) : Piece(white)
 {
-    public override void FindMoves(Piece[][] board)
+    public override void FindMoves(ChessInfo chessState)
     {
         (int row, int col) = ChessMethods.RankFileToRowCol(this.Position);
 
@@ -28,7 +28,7 @@ public class Bishop(bool white) : Piece(white)
                  iRow >= 0 && iRow < 8 && iCol >= 0 && iCol < 8;
                  iRow += dRow, iCol += dCol)
             {
-                if (!UpdateMoves(board, iRow, iCol)) break; // will return true if the direction is not blocked by a piece
+                if (!UpdateMoves(chessState, iRow, iCol)) break; // will return true if the direction is not blocked by a piece
             }
         }
     }

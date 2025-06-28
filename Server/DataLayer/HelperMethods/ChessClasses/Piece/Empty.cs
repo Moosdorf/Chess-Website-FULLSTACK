@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 public class Empty(bool white) : Piece(white)
 {
-    public override void FindMoves(Piece[][] board)
+    public override void FindMoves(ChessInfo chessState)
     {
     }
 
