@@ -3,8 +3,10 @@ using DataLayer.HelperMethods;
 using DataLayer.Models.Chess;
 using System;
 using System.Collections.Generic;
+using System.IO.Pipelines;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +21,15 @@ public class ChessInfo
     public List<Piece> WhitePieces { get; private set; } = [];
     public King BlackKing { get; private set; } = null!;
     public King WhiteKing { get; private set; } = null!;
+    public string EnPassantSquare { get; set; } = "-";
+    public string Castling { get; set; } = "KQkq";
     public bool InCheck { get; set; } = false;
     public King? CheckedKing { get; set; } = null;
     public List<string> Blockers { get; set; } = [];
-    public int Moves { get; set; }
-    
+    public string Turn { get; set; } = "w";
+    public int HalfMoveNumber { get; set; } = 0;
+    public int FullMoveClock { get; set; } = 0;
+
 
     public ChessInfo() // used when the game starts initially
     {
@@ -31,11 +37,12 @@ public class ChessInfo
         InitializeInfo(); // set information like kings
         FindAvailableMoves(); // find all moves for all pieces
     }
-    public ChessInfo(List<Move> moves) // list of moves already played, use this to catch up to the correct state
+    public ChessInfo(string FEN) // list of moves already played, use this to catch up to the correct state
     {
-        this.GameBoard = CreateGameBoard();
+        CreateChessState(FEN);
         InitializeInfo();
-        ReplayMoves(moves); // not first move, then replay the game to get to the current state
+        // remove replay
+        // ReplayMoves(moves); // not first move, then replay the game to get to the current state
         FindAvailableMoves(); 
     }
 
@@ -68,25 +75,76 @@ public class ChessInfo
         // replay game to get to current state
         for (int i = 0; i < moves.Count; i++)
         {
-            ChessMethods.MakeMove(GameBoard, moves[i].MoveString); // as all moves are made, they are valid and can just be played
-            Moves++;
+            ChessMethods.MakeMove(this, moves[i].MoveString); // as all moves are made, they are valid and can just be played
         }
     }
 
     public bool Move(string move)
     {
         // check if move is good
-        var canMove = ChessMethods.ValidateMove(move, GameBoard);
+        var canMove = ValidateMove(move);
         if (!canMove) return false;
 
         // make the move
-        Console.WriteLine("Move: " + Moves);
-        ChessMethods.MakeMove(GameBoard, move);
-        Moves++;
+        ChessMethods.MakeMove(this, move);
+
         FindAvailableMoves();
+
         return true;
     }
+    public bool ValidateMove(string move)
+    {
+        var (fRow, fCol, tRow, tCol) = ChessMethods.ConvertMoveToColRow(move);
+        // find attacker and target from the GameBoard
+        var attacker = GameBoard[fRow][fCol];
+        var target = GameBoard[tRow][tCol];
+        // check if pieces are null
+        if (attacker == null || target == null)
+        {
+            return false;
+        }
 
+
+        // update some FEN variables
+        if (attacker.Type == PieceType.Pawn)
+        {
+            if (Math.Abs(fRow - tRow) == 2)
+            {
+                EnPassantSquare = ChessMethods.RowColToRankFile((attacker.IsWhite) ? fRow + 1 : fRow - 1, fCol);
+            }
+
+        }
+        if (attacker.Type == PieceType.King)
+        {
+            if (attacker.IsWhite)
+            {
+                Castling = Castling.Replace("K", "");
+                Castling = Castling.Replace("Q", "");
+            } else
+            {
+                Castling = Castling.Replace("k", "");
+                Castling = Castling.Replace("q", "");
+            }
+        }
+
+        if (attacker.Type == PieceType.Rook)
+        {
+            if (Castling.Contains('K') && attacker.Position == "h1") Castling = Castling.Replace("K", "");
+            if (Castling.Contains('Q') && attacker.Position == "a1") Castling = Castling.Replace("Q", "");
+            if (Castling.Contains('k') && attacker.Position == "h8") Castling = Castling.Replace("k", "");
+            if (Castling.Contains('q') && attacker.Position == "a8") Castling = Castling.Replace("q", "");
+        }
+        if (Castling == "") Castling = "-";
+
+
+
+        if (attacker.AvailableCaptures.Contains(target.Position) || attacker.AvailableMoves.Contains(target.Position))
+        { // if the piece has the move in their list its a valid move
+            return true;
+        }
+
+        return false;
+    }
 
     public void FindAvailableMoves()
     {
@@ -102,32 +160,189 @@ public class ChessInfo
             piece.Defenders = new();
         }
 
-        Console.WriteLine("moves: " + Moves);
-        if (Moves % 2 == 0)
+        if (Turn == "w")
         {
-            Console.WriteLine("finding black moves");   
             foreach (var piece in BlackPieces)
             {
                 piece.FindMoves(this);
             }
-            Console.WriteLine("finding white moves");
+            FindPins();
             foreach (var piece in WhitePieces)
             {
                 piece.FindMoves(this);
             }
         } else
         {
-            Console.WriteLine("finding white moves");
             foreach (var piece in WhitePieces)
             {
                 piece.FindMoves(this);
             }
-            Console.WriteLine("finding black moves");
+            FindPins();
             foreach (var piece in BlackPieces)
             {
                 piece.FindMoves(this);
             }
         }
+    }
+
+    private void FindPins()
+    {
+        var currentKing = Turn == "w" ? WhiteKing : BlackKing;
+
+        (int row, int col) = ChessMethods.RankFileToRowCol(currentKing.Position);
+
+        int[][] directions =
+        [
+            [-1, 0], // up
+            [1, 0],  // down
+            [0, 1],   // right
+            [0, -1],  // left
+            [-1, -1], // up-left
+            [1, -1],  // down-left
+            [1, 1],   // down-right
+            [-1, 1],  // up-right
+        ];
+
+
+        foreach (var dir in directions)
+        {
+            int dRow = dir[0], dCol = dir[1];
+            Piece foundFriendly = null;
+
+            for (int iRow = row + dRow, iCol = col + dCol; // find new row and col based on the direction
+                 iRow >= 0 && iRow < 8 && iCol >= 0 && iCol < 8; // within gameboard
+                 iRow += dRow, iCol += dCol) // increment by deltaCol or row, -1 or 1.
+            {
+                var reviewPiece = GameBoard[iRow][iCol];
+                if (reviewPiece.Type == PieceType.Empty) continue;
+                if (reviewPiece.IsWhite == currentKing.IsWhite)
+                {
+                    if (foundFriendly != null) break; // found another friendly in a row, not pinned
+                    foundFriendly = reviewPiece;
+                }
+                if (reviewPiece.IsWhite != currentKing.IsWhite && foundFriendly != null) // found an enemy
+                {
+                    (int rRow, int rCol) = ChessMethods.RankFileToRowCol(reviewPiece.Position); // find its position on the board in row col
+                    // check if diagonal to the king
+                    if (Math.Abs(row - rRow) == Math.Abs(col - rCol)) 
+                    {
+                        if (reviewPiece.Type == PieceType.Bishop || reviewPiece.Type == PieceType.Queen) // only queen or bishop can make diagonal attacks in range
+                        {
+                            foundFriendly.Pinned = true;
+                            Console.WriteLine("pin found diagonal");
+                            break;
+                        }
+                    }
+
+                    // if straight then its rook or queen
+                    if (reviewPiece.Type == PieceType.Rook || reviewPiece.Type == PieceType.Queen) 
+                    {
+                        foundFriendly.Pinned = true;
+                            Console.WriteLine("pin found straight");
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void CreateChessState(string FEN)
+    {
+        var fenSPLIT = FEN.Split(" ");
+        // index 0 is the boardstate
+        // index 1 is the turn w / b
+        // index 2 is castling rights
+        // index 3 is en passant square
+        // index 4 halfmove number - increments when a non pawn pieces moves, resets when a pawn moves
+        // index 5 fullmoveclock - increments when black moves
+
+        GameBoard = ConvertFENtoBoard(fenSPLIT[0]);
+        Turn = fenSPLIT[1];
+        Castling = fenSPLIT[2];
+        EnPassantSquare = "-";
+        HalfMoveNumber = int.Parse(fenSPLIT[4]);
+        FullMoveClock = int.Parse(fenSPLIT[5]);
+
+    }
+
+    private Piece[][] ConvertFENtoBoard(string v)
+    {
+        Console.WriteLine(v);
+        var chessBoard = new Piece[8][]; // ends as final result 
+
+        for (int iRow = 0; iRow < 8; iRow++) 
+        {
+            chessBoard[iRow] = new Piece[8];
+        }
+
+        int row = 7, col = 0;
+        foreach (char currentChar in v)
+        {
+            // if empty square
+            if (currentChar >= '1' && currentChar <= '8')
+            {
+                int numberOfEmpties = int.Parse(currentChar.ToString());
+                for (int i = 0; i < numberOfEmpties; i++)
+                {
+                    chessBoard[row][col] = new Empty(false)
+                    {
+                        Type = PieceType.Empty,
+                        Position = ChessMethods.RowColToRankFile(row, col)
+                    };
+                    col++;
+                }
+                continue;
+            }
+
+            switch (currentChar)
+            {
+                case 'P': // white cases
+                case 'N':
+                case 'B':
+                case 'R':
+                case 'Q':
+                case 'K':
+                case 'p': // black cases
+                case 'n':
+                case 'b':
+                case 'r':
+                case 'q':
+                case 'k':
+                    bool isWhite = char.IsUpper(currentChar);
+                    PieceType type = currentChar switch // determine the type of each piece on the board
+                    {
+                        'P' or 'p' => PieceType.Pawn,
+                        'N' or 'n' => PieceType.Knight,
+                        'B' or 'b' => PieceType.Bishop,
+                        'R' or 'r' => PieceType.Rook,
+                        'Q' or 'q' => PieceType.Queen,
+                        'K' or 'k' => PieceType.King,
+                    };
+
+                    chessBoard[row][col] = type switch // create new pieces
+                    {
+                        PieceType.Pawn => new Pawn(isWhite),
+                        PieceType.Knight => new Knight(isWhite),
+                        PieceType.Bishop => new Bishop(isWhite),
+                        PieceType.Rook => new Rook(isWhite),
+                        PieceType.Queen => new Queen(isWhite),
+                        PieceType.King => new King(isWhite),
+                        _ => new Empty(false)
+                    };
+                    // set their type and position
+                    chessBoard[row][col].Type = type; 
+                    chessBoard[row][col].Position = ChessMethods.RowColToRankFile(row, col);
+                    col++;
+                    break;
+
+                case '/':
+                    row--;
+                    col = 0;
+                    break;
+            }
+        }
+
+        return chessBoard; 
     }
 
     public Piece[][] CreateGameBoard()
@@ -186,8 +401,7 @@ public class ChessInfo
         return $"Black Pieces: {BlackPieces?.Count ?? 0}\n" +
                $"White Pieces: {WhitePieces?.Count ?? 0}\n" +
                $"Black King Position: {blackKingPos}\n" +
-               $"White King Position: {whiteKingPos}\n" +
-               $"Moves: {Moves}";
+               $"White King Position: {whiteKingPos}";
     }
 
 }

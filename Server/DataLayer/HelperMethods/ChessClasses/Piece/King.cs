@@ -8,8 +8,6 @@ using System.Threading.Tasks;
 
 public class King(bool white) : Piece(white)
 {
-    public bool Check { get; set; } = false;
-    public List<string>? Blockers { get; set; } = null;
     public override void FindMoves(ChessInfo chessState)
     {
         (int row, int col) = ChessMethods.RankFileToRowCol(this.Position);
@@ -26,15 +24,78 @@ public class King(bool white) : Piece(white)
                 }
             }
         }
+
+        if (!chessState.InCheck)
+        {
+            CheckQueenSideCastle(chessState);
+            CheckKingSideCastle(chessState);
+        }
+
     }
 
-    public override bool Capture()
+    private void CheckKingSideCastle(ChessInfo chessState)
     {
-        throw new NotImplementedException();
+        var fenKingCastle = (IsWhite) ? "K" : "k";
+
+        if (chessState.Castling.Contains(fenKingCastle))
+        {
+            (var row, var col) = ChessMethods.RankFileToRowCol(Position);
+
+            for (int i = 1; i < 4; i++)
+            {
+                var target = chessState.GameBoard[row][col + i];
+                if (target.Type == PieceType.Empty && target.Attackers.Count == 0)
+                {
+                    continue;
+                }
+                if (target.Type == PieceType.Rook && target.IsWhite == IsWhite)
+                {
+                    var possibleMove = chessState.GameBoard[row][col + 2];
+                    AvailableMoves.Add(possibleMove.Position);
+                }
+                break;
+            }
+        }
+
     }
 
-    public override bool Move()
+
+
+    
+    private void CheckQueenSideCastle(ChessInfo chessState)
     {
-        throw new NotImplementedException();
+        (var row, var col) = ChessMethods.RankFileToRowCol(Position);
+
+
+        var fenQueenCastle = (IsWhite) ? "Q" : "q";
+
+        if (chessState.Castling.Contains(fenQueenCastle))
+        {
+            for (int i = 1; i < 5; i++)
+            {
+                var target = chessState.GameBoard[row][col - i];
+
+                if (target.Type == PieceType.Empty)
+                {
+                    if ((col - i == 1) || ((target.Attackers.Count == 0) && (col - i != 1)))
+                    {
+                        continue;
+                    }
+                }
+
+                if (target.Type == PieceType.Rook && target.IsWhite == IsWhite)
+                {
+                    var possibleMove = chessState.GameBoard[row][col - 2];
+                    AvailableMoves.Add(possibleMove.Position);
+                }
+                if (col - i != 1)
+                break;
+            }
+            Console.WriteLine("---------------------------------------");
+
+        }
+
     }
+
+
 }

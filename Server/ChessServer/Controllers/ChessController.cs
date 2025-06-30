@@ -31,7 +31,7 @@ namespace ChessServer.Controllers
             {
                 return NotFound();
             }
-            (int id, ChessInfo game) = await db.CreateGameAsync(model.player1, model.player2);
+            (ChessGame game, ChessInfo chessState) = await db.CreateGameAsync(model.player1, model.player2);
 
 
             if (game == null)
@@ -44,16 +44,7 @@ namespace ChessServer.Controllers
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull // Include properties even if they are null
             };
 
-            var serializedOutput = JsonSerializer.Serialize(new ChessModel 
-                { 
-                    Chessboard = game.GameBoard, 
-                    Id = id, 
-                    IsWhite = true, 
-                    Check = false
-                }, 
-                options);
-
-            return Ok(serializedOutput);
+            return Ok(JsonSerializer.Serialize(db.CreateChessModel(chessState, game)));
         }
 
         [HttpPut]
@@ -64,17 +55,23 @@ namespace ChessServer.Controllers
             // check if user is part of the game here if (game.player1 || game.player2 == moveModel.id???) return BadRequest("user not part of game");
             if (game == null) return BadRequest("CannotFindGame");
 
+            ChessInfo chessState;
             // create chess state from moves
-            var chessState = new ChessInfo(game.Moves);
+            if (game.Moves.Count > 0)
+                chessState = new ChessInfo(game.Moves.Last().FEN); // find last moves FEN to create state from
+            else
+                chessState = new ChessInfo();
+
 
             // validate if the move can be made
             var canMove = chessState.Move(moveModel.Move);
             if (!canMove) return BadRequest("Cannot make move - dataservice");
 
+            var FEN = ChessMethods.GenerateFEN(chessState);
+
             // change in the database
-            var moveMade = await db.MoveAsync(id, moveModel.Move);
+            var moveMade = await db.MoveAsync(id, moveModel.Move, FEN);
             if (!moveMade) return BadRequest("Cannot make move - database");
-            Console.WriteLine(chessState);
             return Ok(JsonSerializer.Serialize(db.CreateChessModel(chessState, game)));
         }
     }

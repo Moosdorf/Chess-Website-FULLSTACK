@@ -429,7 +429,6 @@ C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\De
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\ChessServer.AssemblyInfoInputs.cache
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\ChessServer.AssemblyInfo.cs
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\ChessServer.csproj.CoreCompileInputs.cache
-C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\ChessServer.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\ChessServer.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\ChessServer.sourcelink.json
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\scopedcss\bundle\ChessServer.styles.css
@@ -443,3 +442,4 @@ C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\De
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\ChessServer.pdb
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\ChessServer.genruntimeconfig.cache
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\ref\ChessServer.dll
+C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

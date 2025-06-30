@@ -23,21 +23,22 @@ public class ChessDataService : IChessDataService
 
 
 
-    public async Task<(int, ChessInfo)> CreateGameAsync(int userId1, int userId2)
+    public async Task<(ChessGame, ChessInfo)> CreateGameAsync(int userId1, int userId2)
     {
         var chessBoard = new ChessInfo();
         var dbEntryChessGame = new ChessGame();
         _db.ChessGames.Add(dbEntryChessGame);
         await _db.SaveChangesAsync();
-        return (dbEntryChessGame.Id, chessBoard);
+        return (dbEntryChessGame, chessBoard);
     }
 
-    public async Task<bool> MoveAsync(int chessId, string move)
+    public async Task<bool> MoveAsync(int chessId, string move, string FEN)
     {
         var newMove = new Move()
         {
             ChessGameId = chessId,
-            MoveString = move
+            MoveString = move,
+            FEN = FEN
         };
 
         _db.Moves.Add(newMove);
@@ -47,13 +48,21 @@ public class ChessDataService : IChessDataService
 
     public ChessModel CreateChessModel(ChessInfo chessState, ChessGame game) 
     {
-        var moves = (chessState.Moves);
-        var isWhite = (moves % 2) == 0;
+        var isWhite = chessState.Turn == "w";
         var king = (isWhite) ? chessState.WhiteKing : chessState.BlackKing;
         var inCheck = chessState.InCheck;
         var blockers = chessState.Blockers;
+
+        bool gameDone = false;
+        if (inCheck)
+        {
+            var pieces = (isWhite) ? chessState.WhitePieces : chessState.BlackPieces;
+            gameDone = !pieces.Any(x => x.AvailableMoves.Count > 0);
+        }
+
+
         return new ChessModel
-        { Chessboard = chessState.GameBoard, Id = game.Id, IsWhite = isWhite, Check = inCheck, BlockCheckPositions = blockers, Moves = moves };
+        { Chessboard = chessState.GameBoard, FEN = ChessMethods.GenerateFEN(chessState), Id = game.Id, IsWhite = isWhite, Check = inCheck, CheckMate = gameDone, BlockCheckPositions = blockers};
     }
 
 

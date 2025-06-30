@@ -1,6 +1,7 @@
 ﻿using DataLayer.Entities.Chess;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,15 +52,14 @@ namespace DataLayer.HelperMethods
         private static List<string> DiagonalBlocks(Piece[][] chessBoard, King king, Piece pieceChecked)
         {
             var blockers = new List<string>();
-            (int aRow, int aCol) = ChessMethods.RankFileToRowCol(pieceChecked.Position);
-            (int kRow, int kCol) = ChessMethods.RankFileToRowCol(king.Position);
+            (int aRow, int aCol) = RankFileToRowCol(pieceChecked.Position);
+            (int kRow, int kCol) = RankFileToRowCol(king.Position);
             // check if they are diagonal to each other
             if (Math.Abs(aRow - kRow) != Math.Abs(aCol - kCol)) return blockers; // return empty list
 
             var verticalDirection = (aRow > kRow) ? -1 : 1; // true = king to the left of piece
             var horizontalDirection = (aCol > kCol) ? -1 : 1; // true = king "above" piece
             int distance = Math.Abs(aRow - kRow);
-            Console.WriteLine("distance: " +  distance);
 
             for (int i = 1; i < distance; i++)
             {
@@ -78,8 +78,8 @@ namespace DataLayer.HelperMethods
         private static List<string> StraightBlocks(Piece[][] chessBoard, King king, Piece pieceChecked)
         {
             var blockers = new List<string>();
-            (int aRow, int aCol) = ChessMethods.RankFileToRowCol(pieceChecked.Position);
-            (int kRow, int kCol) = ChessMethods.RankFileToRowCol(king.Position);
+            (int aRow, int aCol) = RankFileToRowCol(pieceChecked.Position);
+            (int kRow, int kCol) = RankFileToRowCol(king.Position);
 
             int deltaRow = 0, deltaCol = 0;
             int distance;
@@ -110,25 +110,7 @@ namespace DataLayer.HelperMethods
         }
 
 
-        public static bool ValidateMove(string move, Piece[][] chessBoard)
-        {
-            var (fRow, fCol, tRow, tCol) = ConvertMoveToColRow(move); 
-            // find attacker and target from the chessBoard
-            var attacker = chessBoard[fRow][fCol];
-            var target = chessBoard[tRow][tCol];
 
-            // check if pieces are null
-            if (attacker == null || target == null)
-            {
-                Console.WriteLine("someone null");
-                return false;
-            }
-            if (attacker.AvailableCaptures.Contains(target.Position) || attacker.AvailableMoves.Contains(target.Position))
-            { // if the piece has the move in their list its a valid move
-                return true;
-            }
-            return false; 
-        }
 
 
         public static (int fromRow, int fromCol, int toRow, int toCol) ConvertMoveToColRow(string move)
@@ -145,26 +127,106 @@ namespace DataLayer.HelperMethods
             return (fRow, fCol, tRow, tCol); // return all of the indexes
         }
 
-        public static void MakeMove(Piece[][] chessBoard, string move)
+        public static void MakeMove(ChessInfo chessState, string move)
         {
 
             var (fRow, fCol, tRow, tCol) = ConvertMoveToColRow(move); // find indexes from the move
 
             // find target and attacker
-            var target = chessBoard[tRow][tCol];
-            var attacker = chessBoard[fRow][fCol];
+            var target = chessState.GameBoard[tRow][tCol];
+            var attacker = chessState.GameBoard[fRow][fCol];
+
+
 
             // put attacker on target and update the position
-            chessBoard[tRow][tCol] = attacker;
-            chessBoard[tRow][tCol].Position = RowColToRankFile(tRow, tCol);
+            chessState.GameBoard[tRow][tCol] = attacker;
+            chessState.GameBoard[tRow][tCol].Position = RowColToRankFile(tRow, tCol);
 
-            //  increment moves of the attacker and captures if it is a capture
-            attacker.Moves++;
-            if (target.Type != PieceType.Empty) attacker.Captures++;
+            if (attacker.Type == PieceType.King && Math.Abs(fCol - tCol) == 2)
+            {
+                Console.WriteLine("go update rook as well");
+                Rook rook;
+                int rookCol = (tCol > fCol) ? tCol + 1 : tCol - 2;
+                int rookToCol = (tCol > fCol) ? tCol - 1 : tCol + 1;
+                rook = (Rook)chessState.GameBoard[fRow][rookCol];
+                rook.Position = RowColToRankFile(fRow, rookToCol);
+
+
+                chessState.GameBoard[fRow][rookToCol] = rook;
+                chessState.GameBoard[fRow][rookCol] = new Empty(false) { Type = PieceType.Empty, Position = RowColToRankFile(fRow, rookCol) }; 
+            }
+
+
+
+            // update some states like whose turn it is, incrementing variables
+            chessState.Turn = (chessState.Turn == "w") ? "b" : "w"; 
+
+
+            // reset halfmovenumber if pawn, else increment it
+            if (attacker.Type == PieceType.Pawn) chessState.HalfMoveNumber = 0;
+            else chessState.HalfMoveNumber++;
+
+            if (!attacker.IsWhite) chessState.FullMoveClock++;
 
             // replace the attackers square with a new empty piece
-            chessBoard[fRow][fCol] = new Empty(false) { Type = PieceType.Empty, Position = RowColToRankFile(fRow, fCol) };
+            chessState.GameBoard[fRow][fCol] = new Empty(false) { Type = PieceType.Empty, Position = RowColToRankFile(fRow, fCol) };
         }
+        public static string GenerateFEN(ChessInfo chessState)
+        {
+            var FEN = "";
+            int slashCounter = 0;
+            foreach (Piece[] pieces in chessState.GameBoard) // loop over each row, they will be seperated by a /
+            {
+                string row = "";
+                var counter = 0; // counter to count empty pieces in a row
+                foreach (Piece piece in pieces)
+                {
+                    if (piece.Type == PieceType.Empty) // if empty continue and increment counter
+                    {
+                        counter++;
+                        continue; 
+                    }
+                    if (counter > 0) // if not empty and counter is above 0, add the count to the string
+                    {
+                        row += counter;
+                        counter = 0;
+                    }
+                    row += GetFenPieceChar(piece);
+                }
+                if (counter > 0) row += counter;
+                if (slashCounter != 0)
+                {
+                    row += "/";
+                }
+                slashCounter++;
+                FEN = row + FEN;
 
+            }
+            FEN += $" {chessState.Turn} "; ; // which turn it is
+            FEN += $"{chessState.Castling}"; // which castles are still legal
+            FEN += $" {chessState.EnPassantSquare}"; // the en passant square if there is one (only one if a pawn has just moved 2 squares)
+            var halfMoveNumber = chessState.HalfMoveNumber; // It resets to 0 whenever a pawn moves or a piece is captured. increments when a pawn does not
+            int fullMoveClock = chessState.FullMoveClock; // increments when black moves, starts at one
+            FEN += $" {halfMoveNumber}";
+            FEN += $" {fullMoveClock}";
+
+            return FEN;
+        }
+        private static char GetFenPieceChar(Piece piece)
+        {
+            char symbol = piece.Type switch
+            {
+                PieceType.King => 'k',
+                PieceType.Queen => 'q',
+                PieceType.Rook => 'r',
+                PieceType.Bishop => 'b',
+                PieceType.Knight => 'n',
+                PieceType.Pawn => 'p',
+                _ => '?'
+            };
+
+            // Uppercase for white pieces
+            return piece.IsWhite ? char.ToUpper(symbol) : symbol;
+        }
     }
 }

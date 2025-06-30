@@ -24,24 +24,20 @@ public abstract class Piece
     }
     public PieceType Type { get; set; }
     public string Position { get; set; } = string.Empty;
-    public int Moves { get; set; } = 0;
-    public int Captures { get; set; } = 0;
-    public bool IsAlive { get; set; } = true;
+    public bool Pinned { get; set; } = false;
     public bool IsWhite { get; set; }
     public List<string> AvailableMoves { get; set; } = [];
     public List<string> AvailableCaptures { get; set; } = [];
     public List<string> Attackers { get; set; } = [];
     public List<string> Defenders { get; set; } = [];
     public abstract void FindMoves(ChessInfo chessState);
-    public abstract bool Move();
-    public abstract bool Capture();
+
 
     public void AddMove(ChessInfo chessState, Piece target)
     {
 
         if (chessState.InCheck && chessState.CheckedKing?.IsWhite == IsWhite && this != chessState.CheckedKing && !chessState.Blockers.Contains(target.Position))
         {
-            Console.WriteLine("returning " + Type);
             return;
         }
 
@@ -49,15 +45,15 @@ public abstract class Piece
         {
             if (target.Attackers.Count > 0)
             {
-                Console.WriteLine("square: " + target + " attacked returning by " + target.Attackers[0]);
-                Console.WriteLine(target.Attackers.Count);
                 return;
             }
         }
 
+
+
         if (Type != PieceType.Pawn)
         { 
-            if (IsWhite == (chessState.Moves % 2 != 0)) target.Attackers.Add(Position); 
+            if (IsWhite == (chessState.Turn != "w")) target.Attackers.Add(Position); 
             else target.Defenders.Add(Position); 
         }
 
@@ -65,24 +61,25 @@ public abstract class Piece
         AvailableMoves.Add(target.Position);
     }
 
+
+
     public void AddCaptures(ChessInfo chessState, Piece target)
     {
         if (target.Type == PieceType.King)
         {
             King king = (King) target;
-            Console.WriteLine("hitting king with with " + this);
             ChessMethods.FindCheckBlockers(chessState, (King)target, this);
             chessState.InCheck = true;
             chessState.CheckedKing = king;
         }
 
+
         if (chessState.InCheck && chessState.CheckedKing?.IsWhite == IsWhite && !chessState.Blockers.Contains(target.Position)) 
         {
-            Console.WriteLine("does not kill checker");
             return; 
         }
 
-        if (IsWhite == (chessState.Moves % 2 != 0)) target.Attackers.Add(Position);
+        if (IsWhite != (chessState.Turn == "w")) target.Attackers.Add(Position);
         else target.Defenders.Add(Position);
 
         if (Type != PieceType.Pawn)
@@ -115,9 +112,6 @@ public abstract class Piece
     {
         return $"Type: {Type}, " +
                $"Position: {Position}, " +
-               $"Moves: {Moves}, " +
-               $"Captures: {Captures}, " +
-               $"IsAlive: {IsAlive}, " +
                $"AvailableMoves: {AvailableMoves.Count}, " +
                $"AvailableCaptures: {AvailableCaptures.Count}, " +
                $"Color: {(IsWhite ? "White" : "Black")}";

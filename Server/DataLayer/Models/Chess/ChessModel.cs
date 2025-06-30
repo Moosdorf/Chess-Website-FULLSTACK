@@ -6,9 +6,10 @@ public class ChessModel
 {
     public int Id { get; set; }
     public Piece[][] Chessboard { get; set; } = null!;
-    public int Moves { get; set; } = 0;
     public bool IsWhite { get; set; }
     public bool Check { get; set; } = false;
+    public bool CheckMate { get; set; } = false;
     public List<string> BlockCheckPositions { get; set; } = [];
+    public string FEN { get; set; } = "";
 
 }

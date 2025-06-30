@@ -15,8 +15,8 @@ var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")
 
 builder.Services.AddDbContext<ChessContext>(options =>
 {
-    /*options.EnableSensitiveDataLogging();
-    options.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Information);*/
+    options.EnableSensitiveDataLogging();
+    options.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Warning);
     options.UseNpgsql(connectionString);
 });
 

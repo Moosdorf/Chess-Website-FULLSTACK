@@ -24,7 +24,8 @@ public class Pawn(bool white) : Piece(white)
     private void MovePawnOneOrTwo(ChessInfo chessState, int row, int col)
     {
         Piece piece;
-        if (this.Moves == 0) // can move two squares
+        bool isOnStartingSquare = (IsWhite && row == 1) || (!IsWhite && row == 6);
+        if (isOnStartingSquare)
         {
             for (int i = 1; i < 3; i++)
             {
@@ -70,14 +71,5 @@ public class Pawn(bool white) : Piece(white)
         }
     }
 
-    public override bool Capture()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override bool Move()
-    {
-        throw new NotImplementedException();
-    }
 }
 

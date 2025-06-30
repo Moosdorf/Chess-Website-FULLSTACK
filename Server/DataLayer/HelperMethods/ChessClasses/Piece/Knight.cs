@@ -32,13 +32,5 @@ public class Knight(bool white) : Piece(white)
         }
     }
 
-    public override bool Capture()
-    {
-        throw new NotImplementedException();
-    }
 
-    public override bool Move()
-    {
-        throw new NotImplementedException();
-    }
 }

@@ -8,16 +8,26 @@ const ChessContext = createContext(null);
 
 const Stats = ({chessBoard}) => {
     return (
-            <Card className="p-3 shadow-sm" variant="flush">
-                <Card.Body>
-                    <Card.Title>Game Stats for id: {chessBoard.id}</Card.Title>
-                    <Card.Text>Turn: {(chessBoard && chessBoard.isWhitesTurn) ? "white" : "black"}</Card.Text>
-                    <Card.Text>Moves: {chessBoard.moves}</Card.Text>
-                    
-                    {chessBoard.check && <Card.Text>In check</Card.Text>}
-                    {chessBoard.check && <Card.Text>Blocks: {chessBoard.checkBlockers}</Card.Text>}
-                </Card.Body>
-            </Card>
+        <Card className="customCard">
+        <Card.Body>
+            <Card.Header className="customCardHeader">Game Stats (ID: {chessBoard.id})</Card.Header>
+
+            <Card.Text><strong>Turn:</strong> {chessBoard.isWhitesTurn ? 'White' : 'Black'}</Card.Text>
+
+            {chessBoard.checkMate && (
+            <Card.Text className="text-danger fw-bold">Checkmate</Card.Text>
+            )}
+
+            {chessBoard.check && (
+            <>
+                <Card.Text className="text-warning">In Check</Card.Text>
+                <Card.Text><strong>Block Options:</strong> {chessBoard.checkBlockers.join(', ')}</Card.Text>
+            </>
+            )}
+
+            <Card.Text><strong>Total Moves:</strong> {chessBoard.moves}</Card.Text>
+        </Card.Body>
+        </Card>
     )
 }
 
@@ -50,6 +60,7 @@ function Chess() {
                 piece.Type, 
                 piece.IsWhite, 
                 piece.Position, 
+                piece.Pinned,
                 piece.Moves,
                 piece.Captures,
                 piece.AvailableMoves,
@@ -58,7 +69,7 @@ function Chess() {
                 piece.Attackers,
                 piece.IsAlive))
         ));
-        setChessBoard({board: tempChessBoard, id: apiBoard.Id, isWhitesTurn: apiBoard.IsWhite, moves: apiBoard.Moves, check: apiBoard.Check, checkBlockers: apiBoard.BlockCheckPositions});
+        setChessBoard({board: tempChessBoard, id: apiBoard.Id, isWhitesTurn: apiBoard.IsWhite, moves: apiBoard.Moves, check: apiBoard.Check, checkMate: apiBoard.CheckMate, checkBlockers: apiBoard.BlockCheckPositions});
     }  
 
     const [chessBoard, setChessBoard] = useState(null);
@@ -107,12 +118,15 @@ function Chess() {
                     </Col>
                 </Row>
                 <Row>
-                    <Col md="auto">
+                    <Col xs={3}>
                         {chessBoard && <Stats chessBoard={chessBoard}/>}
 
                     </Col>
-                    <Col>
+                    <Col xs={6}>
                         {chessBoard && <ChessBoard/>}
+                    </Col>
+                    <Col xs={3}>
+
                     </Col>
 
                 </Row>
