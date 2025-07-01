@@ -88,6 +88,7 @@ public abstract class Piece
         } else
         {
             if (target.Type != PieceType.Empty && target.IsWhite != IsWhite) AvailableCaptures.Add(target.Position);
+            if (target.Type == PieceType.Empty && target.Position == chessState.EnPassantSquare) AvailableCaptures.Add(target.Position);
         }
     }
 

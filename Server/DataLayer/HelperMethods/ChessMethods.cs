@@ -142,9 +142,17 @@ namespace DataLayer.HelperMethods
             chessState.GameBoard[tRow][tCol] = attacker;
             chessState.GameBoard[tRow][tCol].Position = RowColToRankFile(tRow, tCol);
 
+            Console.WriteLine("en passant square = " + chessState.EnPassantSquare);
+            if (attacker.Type == PieceType.Pawn && target.Position == chessState.EnPassantSquare)
+            {
+                Console.WriteLine("en passant");
+                var rowRemove = (attacker.IsWhite) ? tRow - 1 : tRow + 1;
+                chessState.GameBoard[rowRemove][tCol] = new Empty(false) { Type = PieceType.Empty, Position = RowColToRankFile(rowRemove, tCol) };
+
+            }
+
             if (attacker.Type == PieceType.King && Math.Abs(fCol - tCol) == 2)
             {
-                Console.WriteLine("go update rook as well");
                 Rook rook;
                 int rookCol = (tCol > fCol) ? tCol + 1 : tCol - 2;
                 int rookToCol = (tCol > fCol) ? tCol - 1 : tCol + 1;
@@ -157,6 +165,34 @@ namespace DataLayer.HelperMethods
             }
 
 
+            // update some FEN variables
+            if (attacker.Type == PieceType.Pawn && Math.Abs(fRow - tRow) == 2)
+            {
+                chessState.EnPassantSquare = RowColToRankFile((attacker.IsWhite) ? fRow + 1 : fRow - 1, fCol);
+            }
+            else chessState.EnPassantSquare = "-";
+            if (attacker.Type == PieceType.King)
+            {
+                if (attacker.IsWhite)
+                {
+                    chessState.Castling = chessState.Castling.Replace("K", "");
+                    chessState.Castling = chessState.Castling.Replace("Q", "");
+                }
+                else
+                {
+                    chessState.Castling = chessState.Castling.Replace("k", "");
+                    chessState.Castling = chessState.Castling.Replace("q", "");
+                }
+            }
+
+            if (attacker.Type == PieceType.Rook)
+            {
+                if (chessState.Castling.Contains('K') && attacker.Position == "h1") chessState.Castling = chessState.Castling.Replace("K", "");
+                if (chessState.Castling.Contains('Q') && attacker.Position == "a1") chessState.Castling = chessState.Castling.Replace("Q", "");
+                if (chessState.Castling.Contains('k') && attacker.Position == "h8") chessState.Castling = chessState.Castling.Replace("k", "");
+                if (chessState.Castling.Contains('q') && attacker.Position == "a8") chessState.Castling = chessState.Castling.Replace("q", "");
+            }
+            if (chessState.Castling == "") chessState.Castling = "-";
 
             // update some states like whose turn it is, incrementing variables
             chessState.Turn = (chessState.Turn == "w") ? "b" : "w"; 

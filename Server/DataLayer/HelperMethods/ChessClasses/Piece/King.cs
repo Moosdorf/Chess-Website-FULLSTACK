@@ -91,7 +91,6 @@ public class King(bool white) : Piece(white)
                 if (col - i != 1)
                 break;
             }
-            Console.WriteLine("---------------------------------------");
 
         }
 

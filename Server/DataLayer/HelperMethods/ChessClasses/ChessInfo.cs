@@ -94,6 +94,7 @@ public class ChessInfo
     }
     public bool ValidateMove(string move)
     {
+        Console.WriteLine("validating: " + move);
         var (fRow, fCol, tRow, tCol) = ChessMethods.ConvertMoveToColRow(move);
         // find attacker and target from the GameBoard
         var attacker = GameBoard[fRow][fCol];
@@ -103,40 +104,6 @@ public class ChessInfo
         {
             return false;
         }
-
-
-        // update some FEN variables
-        if (attacker.Type == PieceType.Pawn)
-        {
-            if (Math.Abs(fRow - tRow) == 2)
-            {
-                EnPassantSquare = ChessMethods.RowColToRankFile((attacker.IsWhite) ? fRow + 1 : fRow - 1, fCol);
-            }
-
-        }
-        if (attacker.Type == PieceType.King)
-        {
-            if (attacker.IsWhite)
-            {
-                Castling = Castling.Replace("K", "");
-                Castling = Castling.Replace("Q", "");
-            } else
-            {
-                Castling = Castling.Replace("k", "");
-                Castling = Castling.Replace("q", "");
-            }
-        }
-
-        if (attacker.Type == PieceType.Rook)
-        {
-            if (Castling.Contains('K') && attacker.Position == "h1") Castling = Castling.Replace("K", "");
-            if (Castling.Contains('Q') && attacker.Position == "a1") Castling = Castling.Replace("Q", "");
-            if (Castling.Contains('k') && attacker.Position == "h8") Castling = Castling.Replace("k", "");
-            if (Castling.Contains('q') && attacker.Position == "a8") Castling = Castling.Replace("q", "");
-        }
-        if (Castling == "") Castling = "-";
-
-
 
         if (attacker.AvailableCaptures.Contains(target.Position) || attacker.AvailableMoves.Contains(target.Position))
         { // if the piece has the move in their list its a valid move
@@ -259,7 +226,7 @@ public class ChessInfo
         GameBoard = ConvertFENtoBoard(fenSPLIT[0]);
         Turn = fenSPLIT[1];
         Castling = fenSPLIT[2];
-        EnPassantSquare = "-";
+        EnPassantSquare = fenSPLIT[3];
         HalfMoveNumber = int.Parse(fenSPLIT[4]);
         FullMoveClock = int.Parse(fenSPLIT[5]);
 
@@ -267,7 +234,6 @@ public class ChessInfo
 
     private Piece[][] ConvertFENtoBoard(string v)
     {
-        Console.WriteLine(v);
         var chessBoard = new Piece[8][]; // ends as final result 
 
         for (int iRow = 0; iRow < 8; iRow++) 
