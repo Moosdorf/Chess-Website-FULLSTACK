@@ -69,7 +69,17 @@ function Chess() {
                 piece.Attackers,
                 piece.IsAlive))
         ));
-        setChessBoard({board: tempChessBoard, id: apiBoard.Id, isWhitesTurn: apiBoard.IsWhite, moves: apiBoard.Moves, check: apiBoard.Check, checkMate: apiBoard.CheckMate, checkBlockers: apiBoard.BlockCheckPositions});
+        setChessBoardHistory([
+            ...chessBoardHistory,
+            apiBoard.FEN
+        ]);
+        setChessBoard({board: tempChessBoard, 
+            id: apiBoard.Id, 
+            isWhitesTurn: apiBoard.IsWhite, 
+            moves: apiBoard.Moves, 
+            check: apiBoard.Check, 
+            checkMate: apiBoard.CheckMate, 
+            checkBlockers: apiBoard.BlockCheckPositions});
     }  
 
     const [chessBoard, setChessBoard] = useState(null);
@@ -81,8 +91,9 @@ function Chess() {
 
     
 
-    const movePiece = async (from, to) => {
+    const movePiece = async (from, to, promotion) => {
         if (!from.AvailableMoves.includes(to.Position) && !from.AvailableCaptures.includes(to.Position) ) return;
+
 
         await fetch(`http://localhost:5000/api/chess/${chessBoard.id}/move`, {
             method: "PUT",
@@ -93,7 +104,8 @@ function Chess() {
 
             },
             body: JSON.stringify({
-                Move: `${from.Position},${to.Position}`
+                Move: `${from.Position},${to.Position}`,
+                Promotion: promotion
             })
         }).then(res => {
             return res.text()

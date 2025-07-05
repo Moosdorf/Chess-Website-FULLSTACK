@@ -70,23 +70,16 @@ public class ChessInfo
     }
 
 
-    private void ReplayMoves(List<Move> moves)
+    public bool Move(MoveModel moveModel)
     {
-        // replay game to get to current state
-        for (int i = 0; i < moves.Count; i++)
-        {
-            ChessMethods.MakeMove(this, moves[i].MoveString); // as all moves are made, they are valid and can just be played
-        }
-    }
+        var move = moveModel.Move;
 
-    public bool Move(string move)
-    {
         // check if move is good
         var canMove = ValidateMove(move);
         if (!canMove) return false;
 
         // make the move
-        ChessMethods.MakeMove(this, move);
+        ChessMethods.MakeMove(this, moveModel);
 
         FindAvailableMoves();
 
@@ -94,7 +87,6 @@ public class ChessInfo
     }
     public bool ValidateMove(string move)
     {
-        Console.WriteLine("validating: " + move);
         var (fRow, fCol, tRow, tCol) = ChessMethods.ConvertMoveToColRow(move);
         // find attacker and target from the GameBoard
         var attacker = GameBoard[fRow][fCol];
@@ -109,7 +101,8 @@ public class ChessInfo
         { // if the piece has the move in their list its a valid move
             return true;
         }
-
+        Console.WriteLine(attacker);
+        Console.WriteLine("no available moves");
         return false;
     }
 
@@ -196,7 +189,6 @@ public class ChessInfo
                         if (reviewPiece.Type == PieceType.Bishop || reviewPiece.Type == PieceType.Queen) // only queen or bishop can make diagonal attacks in range
                         {
                             foundFriendly.Pinned = true;
-                            Console.WriteLine("pin found diagonal");
                             break;
                         }
                     }
@@ -205,7 +197,6 @@ public class ChessInfo
                     if (reviewPiece.Type == PieceType.Rook || reviewPiece.Type == PieceType.Queen) 
                     {
                         foundFriendly.Pinned = true;
-                            Console.WriteLine("pin found straight");
                         break;
                     }
                 }

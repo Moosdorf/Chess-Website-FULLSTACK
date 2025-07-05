@@ -1,4 +1,5 @@
 ﻿using DataLayer.Entities.Chess;
+using DataLayer.Models.Chess;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
@@ -127,25 +128,52 @@ namespace DataLayer.HelperMethods
             return (fRow, fCol, tRow, tCol); // return all of the indexes
         }
 
-        public static void MakeMove(ChessInfo chessState, string move)
+        public static void MakeMove(ChessInfo chessState, MoveModel move)
         {
 
-            var (fRow, fCol, tRow, tCol) = ConvertMoveToColRow(move); // find indexes from the move
+            var (fRow, fCol, tRow, tCol) = ConvertMoveToColRow(move.Move); // find indexes from the move
 
             // find target and attacker
             var target = chessState.GameBoard[tRow][tCol];
             var attacker = chessState.GameBoard[fRow][fCol];
 
 
+            if (move.Promotion != null)
+            {
+                Piece promotionPiece = null;
+                switch(move.Promotion)
+                {
+                    
+                    case "queen": 
+                        promotionPiece = new Queen(attacker.IsWhite) { Type = PieceType.Queen };
+                        break;
+                    case "rook":
+                        promotionPiece = new Rook(attacker.IsWhite) { Type = PieceType.Rook };
+                        break;
+                    case "bishop":
+                        promotionPiece = new Bishop(attacker.IsWhite) { Type = PieceType.Bishop };
+                        break;
+                    case "knight":
+                        promotionPiece = new Knight(attacker.IsWhite) { Type = PieceType.Knight };
+                        break;
 
-            // put attacker on target and update the position
-            chessState.GameBoard[tRow][tCol] = attacker;
+                }
+                chessState.GameBoard[tRow][tCol] = promotionPiece;
+                var pieceList = (attacker.IsWhite) ? chessState.WhitePieces : chessState.BlackPieces;
+                pieceList.Remove(attacker);
+                pieceList.Add(promotionPiece);
+            }
+            else
+            {
+                // put attacker on target and update the position
+                chessState.GameBoard[tRow][tCol] = attacker;
+            }
+
             chessState.GameBoard[tRow][tCol].Position = RowColToRankFile(tRow, tCol);
 
-            Console.WriteLine("en passant square = " + chessState.EnPassantSquare);
+            // en passant, remove the pawn that is below (or above depending on color)
             if (attacker.Type == PieceType.Pawn && target.Position == chessState.EnPassantSquare)
             {
-                Console.WriteLine("en passant");
                 var rowRemove = (attacker.IsWhite) ? tRow - 1 : tRow + 1;
                 chessState.GameBoard[rowRemove][tCol] = new Empty(false) { Type = PieceType.Empty, Position = RowColToRankFile(rowRemove, tCol) };
 
@@ -161,10 +189,19 @@ namespace DataLayer.HelperMethods
 
 
                 chessState.GameBoard[fRow][rookToCol] = rook;
-                chessState.GameBoard[fRow][rookCol] = new Empty(false) { Type = PieceType.Empty, Position = RowColToRankFile(fRow, rookCol) }; 
+                chessState.GameBoard[fRow][rookCol] = new Empty(false) { Type = PieceType.Empty, Position = RowColToRankFile(fRow, rookCol) };
             }
 
 
+            // replace the attackers square with a new empty piece
+            chessState.GameBoard[fRow][fCol] = new Empty(false) { Type = PieceType.Empty, Position = RowColToRankFile(fRow, fCol) };
+
+
+            UpdateFen(chessState, fRow, fCol, tRow, attacker);
+        }
+
+        private static void UpdateFen(ChessInfo chessState, int fRow, int fCol, int tRow, Piece attacker)
+        {
             // update some FEN variables
             if (attacker.Type == PieceType.Pawn && Math.Abs(fRow - tRow) == 2)
             {
@@ -195,7 +232,7 @@ namespace DataLayer.HelperMethods
             if (chessState.Castling == "") chessState.Castling = "-";
 
             // update some states like whose turn it is, incrementing variables
-            chessState.Turn = (chessState.Turn == "w") ? "b" : "w"; 
+            chessState.Turn = (chessState.Turn == "w") ? "b" : "w";
 
 
             // reset halfmovenumber if pawn, else increment it
@@ -203,10 +240,8 @@ namespace DataLayer.HelperMethods
             else chessState.HalfMoveNumber++;
 
             if (!attacker.IsWhite) chessState.FullMoveClock++;
-
-            // replace the attackers square with a new empty piece
-            chessState.GameBoard[fRow][fCol] = new Empty(false) { Type = PieceType.Empty, Position = RowColToRankFile(fRow, fCol) };
         }
+
         public static string GenerateFEN(ChessInfo chessState)
         {
             var FEN = "";

@@ -59,14 +59,13 @@ namespace ChessServer.Controllers
             // create chess state from moves
             if (game.Moves.Count > 0)
             {
-                Console.WriteLine("last FEN: " + game.Moves.Last().FEN);
                 chessState = new ChessInfo(game.Moves.Last().FEN); // find last moves FEN to create state from
             }
             else
                 chessState = new ChessInfo();
 
             // validate if the move can be made
-            var canMove = chessState.Move(moveModel.Move);
+            var canMove = chessState.Move(moveModel);
             if (!canMove) return BadRequest("Cannot make move - dataservice");
 
             var FEN = ChessMethods.GenerateFEN(chessState);

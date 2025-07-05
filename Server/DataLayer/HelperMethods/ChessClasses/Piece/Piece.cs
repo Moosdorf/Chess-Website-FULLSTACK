@@ -52,9 +52,23 @@ public abstract class Piece
 
 
         if (Type != PieceType.Pawn)
-        { 
-            if (IsWhite == (chessState.Turn != "w")) target.Attackers.Add(Position); 
-            else target.Defenders.Add(Position); 
+        {
+            if (target.Type == PieceType.Empty)
+            {
+                if ((chessState.Turn == "w") == IsWhite)
+                {
+                    target.Defenders.Add(Position);
+                }
+                else
+                {
+                    target.Attackers.Add(Position);
+                }
+            }
+            else
+            { // not empty square
+                if (IsWhite != target.IsWhite) target.Attackers.Add(Position);
+                else target.Defenders.Add(Position);
+            }
         }
 
 
@@ -65,7 +79,8 @@ public abstract class Piece
 
     public void AddCaptures(ChessInfo chessState, Piece target)
     {
-        if (target.Type == PieceType.King)
+        // if the target is the enemy king, find blocking squares and set states
+        if (target.Type == PieceType.King && target.IsWhite != IsWhite)
         {
             King king = (King) target;
             ChessMethods.FindCheckBlockers(chessState, (King)target, this);
@@ -73,16 +88,40 @@ public abstract class Piece
             chessState.CheckedKing = king;
         }
 
+        // if the attacker is the king, return if the enemy piece has a defender
+        if (Type == PieceType.King)
+        {
+            if (target.Type != PieceType.Empty && target.Defenders.Count > 0)
+            {
+                return;
+            }
+        }
 
+        // if the friendly king is in check, return if this square is not a blocker of the check
         if (chessState.InCheck && chessState.CheckedKing?.IsWhite == IsWhite && !chessState.Blockers.Contains(target.Position)) 
         {
             return; 
         }
 
-        if (IsWhite != (chessState.Turn == "w")) target.Attackers.Add(Position);
-        else target.Defenders.Add(Position);
+        // if the target is an empty square add this piece as a defender if it is the piece's turn else attacker
+        if (target.Type == PieceType.Empty)
+        {
+            if ((chessState.Turn == "w") == IsWhite)
+            {
+                target.Defenders.Add(Position);
+            } else
+            {
+                target.Attackers.Add(Position);
+            }
+        } else
+        { // not empty square
+            if (IsWhite != target.IsWhite) target.Attackers.Add(Position);
+            else target.Defenders.Add(Position);
+        }
 
-        if (Type != PieceType.Pawn)
+
+
+        if (Type != PieceType.Pawn) // a pawn cannot capture in front
         {
             AvailableCaptures.Add(target.Position);
         } else
@@ -106,6 +145,8 @@ public abstract class Piece
         {
             AddCaptures(chessState, piece);
         }
+        // else
+        if (piece.IsWhite == IsWhite) piece.Defenders.Add(Position);
         return false; 
     }
 

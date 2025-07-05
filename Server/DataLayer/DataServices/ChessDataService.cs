@@ -57,7 +57,7 @@ public class ChessDataService : IChessDataService
         if (inCheck)
         {
             var pieces = (isWhite) ? chessState.WhitePieces : chessState.BlackPieces;
-            gameDone = !pieces.Any(x => x.AvailableMoves.Count > 0);
+            gameDone = !pieces.Any(x => x.AvailableMoves.Count > 0 || x.AvailableCaptures.Count > 0);
         }
 
 

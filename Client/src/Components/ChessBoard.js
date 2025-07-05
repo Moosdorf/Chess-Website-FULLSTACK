@@ -2,14 +2,16 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './chessboard.css';
 import { useContext, useState } from 'react';
 import { ChessContext } from '../Pages/Chess';
+import { Button } from 'react-bootstrap';
 
 function ChessBoard() {
-    const {reversed, chessBoard, movePiece} = useContext(ChessContext);
-    const chessBoardDisplay = (reversed) ? [...chessBoard.board].reverse() : chessBoard.board;
+    const { reversed, chessBoard, movePiece } = useContext(ChessContext);
+    const chessBoardDisplay = reversed ? [...chessBoard.board].reverse() : chessBoard.board;
     const [selectedPiece, setSelectedPiece] = useState(null);
-    var lightBrown = "rgb(239, 222, 205)";
-    var darkBrown = "rgb(159, 129, 112)";
-    
+    const [promotionInfo, setPromotionInfo] = useState(null);
+    const promotionTypes = ["queen", "rook", "bishop", "knight"];
+    const lightBrown = "rgb(239, 222, 205)";
+    const darkBrown = "rgb(159, 129, 112)";
 
       
 
@@ -18,13 +20,13 @@ function ChessBoard() {
         e.target.style.opacity = '0.6';
         // create new image from react and put it on cursor
         const dragImage = document.createElement('div');
-        dragImage.style.backgroundImage = `url(/images/${piece.IsWhite ? "white" : "black" }-${piece.Type}.png)`;
-        dragImage.style.backgroundSize = 'cover';
-        dragImage.style.width = '75px';
-        dragImage.style.height = '75px';
-        dragImage.style.position = 'absolute';
-        dragImage.style.top = '-9999px'; // Move off-screen
-        dragImage.style.opacity = '1'; 
+            dragImage.style.backgroundImage = `url(/images/${piece.IsWhite ? "white" : "black" }-${piece.Type}.png)`;
+            dragImage.style.backgroundSize = 'cover';
+            dragImage.style.width = '75px';
+            dragImage.style.height = '75px';
+            dragImage.style.position = 'absolute';
+            dragImage.style.top = '-9999px'; // Move off-screen
+            dragImage.style.opacity = '1'; 
 
         document.body.appendChild(dragImage);
     
@@ -56,83 +58,150 @@ function ChessBoard() {
         setSelectedPiece(null);
     };
 
-
-    const onDrop = (piece) => {
-        if (piece !== selectedPiece) {
-            if (selectedPiece.AvailableMoves.includes(piece.Position) || selectedPiece.AvailableCaptures.includes(piece.Position)) {
-                movePiece(selectedPiece, piece);
-                removeSelected();
-            } else {
-                addSelected(piece);
-            }
-            return;
-        } 
-    };
-
-    const handleOnClick = (clickedPiece) => {
-        console.log(clickedPiece);
-        if (selectedPiece === null) {
-            addSelected(clickedPiece)
-            return;
-        };
-        if (clickedPiece !== selectedPiece) {
-            if (selectedPiece.AvailableMoves.includes(clickedPiece.Position) || selectedPiece.AvailableCaptures.includes(clickedPiece.Position)) {
-                movePiece(selectedPiece, clickedPiece);
-                console.log(selectedPiece)
-                removeSelected();
-            } else {
-                addSelected(clickedPiece);
-            }
-            return;
-        } 
+    const attack = (clickedPiece, promotion) => {
+        movePiece(selectedPiece, clickedPiece, promotion);
+        setPromotionInfo(null);
         removeSelected();
     }
 
+    const onDrop = (piece, promotion) => {
+        if (CheckForPromotion(piece)) return;
+
+        if (piece === selectedPiece) { // if the piece is dropped on itself, just reselect it
+            addSelected(piece);
+            return;
+        }
+        if (selectedPiece.AvailableMoves.includes(piece.Position) || selectedPiece.AvailableCaptures.includes(piece.Position)) {
+            attack(piece, promotion);
+        }
+        return;
+         
+    };
+
+    const handlePromotionSelection = (piece, promotionType) => {
+        attack(promotionInfo.to, promotionType);
+    };
 
 
 
-    return (
+    const handleOnClick = (clickedPiece) => {
+        console.log(clickedPiece);
+        // If we're in promotion mode, don't process normal clicks
+        if (promotionInfo) return;
+
+        if (CheckForPromotion(clickedPiece)) return;
+
+        if (selectedPiece === null) {
+            addSelected(clickedPiece);
+            return;
+        } 
+
+        if (clickedPiece !== selectedPiece) {
+            addSelected(clickedPiece);
+            if (selectedPiece.AvailableMoves.includes(clickedPiece.Position) || 
+                selectedPiece.AvailableCaptures.includes(clickedPiece.Position)) {
+                attack(clickedPiece, null);
+            } 
+            return;
+        } 
+        
+        removeSelected();
+    }
+
+    const CheckForPromotion = (clickedPiece) => {
+        if (selectedPiece === null || selectedPiece.Type !== "pawn") return false;
+
+        const targetRank = clickedPiece.Position[1];
+        const isPromotionRank = (selectedPiece.IsWhite && targetRank === '8') || 
+                        (!selectedPiece.IsWhite && targetRank === '1');
+
+        if (isPromotionRank && 
+            (selectedPiece.AvailableMoves.includes(clickedPiece.Position) || 
+                        selectedPiece.AvailableCaptures.includes(clickedPiece.Position))) {
+
+            const direction = selectedPiece.IsWhite ? -1 : 1;
+            const promotionSquares = [];
+
+            for (let i = 0; i < 4; i++) {
+                const rank = String.fromCharCode(targetRank.charCodeAt(0) + (i * direction));
+                promotionSquares.push({
+                    position: clickedPiece.Position[0] + rank,
+                    type: promotionTypes[i]
+                });
+            }
+            
+            setPromotionInfo({
+                from: selectedPiece,
+                to: clickedPiece,
+                squares: promotionSquares
+            });
+            return true;
+        }
+        return false;
+    }
+    
+
+
+    
+
+return (
         <div className='wrapper'>
             <div className='chessboard'>
-                {chessBoardDisplay && chessBoardDisplay.map((row, rowIndex) => (
+                {chessBoardDisplay.map((row, rowIndex) => (
                     row.map((piece, colIndex) => {
                         const isSelected = piece === selectedPiece;
                         const isMove = selectedPiece && selectedPiece.AvailableMoves.includes(piece.Position);
                         const isTarget = selectedPiece && selectedPiece.AvailableCaptures.includes(piece.Position);
-                        let className = `square ${piece.Type} ${piece.IsWhite ? "white" : "black"} ${isSelected && 'selected'}`;
+                        const promotionOverlay = promotionInfo?.squares.find(
+                            s => s.position === piece.Position
+                        );
 
-                        let color = ((rowIndex + colIndex) % 2 === 0 ? darkBrown : lightBrown);
-                        if (reversed) {color = (color === lightBrown) ? darkBrown : lightBrown;}
+                        const className = `square ${piece.Type} ${piece.IsWhite ? "white" : "black"} ${isSelected && 'selected'}`;
+                        const color = ((rowIndex + colIndex) % 2 === 0 ? darkBrown : lightBrown);
+                        const style = { backgroundColor: reversed ? (color === lightBrown ? darkBrown : lightBrown) : color };
+                        const image = `/images/${piece.IsWhite ? "white" : "black"}-${piece.Type}.png`;
 
-                        let style = {backgroundColor: color};
-                        let image = `/images/${(piece.IsWhite) ? "white" : "black"}-${piece.Type}.png`;
                         return (
-                        <div onDragOver={e => dragOver(e)} 
-                             onDrop={() => onDrop(piece)} 
-                             onClick={() => handleOnClick(piece)} 
-                             style={style}  
-                             className={className}       
-                             key={piece.Position}
-                        >
-                            {piece.Type !== "empty" && <img className={`piece`} 
-                                 src={image}
-                                 alt=''
-                                 draggable={piece.IsWhite === chessBoard.isWhitesTurn} 
-                                 onDragStart={(e) => {
-                                    drag(e, piece);
-                                    addSelected(piece);}
-                                }
-                                 onDragEnd={(e) => dragEnd(e, piece)}/>}
-                            {isTarget && <div className='target'></div>}
-                            {isMove && <div className='move'></div>}
-                            <div className='overlay'>{piece.Position}</div>
-
-                        </div>)
+                            <div 
+                                onDragOver={dragOver} 
+                                onDrop={() => onDrop(piece)} 
+                                onClick={() => handleOnClick(piece)} 
+                                style={style}  
+                                className={className}       
+                                key={piece.Position}
+                            >
+                                {piece.Type !== "empty" && (
+                                    <img 
+                                        className="piece"
+                                        src={image}
+                                        alt=""
+                                        draggable={piece.IsWhite === chessBoard.isWhitesTurn} 
+                                        onDragStart={(e) => {
+                                            drag(e, piece);
+                                            addSelected(piece);
+                                        }}
+                                        onDragEnd={(e) => dragEnd(e, piece)}
+                                    />
+                                )}
+                                {isTarget && <div className='target'></div>}
+                                {isMove && <div className='move'></div>}
+                                <div className='overlay'>{piece.Position}</div>
+                                {promotionOverlay && (
+                                    <div 
+                                        className='promotionOverlay'
+                                        onClick={() => handlePromotionSelection(piece, promotionOverlay.type)}
+                                    >
+                                        <img 
+                                            src={`/images/${chessBoard.isWhitesTurn ? "white" : "black"}-${promotionOverlay.type}.png`}
+                                            alt={promotionOverlay.type}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        );
                     })
                 ))}
             </div>
-
-            
         </div>
     );
 }
