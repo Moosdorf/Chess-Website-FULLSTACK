@@ -11,6 +11,7 @@ public class Knight(bool white) : Piece(white)
     public override void FindMoves(ChessInfo chessState)
     {
         (int row, int col) = ChessMethods.RankFileToRowCol(this.Position);
+
         
         var offsets = new (int dRow, int dCol)[]
         {
@@ -27,6 +28,7 @@ public class Knight(bool white) : Piece(white)
 
             if (targetRow >= 0 && targetRow < 8 && targetCol >= 0 && targetCol < 8)
             {
+
                 UpdateMoves(chessState, targetRow, targetCol);
             }
         }

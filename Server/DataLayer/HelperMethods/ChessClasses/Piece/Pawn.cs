@@ -1,6 +1,7 @@
 ﻿using DataLayer.HelperMethods;
 using System;
 using System.Collections.Generic;
+using System.IO.Pipelines;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ public class Pawn(bool white) : Piece(white)
     public override void FindMoves(ChessInfo chessState)
     {
         (int row, int col) = ChessMethods.RankFileToRowCol(this.Position);
+
 
         // moving 
         MovePawnOneOrTwo(chessState, row, col);

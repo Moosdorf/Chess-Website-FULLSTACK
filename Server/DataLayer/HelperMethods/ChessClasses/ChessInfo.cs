@@ -149,7 +149,7 @@ public class ChessInfo
     {
         var currentKing = Turn == "w" ? WhiteKing : BlackKing;
 
-        (int row, int col) = ChessMethods.RankFileToRowCol(currentKing.Position);
+        (int kingRow, int kingCol) = ChessMethods.RankFileToRowCol(currentKing.Position);
 
         int[][] directions =
         [
@@ -169,7 +169,7 @@ public class ChessInfo
             int dRow = dir[0], dCol = dir[1];
             Piece foundFriendly = null;
 
-            for (int iRow = row + dRow, iCol = col + dCol; // find new row and col based on the direction
+            for (int iRow = kingRow + dRow, iCol = kingCol + dCol; // find new row and col based on the direction
                  iRow >= 0 && iRow < 8 && iCol >= 0 && iCol < 8; // within gameboard
                  iRow += dRow, iCol += dCol) // increment by deltaCol or row, -1 or 1.
             {
@@ -180,28 +180,56 @@ public class ChessInfo
                     if (foundFriendly != null) break; // found another friendly in a row, not pinned
                     foundFriendly = reviewPiece;
                 }
-                if (reviewPiece.IsWhite != currentKing.IsWhite && foundFriendly != null) // found an enemy
+                if (reviewPiece.IsWhite != currentKing.IsWhite && foundFriendly != null) // friendly piece might be pinned. 
                 {
+                    (int fRow, int fCol) = ChessMethods.RankFileToRowCol(foundFriendly.Position); // find its position on the board in row col
                     (int rRow, int rCol) = ChessMethods.RankFileToRowCol(reviewPiece.Position); // find its position on the board in row col
-                    // check if diagonal to the king
-                    if (Math.Abs(row - rRow) == Math.Abs(col - rCol)) 
+                    // check if diagonal to piece
+                    if (Math.Abs(kingRow - rRow) == Math.Abs(kingCol - rCol))  // check if diagonal 
                     {
                         if (reviewPiece.Type == PieceType.Bishop || reviewPiece.Type == PieceType.Queen) // only queen or bishop can make diagonal attacks in range
                         {
                             foundFriendly.Pinned = true;
+                            Console.WriteLine(foundFriendly);
+                            FindPinnedMovableSquares(fRow, fCol, dRow, dCol);
                             break;
-                        }
-                    }
 
-                    // if straight then its rook or queen
-                    if (reviewPiece.Type == PieceType.Rook || reviewPiece.Type == PieceType.Queen) 
+                        }
+                    } // if straight then its rook or queen
+                    if (reviewPiece.Type == PieceType.Rook || reviewPiece.Type == PieceType.Queen)
                     {
+                        Console.WriteLine(foundFriendly);
                         foundFriendly.Pinned = true;
+                        FindPinnedMovableSquares(fRow, fCol, dRow, dCol);
                         break;
                     }
+
+
                 }
             }
         }
+    }
+
+    private void FindPinnedMovableSquares(int pinnedRow, int pinnedCol, int dRow, int dCol)
+    {
+        // find squares that can be walked on
+        for (int jRow = pinnedRow + dRow, jCol = pinnedCol + dCol; // find new row and col based on the direction
+                jRow >= 0 && jRow < 8 && jCol >= 0 && jCol < 8; // within gameboard
+                jRow += dRow, jCol += dCol) // increment by deltaCol or row, -1 or 1.
+        {
+            Console.WriteLine(ChessMethods.RowColToRankFile(jRow, jCol));
+            GameBoard[pinnedRow][pinnedCol].PinnedSquares.Add(ChessMethods.RowColToRankFile(jRow, jCol));
+            if (GameBoard[jRow][jCol].Type != PieceType.Empty) break;
+        }
+        for (int jRow = pinnedRow - dRow, jCol = pinnedCol - dCol; // find new row and col based on the direction
+        jRow >= 0 && jRow < 8 && jCol >= 0 && jCol < 8; // within gameboard
+        jRow -= dRow, jCol -= dCol) // increment by deltaCol or row, -1 or 1.
+        {
+            Console.WriteLine(ChessMethods.RowColToRankFile(jRow, jCol));
+            GameBoard[pinnedRow][pinnedCol].PinnedSquares.Add(ChessMethods.RowColToRankFile(jRow, jCol));
+            if (GameBoard[jRow][jCol].Type != PieceType.Empty) break;
+        }
+
     }
 
     public void CreateChessState(string FEN)

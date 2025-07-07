@@ -18,23 +18,32 @@ public enum PieceType
 
 public abstract class Piece
 {
-    public Piece(bool white) 
-    {
-        IsWhite = white;
-    }
     public PieceType Type { get; set; }
     public string Position { get; set; } = string.Empty;
-    public bool Pinned { get; set; } = false;
     public bool IsWhite { get; set; }
+    public bool Pinned { get; set; } = false;
+    public List<string> PinnedSquares { get; set; } = [];
     public List<string> AvailableMoves { get; set; } = [];
     public List<string> AvailableCaptures { get; set; } = [];
     public List<string> Attackers { get; set; } = [];
     public List<string> Defenders { get; set; } = [];
+
+    public Piece(bool white)
+    {
+        IsWhite = white;
+    }
+
     public abstract void FindMoves(ChessInfo chessState);
 
 
     public void AddMove(ChessInfo chessState, Piece target)
     {
+        if (Pinned)
+        {
+            Console.WriteLine("pinned - target " + target.Position);
+            Console.WriteLine("pinned - PinnedSquares " + PinnedSquares.Count);
+            if (!PinnedSquares.Contains(target.Position)) return;
+        }
 
         if (chessState.InCheck && chessState.CheckedKing?.IsWhite == IsWhite && this != chessState.CheckedKing && !chessState.Blockers.Contains(target.Position))
         {
@@ -71,7 +80,6 @@ public abstract class Piece
             }
         }
 
-
         AvailableMoves.Add(target.Position);
     }
 
@@ -79,6 +87,13 @@ public abstract class Piece
 
     public void AddCaptures(ChessInfo chessState, Piece target)
     {
+
+        if (Pinned)
+        {
+            Console.WriteLine("pinned");
+            if (!PinnedSquares.Contains(target.Position)) return;
+        }
+
         // if the target is the enemy king, find blocking squares and set states
         if (target.Type == PieceType.King && target.IsWhite != IsWhite)
         {
@@ -87,6 +102,7 @@ public abstract class Piece
             chessState.InCheck = true;
             chessState.CheckedKing = king;
         }
+
 
         // if the attacker is the king, return if the enemy piece has a defender
         if (Type == PieceType.King)
@@ -98,7 +114,7 @@ public abstract class Piece
         }
 
         // if the friendly king is in check, return if this square is not a blocker of the check
-        if (chessState.InCheck && chessState.CheckedKing?.IsWhite == IsWhite && !chessState.Blockers.Contains(target.Position)) 
+        if (chessState.InCheck && chessState.CheckedKing != this && chessState.CheckedKing?.IsWhite == IsWhite && !chessState.Blockers.Contains(target.Position)) 
         {
             return; 
         }

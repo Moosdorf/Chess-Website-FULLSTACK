@@ -24,15 +24,30 @@ public class Queen(bool white) : Piece(white)
             [-1, 1],  // up-right
         ];
 
-
         foreach (var dir in directions)
         {
+            bool kingHit = false;
             int dRow = dir[0], dCol = dir[1];
             for (int iRow = row + dRow, iCol = col + dCol;
                  iRow >= 0 && iRow < 8 && iCol >= 0 && iCol < 8; // within 
                  iRow += dRow, iCol += dCol)
             {
-                if (!UpdateMoves(chessState, iRow, iCol)) break;
+                var target = chessState.GameBoard[iRow][iCol];
+                if (kingHit)
+                {
+                    if (target.Type != PieceType.Empty) break;
+                    target.Attackers.Add(Position);
+                    continue;
+                }
+                if (!UpdateMoves(chessState, iRow, iCol))
+                {
+                    if (target.Type == PieceType.King && target.IsWhite != IsWhite)
+                    {
+                        kingHit = true;
+                        continue;
+                    }
+                    break;
+                }
             }
         }
     }

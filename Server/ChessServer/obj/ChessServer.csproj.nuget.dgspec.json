@@ -1,33 +1,39 @@
 {
   "format": 1,
   "restore": {
-    "/app/ChessServer/ChessServer.csproj": {}
+    "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\Server\\ChessServer\\ChessServer.csproj": {}
   },
   "projects": {
-    "/app/ChessServer/ChessServer.csproj": {
+    "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\Server\\ChessServer\\ChessServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/app/ChessServer/ChessServer.csproj",
+        "projectUniqueName": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\Server\\ChessServer\\ChessServer.csproj",
         "projectName": "ChessServer",
-        "projectPath": "/app/ChessServer/ChessServer.csproj",
-        "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/app/ChessServer/obj/",
+        "projectPath": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\Server\\ChessServer\\ChessServer.csproj",
+        "packagesPath": "C:\\Users\\Moosdorf\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\Server\\ChessServer\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/root/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Moosdorf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "/app/DataLayer/DataLayer.csproj": {
-                "projectPath": "/app/DataLayer/DataLayer.csproj"
+              "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\Server\\DataLayer\\DataLayer.csproj": {
+                "projectPath": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\Server\\DataLayer\\DataLayer.csproj"
               }
             }
           }
@@ -116,26 +122,32 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/app/DataLayer/DataLayer.csproj": {
+    "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\Server\\DataLayer\\DataLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/app/DataLayer/DataLayer.csproj",
+        "projectUniqueName": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\Server\\DataLayer\\DataLayer.csproj",
         "projectName": "DataLayer",
-        "projectPath": "/app/DataLayer/DataLayer.csproj",
-        "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/app/DataLayer/obj/",
+        "projectPath": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\Server\\DataLayer\\DataLayer.csproj",
+        "packagesPath": "C:\\Users\\Moosdorf\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Moosdorf\\Desktop\\sem1\\Chess-Website-FULLSTACK\\Server\\DataLayer\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/root/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\Moosdorf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -225,7 +237,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/9.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
