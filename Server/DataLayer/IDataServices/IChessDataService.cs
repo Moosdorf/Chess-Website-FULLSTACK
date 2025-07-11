@@ -11,7 +11,10 @@ namespace DataLayer.DataServices
 {
     public interface IChessDataService
     {
-        Task<(ChessGame, ChessInfo)> CreateGameAsync(int userId1, int userId2);
+        Task<(ChessGame, ChessInfo)> CreateGameAsync(string userName1, string userName2);
+        Task<(ChessGame, ChessInfo)> CreateBotGameAsync(string userName1, bool white);
+
+
         Task<bool> MoveAsync(int chessId, string move, string FEN);
 
         public ChessModel CreateChessModel(ChessInfo chessState, ChessGame game);

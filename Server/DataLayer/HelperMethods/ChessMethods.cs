@@ -144,16 +144,16 @@ namespace DataLayer.HelperMethods
                 switch(move.Promotion)
                 {
                     
-                    case "queen": 
+                    case 'q': 
                         promotionPiece = new Queen(attacker.IsWhite) { Type = PieceType.Queen };
                         break;
-                    case "rook":
+                    case 'r':
                         promotionPiece = new Rook(attacker.IsWhite) { Type = PieceType.Rook };
                         break;
-                    case "bishop":
+                    case 'b':
                         promotionPiece = new Bishop(attacker.IsWhite) { Type = PieceType.Bishop };
                         break;
-                    case "knight":
+                    case 'k':
                         promotionPiece = new Knight(attacker.IsWhite) { Type = PieceType.Knight };
                         break;
 

@@ -1,0 +1,13 @@
+node_modules/
+build/
+dist/
+.vscode/
+.idea/
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+.env*
+.git
+Dockerfile
+docker-compose*.yml

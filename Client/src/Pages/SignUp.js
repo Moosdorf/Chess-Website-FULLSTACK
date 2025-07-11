@@ -57,7 +57,7 @@ function SignUp() {
                             <Form.Control 
                                 type="text" 
                                 placeholder="Enter username"
-                                {...register("username")} 
+                                {...register("username", { required: "Username is required" })}
                                 isInvalid={!!errors.username}/>
                             <Form.Control.Feedback type="invalid">
                                 {errors.username?.message}
@@ -76,7 +76,7 @@ function SignUp() {
                                 {errors.password?.message}
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Button className='text-center' variant="secondary" type="submit">
+                        <Button className='text-center' type="submit">
                             Create Account
                         </Button>
                     </Form>

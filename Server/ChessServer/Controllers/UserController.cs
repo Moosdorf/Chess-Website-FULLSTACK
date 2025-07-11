@@ -34,12 +34,12 @@ public class UserController : BaseController
 
     [HttpPut]
     [Route("sign_in")] 
-    public IActionResult SignInRequest([FromBody] UserSignInModel userModel)
+    public async Task<IActionResult> SignInRequest([FromBody] UserSignInModel userModel)
     {
         var canSignIn = db.SignInUser(userModel.Username, userModel.Password);
         if (canSignIn)
         {
-            var user = db.GetUser(userModel.Username);
+            var user = await db.GetUser(userModel.Username);
             var token = CreateToken(user, _configuration);
             SetJwtCookie(Response, token);
             return Ok(new { message = "Signed In", userSignedIn = user });

@@ -2,7 +2,7 @@
 {
     public class MoveModel
     {
-        public string Move { get; set; }
-        public string? Promotion { get; set; } = null;
+        public string Move { get; set; } = null!;
+        public char? Promotion { get; set; } = null;
     }
 }

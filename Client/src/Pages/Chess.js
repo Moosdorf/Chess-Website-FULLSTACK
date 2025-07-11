@@ -1,50 +1,75 @@
-import 'bootstrap/dist/css/bootstrap.css';
-import { Col, Row, Container, Button, Card} from 'react-bootstrap';
+import { Col, Row, Container, Button, Card } from 'react-bootstrap';
 import { Title } from '../Components/Title';
 import { createContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import ChessBoard from '../Components/ChessBoard.js';
 import Piece from '../Data/Piece.js';
+import { GetCookies } from '../Functions/HelperMethods.js';
+import ActiveChessMoves from '../Components/ActiveChessMoves.js';
 const ChessContext = createContext(null);
+
+const PlayerInfo = ({player, classText}) => {
+    
+    return(
+        <Card className={classText}>
+            <Card.Header>{player.name}</Card.Header>
+        </Card>);
+}
 
 const Stats = ({chessBoard}) => {
     return (
-        <Card className="customCard">
-        <Card.Body>
-            <Card.Header className="customCardHeader">Game Stats (ID: {chessBoard.id})</Card.Header>
+            <Card className="game-stats">
+            <Card.Header>
+                Game ID: {chessBoard.id}
+            </Card.Header>
+            <Card.Body>
+                {chessBoard.checkMate && (
+                <Card.Text className="text-danger fw-bold">
+                    Checkmate
+                </Card.Text>
+                )}
 
-            <Card.Text><strong>Turn:</strong> {chessBoard.isWhitesTurn ? 'White' : 'Black'}</Card.Text>
+                {chessBoard.check && !chessBoard.checkMate && (
+                <Card.Text className="text-warning">
+                    In Check
+                </Card.Text>
+                )}
 
-            {chessBoard.checkMate && (
-            <Card.Text className="text-danger fw-bold">Checkmate</Card.Text>
-            )}
-
-            {chessBoard.check && (
-            <>
-                <Card.Text className="text-warning">In Check</Card.Text>
-                <Card.Text><strong>Block Options:</strong> {chessBoard.checkBlockers.join(', ')}</Card.Text>
-            </>
-            )}
-
-            <Card.Text><strong>Total Moves:</strong> {chessBoard.moves}</Card.Text>
-        </Card.Body>
-        </Card>
+                <Card.Text>
+                    Total Moves: {chessBoard.moves}
+                </Card.Text>
+            </Card.Body>
+            </Card>
     )
 }
 
 function Chess() {
+    var location = useLocation();
+    const botGame = location.state?.botGame ?? false;
+    const playerWhite = location.state?.playerWhite ?? false;
+    var cookies = GetCookies();
 
     async function createBoard() {
-        let res = await fetch(`http://localhost:5000/api/chess/new`, {
+
+        let body = (!botGame) ? 
+                JSON.stringify({
+                    "Player1": cookies.user,
+                    "Player2": "admin"}) : 
+                JSON.stringify({
+                    "Player1": cookies.user,
+                    "PickedWhite": playerWhite});
+
+        var url = (botGame) ? `http://localhost:5000/api/chess/newbotgame` : `http://localhost:5000/api/chess/new`;
+
+        let res = await fetch(url, {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "*/*"
 
             },
-            body: JSON.stringify({
-                "player1": 0,
-                "player2": 1
-            })
+            body: body
         });
 
         var jsonText = await res.text();
@@ -53,7 +78,8 @@ function Chess() {
     }
 
     const handleSetChessBoard = (apiBoard) => {
-        console.log("update chessboard ", apiBoard);
+        if (chessBoardHistory.length > 0 && chessBoardHistory[chessBoardHistory.length - 1][1] === apiBoard.FEN) return;
+        
         var tempChessBoard = apiBoard.Chessboard;
         tempChessBoard = tempChessBoard.map(row => (
             row.map(piece => new Piece(
@@ -71,25 +97,57 @@ function Chess() {
         ));
         setChessBoardHistory([
             ...chessBoardHistory,
-            apiBoard.FEN
+            [apiBoard.LastMove, apiBoard.FEN]
         ]);
+        setReversed(cookies.user === apiBoard.Players[0]); // index 0 will always be white
+        var fenSplit = apiBoard.FEN.split(" ");
         setChessBoard({board: tempChessBoard, 
             id: apiBoard.Id, 
             isWhitesTurn: apiBoard.IsWhite, 
-            moves: apiBoard.Moves, 
+            moves: parseInt(fenSplit[5]) * 2 + (fenSplit[1] === "b"), 
             check: apiBoard.Check, 
             checkMate: apiBoard.CheckMate, 
-            checkBlockers: apiBoard.BlockCheckPositions});
+            checkBlockers: apiBoard.BlockCheckPositions,
+            currentPlayer: apiBoard.CurrentPlayer,
+            players: apiBoard.Players,
+            botGame: botGame,
+            playerWhite: playerWhite,
+            lastMove: apiBoard.LastMove});
     }  
 
     const [chessBoard, setChessBoard] = useState(null);
     const [chessBoardHistory, setChessBoardHistory] = useState([]); 
     const [reversed, setReversed] = useState(false);
+
     useEffect(() => {
         createBoard();
     }, []);
 
-    
+    useEffect(() => {
+        if (botGame && chessBoard?.currentPlayer === "stockfish") {
+            movePieceBot();
+        }
+    }, [chessBoard, botGame]);
+
+    const movePieceBot = async () => {
+        await fetch(`http://localhost:5000/api/chess/${chessBoard.id}/moveBot`, {
+            method: "PUT",
+            credentials: 'include',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "*/*"
+            }
+        }).then(res => {
+            return res.text()
+        })
+        .then(data => {
+            return JSON.parse(data)
+        })
+        .then(results => {
+            handleSetChessBoard(results);
+        })
+        .catch(e => console.log(e)); 
+    }
 
     const movePiece = async (from, to, promotion) => {
         if (!from.AvailableMoves.includes(to.Position) && !from.AvailableCaptures.includes(to.Position) ) return;
@@ -116,29 +174,52 @@ function Chess() {
         .then(results => {
             handleSetChessBoard(results);
         })
-        .catch(e => console.log(e));    
+        .catch(e => console.log(e));  
     };
 
-
+    if (!chessBoard) return;
     return ( // give info if board is reveresed or not.
-        <ChessContext.Provider value={{reversed, chessBoard, movePiece}}> 
+        <ChessContext.Provider value={{reversed, chessBoard, chessBoardHistory, movePiece, movePieceBot}}> 
             <Container className='center'>
                 <Row>
                     <Col>
                         <Title message="Chess Game"/>
-                        <p>{(chessBoard && chessBoard.isWhitesTurn) ? "white" : "black"}</p>
                     </Col>
                 </Row>
-                <Row>
-                    <Col xs={3}>
+                <Row className='g-4'>
+                    {/* Column 1 - stats of the game */}
+                    <Col md={3}>
                         {chessBoard && <Stats chessBoard={chessBoard}/>}
-
                     </Col>
-                    <Col xs={6}>
+
+                    {/* Column 2 - Chessboard */}
+                    <Col md={6}>
                         {chessBoard && <ChessBoard/>}
                     </Col>
-                    <Col xs={3}>
+                    
+                    {/* Column 3 - Player Info */}
+                    <Col md={3} className="d-flex flex-column">
+                        <div className="flex-grow-1"></div>
 
+                        {/* Player 2 info */}
+                        <div className="mb-3">
+                            <PlayerInfo
+                                classText={chessBoard.currentPlayer !== cookies.user ? "active-card" : ""}
+                                player={{ name: chessBoard.players[0] === cookies.user ? chessBoard.players[1] : chessBoard.players[0] }}
+                            />
+                        </div>
+
+                        <ActiveChessMoves />
+
+                        {/* Player 1 info */}
+                        <div className="mt-3">
+                            <PlayerInfo
+                                classText={chessBoard.currentPlayer === cookies.user ? "active-card" : ""}
+                                player={{ name: cookies.user }}
+                            />
+                        </div>
+                        
+                        <div className="flex-grow-1"></div>
                     </Col>
 
                 </Row>

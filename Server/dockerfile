@@ -2,8 +2,17 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0
 
 WORKDIR /app
 
-# Copy everything so dotnet watch can see it
+# Copy only csproj files first to restore dependencies (leverages Docker cache)
+COPY ChessServer/*.csproj ./ChessServer/
+
+# Restore dependencies
+RUN dotnet restore ChessServer/ChessServer.csproj
+
+# Copy everything else
 COPY . .
+
+# Make sure Stockfish binary is executable
+RUN chmod +x ./Stockfish/stockfish
 
 # Use dotnet watch for hot reload
 CMD ["dotnet", "watch", "run", "--project", "ChessServer/ChessServer.csproj"]

@@ -29,6 +29,7 @@ public class ChessInfo
     public string Turn { get; set; } = "w";
     public int HalfMoveNumber { get; set; } = 0;
     public int FullMoveClock { get; set; } = 0;
+    public string LastMove { get; set; } = "";
 
 
     public ChessInfo() // used when the game starts initially
@@ -80,6 +81,7 @@ public class ChessInfo
 
         // make the move
         ChessMethods.MakeMove(this, moveModel);
+        LastMove = move;
 
         FindAvailableMoves();
 
@@ -190,7 +192,6 @@ public class ChessInfo
                         if (reviewPiece.Type == PieceType.Bishop || reviewPiece.Type == PieceType.Queen) // only queen or bishop can make diagonal attacks in range
                         {
                             foundFriendly.Pinned = true;
-                            Console.WriteLine(foundFriendly);
                             FindPinnedMovableSquares(fRow, fCol, dRow, dCol);
                             break;
 
@@ -198,7 +199,6 @@ public class ChessInfo
                     } // if straight then its rook or queen
                     if (reviewPiece.Type == PieceType.Rook || reviewPiece.Type == PieceType.Queen)
                     {
-                        Console.WriteLine(foundFriendly);
                         foundFriendly.Pinned = true;
                         FindPinnedMovableSquares(fRow, fCol, dRow, dCol);
                         break;

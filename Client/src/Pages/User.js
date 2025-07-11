@@ -35,7 +35,9 @@ function Userpage() {
     return (
         <Container>
             <Row>
-                {cookies.user && <h1>User: {cookies.user}</h1>}
+                <Col>
+                    {cookies.user && <h1>User: {cookies.user}</h1>}
+                </Col>
             </Row>
             <Row>
                 <Col>

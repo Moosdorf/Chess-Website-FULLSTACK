@@ -18,6 +18,7 @@ public class ChessContext : DbContext
     // user stuff
     public DbSet<User> Users { get; set; }
 
+
     public ChessContext(DbContextOptions<ChessContext> options)
     : base(options)
     { 
@@ -35,6 +36,16 @@ public class ChessContext : DbContext
             .HasMany(g => g.Moves)
             .WithOne(m => m.ChessGame)
             .HasForeignKey(m => m.ChessGameId);
+
+        modelBuilder.Entity<ChessGame>()
+            .HasOne(g => g.WhitePlayer)
+            .WithMany(m => m.WhiteGames)
+            .HasForeignKey(g => g.WhiteId);
+
+        modelBuilder.Entity<ChessGame>()
+            .HasOne(g => g.BlackPlayer)
+            .WithMany(m => m.BlackGames)
+            .HasForeignKey(g => g.BlackId);
     }
 
 }

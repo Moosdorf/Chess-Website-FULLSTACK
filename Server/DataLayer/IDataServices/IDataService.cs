@@ -11,7 +11,8 @@ namespace DataLayer.DataServices
     {
         // user stuff
         IList<User> GetUsers();
-        User GetUser(string username);
+        Task<User> GetUser(int id);
+        Task<User> GetUser(string username);
         User? CreateUser(string username, string password);
         bool UpdateCustomization();
 

@@ -2,7 +2,7 @@
 {
     public class CreateChessModel
     {
-        public int player1 { get; set; }
-        public int player2 { get; set; }
+        public string Player1 { get; set; } = null!;
+        public string Player2 { get; set; } = null!;
     }
 }

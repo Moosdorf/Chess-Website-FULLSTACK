@@ -1,12 +1,16 @@
 using DataLayer;
 using DataLayer.DataServices;
+using DataLayer.IDataServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using DataLayer.GameHub.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSignalR();
 builder.Services.AddTransient<IDataService, DataService>();
+builder.Services.AddSingleton<IStockFishService, StockFishService>();
 builder.Services.AddTransient<IChessDataService, ChessDataService>();
 
 
@@ -74,5 +78,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<GameHub>("/gameHub");
 
 app.Run();

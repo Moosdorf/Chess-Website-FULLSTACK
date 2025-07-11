@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DataLayer.Entities.Chess;
+using System.ComponentModel.DataAnnotations;
 namespace DataLayer.Entities.Users;
 public class User
 {
@@ -10,5 +11,10 @@ public class User
     public string Password {  get; set; }
     public string Salt {  get; set; }
     public string Email {  get; set; } = string.Empty;
+
+
+    // need both in order to link players
+    public List<ChessGame> WhiteGames { get; set; } = null!;
+    public List<ChessGame> BlackGames { get; set; } = null!;
 
 }

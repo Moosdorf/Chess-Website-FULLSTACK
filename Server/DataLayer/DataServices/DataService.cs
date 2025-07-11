@@ -21,11 +21,14 @@ public class DataService : IDataService
 
 
     // users
-    public User GetUser(string username)
+    public async Task<User> GetUser(string username)
     {
-        User user = _db.Users.Where(x => x.Username == username)
-                            .First();
-        return user;
+        return await _db.Users.FirstOrDefaultAsync(x => x.Username == username);
+    }
+
+    public async Task<User> GetUser(int id)
+    {
+        return await _db.Users.FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public IList<User> GetUsers()

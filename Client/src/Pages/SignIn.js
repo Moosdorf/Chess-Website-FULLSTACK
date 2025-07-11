@@ -78,7 +78,7 @@ function SignIn() {
                             </Form.Control.Feedback>
                         </Form.Group>
 
-                        <Button className='text-center' variant="secondary" type="submit">
+                        <Button className='text-center' type="submit">
                             Sign In
                         </Button>
                     </Form>

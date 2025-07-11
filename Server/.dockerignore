@@ -1,0 +1,16 @@
+bin/
+obj/
+out/
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+.env*
+.git
+Dockerfile
+docker-compose*.yml

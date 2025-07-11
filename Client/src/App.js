@@ -1,14 +1,15 @@
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import './ChessStyle.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 import Frontpage from './Pages/Frontpage';
 import Chess from './Pages/Chess';
-import ChessNavbar from './ChessNavbar';
 import SignUp from './Pages/SignUp';
 import SignIn from './Pages/SignIn';
 import Userpage from './Pages/User';
 import { AuthProvider } from './Data/AuthProvider';
+import ChessNavbar from './Components/ChessNavbar';
 
 function App() {
   return (
