@@ -191,7 +191,7 @@ function Chess() {
                     {/* Column 1 - stats of the game */}
                     <Col md={3}>
                         {chessBoard && <Stats chessBoard={chessBoard}/>}
-                        {chessBoard && <Chat chessBoard={chessBoard}/>}
+                        {chessBoard && <Chat/>}
                         
                     </Col>
 

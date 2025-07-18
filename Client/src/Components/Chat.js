@@ -1,26 +1,30 @@
 import { Button, Card, CardBody, Form, InputGroup } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useSignalR from "../SignalRService";
+import { useAuth } from "../Data/AuthProvider";
 
-function Chat({ chessBoard }) {
-    const [messages, setMessages] = useState([
-        { id: 0, sender: 'System', text: 'Game started!', isOwn: false }
-    ]);
+
+
+
+
+function Chat() {
+    const { user }  = useAuth();
+    const { connection, startConnection, messages } = useSignalR('');
+
+    useEffect(() => {
+        if (connection) {
+            startConnection();
+        }
+    }, [connection]);
+
     const [inputValue, setInputValue] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (inputValue.trim()) {
-            const newMessage = {
-                id: messages.length + 1,
-                sender: 'You',
-                text: inputValue,
-                isOwn: true
-            };
-            setMessages([...messages, newMessage]);
+
+            connection.invoke("SendMessageToAll", user, inputValue);
             setInputValue("");
-            
-            // Here you would typically also send the message to your backend
-            console.log("Message sent:", inputValue);
         }
     };
 

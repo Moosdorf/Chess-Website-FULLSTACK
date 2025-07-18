@@ -2,9 +2,11 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Col, Row, Container, Button} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Title } from '../Components/Title';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ChessTypeSelection from '../Components/ChessTypeSelection';
 import { GetCookies } from '../Functions/HelperMethods';
+import Chat from '../Components/Chat';
+import { useSignalR } from '../SignalRService';
 
 
 function Frontpage() {
@@ -19,6 +21,8 @@ function Frontpage() {
     }
 
 
+
+
     let navigate = useNavigate();
     return (
         <Container>
@@ -27,6 +31,7 @@ function Frontpage() {
                     <Title message="Chess"/>
                 </Col>
             </Row>
+                        {<Chat/>}
             <Row>
                 <Col className='text-center'>
                     <Button onClick={handleShow}>
