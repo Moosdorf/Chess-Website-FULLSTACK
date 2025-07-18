@@ -6,6 +6,7 @@ import ChessBoard from '../Components/ChessBoard.js';
 import Piece from '../Data/Piece.js';
 import { GetCookies } from '../Functions/HelperMethods.js';
 import ActiveChessMoves from '../Components/ActiveChessMoves.js';
+import Chat from '../Components/Chat.js';
 const ChessContext = createContext(null);
 
 const PlayerInfo = ({player, classText}) => {
@@ -180,7 +181,7 @@ function Chess() {
     if (!chessBoard) return;
     return ( // give info if board is reveresed or not.
         <ChessContext.Provider value={{reversed, chessBoard, chessBoardHistory, movePiece, movePieceBot}}> 
-            <Container className='center'>
+            <Container className=''>
                 <Row>
                     <Col>
                         <Title message="Chess Game"/>
@@ -190,6 +191,8 @@ function Chess() {
                     {/* Column 1 - stats of the game */}
                     <Col md={3}>
                         {chessBoard && <Stats chessBoard={chessBoard}/>}
+                        {chessBoard && <Chat chessBoard={chessBoard}/>}
+                        
                     </Col>
 
                     {/* Column 2 - Chessboard */}

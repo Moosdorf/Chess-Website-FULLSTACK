@@ -1,8 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import { Col, Row, Container, Button} from 'react-bootstrap';
 import { GetCookies } from '../Functions/HelperMethods'
+import { connectToHub } from "../SignalRService.js";
+import { useEffect } from 'react';
 
 function Userpage() {
+    
 
     var cookies = GetCookies();
     console.log(cookies);
@@ -31,6 +34,12 @@ function Userpage() {
         })
         .catch(e => console.log(e));
     }
+
+    useEffect(() => {
+        connectToHub(cookies.user, (message) => {
+            console.log("set some value?: ", message);
+        });
+    }, [cookies.user]);
 
     return (
         <Container>

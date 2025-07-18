@@ -143,7 +143,7 @@ h1 {
 }
 
 /* Scrollable Content Inside */
-.move-list-content {
+.move-list-content, .chess-chat-content {
     flex: 1;
     overflow-y: auto;
     overflow-x: hidden;
@@ -156,6 +156,14 @@ h1 {
     color: var(--chess-light);
     border: none;
 }
+
+
+.chat-area {
+  background-color: var(--chess-board-light) !important;
+  color: rgb(0, 0, 0) !important;
+}
+
+
 
 /* Button Group - Compact */
 .card.move-list .btn-group {
@@ -536,5 +544,150 @@ h1 {
   .btn {
     padding: 0.5rem;
     font-size: 0.9rem;
+  }
+
+  /* Chess Chat Component Styling */
+  .chat {
+    background: linear-gradient(145deg, var(--chess-darker) 0%, var(--chess-dark) 100%) !important;
+    border: 1px solid var(--chess-gold-dark) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .chess-chat-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+    background: rgba(18, 18, 18, 0.7) !important;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Enhanced Chat Message Styling */
+  .chat-message {
+    background-color: rgba(101, 81, 28, 0.1);
+    border: 1px solid var(--chess-gold-dark);
+    color: var(--chess-light);
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    width: fit-content;
+    max-width: 80%;
+  }
+
+  
+  /* Message sender text */
+  .chat-message-sender {
+    font-weight: 500;
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+    display: block; /* Ensures it's on its own line */
+  }
+
+  /* System Messages - Centered */
+  .chat-message-system {
+    align-self: center;
+    background-color: rgba(18, 18, 18, 0.5);
+    border: 1px solid var(--chess-divider);
+    color: var(--chess-muted);
+    text-align: center;
+    width: 90%;
+  }
+
+  /* Your Messages - Right Aligned */
+  .chat-message-own {
+    float: right;
+    background-color: rgba(226, 179, 58, 0.15);
+    border: 1px solid var(--chess-gold-dark);
+    color: var(--chess-gold-light) !important;
+    margin-right: 0;
+    margin-left: auto; /* Pushes to right */
+    text-align: right;
+  }
+
+  /* Opponent Messages - Left Aligned */
+  .chat-message-opponent {
+    float: left;
+    background-color: rgba(138, 92, 68, 0.15);
+    border: 1px solid var(--chess-brown-dark);
+    color: var(--chess-light) !important;
+    margin-left: 0;
+    margin-right: auto; /* Ensures left alignment */
+    text-align: left;
+  }
+
+
+  /* Message text content */
+  .chat-message-text {
+    color: var(--chess-light);
+    word-break: break-word;
+    display: block; /* Ensures proper text flow */
+  }
+
+
+  /* Input area styling */
+  .chat .igrp {
+    border-top: 1px solid var(--chess-gold-dark) !important;
+    padding: 0.75rem !important;
+    background: rgba(101, 81, 28, 0.1) !important;
+  }
+
+  .chat .chat-area {
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid var(--chess-gold-dark) !important;
+    color: var(--chess-light) !important;
+    border-radius: 4px 0 0 4px !important;
+    transition: all 0.3s ease;
+  }
+
+  .chat .chat-area:focus {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border-color: var(--chess-gold) !important;
+    box-shadow: 0 0 0 0.25rem rgba(226, 179, 58, 0.25) !important;
+    color: var(--chess-lighter) !important;
+  }
+
+  .chat .btn {
+    background-color: var(--chess-gold-dark) !important;
+    border-color: var(--chess-gold-dark) !important;
+    color: var(--chess-light) !important;
+    border-radius: 0 4px 4px 0 !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .chat .btn:hover {
+    background-color: var(--chess-gold) !important;
+    border-color: var(--chess-gold) !important;
+    color: var(--chess-dark) !important;
+  }
+
+  /* Scrollbar styling */
+  .chess-chat-content::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .chess-chat-content::-webkit-scrollbar-track {
+    background: var(--chess-dark);
+  }
+
+  .chess-chat-content::-webkit-scrollbar-thumb {
+    background-color: var(--chess-gold-dark);
+    border-radius: 3px;
+  }
+
+  /* Animation for new messages */
+  @keyframes messageFadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .chat-message {
+    animation: messageFadeIn 0.3s ease-out;
   }
 }

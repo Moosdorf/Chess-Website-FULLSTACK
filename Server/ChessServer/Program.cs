@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using DataLayer.GameHub.Hubs;
+using ChessServer.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR();
