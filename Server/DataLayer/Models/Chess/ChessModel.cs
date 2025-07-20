@@ -5,6 +5,7 @@ namespace DataLayer.Models.Chess;
 public class ChessModel
 {
     public int Id { get; set; }
+    public string SessionId { get; set; }
     public Piece[][] Chessboard { get; set; } = null!;
     public bool IsWhite { get; set; }
     public string[] Players { get; set; } = [];

@@ -1,21 +1,15 @@
 import { Button, Card, CardBody, Form, InputGroup } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import useSignalR from "../SignalRService";
+import useSignalR from "../SignalR/SignalRService";
 import { useAuth } from "../Data/AuthProvider";
 
 
 
 
 
-function Chat() {
+function Chat( {sessionId} ) {
     const { user }  = useAuth();
-    const { connection, startConnection, messages } = useSignalR('');
-
-    useEffect(() => {
-        if (connection) {
-            startConnection();
-        }
-    }, [connection]);
+    const { connection, messages } = useSignalR();
 
     const [inputValue, setInputValue] = useState("");
 
@@ -23,7 +17,7 @@ function Chat() {
         e.preventDefault();
         if (inputValue.trim()) {
 
-            connection.invoke("SendMessageToAll", user, inputValue);
+            connection.invoke("SendMessageToGroup", user, inputValue, sessionId);
             setInputValue("");
         }
     };

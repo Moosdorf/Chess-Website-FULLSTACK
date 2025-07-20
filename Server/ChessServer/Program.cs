@@ -13,6 +13,8 @@ builder.Services.AddTransient<IDataService, DataService>();
 builder.Services.AddSingleton<IStockFishService, StockFishService>();
 builder.Services.AddTransient<IChessDataService, ChessDataService>();
 
+builder.Services.AddSingleton<IGameManager, GameManager>();
+
 
 var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")
                        ?? "Host=localhost;Database=chessdb;Username=postgres;Password=moos";

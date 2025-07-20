@@ -448,7 +448,6 @@ C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\De
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\staticwebassets.build.json.cache
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\staticwebassets.development.json
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\staticwebassets.build.endpoints.json
-C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\ChessSer.FBCBF35F.Up2Date
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\ChessServer.dll
 C:\Users\Moosdorf\Desktop\sem1\Chess-Website-FULLSTACK\Server\ChessServer\obj\Debug\net9.0\refint\ChessServer.dll

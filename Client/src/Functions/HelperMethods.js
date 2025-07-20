@@ -3,8 +3,8 @@ export function GetCookies() {
     var keyvalues = cookie.split(";");
     var cookieData = {};
     keyvalues.forEach(kv => {
-        var kv = kv.split("=");
-        if (kv.length == 2) {
+        kv = kv.split("=");
+        if (kv.length === 2) {
             cookieData[kv[0]] = kv[1];
         }
     })

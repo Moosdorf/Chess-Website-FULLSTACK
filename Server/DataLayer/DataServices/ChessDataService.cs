@@ -87,7 +87,7 @@ public class ChessDataService : IChessDataService
         return result;
     }
 
-    public ChessModel CreateChessModel(ChessInfo chessState, ChessGame game) 
+    public ChessModel CreateChessModel(ChessInfo chessState, ChessGame game, string sessionId) 
     {
         var isWhite = chessState.Turn == "w";
         var king = (isWhite) ? chessState.WhiteKing : chessState.BlackKing;
@@ -112,7 +112,7 @@ public class ChessDataService : IChessDataService
         var currentPlayer = (isWhite) ? game.WhitePlayer.Username : game.BlackPlayer.Username;
 
         return new ChessModel
-            { CurrentPlayer = currentPlayer, Players = [game.WhitePlayer.Username, game.BlackPlayer.Username] , LastMove = chessState.LastMove, Chessboard = chessState.GameBoard, FEN = ChessMethods.GenerateFEN(chessState), Id = game.Id, IsWhite = isWhite, Check = inCheck, CheckMate = gameDone, BlockCheckPositions = blockers };
+            { SessionId = sessionId, CurrentPlayer = currentPlayer, Players = [game.WhitePlayer.Username, game.BlackPlayer.Username] , LastMove = chessState.LastMove, Chessboard = chessState.GameBoard, FEN = ChessMethods.GenerateFEN(chessState), Id = game.Id, IsWhite = isWhite, Check = inCheck, CheckMate = gameDone, BlockCheckPositions = blockers };
     }
 
 

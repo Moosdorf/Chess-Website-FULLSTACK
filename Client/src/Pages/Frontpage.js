@@ -2,26 +2,23 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Col, Row, Container, Button} from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Title } from '../Components/Title';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ChessTypeSelection from '../Components/ChessTypeSelection';
 import { GetCookies } from '../Functions/HelperMethods';
-import Chat from '../Components/Chat';
-import { useSignalR } from '../SignalRService';
 
 
 function Frontpage() {
+
     var cookies = GetCookies();
     const [showBotOptions, setShowBotOptions] = useState(false);
     const handleShow = () => setShowBotOptions(true);
     const handleClose = () => {
         setShowBotOptions(false);
     }
+
     const handleSelection = (playerWhite) => {
         if (cookies.user) navigate("/chess_game", { state: { botGame: true, playerWhite: playerWhite} })
     }
-
-
-
 
     let navigate = useNavigate();
     return (
@@ -31,7 +28,6 @@ function Frontpage() {
                     <Title message="Chess"/>
                 </Col>
             </Row>
-                        {<Chat/>}
             <Row>
                 <Col className='text-center'>
                     <Button onClick={handleShow}>

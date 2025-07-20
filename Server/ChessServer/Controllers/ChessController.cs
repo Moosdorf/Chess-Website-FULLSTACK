@@ -45,7 +45,7 @@ namespace ChessServer.Controllers
             }
 
 
-            return Ok(JsonSerializer.Serialize(db.CreateChessModel(chessState, game)));
+            return Ok(JsonSerializer.Serialize(db.CreateChessModel(chessState, game, "non")));
         }
 
         // create bot game
@@ -70,7 +70,7 @@ namespace ChessServer.Controllers
             }
 
 
-            return Ok(JsonSerializer.Serialize(db.CreateChessModel(chessState, game)));
+            return Ok(JsonSerializer.Serialize(db.CreateChessModel(chessState, game, "non")));
         }
 
         [HttpPut]
@@ -99,7 +99,7 @@ namespace ChessServer.Controllers
             // change in the database
             var moveMade = await db.MoveAsync(id, moveModel.Move, FEN);
             if (!moveMade) return BadRequest("Cannot make move - database");
-            return Ok(JsonSerializer.Serialize(db.CreateChessModel(chessState, game)));
+            return Ok(JsonSerializer.Serialize(db.CreateChessModel(chessState, game, "non")));
         }
 
 
@@ -141,7 +141,7 @@ namespace ChessServer.Controllers
             // change in the database
             var moveMade = await db.MoveAsync(id, stockFishMove.Move, FEN);
             if (!moveMade) return BadRequest("Cannot make move - database");
-            return Ok(JsonSerializer.Serialize(db.CreateChessModel(chessState, game)));
+            return Ok(JsonSerializer.Serialize(db.CreateChessModel(chessState, game, "non")));
         }
 
         [HttpGet]

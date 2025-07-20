@@ -1,11 +1,10 @@
-import { useForm, SubmitHandler, SubmitErrorHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Col, Row, Container, Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useState } from "react";
 import { useAuth } from "../Data/AuthProvider";
 
 function SignUp() {
-    const { user, signin } = useAuth();
+    const { signin } = useAuth();
     const { register, handleSubmit, setError, formState: { errors } } = useForm();
     var navigate = useNavigate();
 

@@ -12,7 +12,7 @@ function ChessBoardPiece({piece, rowCol}) {
 
     const promotionTypes = ["queen", "rook", "bishop", "knight"];
 
-    const { reversed, chessBoard, movePiece} = useContext(ChessContext);
+    const { reversed, chessBoard, movePiece } = useContext(ChessContext);
     const { selectedPiece, setSelectedPiece, ourTurn } = useContext(ChessBoardContext);
 
     const lightBrown = "rgb(239, 222, 205)";

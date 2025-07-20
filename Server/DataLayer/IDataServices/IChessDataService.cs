@@ -17,7 +17,7 @@ namespace DataLayer.DataServices
 
         Task<bool> MoveAsync(int chessId, string move, string FEN);
 
-        public ChessModel CreateChessModel(ChessInfo chessState, ChessGame game);
+        public ChessModel CreateChessModel(ChessInfo chessState, ChessGame game, string sessionId);
 
         bool RemoveLastMove(int chessId);
 

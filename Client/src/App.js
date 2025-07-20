@@ -10,22 +10,28 @@ import SignIn from './Pages/SignIn';
 import Userpage from './Pages/User';
 import { AuthProvider } from './Data/AuthProvider';
 import ChessNavbar from './Components/ChessNavbar';
+import { SignalRProvider } from './SignalR/SignalRProvider';
+
 
 function App() {
+
+
   return (
     
     <BrowserRouter>
       <AuthProvider>
-        <Container>
-          <ChessNavbar/>
-          <Routes>
-            <Route index element={<Frontpage />}/>
-            <Route path='chess_game' element={<Chess />}/>
-            <Route path='sign_up' element={<SignUp />}/>
-            <Route path='sign_in' element={<SignIn />}/>
-            <Route path='user' element={<Userpage />}/>
-          </Routes>
-        </Container>
+        <SignalRProvider>
+          <Container>
+            <ChessNavbar/>
+            <Routes>
+              <Route index element={<Frontpage />}/>
+              <Route path='chess_game' element={<Chess />}/>
+              <Route path='sign_up' element={<SignUp />}/>
+              <Route path='sign_in' element={<SignIn />}/>
+              <Route path='user' element={<Userpage />}/>
+            </Routes>
+          </Container>
+        </SignalRProvider>
       </AuthProvider>
     </BrowserRouter>
   );
