@@ -5,9 +5,8 @@ import { useLocation } from 'react-router-dom';
 import ChessBoard from '../Components/ChessBoard.js';
 import ActiveChessMoves from '../Components/ActiveChessMoves.js';
 import Chat from '../Components/Chat.js';
-import useSignalR from '../SignalR/SignalRService.js';
 import { useAuth } from '../Data/AuthProvider.js';
-import * as signalR from "@microsoft/signalr";
+import { useSignalRGame } from '../SignalR/SingalRGameProvider.js';
 
 
 
@@ -50,7 +49,7 @@ const Stats = ({chessBoard}) => {
 
 function Chess() {
     const { user } = useAuth();
-    const { connection, joinGame, chessState, sendMove } = useSignalR();
+    const { chessState, sendMove } = useSignalRGame();
     
     var location = useLocation();
 
@@ -59,12 +58,6 @@ function Chess() {
 
     const [reversed, setReversed] = useState(false);
     const [chessBoardHistory, setChessBoardHistory] = useState([]); 
-
-    useEffect(() => {
-        if (connection?.state === signalR.HubConnectionState.Connected) {
-            joinGame();
-        }
-    }, [connection]);
 
     useEffect(() => {
         if (chessState == null) return;
@@ -95,7 +88,7 @@ function Chess() {
         sendMove(chessState.id, chessState.sessionId, move);
     };
 
-    if (!chessState) return;
+    if (!chessState) return (<div>no chess</div>);
     return ( // give info if board is reveresed or not.
         <ChessContext.Provider value={{reversed, chessBoard: chessState, chessBoardHistory, movePiece, movePieceBot}}> 
             <Container className=''>

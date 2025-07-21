@@ -9,4 +9,5 @@ public interface IGameHub
     Task WaitingForOpponent();
     Task GameReady(ChessModel chessState);
     Task BadMove(string message);
+    Task QueueStopped(string message);
 }

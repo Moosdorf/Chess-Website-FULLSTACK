@@ -11,6 +11,7 @@ import Userpage from './Pages/User';
 import { AuthProvider } from './Data/AuthProvider';
 import ChessNavbar from './Components/ChessNavbar';
 import { SignalRProvider } from './SignalR/SignalRProvider';
+import { SignalRGameProvider } from './SignalR/SingalRGameProvider';
 
 
 function App() {
@@ -21,16 +22,18 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <SignalRProvider>
-          <Container>
-            <ChessNavbar/>
-            <Routes>
-              <Route index element={<Frontpage />}/>
-              <Route path='chess_game' element={<Chess />}/>
-              <Route path='sign_up' element={<SignUp />}/>
-              <Route path='sign_in' element={<SignIn />}/>
-              <Route path='user' element={<Userpage />}/>
-            </Routes>
-          </Container>
+          <SignalRGameProvider>
+            <Container>
+              <ChessNavbar/>
+              <Routes>
+                <Route index element={<Frontpage />}/>
+                <Route path='chess_game' element={<Chess />}/>
+                <Route path='sign_up' element={<SignUp />}/>
+                <Route path='sign_in' element={<SignIn />}/>
+                <Route path='user' element={<Userpage />}/>
+              </Routes>
+            </Container>
+          </SignalRGameProvider>
         </SignalRProvider>
       </AuthProvider>
     </BrowserRouter>

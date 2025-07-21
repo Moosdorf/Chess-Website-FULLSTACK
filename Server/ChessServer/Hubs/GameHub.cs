@@ -3,13 +3,16 @@ using DataLayer.Entities.Chess;
 using DataLayer.HelperMethods;
 using DataLayer.HubServices;
 using DataLayer.Models.Chess;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using System.Diagnostics;
+using System.Security.Claims;
 using System.Text.Json;
 
 namespace ChessServer.Hubs;
 
-
+[Authorize]
 public class GameHub : Hub<IGameHub>
 {
     private readonly IGameManager _gameManager;
@@ -27,11 +30,40 @@ public class GameHub : Hub<IGameHub>
         _chessDataService = chessDataService;
     }
 
+    public override async Task OnDisconnectedAsync(Exception? ex)
+    {
+        var userId = Context.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value; 
+        var username = Context.User?.FindFirst(ClaimTypes.Name)?.Value;
+
+        Console.WriteLine("userid: " + userId);  
+        Console.WriteLine("username: " + username);  
+
+        if (username != null) _gameManager.RemoveUserFromSession(username);
+
+        Console.WriteLine("disconnecting signal r");
+        // do the logging here
+        Trace.WriteLine(Context.ConnectionId + " - disconnected");
+
+
+        await base.OnDisconnectedAsync(ex);
+    }
+
+    public async Task StopQueue()
+    {
+        var username = Context.User?.FindFirst(ClaimTypes.Name)?.Value;
+        _gameManager.RemoveUserFromSession(username);
+        await Clients.Caller.QueueStopped("Queue stopped");
+    }
+
     public async Task JoinGame(string user)
     {
+        var username = Context.User?.FindFirst(ClaimTypes.Name)?.Value;
         Console.WriteLine("trying to join a game");
         // find an available session, if no session found then create one and wait
         var session = _gameManager.FindWaitingGame();
+
+        if (username == null || _gameManager.GetSessionId(username) != null) return;
+
 
         // null indicates no session found
         if (session == null)
@@ -44,7 +76,7 @@ public class GameHub : Hub<IGameHub>
             await Clients.Caller.WaitingForOpponent();
         }
         else
-        {
+        {   
             Console.WriteLine("session not null!");
             // session found, add this user to the session and initialize the session (will set values like who is black).
 
@@ -90,7 +122,6 @@ public class GameHub : Hub<IGameHub>
         } catch (Exception ex)
         {
             Console.WriteLine($"MakeMove Exception: {ex}");
-            throw; // rethrow so client sees failure
         }
         
     }

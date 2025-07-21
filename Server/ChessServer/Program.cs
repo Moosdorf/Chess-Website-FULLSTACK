@@ -38,10 +38,21 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             OnMessageReceived = context =>
             {
-                if (context.Request.Cookies.ContainsKey("access_token"))
+                // Check if token is in query string (for SignalR)
+                var accessToken = context.Request.Query["access_token"];
+                var path = context.HttpContext.Request.Path;
+
+                // If request is to SignalR hub
+                if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/gameHub"))
+                {
+                    context.Token = accessToken;
+                }
+                // Check cookies as a fallback
+                else if (context.Request.Cookies.ContainsKey("access_token"))
                 {
                     context.Token = context.Request.Cookies["access_token"];
                 }
+
                 return Task.CompletedTask;
             }
         };

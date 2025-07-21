@@ -1,7 +1,7 @@
 import { Button, Card, CardBody, Form, InputGroup } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import useSignalR from "../SignalR/SignalRService";
+import {  useState } from "react";
 import { useAuth } from "../Data/AuthProvider";
+import { useSignalRGame } from "../SignalR/SingalRGameProvider";
 
 
 
@@ -9,7 +9,7 @@ import { useAuth } from "../Data/AuthProvider";
 
 function Chat( {sessionId} ) {
     const { user }  = useAuth();
-    const { connection, messages } = useSignalR();
+    const { connection, messages } = useSignalRGame();
 
     const [inputValue, setInputValue] = useState("");
 

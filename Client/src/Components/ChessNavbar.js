@@ -4,8 +4,11 @@ import { useAuth } from '../Data/AuthProvider';
 import ChessTypeSelection from './ChessTypeSelection';
 import { GetCookies } from '../Functions/HelperMethods';
 import { useState } from 'react';
+import { useSignalRGame } from '../SignalR/SingalRGameProvider';
 
 function ChessNavbar() {
+  const { stopQueue, queue } = useSignalRGame(); 
+  
   var cookies = GetCookies();
   const { user, signout } = useAuth();
   const navigate = useNavigate();
@@ -47,9 +50,11 @@ function ChessNavbar() {
               <ChessTypeSelection show={showBotOptions} handleClose={handleClose} handleSelection={handleSelection} />
 
               <NavDropdown.Divider className="dropdown-divider" />
+
               <NavDropdown.Item as={Link} to="/chess_game" className="dropdown-item">
                 <i className="fas fa-users me-2"></i> Multiplayer
               </NavDropdown.Item>
+              
             </NavDropdown>
             <Nav.Link as={Link} to="/puzzles" className="nav-link">
               <i className="fas fa-puzzle-piece me-1"></i> Puzzles
@@ -58,6 +63,13 @@ function ChessNavbar() {
               <i className="fas fa-graduation-cap me-1"></i> Learn
             </Nav.Link>
           </Nav>
+
+          {queue && (<Nav className="me-auto">
+            <div style={{border: "1px solid green", padding: "5px"}}>
+              Queue
+              <Button onClick={() => stopQueue()}>stop queue</Button>
+            </div>
+          </Nav>)}
           
           <Nav className="align-items-center">
             {user ? (

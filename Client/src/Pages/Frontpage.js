@@ -5,9 +5,12 @@ import { Title } from '../Components/Title';
 import { useState } from 'react';
 import ChessTypeSelection from '../Components/ChessTypeSelection';
 import { GetCookies } from '../Functions/HelperMethods';
+import { useSignalRGame } from '../SignalR/SingalRGameProvider';
 
 
 function Frontpage() {
+
+    const { joinGame } = useSignalRGame(); 
 
     var cookies = GetCookies();
     const [showBotOptions, setShowBotOptions] = useState(false);
@@ -39,7 +42,7 @@ function Frontpage() {
 
             <Row>
                 <Col className='text-center'>
-                    <Button onClick={() => navigate("/chess_game", { state: { botGame: false } })}>
+                    <Button onClick={() => joinGame()}>
                         Play Chess
                     </Button>
                 </Col>

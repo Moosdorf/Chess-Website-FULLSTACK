@@ -5,7 +5,6 @@ import { useAuth } from "../Data/AuthProvider";
 const SignalRContext = createContext(null);
 
 export function SignalRProvider({ children }) {
-  console.log("signal r provider")
   const { user } = useAuth();
   const [connection, setConnection] = useState(null);
   const startedRef = useRef(false); // guard against double-start
@@ -43,7 +42,7 @@ export function SignalRProvider({ children }) {
       })
       .catch((err) => {
         console.error("SignalR start error:", err);
-        startedRef.current = false; // allow retry if it failed
+        startedRef.current = false; 
       });
   }, [connection]);
 
