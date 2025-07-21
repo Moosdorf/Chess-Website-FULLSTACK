@@ -1,0 +1,1012 @@
+{
+  "source_base_path": "C:/Users/Moosdorf/Desktop/sem1/Chess-Website-FULLSTACK/Server",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Stockfish/CONTRIBUTING.md",
+      "output": {
+        ".html": {
+          "relative_path": "Stockfish/CONTRIBUTING.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Stockfish/README.md",
+      "output": {
+        ".html": {
+          "relative_path": "Stockfish/README.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Stockfish/wiki/Advanced-topics.md",
+      "output": {
+        ".html": {
+          "relative_path": "Stockfish/wiki/Advanced-topics.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Stockfish/wiki/Compiling-from-source.md",
+      "output": {
+        ".html": {
+          "relative_path": "Stockfish/wiki/Compiling-from-source.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Stockfish/wiki/Developers.md",
+      "output": {
+        ".html": {
+          "relative_path": "Stockfish/wiki/Developers.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Stockfish/wiki/Download-and-usage.md",
+      "output": {
+        ".html": {
+          "relative_path": "Stockfish/wiki/Download-and-usage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Stockfish/wiki/Governance-and-responsibilities.md",
+      "output": {
+        ".html": {
+          "relative_path": "Stockfish/wiki/Governance-and-responsibilities.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Stockfish/wiki/Home.md",
+      "output": {
+        ".html": {
+          "relative_path": "Stockfish/wiki/Home.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Stockfish/wiki/Regression-Tests.md",
+      "output": {
+        ".html": {
+          "relative_path": "Stockfish/wiki/Regression-Tests.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Stockfish/wiki/Stockfish-FAQ.md",
+      "output": {
+        ".html": {
+          "relative_path": "Stockfish/wiki/Stockfish-FAQ.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Stockfish/wiki/Terminology.md",
+      "output": {
+        ".html": {
+          "relative_path": "Stockfish/wiki/Terminology.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Stockfish/wiki/UCI-&-Commands.md",
+      "output": {
+        ".html": {
+          "relative_path": "Stockfish/wiki/UCI-&-Commands.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Stockfish/wiki/Useful-data.md",
+      "output": {
+        ".html": {
+          "relative_path": "Stockfish/wiki/Useful-data.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "Stockfish/wiki/_Footer.md",
+      "output": {
+        ".html": {
+          "relative_path": "Stockfish/wiki/_Footer.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChessServer.Controllers.BaseController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChessServer.Controllers.BaseController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "ChessServer.Controllers.BaseController",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChessServer.Controllers.ChessController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChessServer.Controllers.ChessController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "ChessServer.Controllers.ChessController",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChessServer.Controllers.UserController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChessServer.Controllers.UserController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "ChessServer.Controllers.UserController",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChessServer.Controllers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChessServer.Controllers.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "ChessServer.Controllers",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChessServer.Hubs.GameHub.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChessServer.Hubs.GameHub.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "ChessServer.Hubs.GameHub",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/ChessServer.Hubs.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/ChessServer.Hubs.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "ChessServer.Hubs",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.ChessContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.ChessContext.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.ChessContext",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.DataServices.ChessDataService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.DataServices.ChessDataService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.DataServices.ChessDataService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.DataServices.DataService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.DataServices.DataService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.DataServices.DataService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.DataServices.IChessDataService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.DataServices.IChessDataService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.DataServices.IChessDataService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.DataServices.IDataService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.DataServices.IDataService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.DataServices.IDataService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.DataServices.StockFishService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.DataServices.StockFishService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.DataServices.StockFishService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.DataServices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.DataServices.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.DataServices",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Entities.Chess.ChessGame.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Entities.Chess.ChessGame.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Entities.Chess.ChessGame",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Entities.Chess.GameResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Entities.Chess.GameResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Entities.Chess.GameResult",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Entities.Chess.GameType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Entities.Chess.GameType.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Entities.Chess.GameType",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Entities.Chess.Move.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Entities.Chess.Move.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Entities.Chess.Move",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Entities.Chess.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Entities.Chess.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Entities.Chess",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Entities.Users.Customization.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Entities.Users.Customization.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Entities.Users.Customization",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Entities.Users.Session.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Entities.Users.Session.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Entities.Users.Session",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Entities.Users.User.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Entities.Users.User.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Entities.Users.User",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Entities.Users.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Entities.Users.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Entities.Users",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.HelperMethods.ChessMethods.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.HelperMethods.ChessMethods.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.HelperMethods.ChessMethods",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.HelperMethods.Hashing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.HelperMethods.Hashing.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.HelperMethods.Hashing",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.HelperMethods.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.HelperMethods.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.HelperMethods",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.HubServices.GameSession.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.HubServices.GameSession.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.HubServices.GameSession",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.HubServices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.HubServices.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.HubServices",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.IDataServices.IStockFishService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.IDataServices.IStockFishService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.IDataServices.IStockFishService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.IDataServices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.IDataServices.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.IDataServices",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.AddUniqueIndexToUsername.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.AddUniqueIndexToUsername.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations.AddUniqueIndexToUsername",
+      "Summary": "<p sourcefile=\"api/DataLayer.Migrations.AddUniqueIndexToUsername.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.ChessGameUpdate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.ChessGameUpdate.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations.ChessGameUpdate",
+      "Summary": "<p sourcefile=\"api/DataLayer.Migrations.ChessGameUpdate.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.ChessGameUpdate1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.ChessGameUpdate1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations.ChessGameUpdate1",
+      "Summary": "<p sourcefile=\"api/DataLayer.Migrations.ChessGameUpdate1.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.ChessgameAndMoves.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.ChessgameAndMoves.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations.ChessgameAndMoves",
+      "Summary": "<p sourcefile=\"api/DataLayer.Migrations.ChessgameAndMoves.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.InitialCreate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.InitialCreate.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations.InitialCreate",
+      "Summary": "<p sourcefile=\"api/DataLayer.Migrations.InitialCreate.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.addedFENtomoves.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.addedFENtomoves.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations.addedFENtomoves",
+      "Summary": "<p sourcefile=\"api/DataLayer.Migrations.addedFENtomoves.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.addedUserRelationsToChessGames.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.addedUserRelationsToChessGames.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations.addedUserRelationsToChessGames",
+      "Summary": "<p sourcefile=\"api/DataLayer.Migrations.addedUserRelationsToChessGames.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.added_moves.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.added_moves.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations.added_moves",
+      "Summary": "<p sourcefile=\"api/DataLayer.Migrations.added_moves.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.added_salt.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.added_salt.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations.added_salt",
+      "Summary": "<p sourcefile=\"api/DataLayer.Migrations.added_salt.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.email.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.email.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations.email",
+      "Summary": "<p sourcefile=\"api/DataLayer.Migrations.email.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.refreshdb.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.refreshdb.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations.refreshdb",
+      "Summary": "<p sourcefile=\"api/DataLayer.Migrations.refreshdb.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.removed_required_for_dev.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.removed_required_for_dev.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations.removed_required_for_dev",
+      "Summary": "<p sourcefile=\"api/DataLayer.Migrations.removed_required_for_dev.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.removed_users_from_chessgame.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.removed_users_from_chessgame.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations.removed_users_from_chessgame",
+      "Summary": "<p sourcefile=\"api/DataLayer.Migrations.removed_users_from_chessgame.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.trying_again.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.trying_again.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations.trying_again",
+      "Summary": "<p sourcefile=\"api/DataLayer.Migrations.trying_again.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Migrations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Migrations.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Migrations",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Models.Chess.ChessModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Models.Chess.ChessModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Models.Chess.ChessModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Models.Chess.CreateBotChessModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Models.Chess.CreateBotChessModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Models.Chess.CreateBotChessModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Models.Chess.CreateChessModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Models.Chess.CreateChessModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Models.Chess.CreateChessModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Models.Chess.MoveModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Models.Chess.MoveModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Models.Chess.MoveModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Models.Chess.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Models.Chess.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Models.Chess",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Models.User.UserCreateModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Models.User.UserCreateModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Models.User.UserCreateModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Models.User.UserModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Models.User.UserModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Models.User.UserModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Models.User.UserSignInModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Models.User.UserSignInModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Models.User.UserSignInModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.Models.User.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.Models.User.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer.Models.User",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/DataLayer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/DataLayer.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "DataLayer",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Testing.UserTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Testing.UserTests.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Testing.UserTests",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Testing.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Testing.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Testing",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/introduction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docs/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

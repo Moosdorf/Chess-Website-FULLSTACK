@@ -1,0 +1,180 @@
+### YamlMime:ManagedReference
+items:
+- uid: DataLayer.IDataServices.IStockFishService
+  commentId: T:DataLayer.IDataServices.IStockFishService
+  id: IStockFishService
+  parent: DataLayer.IDataServices
+  children:
+  - DataLayer.IDataServices.IStockFishService.MoveFrom(System.String)
+  - DataLayer.IDataServices.IStockFishService.StartNewStockFishGame
+  langs:
+  - csharp
+  - vb
+  name: IStockFishService
+  nameWithType: IStockFishService
+  fullName: DataLayer.IDataServices.IStockFishService
+  type: Interface
+  source:
+    remote:
+      path: Server/DataLayer/IDataServices/IStockFishService.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: IStockFishService
+    path: DataLayer/IDataServices/IStockFishService.cs
+    startLine: 9
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.IDataServices
+  syntax:
+    content: public interface IStockFishService
+    content.vb: Public Interface IStockFishService
+- uid: DataLayer.IDataServices.IStockFishService.MoveFrom(System.String)
+  commentId: M:DataLayer.IDataServices.IStockFishService.MoveFrom(System.String)
+  id: MoveFrom(System.String)
+  parent: DataLayer.IDataServices.IStockFishService
+  langs:
+  - csharp
+  - vb
+  name: MoveFrom(string)
+  nameWithType: IStockFishService.MoveFrom(string)
+  fullName: DataLayer.IDataServices.IStockFishService.MoveFrom(string)
+  type: Method
+  source:
+    remote:
+      path: Server/DataLayer/IDataServices/IStockFishService.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: MoveFrom
+    path: DataLayer/IDataServices/IStockFishService.cs
+    startLine: 11
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.IDataServices
+  syntax:
+    content: MoveModel MoveFrom(string fEN)
+    parameters:
+    - id: fEN
+      type: System.String
+    return:
+      type: DataLayer.Models.Chess.MoveModel
+    content.vb: Function MoveFrom(fEN As String) As MoveModel
+  overload: DataLayer.IDataServices.IStockFishService.MoveFrom*
+  nameWithType.vb: IStockFishService.MoveFrom(String)
+  fullName.vb: DataLayer.IDataServices.IStockFishService.MoveFrom(String)
+  name.vb: MoveFrom(String)
+- uid: DataLayer.IDataServices.IStockFishService.StartNewStockFishGame
+  commentId: M:DataLayer.IDataServices.IStockFishService.StartNewStockFishGame
+  id: StartNewStockFishGame
+  parent: DataLayer.IDataServices.IStockFishService
+  langs:
+  - csharp
+  - vb
+  name: StartNewStockFishGame()
+  nameWithType: IStockFishService.StartNewStockFishGame()
+  fullName: DataLayer.IDataServices.IStockFishService.StartNewStockFishGame()
+  type: Method
+  source:
+    remote:
+      path: Server/DataLayer/IDataServices/IStockFishService.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: StartNewStockFishGame
+    path: DataLayer/IDataServices/IStockFishService.cs
+    startLine: 12
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.IDataServices
+  syntax:
+    content: void StartNewStockFishGame()
+    content.vb: Sub StartNewStockFishGame()
+  overload: DataLayer.IDataServices.IStockFishService.StartNewStockFishGame*
+references:
+- uid: DataLayer.IDataServices
+  commentId: N:DataLayer.IDataServices
+  href: DataLayer.html
+  name: DataLayer.IDataServices
+  nameWithType: DataLayer.IDataServices
+  fullName: DataLayer.IDataServices
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.IDataServices
+    name: IDataServices
+    href: DataLayer.IDataServices.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.IDataServices
+    name: IDataServices
+    href: DataLayer.IDataServices.html
+- uid: DataLayer.IDataServices.IStockFishService.MoveFrom*
+  commentId: Overload:DataLayer.IDataServices.IStockFishService.MoveFrom
+  href: DataLayer.IDataServices.IStockFishService.html#DataLayer_IDataServices_IStockFishService_MoveFrom_System_String_
+  name: MoveFrom
+  nameWithType: IStockFishService.MoveFrom
+  fullName: DataLayer.IDataServices.IStockFishService.MoveFrom
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: DataLayer.Models.Chess.MoveModel
+  commentId: T:DataLayer.Models.Chess.MoveModel
+  parent: DataLayer.Models.Chess
+  href: DataLayer.Models.Chess.MoveModel.html
+  name: MoveModel
+  nameWithType: MoveModel
+  fullName: DataLayer.Models.Chess.MoveModel
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: DataLayer.Models.Chess
+  commentId: N:DataLayer.Models.Chess
+  href: DataLayer.html
+  name: DataLayer.Models.Chess
+  nameWithType: DataLayer.Models.Chess
+  fullName: DataLayer.Models.Chess
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Models
+    name: Models
+    href: DataLayer.Models.html
+  - name: .
+  - uid: DataLayer.Models.Chess
+    name: Chess
+    href: DataLayer.Models.Chess.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Models
+    name: Models
+    href: DataLayer.Models.html
+  - name: .
+  - uid: DataLayer.Models.Chess
+    name: Chess
+    href: DataLayer.Models.Chess.html
+- uid: DataLayer.IDataServices.IStockFishService.StartNewStockFishGame*
+  commentId: Overload:DataLayer.IDataServices.IStockFishService.StartNewStockFishGame
+  href: DataLayer.IDataServices.IStockFishService.html#DataLayer_IDataServices_IStockFishService_StartNewStockFishGame
+  name: StartNewStockFishGame
+  nameWithType: IStockFishService.StartNewStockFishGame
+  fullName: DataLayer.IDataServices.IStockFishService.StartNewStockFishGame

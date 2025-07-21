@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
+/// <summary>
+/// Represents a Bishop chess piece.
+/// </summary>
 public class Bishop(bool white) : Piece(white)
 {
     public override void FindMoves(ChessInfo chessState)

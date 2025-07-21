@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Represents a Pawn chess piece.
+/// </summary>
 public class Pawn(bool white) : Piece(white) 
 {
     public override void FindMoves(ChessInfo chessState)

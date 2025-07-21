@@ -1,0 +1,46 @@
+### YamlMime:ManagedReference
+items:
+- uid: DataLayer.IDataServices
+  commentId: N:DataLayer.IDataServices
+  id: DataLayer.IDataServices
+  children:
+  - DataLayer.IDataServices.IStockFishService
+  langs:
+  - csharp
+  - vb
+  name: DataLayer.IDataServices
+  nameWithType: DataLayer.IDataServices
+  fullName: DataLayer.IDataServices
+  type: Namespace
+  assemblies:
+  - DataLayer
+references:
+- uid: DataLayer.IDataServices.IStockFishService
+  commentId: T:DataLayer.IDataServices.IStockFishService
+  parent: DataLayer.IDataServices
+  href: DataLayer.IDataServices.IStockFishService.html
+  name: IStockFishService
+  nameWithType: IStockFishService
+  fullName: DataLayer.IDataServices.IStockFishService
+- uid: DataLayer.IDataServices
+  commentId: N:DataLayer.IDataServices
+  href: DataLayer.html
+  name: DataLayer.IDataServices
+  nameWithType: DataLayer.IDataServices
+  fullName: DataLayer.IDataServices
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.IDataServices
+    name: IDataServices
+    href: DataLayer.IDataServices.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.IDataServices
+    name: IDataServices
+    href: DataLayer.IDataServices.html

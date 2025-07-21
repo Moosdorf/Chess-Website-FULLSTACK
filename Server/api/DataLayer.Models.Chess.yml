@@ -1,0 +1,78 @@
+### YamlMime:ManagedReference
+items:
+- uid: DataLayer.Models.Chess
+  commentId: N:DataLayer.Models.Chess
+  id: DataLayer.Models.Chess
+  children:
+  - DataLayer.Models.Chess.ChessModel
+  - DataLayer.Models.Chess.CreateBotChessModel
+  - DataLayer.Models.Chess.CreateChessModel
+  - DataLayer.Models.Chess.MoveModel
+  langs:
+  - csharp
+  - vb
+  name: DataLayer.Models.Chess
+  nameWithType: DataLayer.Models.Chess
+  fullName: DataLayer.Models.Chess
+  type: Namespace
+  assemblies:
+  - DataLayer
+references:
+- uid: DataLayer.Models.Chess.ChessModel
+  commentId: T:DataLayer.Models.Chess.ChessModel
+  parent: DataLayer.Models.Chess
+  href: DataLayer.Models.Chess.ChessModel.html
+  name: ChessModel
+  nameWithType: ChessModel
+  fullName: DataLayer.Models.Chess.ChessModel
+- uid: DataLayer.Models.Chess.CreateBotChessModel
+  commentId: T:DataLayer.Models.Chess.CreateBotChessModel
+  parent: DataLayer.Models.Chess
+  href: DataLayer.Models.Chess.CreateBotChessModel.html
+  name: CreateBotChessModel
+  nameWithType: CreateBotChessModel
+  fullName: DataLayer.Models.Chess.CreateBotChessModel
+- uid: DataLayer.Models.Chess.CreateChessModel
+  commentId: T:DataLayer.Models.Chess.CreateChessModel
+  parent: DataLayer.Models.Chess
+  href: DataLayer.Models.Chess.CreateChessModel.html
+  name: CreateChessModel
+  nameWithType: CreateChessModel
+  fullName: DataLayer.Models.Chess.CreateChessModel
+- uid: DataLayer.Models.Chess.MoveModel
+  commentId: T:DataLayer.Models.Chess.MoveModel
+  parent: DataLayer.Models.Chess
+  href: DataLayer.Models.Chess.MoveModel.html
+  name: MoveModel
+  nameWithType: MoveModel
+  fullName: DataLayer.Models.Chess.MoveModel
+- uid: DataLayer.Models.Chess
+  commentId: N:DataLayer.Models.Chess
+  href: DataLayer.html
+  name: DataLayer.Models.Chess
+  nameWithType: DataLayer.Models.Chess
+  fullName: DataLayer.Models.Chess
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Models
+    name: Models
+    href: DataLayer.Models.html
+  - name: .
+  - uid: DataLayer.Models.Chess
+    name: Chess
+    href: DataLayer.Models.Chess.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Models
+    name: Models
+    href: DataLayer.Models.html
+  - name: .
+  - uid: DataLayer.Models.Chess
+    name: Chess
+    href: DataLayer.Models.Chess.html

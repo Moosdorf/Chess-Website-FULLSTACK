@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: DataLayer.HubServices
+  commentId: N:DataLayer.HubServices
+  id: DataLayer.HubServices
+  children:
+  - DataLayer.HubServices.GameSession
+  langs:
+  - csharp
+  - vb
+  name: DataLayer.HubServices
+  nameWithType: DataLayer.HubServices
+  fullName: DataLayer.HubServices
+  type: Namespace
+  assemblies:
+  - DataLayer
+references:
+- uid: DataLayer.HubServices.GameSession
+  commentId: T:DataLayer.HubServices.GameSession
+  href: DataLayer.HubServices.GameSession.html
+  name: GameSession
+  nameWithType: GameSession
+  fullName: DataLayer.HubServices.GameSession

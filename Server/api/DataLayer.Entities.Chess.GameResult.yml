@@ -1,0 +1,174 @@
+### YamlMime:ManagedReference
+items:
+- uid: DataLayer.Entities.Chess.GameResult
+  commentId: T:DataLayer.Entities.Chess.GameResult
+  id: GameResult
+  parent: DataLayer.Entities.Chess
+  children:
+  - DataLayer.Entities.Chess.GameResult.BlackWin
+  - DataLayer.Entities.Chess.GameResult.Draw
+  - DataLayer.Entities.Chess.GameResult.Ongoing
+  - DataLayer.Entities.Chess.GameResult.WhiteWin
+  langs:
+  - csharp
+  - vb
+  name: GameResult
+  nameWithType: GameResult
+  fullName: DataLayer.Entities.Chess.GameResult
+  type: Enum
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Chess/ChessGame.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: GameResult
+    path: DataLayer/Entities/Chess/ChessGame.cs
+    startLine: 12
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Chess
+  syntax:
+    content: public enum GameResult
+    content.vb: Public Enum GameResult
+- uid: DataLayer.Entities.Chess.GameResult.WhiteWin
+  commentId: F:DataLayer.Entities.Chess.GameResult.WhiteWin
+  id: WhiteWin
+  parent: DataLayer.Entities.Chess.GameResult
+  langs:
+  - csharp
+  - vb
+  name: WhiteWin
+  nameWithType: GameResult.WhiteWin
+  fullName: DataLayer.Entities.Chess.GameResult.WhiteWin
+  type: Field
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Chess/ChessGame.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: WhiteWin
+    path: DataLayer/Entities/Chess/ChessGame.cs
+    startLine: 14
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Chess
+  syntax:
+    content: WhiteWin = 0
+    return:
+      type: DataLayer.Entities.Chess.GameResult
+- uid: DataLayer.Entities.Chess.GameResult.BlackWin
+  commentId: F:DataLayer.Entities.Chess.GameResult.BlackWin
+  id: BlackWin
+  parent: DataLayer.Entities.Chess.GameResult
+  langs:
+  - csharp
+  - vb
+  name: BlackWin
+  nameWithType: GameResult.BlackWin
+  fullName: DataLayer.Entities.Chess.GameResult.BlackWin
+  type: Field
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Chess/ChessGame.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: BlackWin
+    path: DataLayer/Entities/Chess/ChessGame.cs
+    startLine: 15
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Chess
+  syntax:
+    content: BlackWin = 1
+    return:
+      type: DataLayer.Entities.Chess.GameResult
+- uid: DataLayer.Entities.Chess.GameResult.Draw
+  commentId: F:DataLayer.Entities.Chess.GameResult.Draw
+  id: Draw
+  parent: DataLayer.Entities.Chess.GameResult
+  langs:
+  - csharp
+  - vb
+  name: Draw
+  nameWithType: GameResult.Draw
+  fullName: DataLayer.Entities.Chess.GameResult.Draw
+  type: Field
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Chess/ChessGame.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: Draw
+    path: DataLayer/Entities/Chess/ChessGame.cs
+    startLine: 16
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Chess
+  syntax:
+    content: Draw = 2
+    return:
+      type: DataLayer.Entities.Chess.GameResult
+- uid: DataLayer.Entities.Chess.GameResult.Ongoing
+  commentId: F:DataLayer.Entities.Chess.GameResult.Ongoing
+  id: Ongoing
+  parent: DataLayer.Entities.Chess.GameResult
+  langs:
+  - csharp
+  - vb
+  name: Ongoing
+  nameWithType: GameResult.Ongoing
+  fullName: DataLayer.Entities.Chess.GameResult.Ongoing
+  type: Field
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Chess/ChessGame.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: Ongoing
+    path: DataLayer/Entities/Chess/ChessGame.cs
+    startLine: 17
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Chess
+  syntax:
+    content: Ongoing = 3
+    return:
+      type: DataLayer.Entities.Chess.GameResult
+references:
+- uid: DataLayer.Entities.Chess
+  commentId: N:DataLayer.Entities.Chess
+  href: DataLayer.html
+  name: DataLayer.Entities.Chess
+  nameWithType: DataLayer.Entities.Chess
+  fullName: DataLayer.Entities.Chess
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Entities
+    name: Entities
+    href: DataLayer.Entities.html
+  - name: .
+  - uid: DataLayer.Entities.Chess
+    name: Chess
+    href: DataLayer.Entities.Chess.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Entities
+    name: Entities
+    href: DataLayer.Entities.html
+  - name: .
+  - uid: DataLayer.Entities.Chess
+    name: Chess
+    href: DataLayer.Entities.Chess.html
+- uid: DataLayer.Entities.Chess.GameResult
+  commentId: T:DataLayer.Entities.Chess.GameResult
+  parent: DataLayer.Entities.Chess
+  href: DataLayer.Entities.Chess.GameResult.html
+  name: GameResult
+  nameWithType: GameResult
+  fullName: DataLayer.Entities.Chess.GameResult

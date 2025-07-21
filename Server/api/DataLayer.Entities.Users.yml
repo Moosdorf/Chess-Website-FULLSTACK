@@ -1,0 +1,68 @@
+### YamlMime:ManagedReference
+items:
+- uid: DataLayer.Entities.Users
+  commentId: N:DataLayer.Entities.Users
+  id: DataLayer.Entities.Users
+  children:
+  - DataLayer.Entities.Users.Customization
+  - DataLayer.Entities.Users.Session
+  - DataLayer.Entities.Users.User
+  langs:
+  - csharp
+  - vb
+  name: DataLayer.Entities.Users
+  nameWithType: DataLayer.Entities.Users
+  fullName: DataLayer.Entities.Users
+  type: Namespace
+  assemblies:
+  - DataLayer
+references:
+- uid: DataLayer.Entities.Users.Customization
+  commentId: T:DataLayer.Entities.Users.Customization
+  href: DataLayer.Entities.Users.Customization.html
+  name: Customization
+  nameWithType: Customization
+  fullName: DataLayer.Entities.Users.Customization
+- uid: DataLayer.Entities.Users.Session
+  commentId: T:DataLayer.Entities.Users.Session
+  href: DataLayer.Entities.Users.Session.html
+  name: Session
+  nameWithType: Session
+  fullName: DataLayer.Entities.Users.Session
+- uid: DataLayer.Entities.Users.User
+  commentId: T:DataLayer.Entities.Users.User
+  parent: DataLayer.Entities.Users
+  href: DataLayer.Entities.Users.User.html
+  name: User
+  nameWithType: User
+  fullName: DataLayer.Entities.Users.User
+- uid: DataLayer.Entities.Users
+  commentId: N:DataLayer.Entities.Users
+  href: DataLayer.html
+  name: DataLayer.Entities.Users
+  nameWithType: DataLayer.Entities.Users
+  fullName: DataLayer.Entities.Users
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Entities
+    name: Entities
+    href: DataLayer.Entities.html
+  - name: .
+  - uid: DataLayer.Entities.Users
+    name: Users
+    href: DataLayer.Entities.Users.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Entities
+    name: Entities
+    href: DataLayer.Entities.html
+  - name: .
+  - uid: DataLayer.Entities.Users
+    name: Users
+    href: DataLayer.Entities.Users.html

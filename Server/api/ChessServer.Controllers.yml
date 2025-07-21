@@ -1,0 +1,60 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChessServer.Controllers
+  commentId: N:ChessServer.Controllers
+  id: ChessServer.Controllers
+  children:
+  - ChessServer.Controllers.BaseController
+  - ChessServer.Controllers.ChessController
+  - ChessServer.Controllers.UserController
+  langs:
+  - csharp
+  - vb
+  name: ChessServer.Controllers
+  nameWithType: ChessServer.Controllers
+  fullName: ChessServer.Controllers
+  type: Namespace
+  assemblies:
+  - ChessServer
+references:
+- uid: ChessServer.Controllers.BaseController
+  commentId: T:ChessServer.Controllers.BaseController
+  parent: ChessServer.Controllers
+  href: ChessServer.Controllers.BaseController.html
+  name: BaseController
+  nameWithType: BaseController
+  fullName: ChessServer.Controllers.BaseController
+- uid: ChessServer.Controllers.ChessController
+  commentId: T:ChessServer.Controllers.ChessController
+  href: ChessServer.Controllers.ChessController.html
+  name: ChessController
+  nameWithType: ChessController
+  fullName: ChessServer.Controllers.ChessController
+- uid: ChessServer.Controllers.UserController
+  commentId: T:ChessServer.Controllers.UserController
+  href: ChessServer.Controllers.UserController.html
+  name: UserController
+  nameWithType: UserController
+  fullName: ChessServer.Controllers.UserController
+- uid: ChessServer.Controllers
+  commentId: N:ChessServer.Controllers
+  href: ChessServer.html
+  name: ChessServer.Controllers
+  nameWithType: ChessServer.Controllers
+  fullName: ChessServer.Controllers
+  spec.csharp:
+  - uid: ChessServer
+    name: ChessServer
+    href: ChessServer.html
+  - name: .
+  - uid: ChessServer.Controllers
+    name: Controllers
+    href: ChessServer.Controllers.html
+  spec.vb:
+  - uid: ChessServer
+    name: ChessServer
+    href: ChessServer.html
+  - name: .
+  - uid: ChessServer.Controllers
+    name: Controllers
+    href: ChessServer.Controllers.html

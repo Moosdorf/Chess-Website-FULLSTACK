@@ -1,0 +1,184 @@
+### YamlMime:TableOfContent
+items:
+- uid: ChessServer.Controllers
+  name: ChessServer.Controllers
+  type: Namespace
+  items:
+  - uid: ChessServer.Controllers.BaseController
+    name: BaseController
+    type: Class
+  - uid: ChessServer.Controllers.ChessController
+    name: ChessController
+    type: Class
+  - uid: ChessServer.Controllers.UserController
+    name: UserController
+    type: Class
+- uid: ChessServer.Hubs
+  name: ChessServer.Hubs
+  type: Namespace
+  items:
+  - uid: ChessServer.Hubs.GameHub
+    name: GameHub
+    type: Class
+- uid: DataLayer
+  name: DataLayer
+  type: Namespace
+  items:
+  - uid: DataLayer.ChessContext
+    name: ChessContext
+    type: Class
+- uid: DataLayer.DataServices
+  name: DataLayer.DataServices
+  type: Namespace
+  items:
+  - uid: DataLayer.DataServices.ChessDataService
+    name: ChessDataService
+    type: Class
+  - uid: DataLayer.DataServices.DataService
+    name: DataService
+    type: Class
+  - uid: DataLayer.DataServices.IChessDataService
+    name: IChessDataService
+    type: Interface
+  - uid: DataLayer.DataServices.IDataService
+    name: IDataService
+    type: Interface
+  - uid: DataLayer.DataServices.StockFishService
+    name: StockFishService
+    type: Class
+- uid: DataLayer.Entities.Chess
+  name: DataLayer.Entities.Chess
+  type: Namespace
+  items:
+  - uid: DataLayer.Entities.Chess.ChessGame
+    name: ChessGame
+    type: Class
+  - uid: DataLayer.Entities.Chess.GameResult
+    name: GameResult
+    type: Enum
+  - uid: DataLayer.Entities.Chess.GameType
+    name: GameType
+    type: Enum
+  - uid: DataLayer.Entities.Chess.Move
+    name: Move
+    type: Class
+- uid: DataLayer.Entities.Users
+  name: DataLayer.Entities.Users
+  type: Namespace
+  items:
+  - uid: DataLayer.Entities.Users.Customization
+    name: Customization
+    type: Class
+  - uid: DataLayer.Entities.Users.Session
+    name: Session
+    type: Class
+  - uid: DataLayer.Entities.Users.User
+    name: User
+    type: Class
+- uid: DataLayer.HelperMethods
+  name: DataLayer.HelperMethods
+  type: Namespace
+  items:
+  - uid: DataLayer.HelperMethods.ChessMethods
+    name: ChessMethods
+    type: Class
+  - uid: DataLayer.HelperMethods.Hashing
+    name: Hashing
+    type: Class
+- uid: DataLayer.HubServices
+  name: DataLayer.HubServices
+  type: Namespace
+  items:
+  - uid: DataLayer.HubServices.GameSession
+    name: GameSession
+    type: Class
+- uid: DataLayer.IDataServices
+  name: DataLayer.IDataServices
+  type: Namespace
+  items:
+  - uid: DataLayer.IDataServices.IStockFishService
+    name: IStockFishService
+    type: Interface
+- uid: DataLayer.Migrations
+  name: DataLayer.Migrations
+  type: Namespace
+  items:
+  - uid: DataLayer.Migrations.AddUniqueIndexToUsername
+    name: AddUniqueIndexToUsername
+    type: Class
+  - uid: DataLayer.Migrations.ChessGameUpdate
+    name: ChessGameUpdate
+    type: Class
+  - uid: DataLayer.Migrations.ChessGameUpdate1
+    name: ChessGameUpdate1
+    type: Class
+  - uid: DataLayer.Migrations.ChessgameAndMoves
+    name: ChessgameAndMoves
+    type: Class
+  - uid: DataLayer.Migrations.InitialCreate
+    name: InitialCreate
+    type: Class
+  - uid: DataLayer.Migrations.addedFENtomoves
+    name: addedFENtomoves
+    type: Class
+  - uid: DataLayer.Migrations.addedUserRelationsToChessGames
+    name: addedUserRelationsToChessGames
+    type: Class
+  - uid: DataLayer.Migrations.added_moves
+    name: added_moves
+    type: Class
+  - uid: DataLayer.Migrations.added_salt
+    name: added_salt
+    type: Class
+  - uid: DataLayer.Migrations.email
+    name: email
+    type: Class
+  - uid: DataLayer.Migrations.refreshdb
+    name: refreshdb
+    type: Class
+  - uid: DataLayer.Migrations.removed_required_for_dev
+    name: removed_required_for_dev
+    type: Class
+  - uid: DataLayer.Migrations.removed_users_from_chessgame
+    name: removed_users_from_chessgame
+    type: Class
+  - uid: DataLayer.Migrations.trying_again
+    name: trying_again
+    type: Class
+- uid: DataLayer.Models.Chess
+  name: DataLayer.Models.Chess
+  type: Namespace
+  items:
+  - uid: DataLayer.Models.Chess.ChessModel
+    name: ChessModel
+    type: Class
+  - uid: DataLayer.Models.Chess.CreateBotChessModel
+    name: CreateBotChessModel
+    type: Class
+  - uid: DataLayer.Models.Chess.CreateChessModel
+    name: CreateChessModel
+    type: Class
+  - uid: DataLayer.Models.Chess.MoveModel
+    name: MoveModel
+    type: Class
+- uid: DataLayer.Models.User
+  name: DataLayer.Models.User
+  type: Namespace
+  items:
+  - uid: DataLayer.Models.User.UserCreateModel
+    name: UserCreateModel
+    type: Class
+  - uid: DataLayer.Models.User.UserModel
+    name: UserModel
+    type: Class
+  - uid: DataLayer.Models.User.UserSignInModel
+    name: UserSignInModel
+    type: Class
+- uid: Testing
+  name: Testing
+  type: Namespace
+  items:
+  - uid: Testing.UserTests
+    name: UserTests
+    type: Class
+memberLayout: SamePage

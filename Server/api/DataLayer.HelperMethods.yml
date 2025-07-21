@@ -1,0 +1,30 @@
+### YamlMime:ManagedReference
+items:
+- uid: DataLayer.HelperMethods
+  commentId: N:DataLayer.HelperMethods
+  id: DataLayer.HelperMethods
+  children:
+  - DataLayer.HelperMethods.ChessMethods
+  - DataLayer.HelperMethods.Hashing
+  langs:
+  - csharp
+  - vb
+  name: DataLayer.HelperMethods
+  nameWithType: DataLayer.HelperMethods
+  fullName: DataLayer.HelperMethods
+  type: Namespace
+  assemblies:
+  - DataLayer
+references:
+- uid: DataLayer.HelperMethods.ChessMethods
+  commentId: T:DataLayer.HelperMethods.ChessMethods
+  href: DataLayer.HelperMethods.ChessMethods.html
+  name: ChessMethods
+  nameWithType: ChessMethods
+  fullName: DataLayer.HelperMethods.ChessMethods
+- uid: DataLayer.HelperMethods.Hashing
+  commentId: T:DataLayer.HelperMethods.Hashing
+  href: DataLayer.HelperMethods.Hashing.html
+  name: Hashing
+  nameWithType: Hashing
+  fullName: DataLayer.HelperMethods.Hashing

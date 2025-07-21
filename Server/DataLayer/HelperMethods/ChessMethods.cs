@@ -11,6 +11,10 @@ namespace DataLayer.HelperMethods
 {
     public static class ChessMethods
     {
+
+        /// <summary>
+        /// Converts row and column indexes to a chessboard coordinate in file-rank format (e.g., 0,0 -> "a1").
+        /// </summary>
         public static string RowColToRankFile(int row,
                                               int col)
         {
@@ -19,6 +23,12 @@ namespace DataLayer.HelperMethods
 
             return $"{file}{rank}";
         }
+
+
+        /// <summary>
+        /// Converts a chessboard coordinate in file-rank format (e.g., "e4") to row and column indexes.
+        /// </summary>
+        /// <returns>A tuple with the corresponding row and col: (row, col).</returns>
         public static (int,int) RankFileToRowCol(string fileRank) // "e3" to 4,2
         {
             int row = fileRank[1] - 48 - 1; // '1' - 48 = 1. then to get index instead -1 again
@@ -28,6 +38,10 @@ namespace DataLayer.HelperMethods
             return (row, col);
         }
 
+        /// <summary>
+        /// Finds squares that block a check from a sliding piece (queen, rook, bishop) to the king.
+        /// Adds these blocking squares to the chessState.Blockers list.
+        /// </summary>
         public static void FindCheckBlockers(ChessInfo chessState, King king, Piece pieceChecked)
         {
             var blockers = new List<string>() { pieceChecked.Position };
@@ -50,6 +64,9 @@ namespace DataLayer.HelperMethods
             chessState.Blockers = chessState.Blockers.Concat(blockers).ToList();
         }
 
+        /// <summary>
+        /// Returns a list of squares between a diagonal attacker and the king that can potentially block a check.
+        /// </summary>
         private static List<string> DiagonalBlocks(Piece[][] chessBoard, King king, Piece pieceChecked)
         {
             var blockers = new List<string>();
@@ -76,6 +93,10 @@ namespace DataLayer.HelperMethods
 
             return blockers;
         }
+
+        /// <summary>
+        /// Returns a list of squares between a straight-line attacker and the king that can potentially block a check.
+        /// </summary>
         private static List<string> StraightBlocks(Piece[][] chessBoard, King king, Piece pieceChecked)
         {
             var blockers = new List<string>();
@@ -112,8 +133,9 @@ namespace DataLayer.HelperMethods
 
 
 
-
-
+        /// <summary>
+        /// Converts a move string in the format "e2,e4" into row and column indices for from and to squares.
+        /// </summary>
         public static (int fromRow, int fromCol, int toRow, int toCol) ConvertMoveToColRow(string move)
         {
             // move can be e2,e4. (from,to)
@@ -128,6 +150,10 @@ namespace DataLayer.HelperMethods
             return (fRow, fCol, tRow, tCol); // return all of the indexes
         }
 
+        /// <summary>
+        /// Executes a move on the chessboard, updating the chessState accordingly.
+        /// Handles promotions, en passant, castling, and updating FEN related state.
+        /// </summary>
         public static void MakeMove(ChessInfo chessState, MoveModel move)
         {
 
@@ -200,6 +226,9 @@ namespace DataLayer.HelperMethods
             UpdateFen(chessState, fRow, fCol, tRow, attacker);
         }
 
+        /// <summary>
+        /// Updates FEN-related state after a move, including en passant square, castling rights, move counters, and turn.
+        /// </summary>
         private static void UpdateFen(ChessInfo chessState, int fRow, int fCol, int tRow, Piece attacker)
         {
             // update some FEN variables
@@ -242,6 +271,9 @@ namespace DataLayer.HelperMethods
             if (!attacker.IsWhite) chessState.FullMoveClock++;
         }
 
+        /// <summary>
+        /// Generates the FEN string representation of the current chess position from the chessState.
+        /// </summary>
         public static string GenerateFEN(ChessInfo chessState)
         {
             var FEN = "";
@@ -283,6 +315,7 @@ namespace DataLayer.HelperMethods
 
             return FEN;
         }
+
         private static char GetFenPieceChar(Piece piece)
         {
             char symbol = piece.Type switch

@@ -1,0 +1,75 @@
+### YamlMime:ManagedReference
+items:
+- uid: DataLayer.DataServices
+  commentId: N:DataLayer.DataServices
+  id: DataLayer.DataServices
+  children:
+  - DataLayer.DataServices.ChessDataService
+  - DataLayer.DataServices.DataService
+  - DataLayer.DataServices.IChessDataService
+  - DataLayer.DataServices.IDataService
+  - DataLayer.DataServices.StockFishService
+  langs:
+  - csharp
+  - vb
+  name: DataLayer.DataServices
+  nameWithType: DataLayer.DataServices
+  fullName: DataLayer.DataServices
+  type: Namespace
+  assemblies:
+  - DataLayer
+references:
+- uid: DataLayer.DataServices.ChessDataService
+  commentId: T:DataLayer.DataServices.ChessDataService
+  href: DataLayer.DataServices.ChessDataService.html
+  name: ChessDataService
+  nameWithType: ChessDataService
+  fullName: DataLayer.DataServices.ChessDataService
+- uid: DataLayer.DataServices.DataService
+  commentId: T:DataLayer.DataServices.DataService
+  href: DataLayer.DataServices.DataService.html
+  name: DataService
+  nameWithType: DataService
+  fullName: DataLayer.DataServices.DataService
+- uid: DataLayer.DataServices.StockFishService
+  commentId: T:DataLayer.DataServices.StockFishService
+  href: DataLayer.DataServices.StockFishService.html
+  name: StockFishService
+  nameWithType: StockFishService
+  fullName: DataLayer.DataServices.StockFishService
+- uid: DataLayer.DataServices.IChessDataService
+  commentId: T:DataLayer.DataServices.IChessDataService
+  parent: DataLayer.DataServices
+  href: DataLayer.DataServices.IChessDataService.html
+  name: IChessDataService
+  nameWithType: IChessDataService
+  fullName: DataLayer.DataServices.IChessDataService
+- uid: DataLayer.DataServices.IDataService
+  commentId: T:DataLayer.DataServices.IDataService
+  parent: DataLayer.DataServices
+  href: DataLayer.DataServices.IDataService.html
+  name: IDataService
+  nameWithType: IDataService
+  fullName: DataLayer.DataServices.IDataService
+- uid: DataLayer.DataServices
+  commentId: N:DataLayer.DataServices
+  href: DataLayer.html
+  name: DataLayer.DataServices
+  nameWithType: DataLayer.DataServices
+  fullName: DataLayer.DataServices
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.DataServices
+    name: DataServices
+    href: DataLayer.DataServices.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.DataServices
+    name: DataServices
+    href: DataLayer.DataServices.html

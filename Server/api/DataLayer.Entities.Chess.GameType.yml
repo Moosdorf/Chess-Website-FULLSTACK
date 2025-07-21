@@ -1,0 +1,120 @@
+### YamlMime:ManagedReference
+items:
+- uid: DataLayer.Entities.Chess.GameType
+  commentId: T:DataLayer.Entities.Chess.GameType
+  id: GameType
+  parent: DataLayer.Entities.Chess
+  children:
+  - DataLayer.Entities.Chess.GameType.Bot
+  - DataLayer.Entities.Chess.GameType.Multiplayer
+  langs:
+  - csharp
+  - vb
+  name: GameType
+  nameWithType: GameType
+  fullName: DataLayer.Entities.Chess.GameType
+  type: Enum
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Chess/ChessGame.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: GameType
+    path: DataLayer/Entities/Chess/ChessGame.cs
+    startLine: 6
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Chess
+  syntax:
+    content: public enum GameType
+    content.vb: Public Enum GameType
+- uid: DataLayer.Entities.Chess.GameType.Bot
+  commentId: F:DataLayer.Entities.Chess.GameType.Bot
+  id: Bot
+  parent: DataLayer.Entities.Chess.GameType
+  langs:
+  - csharp
+  - vb
+  name: Bot
+  nameWithType: GameType.Bot
+  fullName: DataLayer.Entities.Chess.GameType.Bot
+  type: Field
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Chess/ChessGame.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: Bot
+    path: DataLayer/Entities/Chess/ChessGame.cs
+    startLine: 8
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Chess
+  syntax:
+    content: Bot = 0
+    return:
+      type: DataLayer.Entities.Chess.GameType
+- uid: DataLayer.Entities.Chess.GameType.Multiplayer
+  commentId: F:DataLayer.Entities.Chess.GameType.Multiplayer
+  id: Multiplayer
+  parent: DataLayer.Entities.Chess.GameType
+  langs:
+  - csharp
+  - vb
+  name: Multiplayer
+  nameWithType: GameType.Multiplayer
+  fullName: DataLayer.Entities.Chess.GameType.Multiplayer
+  type: Field
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Chess/ChessGame.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: Multiplayer
+    path: DataLayer/Entities/Chess/ChessGame.cs
+    startLine: 9
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Chess
+  syntax:
+    content: Multiplayer = 1
+    return:
+      type: DataLayer.Entities.Chess.GameType
+references:
+- uid: DataLayer.Entities.Chess
+  commentId: N:DataLayer.Entities.Chess
+  href: DataLayer.html
+  name: DataLayer.Entities.Chess
+  nameWithType: DataLayer.Entities.Chess
+  fullName: DataLayer.Entities.Chess
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Entities
+    name: Entities
+    href: DataLayer.Entities.html
+  - name: .
+  - uid: DataLayer.Entities.Chess
+    name: Chess
+    href: DataLayer.Entities.Chess.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Entities
+    name: Entities
+    href: DataLayer.Entities.html
+  - name: .
+  - uid: DataLayer.Entities.Chess
+    name: Chess
+    href: DataLayer.Entities.Chess.html
+- uid: DataLayer.Entities.Chess.GameType
+  commentId: T:DataLayer.Entities.Chess.GameType
+  parent: DataLayer.Entities.Chess
+  href: DataLayer.Entities.Chess.GameType.html
+  name: GameType
+  nameWithType: GameType
+  fullName: DataLayer.Entities.Chess.GameType

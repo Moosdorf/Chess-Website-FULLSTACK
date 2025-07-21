@@ -8,8 +8,7 @@ import { useSignalRGame } from "../SignalR/SingalRGameProvider";
 
 
 function Chat( {sessionId} ) {
-    const { user }  = useAuth();
-    const { connection, messages } = useSignalRGame();
+    const { messages, sendMessage } = useSignalRGame();
 
     const [inputValue, setInputValue] = useState("");
 
@@ -17,7 +16,7 @@ function Chat( {sessionId} ) {
         e.preventDefault();
         if (inputValue.trim()) {
 
-            connection.invoke("SendMessageToGroup", user, inputValue, sessionId);
+            sendMessage(inputValue, sessionId);
             setInputValue("");
         }
     };

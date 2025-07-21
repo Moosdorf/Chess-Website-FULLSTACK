@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
+/// <summary>
+/// Represents a King chess piece.
+/// </summary>
 public class King(bool white) : Piece(white)
 {
     public override void FindMoves(ChessInfo chessState)

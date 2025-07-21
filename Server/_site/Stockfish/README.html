@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Chess </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Chess ">
+      
+      
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="../toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Moosdorf/Chess-Website-FULLSTACK/blob/main/Server/Stockfish/README.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="Chess">
+            Chess
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<div align="center">
+<p><a href="https://stockfishchess.org"><img src="https://stockfishchess.org/images/logo/icon_128x128.png" alt="Stockfish"></a></p>
+  <h3>Stockfish</h3>
+<p>A free and strong UCI chess engine.
+<br>
+<strong><a href="https://github.com/official-stockfish/Stockfish/wiki">Explore Stockfish docs »</a></strong>
+<br>
+<br>
+<a href="https://github.com/official-stockfish/Stockfish/issues/new?assignees=&amp;labels=&amp;template=BUG-REPORT.yml">Report bug</a>
+·
+<a href="https://github.com/official-stockfish/Stockfish/discussions/new">Open a discussion</a>
+·
+<a href="https://discord.gg/GWDRS3kU6R">Discord</a>
+·
+<a href="https://stockfishchess.org/blog/">Blog</a></p>
+<p><a href="https://github.com/official-stockfish/Stockfish/actions/workflows/stockfish.yml"><img src="https://img.shields.io/github/actions/workflow/status/official-stockfish/Stockfish/stockfish.yml?branch=master&amp;style=for-the-badge&amp;label=stockfish&amp;logo=github" alt="Build"></a>
+<a href="https://github.com/official-stockfish/Stockfish/blob/master/Copying.txt"><img src="https://img.shields.io/github/license/official-stockfish/Stockfish?style=for-the-badge&amp;label=license&amp;color=success" alt="License"></a>
+<br>
+<a href="https://github.com/official-stockfish/Stockfish/releases/latest"><img src="https://img.shields.io/github/v/release/official-stockfish/Stockfish?style=for-the-badge&amp;label=official%20release" alt="Release"></a>
+<a href="https://github.com/official-stockfish/Stockfish/commits/master"><img src="https://img.shields.io/github/commits-since/official-stockfish/Stockfish/latest?style=for-the-badge" alt="Commits"></a>
+<br>
+<a href="https://stockfishchess.org"><img src="https://img.shields.io/website?style=for-the-badge&amp;down_color=red&amp;down_message=Offline&amp;label=website&amp;up_color=success&amp;up_message=Online&amp;url=https%3A%2F%2Fstockfishchess.org" alt="Website"></a>
+<a href="https://tests.stockfishchess.org/tests"><img src="https://img.shields.io/website?style=for-the-badge&amp;down_color=red&amp;down_message=Offline&amp;label=Fishtest&amp;up_color=success&amp;up_message=Online&amp;url=https%3A%2F%2Ftests.stockfishchess.org%2Ftests%2Ffinished" alt="Fishtest"></a>
+<a href="https://discord.gg/GWDRS3kU6R"><img src="https://img.shields.io/discord/435943710472011776?style=for-the-badge&amp;label=discord&amp;logo=Discord" alt="Discord"></a></p>
+</div>
+<h2 id="overview">Overview</h2>
+<p><a href="https://stockfishchess.org">Stockfish</a> is a <strong>free and strong UCI chess engine</strong> derived from
+Glaurung 2.1 that analyzes chess positions and computes the optimal moves.</p>
+<p>Stockfish <strong>does not include a graphical user interface</strong> (GUI) that is required
+to display a chessboard and to make it easy to input moves. These GUIs are
+developed independently from Stockfish and are available online. <strong>Read the
+documentation for your GUI</strong> of choice for information about how to use
+Stockfish with it.</p>
+<p>See also the Stockfish <a href="https://github.com/official-stockfish/Stockfish/wiki/Download-and-usage">documentation</a> for further usage help.</p>
+<h2 id="files">Files</h2>
+<p>This distribution of Stockfish consists of the following files:</p>
+<ul>
+<li><p><a href="https://github.com/official-stockfish/Stockfish/blob/master/README.md">README.md</a>, the file you are currently reading.</p>
+</li>
+<li><p><a href="https://github.com/official-stockfish/Stockfish/blob/master/Copying.txt">Copying.txt</a>, a text file containing the GNU General Public
+License version 3.</p>
+</li>
+<li><p><a href="https://github.com/official-stockfish/Stockfish/blob/master/AUTHORS">AUTHORS</a>, a text file with the list of authors for the project.</p>
+</li>
+<li><p><a href="https://github.com/official-stockfish/Stockfish/tree/master/src">src</a>, a subdirectory containing the full source code, including a
+Makefile that can be used to compile Stockfish on Unix-like systems.</p>
+</li>
+<li><p>a file with the .nnue extension, storing the neural network for the NNUE
+evaluation. Binary distributions will have this file embedded.</p>
+</li>
+</ul>
+<h2 id="contributing">Contributing</h2>
+<p><strong>See <a href="CONTRIBUTING.html">Contributing Guide</a>.</strong></p>
+<h3 id="donating-hardware">Donating hardware</h3>
+<p>Improving Stockfish requires a massive amount of testing. You can donate your
+hardware resources by installing the <a href="https://github.com/official-stockfish/fishtest/wiki/Running-the-worker">Fishtest Worker</a> and viewing
+the current tests on <a href="https://tests.stockfishchess.org/tests">Fishtest</a>.</p>
+<h3 id="improving-the-code">Improving the code</h3>
+<p>In the <a href="https://www.chessprogramming.org/Main_Page">chessprogramming wiki</a>, many techniques used in
+Stockfish are explained with a lot of background information.
+The <a href="https://www.chessprogramming.org/Stockfish">section on Stockfish</a> describes many features
+and techniques used by Stockfish. However, it is generic rather than
+focused on Stockfish's precise implementation.</p>
+<p>The engine testing is done on <a href="https://tests.stockfishchess.org/tests">Fishtest</a>.
+If you want to help improve Stockfish, please read this <a href="https://github.com/official-stockfish/fishtest/wiki/Creating-my-first-test">guideline</a>
+first, where the basics of Stockfish development are explained.</p>
+<p>Discussions about Stockfish take place these days mainly in the Stockfish
+<a href="https://discord.gg/GWDRS3kU6R">Discord server</a>. This is also the best place to ask questions
+about the codebase and how to improve it.</p>
+<h2 id="compiling-stockfish">Compiling Stockfish</h2>
+<p>Stockfish has support for 32 or 64-bit CPUs, certain hardware instructions,
+big-endian machines such as Power PC, and other platforms.</p>
+<p>On Unix-like systems, it should be easy to compile Stockfish directly from the
+source code with the included Makefile in the folder <code>src</code>. In general, it is
+recommended to run <code>make help</code> to see a list of make targets with corresponding
+descriptions. An example suitable for most Intel and AMD chips:</p>
+<pre><code>cd src
+make -j profile-build
+</code></pre>
+<p>Detailed compilation instructions for all platforms can be found in our
+<a href="https://github.com/official-stockfish/Stockfish/wiki/Compiling-from-source">documentation</a>. Our wiki also has information about
+the <a href="https://github.com/official-stockfish/Stockfish/wiki/UCI-&amp;-Commands">UCI commands</a> supported by Stockfish.</p>
+<h2 id="terms-of-use">Terms of use</h2>
+<p>Stockfish is free and distributed under the
+<a href="https://github.com/official-stockfish/Stockfish/blob/master/Copying.txt"><strong>GNU General Public License version 3</strong></a> (GPL v3). Essentially,
+this means you are free to do almost exactly what you want with the program,
+including distributing it among your friends, making it available for download
+from your website, selling it (either by itself or as part of some bigger
+software package), or using it as the starting point for a software project of
+your own.</p>
+<p>The only real limitation is that whenever you distribute Stockfish in some way,
+you MUST always include the license and the full source code (or a pointer to
+where the source code can be found) to generate the exact binary you are
+distributing. If you make any changes to the source code, these changes must
+also be made available under GPL v3.</p>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>Stockfish uses neural networks trained on <a href="https://storage.lczero.org/files/training_data">data provided by the Leela Chess Zero
+project</a>, which is made available under the <a href="https://opendatacommons.org/licenses/odbl/odbl-10.txt">Open Database License</a> (ODbL).</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Moosdorf/Chess-Website-FULLSTACK/blob/main/Server/Stockfish/README.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

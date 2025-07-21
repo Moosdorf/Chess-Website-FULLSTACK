@@ -63,6 +63,7 @@ export function SignalRGameProvider({ children }) {
     connection.on("WaitingForOpponent", () => setQueue(true));
     connection.on("QueueStopped", () => setQueue(false));
     connection.on("GameReady", (apiBoard) => {
+      console.log(apiBoard);
       handleSetChessBoard(apiBoard);
       setQueue(false);
       navigate("/chess_game");
@@ -107,7 +108,7 @@ export function SignalRGameProvider({ children }) {
 
   // send message in game
   const sendMessage = useCallback((message, sessionId) => {
-    if (connection) connection.invoke("SendMessageToGroup", user, message, sessionId);
+    if (connection) connection.invoke("SendMessageToGroup", message, sessionId);
   }, [connection, user]);
 
   // send move
@@ -115,8 +116,18 @@ export function SignalRGameProvider({ children }) {
     if (connection) connection.invoke("MakeMove", gameId, sessionId, move);
   }, [connection]);
 
+  // leave game
+  const leaveGame = useCallback((sessionId) => {
+    console.log("try to leave", connection);
+    if (connection && sessionId) {
+      console.log("inside")
+      setMessages([{ id: 0, sender: 'System', text: 'Game started!', isOwn: false }]);
+      connection.invoke("LeaveGame", sessionId);
+    }
+  }, [connection]);
+
   return (
-    <SignalRGameContext.Provider value={{ chessState, messages, queue, joinGame, stopQueue, sendMessage, sendMove }}>
+    <SignalRGameContext.Provider value={{ chessState, messages, queue, leaveGame, joinGame, stopQueue, sendMessage, sendMove }}>
       {children}
     </SignalRGameContext.Provider>
   );

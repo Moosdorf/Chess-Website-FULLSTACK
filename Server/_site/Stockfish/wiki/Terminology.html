@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | Chess </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | Chess ">
+      
+      
+      <link rel="icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../public/main.css">
+      <meta name="docfx:navrel" content="../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Moosdorf/Chess-Website-FULLSTACK/blob/main/Server/Stockfish/wiki/Terminology.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../index.html">
+            <img id="logo" class="svg" src="../../logo.svg" alt="Chess">
+            Chess
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="general-terms">General terms</h2>
+<h3 id="threads">Threads</h3>
+<p>Also known as &quot;cores&quot;, &quot;CPUs&quot; or &quot;vCPUs&quot;.
+The amount of CPU threads that the engine will use, usually the higher the better.
+Note that a modern CPU will have multiple cores and typically can run two threads each.</p>
+<h3 id="hash">Hash</h3>
+<p>Also known as &quot;memory&quot;.
+The amount of Hash is the amount of RAM that the engine will use to store positions in the game tree.
+This information can be reused during the analysis, for example after a transposition,
+which means usually <a href="Useful-data#elo-cost-of-small-hash">the higher the Hash the better</a>. See also <a href="#transposition-table">Transposition Table</a>.</p>
+<h3 id="depth">Depth</h3>
+<p>Counter of <a href="#iterative-deepening">iterative deepening</a> loop at the root of the game tree, thus also known as rootDepth. Regardless of the name, there is no simple connection to the actual depth searched in the game tree. The deepest lines searched are usually quite a bit deeper than the rootDepth. See also <a href="https://github.com/official-stockfish/Stockfish/discussions/3888">a discussion on rootDepth vs depth</a>.</p>
+<h3 id="selective-depth">Selective Depth</h3>
+<p>Also known as &quot;seldepth&quot;.
+Is the depth of the deepest principal variation line in the search.</p>
+<h3 id="multiple-pvs">Multiple PVs</h3>
+<p>Also known as &quot;number of lines&quot; or &quot;multiple lines&quot;.
+The top N moves and their <a href="#principal-variation">principal variations</a> can be computed. This gives additional insight in the options of the position. However, in Stockfish, this weakens the quality of the best move computed, as resources are used to compute other moves.</p>
+<h3 id="transposition-table">Transposition Table</h3>
+<p>Also known as &quot;TT&quot;.
+A database / hash table that stores results of previously performed searches. See also <a href="#hash">Hash</a>.</p>
+<h3 id="lazy-symmetric-multiprocessing">Lazy Symmetric Multiprocessing</h3>
+<p>Also known as &quot;Lazy SMP&quot;.
+The idea of executing the search function on N many threads and share the Transposition table. This allows for faster filling of the transposition table, resulting in a faster and wider search.
+This approach to parallelism is <a href="Useful-data#threading-efficiency-and-elo-gain">known to scale well</a>, especially with longer searches.</p>
+<h3 id="iterative-deepening">Iterative deepening</h3>
+<p>The idea of performing consecutive searches at higher depths each time.</p>
+<h3 id="null-move">Null Move</h3>
+<p>Also known as &quot;passing move&quot;, it is when you don't make a move, &quot;passing&quot; the ability to move to the opponent. Although not a legal move, it is used in Null Move Pruning.</p>
+<h3 id="time-control">Time Control</h3>
+<p>Also known as &quot;TC&quot;. How the time limits are set for playing a game. For chess engine testing, Stockfish uses 10+0.1s (10 seconds for the game, 0.1 seconds for every move), and 60+0.6s. These TCs are known as STC (short TC) and LTC (long TC).</p>
+<h2 id="principal-variation-search">Principal Variation Search</h2>
+<h3 id="principal-variation">Principal Variation</h3>
+<p>Also known as &quot;PV&quot;.
+The sequence of moves that the engine considers best and therefore expects to be played.</p>
+<h3 id="pruning">Pruning</h3>
+<p>The idea of ignoring certain parts of the search tree in order to reduce the amount of time it takes to execute a search.</p>
+<h3 id="null-move-pruning">Null Move Pruning</h3>
+<p>Based on the assumption that, if we can reach beta by not making a move at lower depths, we will most likely be able to reach it anyway.</p>
+<h3 id="futility-pruning">Futility Pruning</h3>
+<p>The idea that quiet moves don't tend to improve positions significantly, therefore we can safely prune quiet moves in positions where the current position is evaluated to be below alpha by a margin.</p>
+<h3 id="late-move-pruning">Late Move Pruning</h3>
+<p>Also known as &quot;LMP&quot;.
+The idea that all quiet moves can be pruned after searching the first few given by the move ordering algorithm.</p>
+<h3 id="late-move-reductions">Late Move Reductions</h3>
+<p>Also known as &quot;LMR&quot;.
+A way of proving if a move is lower than alpha quickly. This is done by searching moves that are expected to underperform at a lower depth.</p>
+<h2 id="extensions">Extensions</h2>
+<p>The idea of extending certain moves, usually by one ply, to try to find better moves faster.</p>
+<h3 id="check-extensions">Check Extensions</h3>
+<p>They can have two distinct forms: one of them extends when giving check, the other when evading it. The reason behind check extension is that we are in a forcing sequence, so that it is desirable to know its outcome with more certainty.</p>
+<h3 id="move-ordering">Move Ordering</h3>
+<p>In order to maximize the efficiency of alpha-beta search, we optimally want to try the best moves first.</p>
+<h3 id="quiescence-search">Quiescence Search</h3>
+<p>Also known as &quot;qSearch&quot;.
+Performed at the end of the main search, the purpose of this search is to only evaluate &quot;quiet&quot; positions, or positions where there are no winning tactical moves to be made.</p>
+<h2 id="evaluation">Evaluation</h2>
+<h3 id="handcrafted-evaluation">Handcrafted Evaluation</h3>
+<p>Also known as &quot;classic&quot;, &quot;classical&quot; or &quot;HCE&quot;.</p>
+<p>This is the older evaluation method that is generally not used today in most engines and was <a href="https://github.com/official-stockfish/Stockfish/commit/af110e0">removed from Stockfish in July 2023</a>. It uses various heuristics and rules (e.g. material, pawn structure, king safety, mobility, etc.) to assign the evaluation. Although it is faster than a NNUE evaluation, it is much less accurate.</p>
+<h3 id="efficiently-updatable-neural-network">Efficiently Updatable Neural Network</h3>
+<p>Also known as &quot;NNUE&quot;. Introduced in Stockfish in <a href="https://stockfishchess.org/blog/2020/introducing-nnue-evaluation/">August 2020</a> and first shipped with Stockfish 12. This implementation evaluates positions using a neural network, which is trained on a large set of training data. NNUE is typically much more accurate than classical evaluation, gaining hundreds of Elo.</p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Moosdorf/Chess-Website-FULLSTACK/blob/main/Server/Stockfish/wiki/Terminology.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

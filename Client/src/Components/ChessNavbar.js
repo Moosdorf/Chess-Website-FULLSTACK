@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useSignalRGame } from '../SignalR/SingalRGameProvider';
 
 function ChessNavbar() {
-  const { stopQueue, queue } = useSignalRGame(); 
+  const { joinGame, stopQueue, queue } = useSignalRGame(); 
   
   var cookies = GetCookies();
   const { user, signout } = useAuth();
@@ -51,7 +51,7 @@ function ChessNavbar() {
 
               <NavDropdown.Divider className="dropdown-divider" />
 
-              <NavDropdown.Item as={Link} to="/chess_game" className="dropdown-item">
+              <NavDropdown.Item as={Link} onClick={() => joinGame()} className="dropdown-item">
                 <i className="fas fa-users me-2"></i> Multiplayer
               </NavDropdown.Item>
               

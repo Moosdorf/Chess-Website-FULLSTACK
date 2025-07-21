@@ -1,0 +1,1015 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChessServer.Hubs.GameHub
+  commentId: T:ChessServer.Hubs.GameHub
+  id: GameHub
+  parent: ChessServer.Hubs
+  children:
+  - ChessServer.Hubs.GameHub.#ctor(IGameManager,DataLayer.DataServices.IChessDataService)
+  - ChessServer.Hubs.GameHub.JoinGame(System.String)
+  - ChessServer.Hubs.GameHub.LeaveGame(System.String)
+  - ChessServer.Hubs.GameHub.MakeMove(System.Int32,System.String,DataLayer.Models.Chess.MoveModel)
+  - ChessServer.Hubs.GameHub.OnDisconnectedAsync(System.Exception)
+  - ChessServer.Hubs.GameHub.SendMessageToGroup(System.String,System.String)
+  - ChessServer.Hubs.GameHub.StopQueue
+  langs:
+  - csharp
+  - vb
+  name: GameHub
+  nameWithType: GameHub
+  fullName: ChessServer.Hubs.GameHub
+  type: Class
+  source:
+    remote:
+      path: Server/ChessServer/Hubs/GameHub.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: GameHub
+    path: ChessServer/Hubs/GameHub.cs
+    startLine: 14
+  assemblies:
+  - ChessServer
+  namespace: ChessServer.Hubs
+  syntax:
+    content: >-
+      [Authorize]
+
+      public class GameHub : Hub<IGameHub>, IDisposable
+    content.vb: >-
+      <Authorize>
+
+      Public Class GameHub Inherits Hub(Of IGameHub) Implements IDisposable
+  inheritance:
+  - System.Object
+  - Microsoft.AspNetCore.SignalR.Hub
+  - Microsoft.AspNetCore.SignalR.Hub{IGameHub}
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - Microsoft.AspNetCore.SignalR.Hub{IGameHub}.Clients
+  - Microsoft.AspNetCore.SignalR.Hub.OnConnectedAsync
+  - Microsoft.AspNetCore.SignalR.Hub.Dispose(System.Boolean)
+  - Microsoft.AspNetCore.SignalR.Hub.Dispose
+  - Microsoft.AspNetCore.SignalR.Hub.Context
+  - Microsoft.AspNetCore.SignalR.Hub.Groups
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  attributes:
+  - type: Microsoft.AspNetCore.Authorization.AuthorizeAttribute
+    ctor: Microsoft.AspNetCore.Authorization.AuthorizeAttribute.#ctor
+    arguments: []
+- uid: ChessServer.Hubs.GameHub.#ctor(IGameManager,DataLayer.DataServices.IChessDataService)
+  commentId: M:ChessServer.Hubs.GameHub.#ctor(IGameManager,DataLayer.DataServices.IChessDataService)
+  id: '#ctor(IGameManager,DataLayer.DataServices.IChessDataService)'
+  parent: ChessServer.Hubs.GameHub
+  langs:
+  - csharp
+  - vb
+  name: GameHub(IGameManager, IChessDataService)
+  nameWithType: GameHub.GameHub(IGameManager, IChessDataService)
+  fullName: ChessServer.Hubs.GameHub.GameHub(IGameManager, DataLayer.DataServices.IChessDataService)
+  type: Constructor
+  source:
+    remote:
+      path: Server/ChessServer/Hubs/GameHub.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: .ctor
+    path: ChessServer/Hubs/GameHub.cs
+    startLine: 20
+  assemblies:
+  - ChessServer
+  namespace: ChessServer.Hubs
+  syntax:
+    content: public GameHub(IGameManager gameManager, IChessDataService chessDataService)
+    parameters:
+    - id: gameManager
+      type: IGameManager
+    - id: chessDataService
+      type: DataLayer.DataServices.IChessDataService
+    content.vb: Public Sub New(gameManager As IGameManager, chessDataService As IChessDataService)
+  overload: ChessServer.Hubs.GameHub.#ctor*
+  nameWithType.vb: GameHub.New(IGameManager, IChessDataService)
+  fullName.vb: ChessServer.Hubs.GameHub.New(IGameManager, DataLayer.DataServices.IChessDataService)
+  name.vb: New(IGameManager, IChessDataService)
+- uid: ChessServer.Hubs.GameHub.OnDisconnectedAsync(System.Exception)
+  commentId: M:ChessServer.Hubs.GameHub.OnDisconnectedAsync(System.Exception)
+  id: OnDisconnectedAsync(System.Exception)
+  parent: ChessServer.Hubs.GameHub
+  langs:
+  - csharp
+  - vb
+  name: OnDisconnectedAsync(Exception?)
+  nameWithType: GameHub.OnDisconnectedAsync(Exception?)
+  fullName: ChessServer.Hubs.GameHub.OnDisconnectedAsync(System.Exception?)
+  type: Method
+  source:
+    remote:
+      path: Server/ChessServer/Hubs/GameHub.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: OnDisconnectedAsync
+    path: ChessServer/Hubs/GameHub.cs
+    startLine: 26
+  assemblies:
+  - ChessServer
+  namespace: ChessServer.Hubs
+  summary: Called when a connection with the hub is terminated.
+  example: []
+  syntax:
+    content: public override Task OnDisconnectedAsync(Exception? ex)
+    parameters:
+    - id: ex
+      type: System.Exception
+    return:
+      type: System.Threading.Tasks.Task
+      description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> that represents the asynchronous disconnect.
+    content.vb: Public Overrides Function OnDisconnectedAsync(ex As Exception) As Task
+  overridden: Microsoft.AspNetCore.SignalR.Hub.OnDisconnectedAsync(System.Exception)
+  overload: ChessServer.Hubs.GameHub.OnDisconnectedAsync*
+  nameWithType.vb: GameHub.OnDisconnectedAsync(Exception)
+  fullName.vb: ChessServer.Hubs.GameHub.OnDisconnectedAsync(System.Exception)
+  name.vb: OnDisconnectedAsync(Exception)
+- uid: ChessServer.Hubs.GameHub.SendMessageToGroup(System.String,System.String)
+  commentId: M:ChessServer.Hubs.GameHub.SendMessageToGroup(System.String,System.String)
+  id: SendMessageToGroup(System.String,System.String)
+  parent: ChessServer.Hubs.GameHub
+  langs:
+  - csharp
+  - vb
+  name: SendMessageToGroup(string, string)
+  nameWithType: GameHub.SendMessageToGroup(string, string)
+  fullName: ChessServer.Hubs.GameHub.SendMessageToGroup(string, string)
+  type: Method
+  source:
+    remote:
+      path: Server/ChessServer/Hubs/GameHub.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: SendMessageToGroup
+    path: ChessServer/Hubs/GameHub.cs
+    startLine: 44
+  assemblies:
+  - ChessServer
+  namespace: ChessServer.Hubs
+  syntax:
+    content: public Task SendMessageToGroup(string message, string sessionId)
+    parameters:
+    - id: message
+      type: System.String
+    - id: sessionId
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Public Function SendMessageToGroup(message As String, sessionId As String) As Task
+  overload: ChessServer.Hubs.GameHub.SendMessageToGroup*
+  nameWithType.vb: GameHub.SendMessageToGroup(String, String)
+  fullName.vb: ChessServer.Hubs.GameHub.SendMessageToGroup(String, String)
+  name.vb: SendMessageToGroup(String, String)
+- uid: ChessServer.Hubs.GameHub.LeaveGame(System.String)
+  commentId: M:ChessServer.Hubs.GameHub.LeaveGame(System.String)
+  id: LeaveGame(System.String)
+  parent: ChessServer.Hubs.GameHub
+  langs:
+  - csharp
+  - vb
+  name: LeaveGame(string)
+  nameWithType: GameHub.LeaveGame(string)
+  fullName: ChessServer.Hubs.GameHub.LeaveGame(string)
+  type: Method
+  source:
+    remote:
+      path: Server/ChessServer/Hubs/GameHub.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: LeaveGame
+    path: ChessServer/Hubs/GameHub.cs
+    startLine: 51
+  assemblies:
+  - ChessServer
+  namespace: ChessServer.Hubs
+  syntax:
+    content: public Task LeaveGame(string sessionId)
+    parameters:
+    - id: sessionId
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Public Function LeaveGame(sessionId As String) As Task
+  overload: ChessServer.Hubs.GameHub.LeaveGame*
+  nameWithType.vb: GameHub.LeaveGame(String)
+  fullName.vb: ChessServer.Hubs.GameHub.LeaveGame(String)
+  name.vb: LeaveGame(String)
+- uid: ChessServer.Hubs.GameHub.StopQueue
+  commentId: M:ChessServer.Hubs.GameHub.StopQueue
+  id: StopQueue
+  parent: ChessServer.Hubs.GameHub
+  langs:
+  - csharp
+  - vb
+  name: StopQueue()
+  nameWithType: GameHub.StopQueue()
+  fullName: ChessServer.Hubs.GameHub.StopQueue()
+  type: Method
+  source:
+    remote:
+      path: Server/ChessServer/Hubs/GameHub.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: StopQueue
+    path: ChessServer/Hubs/GameHub.cs
+    startLine: 60
+  assemblies:
+  - ChessServer
+  namespace: ChessServer.Hubs
+  syntax:
+    content: public Task StopQueue()
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Public Function StopQueue() As Task
+  overload: ChessServer.Hubs.GameHub.StopQueue*
+- uid: ChessServer.Hubs.GameHub.JoinGame(System.String)
+  commentId: M:ChessServer.Hubs.GameHub.JoinGame(System.String)
+  id: JoinGame(System.String)
+  parent: ChessServer.Hubs.GameHub
+  langs:
+  - csharp
+  - vb
+  name: JoinGame(string)
+  nameWithType: GameHub.JoinGame(string)
+  fullName: ChessServer.Hubs.GameHub.JoinGame(string)
+  type: Method
+  source:
+    remote:
+      path: Server/ChessServer/Hubs/GameHub.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: JoinGame
+    path: ChessServer/Hubs/GameHub.cs
+    startLine: 67
+  assemblies:
+  - ChessServer
+  namespace: ChessServer.Hubs
+  syntax:
+    content: public Task JoinGame(string user)
+    parameters:
+    - id: user
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Public Function JoinGame(user As String) As Task
+  overload: ChessServer.Hubs.GameHub.JoinGame*
+  nameWithType.vb: GameHub.JoinGame(String)
+  fullName.vb: ChessServer.Hubs.GameHub.JoinGame(String)
+  name.vb: JoinGame(String)
+- uid: ChessServer.Hubs.GameHub.MakeMove(System.Int32,System.String,DataLayer.Models.Chess.MoveModel)
+  commentId: M:ChessServer.Hubs.GameHub.MakeMove(System.Int32,System.String,DataLayer.Models.Chess.MoveModel)
+  id: MakeMove(System.Int32,System.String,DataLayer.Models.Chess.MoveModel)
+  parent: ChessServer.Hubs.GameHub
+  langs:
+  - csharp
+  - vb
+  name: MakeMove(int, string, MoveModel)
+  nameWithType: GameHub.MakeMove(int, string, MoveModel)
+  fullName: ChessServer.Hubs.GameHub.MakeMove(int, string, DataLayer.Models.Chess.MoveModel)
+  type: Method
+  source:
+    remote:
+      path: Server/ChessServer/Hubs/GameHub.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: MakeMove
+    path: ChessServer/Hubs/GameHub.cs
+    startLine: 103
+  assemblies:
+  - ChessServer
+  namespace: ChessServer.Hubs
+  syntax:
+    content: public Task MakeMove(int gameId, string sessionId, MoveModel move)
+    parameters:
+    - id: gameId
+      type: System.Int32
+    - id: sessionId
+      type: System.String
+    - id: move
+      type: DataLayer.Models.Chess.MoveModel
+    return:
+      type: System.Threading.Tasks.Task
+    content.vb: Public Function MakeMove(gameId As Integer, sessionId As String, move As MoveModel) As Task
+  overload: ChessServer.Hubs.GameHub.MakeMove*
+  nameWithType.vb: GameHub.MakeMove(Integer, String, MoveModel)
+  fullName.vb: ChessServer.Hubs.GameHub.MakeMove(Integer, String, DataLayer.Models.Chess.MoveModel)
+  name.vb: MakeMove(Integer, String, MoveModel)
+references:
+- uid: ChessServer.Hubs
+  commentId: N:ChessServer.Hubs
+  href: ChessServer.html
+  name: ChessServer.Hubs
+  nameWithType: ChessServer.Hubs
+  fullName: ChessServer.Hubs
+  spec.csharp:
+  - uid: ChessServer
+    name: ChessServer
+    href: ChessServer.html
+  - name: .
+  - uid: ChessServer.Hubs
+    name: Hubs
+    href: ChessServer.Hubs.html
+  spec.vb:
+  - uid: ChessServer
+    name: ChessServer
+    href: ChessServer.html
+  - name: .
+  - uid: ChessServer.Hubs
+    name: Hubs
+    href: ChessServer.Hubs.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: Microsoft.AspNetCore.SignalR.Hub
+  commentId: T:Microsoft.AspNetCore.SignalR.Hub
+  parent: Microsoft.AspNetCore.SignalR
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub
+  name: Hub
+  nameWithType: Hub
+  fullName: Microsoft.AspNetCore.SignalR.Hub
+- uid: Microsoft.AspNetCore.SignalR.Hub{IGameHub}
+  commentId: T:Microsoft.AspNetCore.SignalR.Hub{IGameHub}
+  parent: Microsoft.AspNetCore.SignalR
+  definition: Microsoft.AspNetCore.SignalR.Hub`1
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub-1
+  name: Hub<IGameHub>
+  nameWithType: Hub<IGameHub>
+  fullName: Microsoft.AspNetCore.SignalR.Hub<IGameHub>
+  nameWithType.vb: Hub(Of IGameHub)
+  fullName.vb: Microsoft.AspNetCore.SignalR.Hub(Of IGameHub)
+  name.vb: Hub(Of IGameHub)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.SignalR.Hub`1
+    name: Hub
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub-1
+  - name: <
+  - uid: IGameHub
+    name: IGameHub
+    href: IGameHub.html
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.AspNetCore.SignalR.Hub`1
+    name: Hub
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: IGameHub
+    name: IGameHub
+    href: IGameHub.html
+  - name: )
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: Microsoft.AspNetCore.SignalR.Hub{IGameHub}.Clients
+  commentId: P:Microsoft.AspNetCore.SignalR.Hub{IGameHub}.Clients
+  parent: Microsoft.AspNetCore.SignalR.Hub{IGameHub}
+  definition: Microsoft.AspNetCore.SignalR.Hub`1.Clients
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub-1.clients
+  name: Clients
+  nameWithType: Hub<IGameHub>.Clients
+  fullName: Microsoft.AspNetCore.SignalR.Hub<IGameHub>.Clients
+  nameWithType.vb: Hub(Of IGameHub).Clients
+  fullName.vb: Microsoft.AspNetCore.SignalR.Hub(Of IGameHub).Clients
+- uid: Microsoft.AspNetCore.SignalR.Hub.OnConnectedAsync
+  commentId: M:Microsoft.AspNetCore.SignalR.Hub.OnConnectedAsync
+  parent: Microsoft.AspNetCore.SignalR.Hub
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub.onconnectedasync
+  name: OnConnectedAsync()
+  nameWithType: Hub.OnConnectedAsync()
+  fullName: Microsoft.AspNetCore.SignalR.Hub.OnConnectedAsync()
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.SignalR.Hub.OnConnectedAsync
+    name: OnConnectedAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub.onconnectedasync
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.SignalR.Hub.OnConnectedAsync
+    name: OnConnectedAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub.onconnectedasync
+  - name: (
+  - name: )
+- uid: Microsoft.AspNetCore.SignalR.Hub.Dispose(System.Boolean)
+  commentId: M:Microsoft.AspNetCore.SignalR.Hub.Dispose(System.Boolean)
+  parent: Microsoft.AspNetCore.SignalR.Hub
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub.dispose#microsoft-aspnetcore-signalr-hub-dispose(system-boolean)
+  name: Dispose(bool)
+  nameWithType: Hub.Dispose(bool)
+  fullName: Microsoft.AspNetCore.SignalR.Hub.Dispose(bool)
+  nameWithType.vb: Hub.Dispose(Boolean)
+  fullName.vb: Microsoft.AspNetCore.SignalR.Hub.Dispose(Boolean)
+  name.vb: Dispose(Boolean)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.SignalR.Hub.Dispose(System.Boolean)
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub.dispose#microsoft-aspnetcore-signalr-hub-dispose(system-boolean)
+  - name: (
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.SignalR.Hub.Dispose(System.Boolean)
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub.dispose#microsoft-aspnetcore-signalr-hub-dispose(system-boolean)
+  - name: (
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: Microsoft.AspNetCore.SignalR.Hub.Dispose
+  commentId: M:Microsoft.AspNetCore.SignalR.Hub.Dispose
+  parent: Microsoft.AspNetCore.SignalR.Hub
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub.dispose#microsoft-aspnetcore-signalr-hub-dispose
+  name: Dispose()
+  nameWithType: Hub.Dispose()
+  fullName: Microsoft.AspNetCore.SignalR.Hub.Dispose()
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.SignalR.Hub.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub.dispose#microsoft-aspnetcore-signalr-hub-dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.SignalR.Hub.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub.dispose#microsoft-aspnetcore-signalr-hub-dispose
+  - name: (
+  - name: )
+- uid: Microsoft.AspNetCore.SignalR.Hub.Context
+  commentId: P:Microsoft.AspNetCore.SignalR.Hub.Context
+  parent: Microsoft.AspNetCore.SignalR.Hub
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub.context
+  name: Context
+  nameWithType: Hub.Context
+  fullName: Microsoft.AspNetCore.SignalR.Hub.Context
+- uid: Microsoft.AspNetCore.SignalR.Hub.Groups
+  commentId: P:Microsoft.AspNetCore.SignalR.Hub.Groups
+  parent: Microsoft.AspNetCore.SignalR.Hub
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub.groups
+  name: Groups
+  nameWithType: Hub.Groups
+  fullName: Microsoft.AspNetCore.SignalR.Hub.Groups
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Microsoft.AspNetCore.SignalR
+  commentId: N:Microsoft.AspNetCore.SignalR
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.AspNetCore.SignalR
+  nameWithType: Microsoft.AspNetCore.SignalR
+  fullName: Microsoft.AspNetCore.SignalR
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.SignalR
+    name: SignalR
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.SignalR
+    name: SignalR
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr
+- uid: Microsoft.AspNetCore.SignalR.Hub`1
+  commentId: T:Microsoft.AspNetCore.SignalR.Hub`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub-1
+  name: Hub<T>
+  nameWithType: Hub<T>
+  fullName: Microsoft.AspNetCore.SignalR.Hub<T>
+  nameWithType.vb: Hub(Of T)
+  fullName.vb: Microsoft.AspNetCore.SignalR.Hub(Of T)
+  name.vb: Hub(Of T)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.SignalR.Hub`1
+    name: Hub
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: Microsoft.AspNetCore.SignalR.Hub`1
+    name: Hub
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: Microsoft.AspNetCore.SignalR.Hub`1.Clients
+  commentId: P:Microsoft.AspNetCore.SignalR.Hub`1.Clients
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub-1.clients
+  name: Clients
+  nameWithType: Hub<T>.Clients
+  fullName: Microsoft.AspNetCore.SignalR.Hub<T>.Clients
+  nameWithType.vb: Hub(Of T).Clients
+  fullName.vb: Microsoft.AspNetCore.SignalR.Hub(Of T).Clients
+- uid: ChessServer.Hubs.GameHub.#ctor*
+  commentId: Overload:ChessServer.Hubs.GameHub.#ctor
+  href: ChessServer.Hubs.GameHub.html#ChessServer_Hubs_GameHub__ctor_IGameManager_DataLayer_DataServices_IChessDataService_
+  name: GameHub
+  nameWithType: GameHub.GameHub
+  fullName: ChessServer.Hubs.GameHub.GameHub
+  nameWithType.vb: GameHub.New
+  fullName.vb: ChessServer.Hubs.GameHub.New
+  name.vb: New
+- uid: IGameManager
+  commentId: T:IGameManager
+  href: IGameManager.html
+  name: IGameManager
+  nameWithType: IGameManager
+  fullName: IGameManager
+- uid: DataLayer.DataServices.IChessDataService
+  commentId: T:DataLayer.DataServices.IChessDataService
+  parent: DataLayer.DataServices
+  href: DataLayer.DataServices.IChessDataService.html
+  name: IChessDataService
+  nameWithType: IChessDataService
+  fullName: DataLayer.DataServices.IChessDataService
+- uid: DataLayer.DataServices
+  commentId: N:DataLayer.DataServices
+  href: DataLayer.html
+  name: DataLayer.DataServices
+  nameWithType: DataLayer.DataServices
+  fullName: DataLayer.DataServices
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.DataServices
+    name: DataServices
+    href: DataLayer.DataServices.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.DataServices
+    name: DataServices
+    href: DataLayer.DataServices.html
+- uid: System.Threading.Tasks.Task
+  commentId: T:System.Threading.Tasks.Task
+  parent: System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task
+  name: Task
+  nameWithType: Task
+  fullName: System.Threading.Tasks.Task
+- uid: Microsoft.AspNetCore.SignalR.Hub.OnDisconnectedAsync(System.Exception)
+  commentId: M:Microsoft.AspNetCore.SignalR.Hub.OnDisconnectedAsync(System.Exception)
+  parent: Microsoft.AspNetCore.SignalR.Hub
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub.ondisconnectedasync
+  name: OnDisconnectedAsync(Exception)
+  nameWithType: Hub.OnDisconnectedAsync(Exception)
+  fullName: Microsoft.AspNetCore.SignalR.Hub.OnDisconnectedAsync(System.Exception)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.SignalR.Hub.OnDisconnectedAsync(System.Exception)
+    name: OnDisconnectedAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub.ondisconnectedasync
+  - name: (
+  - uid: System.Exception
+    name: Exception
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.exception
+  - name: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.SignalR.Hub.OnDisconnectedAsync(System.Exception)
+    name: OnDisconnectedAsync
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.signalr.hub.ondisconnectedasync
+  - name: (
+  - uid: System.Exception
+    name: Exception
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.exception
+  - name: )
+- uid: ChessServer.Hubs.GameHub.OnDisconnectedAsync*
+  commentId: Overload:ChessServer.Hubs.GameHub.OnDisconnectedAsync
+  href: ChessServer.Hubs.GameHub.html#ChessServer_Hubs_GameHub_OnDisconnectedAsync_System_Exception_
+  name: OnDisconnectedAsync
+  nameWithType: GameHub.OnDisconnectedAsync
+  fullName: ChessServer.Hubs.GameHub.OnDisconnectedAsync
+- uid: System.Exception
+  commentId: T:System.Exception
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.exception
+  name: Exception
+  nameWithType: Exception
+  fullName: System.Exception
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: ChessServer.Hubs.GameHub.SendMessageToGroup*
+  commentId: Overload:ChessServer.Hubs.GameHub.SendMessageToGroup
+  href: ChessServer.Hubs.GameHub.html#ChessServer_Hubs_GameHub_SendMessageToGroup_System_String_System_String_
+  name: SendMessageToGroup
+  nameWithType: GameHub.SendMessageToGroup
+  fullName: ChessServer.Hubs.GameHub.SendMessageToGroup
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: ChessServer.Hubs.GameHub.LeaveGame*
+  commentId: Overload:ChessServer.Hubs.GameHub.LeaveGame
+  href: ChessServer.Hubs.GameHub.html#ChessServer_Hubs_GameHub_LeaveGame_System_String_
+  name: LeaveGame
+  nameWithType: GameHub.LeaveGame
+  fullName: ChessServer.Hubs.GameHub.LeaveGame
+- uid: ChessServer.Hubs.GameHub.StopQueue*
+  commentId: Overload:ChessServer.Hubs.GameHub.StopQueue
+  href: ChessServer.Hubs.GameHub.html#ChessServer_Hubs_GameHub_StopQueue
+  name: StopQueue
+  nameWithType: GameHub.StopQueue
+  fullName: ChessServer.Hubs.GameHub.StopQueue
+- uid: ChessServer.Hubs.GameHub.JoinGame*
+  commentId: Overload:ChessServer.Hubs.GameHub.JoinGame
+  href: ChessServer.Hubs.GameHub.html#ChessServer_Hubs_GameHub_JoinGame_System_String_
+  name: JoinGame
+  nameWithType: GameHub.JoinGame
+  fullName: ChessServer.Hubs.GameHub.JoinGame
+- uid: ChessServer.Hubs.GameHub.MakeMove*
+  commentId: Overload:ChessServer.Hubs.GameHub.MakeMove
+  href: ChessServer.Hubs.GameHub.html#ChessServer_Hubs_GameHub_MakeMove_System_Int32_System_String_DataLayer_Models_Chess_MoveModel_
+  name: MakeMove
+  nameWithType: GameHub.MakeMove
+  fullName: ChessServer.Hubs.GameHub.MakeMove
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: DataLayer.Models.Chess.MoveModel
+  commentId: T:DataLayer.Models.Chess.MoveModel
+  parent: DataLayer.Models.Chess
+  href: DataLayer.Models.Chess.MoveModel.html
+  name: MoveModel
+  nameWithType: MoveModel
+  fullName: DataLayer.Models.Chess.MoveModel
+- uid: DataLayer.Models.Chess
+  commentId: N:DataLayer.Models.Chess
+  href: DataLayer.html
+  name: DataLayer.Models.Chess
+  nameWithType: DataLayer.Models.Chess
+  fullName: DataLayer.Models.Chess
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Models
+    name: Models
+    href: DataLayer.Models.html
+  - name: .
+  - uid: DataLayer.Models.Chess
+    name: Chess
+    href: DataLayer.Models.Chess.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Models
+    name: Models
+    href: DataLayer.Models.html
+  - name: .
+  - uid: DataLayer.Models.Chess
+    name: Chess
+    href: DataLayer.Models.Chess.html

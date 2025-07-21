@@ -1,0 +1,69 @@
+### YamlMime:ManagedReference
+items:
+- uid: DataLayer.Models.User
+  commentId: N:DataLayer.Models.User
+  id: DataLayer.Models.User
+  children:
+  - DataLayer.Models.User.UserCreateModel
+  - DataLayer.Models.User.UserModel
+  - DataLayer.Models.User.UserSignInModel
+  langs:
+  - csharp
+  - vb
+  name: DataLayer.Models.User
+  nameWithType: DataLayer.Models.User
+  fullName: DataLayer.Models.User
+  type: Namespace
+  assemblies:
+  - DataLayer
+references:
+- uid: DataLayer.Models.User.UserCreateModel
+  commentId: T:DataLayer.Models.User.UserCreateModel
+  parent: DataLayer.Models.User
+  href: DataLayer.Models.User.UserCreateModel.html
+  name: UserCreateModel
+  nameWithType: UserCreateModel
+  fullName: DataLayer.Models.User.UserCreateModel
+- uid: DataLayer.Models.User.UserModel
+  commentId: T:DataLayer.Models.User.UserModel
+  href: DataLayer.Models.User.UserModel.html
+  name: UserModel
+  nameWithType: UserModel
+  fullName: DataLayer.Models.User.UserModel
+- uid: DataLayer.Models.User.UserSignInModel
+  commentId: T:DataLayer.Models.User.UserSignInModel
+  parent: DataLayer.Models.User
+  href: DataLayer.Models.User.UserSignInModel.html
+  name: UserSignInModel
+  nameWithType: UserSignInModel
+  fullName: DataLayer.Models.User.UserSignInModel
+- uid: DataLayer.Models.User
+  commentId: N:DataLayer.Models.User
+  href: DataLayer.html
+  name: DataLayer.Models.User
+  nameWithType: DataLayer.Models.User
+  fullName: DataLayer.Models.User
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Models
+    name: Models
+    href: DataLayer.Models.html
+  - name: .
+  - uid: DataLayer.Models.User
+    name: User
+    href: DataLayer.Models.User.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Models
+    name: Models
+    href: DataLayer.Models.html
+  - name: .
+  - uid: DataLayer.Models.User
+    name: User
+    href: DataLayer.Models.User.html

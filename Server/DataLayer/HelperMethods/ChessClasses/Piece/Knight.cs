@@ -5,14 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
+/// <summary>
+/// Represents a Knight chess piece.
+/// </summary>
 public class Knight(bool white) : Piece(white)
 {
     public override void FindMoves(ChessInfo chessState)
     {
         (int row, int col) = ChessMethods.RankFileToRowCol(this.Position);
 
-        
         var offsets = new (int dRow, int dCol)[]
         {
             (-2, -1), (-2, 1),

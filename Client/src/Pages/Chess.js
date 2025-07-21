@@ -49,7 +49,7 @@ const Stats = ({chessBoard}) => {
 
 function Chess() {
     const { user } = useAuth();
-    const { chessState, sendMove } = useSignalRGame();
+    const { leaveGame, chessState, sendMove } = useSignalRGame();
     
     var location = useLocation();
 
@@ -59,12 +59,23 @@ function Chess() {
     const [reversed, setReversed] = useState(false);
     const [chessBoardHistory, setChessBoardHistory] = useState([]); 
 
+
+    useEffect(() => {
+        return () => {
+            console.log("leave the game");
+            leaveGame(chessState.sessionId); 
+            
+        };
+    }, []);
+
     useEffect(() => {
         if (chessState == null) return;
+        console.log("updating history" , chessBoardHistory);
+        console.log(chessState);
         setReversed(chessState.playerWhite === user);
         setChessBoardHistory(prevHistory => [
             ...prevHistory, 
-            { move: chessState.lastMove, fen: chessState.FEN }
+            { move: chessState.lastMove, fen: chessState.fen }
         ]);
     }, [user, chessState]);
 
@@ -90,7 +101,7 @@ function Chess() {
 
     if (!chessState) return (<div>no chess</div>);
     return ( // give info if board is reveresed or not.
-        <ChessContext.Provider value={{reversed, chessBoard: chessState, chessBoardHistory, movePiece, movePieceBot}}> 
+        <ChessContext.Provider value={{reversed, chessState, chessBoardHistory, movePiece, movePieceBot}}> 
             <Container className=''>
                 <Row>
                     <Col>

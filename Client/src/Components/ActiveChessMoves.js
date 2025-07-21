@@ -3,12 +3,13 @@ import { ChessContext } from '../Pages/Chess';
 import { useContext, useEffect, useRef } from "react";
 
 function ActiveChessMoves() {
-    const { chessBoard, chessBoardHistory } = useContext(ChessContext);
+    const { chessState, chessBoardHistory } = useContext(ChessContext);
+    
     const listEndRef = useRef(null);
 
     useEffect(() => {
         if (listEndRef.current) {
-        listEndRef.current.scrollIntoView({ behavior: 'smooth' });
+            listEndRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [chessBoardHistory]);
 
@@ -18,12 +19,12 @@ function ActiveChessMoves() {
                         <div className="move-list-content">
                             <ListGroup variant="flush">
                                 {chessBoardHistory.map((move, i) =>
-                                    move[0] && (
+                                    move.move && (
                                         <ListGroup.Item
-                                            className={chessBoard.moves === i ? 'active' : ''}
-                                            key={move[0]}
+                                            className={chessState.moves === i ? 'active' : ''}
+                                            key={move.move}
                                         >
-                                            {i}. {move[0]}
+                                            {i}. {move.move}
                                         </ListGroup.Item>
                                     )
                                 )}

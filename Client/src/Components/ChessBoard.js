@@ -9,9 +9,9 @@ function ChessBoard() {
     const [selectedPiece, setSelectedPiece] = useState(null);
 
     var cookies = GetCookies();
-    const { reversed, chessBoard } = useContext(ChessContext);
-    const chessBoardDisplay = reversed ? [...chessBoard.board].reverse() : chessBoard.board;
-    var ourTurn = cookies.user === chessBoard.currentPlayer;
+    const { reversed, chessState } = useContext(ChessContext);
+    const chessBoardDisplay = reversed ? [...chessState.board].reverse() : chessState.board;
+    var ourTurn = cookies.user === chessState.currentPlayer;
 
     return (
         <ChessBoardContext.Provider value={{selectedPiece, setSelectedPiece, ourTurn}}>

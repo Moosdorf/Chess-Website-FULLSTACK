@@ -1,0 +1,698 @@
+### YamlMime:ManagedReference
+items:
+- uid: DataLayer.Entities.Users.User
+  commentId: T:DataLayer.Entities.Users.User
+  id: User
+  parent: DataLayer.Entities.Users
+  children:
+  - DataLayer.Entities.Users.User.BlackGames
+  - DataLayer.Entities.Users.User.Email
+  - DataLayer.Entities.Users.User.Id
+  - DataLayer.Entities.Users.User.Password
+  - DataLayer.Entities.Users.User.Salt
+  - DataLayer.Entities.Users.User.Username
+  - DataLayer.Entities.Users.User.WhiteGames
+  langs:
+  - csharp
+  - vb
+  name: User
+  nameWithType: User
+  fullName: DataLayer.Entities.Users.User
+  type: Class
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Users/User.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: User
+    path: DataLayer/Entities/Users/User.cs
+    startLine: 3
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Users
+  syntax:
+    content: public class User
+    content.vb: Public Class User
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: DataLayer.Entities.Users.User.Id
+  commentId: P:DataLayer.Entities.Users.User.Id
+  id: Id
+  parent: DataLayer.Entities.Users.User
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: User.Id
+  fullName: DataLayer.Entities.Users.User.Id
+  type: Property
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Users/User.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: Id
+    path: DataLayer/Entities/Users/User.cs
+    startLine: 5
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Users
+  syntax:
+    content: public int Id { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property Id As Integer
+  overload: DataLayer.Entities.Users.User.Id*
+- uid: DataLayer.Entities.Users.User.Username
+  commentId: P:DataLayer.Entities.Users.User.Username
+  id: Username
+  parent: DataLayer.Entities.Users.User
+  langs:
+  - csharp
+  - vb
+  name: Username
+  nameWithType: User.Username
+  fullName: DataLayer.Entities.Users.User.Username
+  type: Property
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Users/User.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: Username
+    path: DataLayer/Entities/Users/User.cs
+    startLine: 6
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Users
+  syntax:
+    content: >-
+      [Required]
+
+      public string Username { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <Required>
+
+      Public Property Username As String
+  overload: DataLayer.Entities.Users.User.Username*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.RequiredAttribute
+    ctor: System.ComponentModel.DataAnnotations.RequiredAttribute.#ctor
+    arguments: []
+- uid: DataLayer.Entities.Users.User.Password
+  commentId: P:DataLayer.Entities.Users.User.Password
+  id: Password
+  parent: DataLayer.Entities.Users.User
+  langs:
+  - csharp
+  - vb
+  name: Password
+  nameWithType: User.Password
+  fullName: DataLayer.Entities.Users.User.Password
+  type: Property
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Users/User.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: Password
+    path: DataLayer/Entities/Users/User.cs
+    startLine: 9
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Users
+  syntax:
+    content: >-
+      [Required]
+
+      public string Password { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <Required>
+
+      Public Property Password As String
+  overload: DataLayer.Entities.Users.User.Password*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.RequiredAttribute
+    ctor: System.ComponentModel.DataAnnotations.RequiredAttribute.#ctor
+    arguments: []
+- uid: DataLayer.Entities.Users.User.Salt
+  commentId: P:DataLayer.Entities.Users.User.Salt
+  id: Salt
+  parent: DataLayer.Entities.Users.User
+  langs:
+  - csharp
+  - vb
+  name: Salt
+  nameWithType: User.Salt
+  fullName: DataLayer.Entities.Users.User.Salt
+  type: Property
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Users/User.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: Salt
+    path: DataLayer/Entities/Users/User.cs
+    startLine: 11
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Users
+  syntax:
+    content: public string Salt { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Salt As String
+  overload: DataLayer.Entities.Users.User.Salt*
+- uid: DataLayer.Entities.Users.User.Email
+  commentId: P:DataLayer.Entities.Users.User.Email
+  id: Email
+  parent: DataLayer.Entities.Users.User
+  langs:
+  - csharp
+  - vb
+  name: Email
+  nameWithType: User.Email
+  fullName: DataLayer.Entities.Users.User.Email
+  type: Property
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Users/User.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: Email
+    path: DataLayer/Entities/Users/User.cs
+    startLine: 12
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Users
+  syntax:
+    content: public string Email { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property Email As String
+  overload: DataLayer.Entities.Users.User.Email*
+- uid: DataLayer.Entities.Users.User.WhiteGames
+  commentId: P:DataLayer.Entities.Users.User.WhiteGames
+  id: WhiteGames
+  parent: DataLayer.Entities.Users.User
+  langs:
+  - csharp
+  - vb
+  name: WhiteGames
+  nameWithType: User.WhiteGames
+  fullName: DataLayer.Entities.Users.User.WhiteGames
+  type: Property
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Users/User.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: WhiteGames
+    path: DataLayer/Entities/Users/User.cs
+    startLine: 16
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Users
+  syntax:
+    content: public List<ChessGame> WhiteGames { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{DataLayer.Entities.Chess.ChessGame}
+    content.vb: Public Property WhiteGames As List(Of ChessGame)
+  overload: DataLayer.Entities.Users.User.WhiteGames*
+- uid: DataLayer.Entities.Users.User.BlackGames
+  commentId: P:DataLayer.Entities.Users.User.BlackGames
+  id: BlackGames
+  parent: DataLayer.Entities.Users.User
+  langs:
+  - csharp
+  - vb
+  name: BlackGames
+  nameWithType: User.BlackGames
+  fullName: DataLayer.Entities.Users.User.BlackGames
+  type: Property
+  source:
+    remote:
+      path: Server/DataLayer/Entities/Users/User.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: BlackGames
+    path: DataLayer/Entities/Users/User.cs
+    startLine: 17
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.Entities.Users
+  syntax:
+    content: public List<ChessGame> BlackGames { get; set; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.List{DataLayer.Entities.Chess.ChessGame}
+    content.vb: Public Property BlackGames As List(Of ChessGame)
+  overload: DataLayer.Entities.Users.User.BlackGames*
+references:
+- uid: DataLayer.Entities.Users
+  commentId: N:DataLayer.Entities.Users
+  href: DataLayer.html
+  name: DataLayer.Entities.Users
+  nameWithType: DataLayer.Entities.Users
+  fullName: DataLayer.Entities.Users
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Entities
+    name: Entities
+    href: DataLayer.Entities.html
+  - name: .
+  - uid: DataLayer.Entities.Users
+    name: Users
+    href: DataLayer.Entities.Users.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Entities
+    name: Entities
+    href: DataLayer.Entities.html
+  - name: .
+  - uid: DataLayer.Entities.Users
+    name: Users
+    href: DataLayer.Entities.Users.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: DataLayer.Entities.Users.User.Id*
+  commentId: Overload:DataLayer.Entities.Users.User.Id
+  href: DataLayer.Entities.Users.User.html#DataLayer_Entities_Users_User_Id
+  name: Id
+  nameWithType: User.Id
+  fullName: DataLayer.Entities.Users.User.Id
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: DataLayer.Entities.Users.User.Username*
+  commentId: Overload:DataLayer.Entities.Users.User.Username
+  href: DataLayer.Entities.Users.User.html#DataLayer_Entities_Users_User_Username
+  name: Username
+  nameWithType: User.Username
+  fullName: DataLayer.Entities.Users.User.Username
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: DataLayer.Entities.Users.User.Password*
+  commentId: Overload:DataLayer.Entities.Users.User.Password
+  href: DataLayer.Entities.Users.User.html#DataLayer_Entities_Users_User_Password
+  name: Password
+  nameWithType: User.Password
+  fullName: DataLayer.Entities.Users.User.Password
+- uid: DataLayer.Entities.Users.User.Salt*
+  commentId: Overload:DataLayer.Entities.Users.User.Salt
+  href: DataLayer.Entities.Users.User.html#DataLayer_Entities_Users_User_Salt
+  name: Salt
+  nameWithType: User.Salt
+  fullName: DataLayer.Entities.Users.User.Salt
+- uid: DataLayer.Entities.Users.User.Email*
+  commentId: Overload:DataLayer.Entities.Users.User.Email
+  href: DataLayer.Entities.Users.User.html#DataLayer_Entities_Users_User_Email
+  name: Email
+  nameWithType: User.Email
+  fullName: DataLayer.Entities.Users.User.Email
+- uid: DataLayer.Entities.Users.User.WhiteGames*
+  commentId: Overload:DataLayer.Entities.Users.User.WhiteGames
+  href: DataLayer.Entities.Users.User.html#DataLayer_Entities_Users_User_WhiteGames
+  name: WhiteGames
+  nameWithType: User.WhiteGames
+  fullName: DataLayer.Entities.Users.User.WhiteGames
+- uid: System.Collections.Generic.List{DataLayer.Entities.Chess.ChessGame}
+  commentId: T:System.Collections.Generic.List{DataLayer.Entities.Chess.ChessGame}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<ChessGame>
+  nameWithType: List<ChessGame>
+  fullName: System.Collections.Generic.List<DataLayer.Entities.Chess.ChessGame>
+  nameWithType.vb: List(Of ChessGame)
+  fullName.vb: System.Collections.Generic.List(Of DataLayer.Entities.Chess.ChessGame)
+  name.vb: List(Of ChessGame)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: DataLayer.Entities.Chess.ChessGame
+    name: ChessGame
+    href: DataLayer.Entities.Chess.ChessGame.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: DataLayer.Entities.Chess.ChessGame
+    name: ChessGame
+    href: DataLayer.Entities.Chess.ChessGame.html
+  - name: )
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: DataLayer.Entities.Users.User.BlackGames*
+  commentId: Overload:DataLayer.Entities.Users.User.BlackGames
+  href: DataLayer.Entities.Users.User.html#DataLayer_Entities_Users_User_BlackGames
+  name: BlackGames
+  nameWithType: User.BlackGames
+  fullName: DataLayer.Entities.Users.User.BlackGames

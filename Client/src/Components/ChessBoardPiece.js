@@ -12,7 +12,7 @@ function ChessBoardPiece({piece, rowCol}) {
 
     const promotionTypes = ["queen", "rook", "bishop", "knight"];
 
-    const { reversed, chessBoard, movePiece } = useContext(ChessContext);
+    const { reversed, chessState, movePiece } = useContext(ChessContext);
     const { selectedPiece, setSelectedPiece, ourTurn } = useContext(ChessBoardContext);
 
     const lightBrown = "rgb(239, 222, 205)";
@@ -33,7 +33,7 @@ function ChessBoardPiece({piece, rowCol}) {
     const style = { backgroundColor: reversed ? (color === lightBrown ? darkBrown : lightBrown) : color };
     const image = `/images/${piece.IsWhite ? "white" : "black"}-${piece.Type}.png`;
 
-    const pieceClass = `piece ${(ourTurn && piece.IsWhite === chessBoard.isWhitesTurn) ? "currentTurn" : ""}`;
+    const pieceClass = `piece ${(ourTurn && piece.IsWhite === chessState.isWhitesTurn) ? "currentTurn" : ""}`;
 
 
     const drag = (e, piece) => {
@@ -115,7 +115,7 @@ function ChessBoardPiece({piece, rowCol}) {
     
 
     const addSelected = (selected) => {
-        if (ourTurn && selected.IsWhite === chessBoard.isWhitesTurn && selected.Type !== "empty") setSelectedPiece(selected);
+        if (ourTurn && selected.IsWhite === chessState.isWhitesTurn && selected.Type !== "empty") setSelectedPiece(selected);
         else setSelectedPiece(null);
     };
 
@@ -166,8 +166,8 @@ function ChessBoardPiece({piece, rowCol}) {
 
     
 
-    var from = chessBoard.lastMove.split(",")[0];
-    var to = chessBoard.lastMove.split(",")[1];
+    var from = chessState.lastMove.split(",")[0];
+    var to = chessState.lastMove.split(",")[1];
     if (from === "") {
         from = "none";
         to = "none";
@@ -186,7 +186,7 @@ function ChessBoardPiece({piece, rowCol}) {
                     className={pieceClass}
                     src={image}
                     alt=""
-                    draggable={ourTurn && piece.IsWhite === chessBoard.isWhitesTurn} 
+                    draggable={ourTurn && piece.IsWhite === chessState.isWhitesTurn} 
                     onDragStart={(e) => {
                         drag(e, piece);
                         addSelected(piece);
@@ -203,7 +203,7 @@ function ChessBoardPiece({piece, rowCol}) {
                     className='promotionOverlay'
                     onClick={() => handlePromotionSelection(promotionOverlay.type)}>
                     <img 
-                        src={`/images/${chessBoard.isWhitesTurn ? "white" : "black"}-${promotionOverlay.type}.png`}
+                        src={`/images/${chessState.isWhitesTurn ? "white" : "black"}-${promotionOverlay.type}.png`}
                         alt={promotionOverlay.type}
                     />
                 </div>

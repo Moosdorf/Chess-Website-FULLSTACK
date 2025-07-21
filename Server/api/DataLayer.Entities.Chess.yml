@@ -1,0 +1,77 @@
+### YamlMime:ManagedReference
+items:
+- uid: DataLayer.Entities.Chess
+  commentId: N:DataLayer.Entities.Chess
+  id: DataLayer.Entities.Chess
+  children:
+  - DataLayer.Entities.Chess.ChessGame
+  - DataLayer.Entities.Chess.GameResult
+  - DataLayer.Entities.Chess.GameType
+  - DataLayer.Entities.Chess.Move
+  langs:
+  - csharp
+  - vb
+  name: DataLayer.Entities.Chess
+  nameWithType: DataLayer.Entities.Chess
+  fullName: DataLayer.Entities.Chess
+  type: Namespace
+  assemblies:
+  - DataLayer
+references:
+- uid: DataLayer.Entities.Chess.GameType
+  commentId: T:DataLayer.Entities.Chess.GameType
+  parent: DataLayer.Entities.Chess
+  href: DataLayer.Entities.Chess.GameType.html
+  name: GameType
+  nameWithType: GameType
+  fullName: DataLayer.Entities.Chess.GameType
+- uid: DataLayer.Entities.Chess.GameResult
+  commentId: T:DataLayer.Entities.Chess.GameResult
+  parent: DataLayer.Entities.Chess
+  href: DataLayer.Entities.Chess.GameResult.html
+  name: GameResult
+  nameWithType: GameResult
+  fullName: DataLayer.Entities.Chess.GameResult
+- uid: DataLayer.Entities.Chess.ChessGame
+  commentId: T:DataLayer.Entities.Chess.ChessGame
+  parent: DataLayer.Entities.Chess
+  href: DataLayer.Entities.Chess.ChessGame.html
+  name: ChessGame
+  nameWithType: ChessGame
+  fullName: DataLayer.Entities.Chess.ChessGame
+- uid: DataLayer.Entities.Chess.Move
+  commentId: T:DataLayer.Entities.Chess.Move
+  href: DataLayer.Entities.Chess.Move.html
+  name: Move
+  nameWithType: Move
+  fullName: DataLayer.Entities.Chess.Move
+- uid: DataLayer.Entities.Chess
+  commentId: N:DataLayer.Entities.Chess
+  href: DataLayer.html
+  name: DataLayer.Entities.Chess
+  nameWithType: DataLayer.Entities.Chess
+  fullName: DataLayer.Entities.Chess
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Entities
+    name: Entities
+    href: DataLayer.Entities.html
+  - name: .
+  - uid: DataLayer.Entities.Chess
+    name: Chess
+    href: DataLayer.Entities.Chess.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Entities
+    name: Entities
+    href: DataLayer.Entities.html
+  - name: .
+  - uid: DataLayer.Entities.Chess
+    name: Chess
+    href: DataLayer.Entities.Chess.html

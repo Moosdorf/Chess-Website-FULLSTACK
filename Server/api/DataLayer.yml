@@ -1,0 +1,30 @@
+### YamlMime:ManagedReference
+items:
+- uid: DataLayer
+  commentId: N:DataLayer
+  id: DataLayer
+  children:
+  - DataLayer.ChessContext
+  langs:
+  - csharp
+  - vb
+  name: DataLayer
+  nameWithType: DataLayer
+  fullName: DataLayer
+  type: Namespace
+  assemblies:
+  - DataLayer
+references:
+- uid: DataLayer.ChessContext
+  commentId: T:DataLayer.ChessContext
+  parent: DataLayer
+  href: DataLayer.ChessContext.html
+  name: ChessContext
+  nameWithType: ChessContext
+  fullName: DataLayer.ChessContext
+- uid: DataLayer
+  commentId: N:DataLayer
+  href: DataLayer.html
+  name: DataLayer
+  nameWithType: DataLayer
+  fullName: DataLayer

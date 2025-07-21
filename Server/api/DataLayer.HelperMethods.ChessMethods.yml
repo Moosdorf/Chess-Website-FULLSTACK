@@ -1,0 +1,823 @@
+### YamlMime:ManagedReference
+items:
+- uid: DataLayer.HelperMethods.ChessMethods
+  commentId: T:DataLayer.HelperMethods.ChessMethods
+  id: ChessMethods
+  parent: DataLayer.HelperMethods
+  children:
+  - DataLayer.HelperMethods.ChessMethods.ConvertMoveToColRow(System.String)
+  - DataLayer.HelperMethods.ChessMethods.FindCheckBlockers(ChessInfo,King,Piece)
+  - DataLayer.HelperMethods.ChessMethods.GenerateFEN(ChessInfo)
+  - DataLayer.HelperMethods.ChessMethods.MakeMove(ChessInfo,DataLayer.Models.Chess.MoveModel)
+  - DataLayer.HelperMethods.ChessMethods.RankFileToRowCol(System.String)
+  - DataLayer.HelperMethods.ChessMethods.RowColToRankFile(System.Int32,System.Int32)
+  langs:
+  - csharp
+  - vb
+  name: ChessMethods
+  nameWithType: ChessMethods
+  fullName: DataLayer.HelperMethods.ChessMethods
+  type: Class
+  source:
+    remote:
+      path: Server/DataLayer/HelperMethods/ChessMethods.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: ChessMethods
+    path: DataLayer/HelperMethods/ChessMethods.cs
+    startLine: 11
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.HelperMethods
+  syntax:
+    content: public static class ChessMethods
+    content.vb: Public Module ChessMethods
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: DataLayer.HelperMethods.ChessMethods.RowColToRankFile(System.Int32,System.Int32)
+  commentId: M:DataLayer.HelperMethods.ChessMethods.RowColToRankFile(System.Int32,System.Int32)
+  id: RowColToRankFile(System.Int32,System.Int32)
+  parent: DataLayer.HelperMethods.ChessMethods
+  langs:
+  - csharp
+  - vb
+  name: RowColToRankFile(int, int)
+  nameWithType: ChessMethods.RowColToRankFile(int, int)
+  fullName: DataLayer.HelperMethods.ChessMethods.RowColToRankFile(int, int)
+  type: Method
+  source:
+    remote:
+      path: Server/DataLayer/HelperMethods/ChessMethods.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: RowColToRankFile
+    path: DataLayer/HelperMethods/ChessMethods.cs
+    startLine: 17
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.HelperMethods
+  summary: Converts row and column indexes to a chessboard coordinate in file-rank format (e.g., 0,0 -&gt; "a1").
+  example: []
+  syntax:
+    content: public static string RowColToRankFile(int row, int col)
+    parameters:
+    - id: row
+      type: System.Int32
+    - id: col
+      type: System.Int32
+    return:
+      type: System.String
+    content.vb: Public Shared Function RowColToRankFile(row As Integer, col As Integer) As String
+  overload: DataLayer.HelperMethods.ChessMethods.RowColToRankFile*
+  nameWithType.vb: ChessMethods.RowColToRankFile(Integer, Integer)
+  fullName.vb: DataLayer.HelperMethods.ChessMethods.RowColToRankFile(Integer, Integer)
+  name.vb: RowColToRankFile(Integer, Integer)
+- uid: DataLayer.HelperMethods.ChessMethods.RankFileToRowCol(System.String)
+  commentId: M:DataLayer.HelperMethods.ChessMethods.RankFileToRowCol(System.String)
+  id: RankFileToRowCol(System.String)
+  parent: DataLayer.HelperMethods.ChessMethods
+  langs:
+  - csharp
+  - vb
+  name: RankFileToRowCol(string)
+  nameWithType: ChessMethods.RankFileToRowCol(string)
+  fullName: DataLayer.HelperMethods.ChessMethods.RankFileToRowCol(string)
+  type: Method
+  source:
+    remote:
+      path: Server/DataLayer/HelperMethods/ChessMethods.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: RankFileToRowCol
+    path: DataLayer/HelperMethods/ChessMethods.cs
+    startLine: 31
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.HelperMethods
+  summary: Converts a chessboard coordinate in file-rank format (e.g., "e4") to row and column indexes.
+  example: []
+  syntax:
+    content: public static (int, int) RankFileToRowCol(string fileRank)
+    parameters:
+    - id: fileRank
+      type: System.String
+    return:
+      type: System.ValueTuple{System.Int32,System.Int32}
+      description: 'A tuple with the corresponding row and col: (row, col).'
+    content.vb: Public Shared Function RankFileToRowCol(fileRank As String) As (Integer, Integer)
+  overload: DataLayer.HelperMethods.ChessMethods.RankFileToRowCol*
+  nameWithType.vb: ChessMethods.RankFileToRowCol(String)
+  fullName.vb: DataLayer.HelperMethods.ChessMethods.RankFileToRowCol(String)
+  name.vb: RankFileToRowCol(String)
+- uid: DataLayer.HelperMethods.ChessMethods.FindCheckBlockers(ChessInfo,King,Piece)
+  commentId: M:DataLayer.HelperMethods.ChessMethods.FindCheckBlockers(ChessInfo,King,Piece)
+  id: FindCheckBlockers(ChessInfo,King,Piece)
+  parent: DataLayer.HelperMethods.ChessMethods
+  langs:
+  - csharp
+  - vb
+  name: FindCheckBlockers(ChessInfo, King, Piece)
+  nameWithType: ChessMethods.FindCheckBlockers(ChessInfo, King, Piece)
+  fullName: DataLayer.HelperMethods.ChessMethods.FindCheckBlockers(ChessInfo, King, Piece)
+  type: Method
+  source:
+    remote:
+      path: Server/DataLayer/HelperMethods/ChessMethods.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: FindCheckBlockers
+    path: DataLayer/HelperMethods/ChessMethods.cs
+    startLine: 44
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.HelperMethods
+  summary: >-
+    Finds squares that block a check from a sliding piece (queen, rook, bishop) to the king.
+
+    Adds these blocking squares to the chessState.Blockers list.
+  example: []
+  syntax:
+    content: public static void FindCheckBlockers(ChessInfo chessState, King king, Piece pieceChecked)
+    parameters:
+    - id: chessState
+      type: ChessInfo
+    - id: king
+      type: King
+    - id: pieceChecked
+      type: Piece
+    content.vb: Public Shared Sub FindCheckBlockers(chessState As ChessInfo, king As King, pieceChecked As Piece)
+  overload: DataLayer.HelperMethods.ChessMethods.FindCheckBlockers*
+- uid: DataLayer.HelperMethods.ChessMethods.ConvertMoveToColRow(System.String)
+  commentId: M:DataLayer.HelperMethods.ChessMethods.ConvertMoveToColRow(System.String)
+  id: ConvertMoveToColRow(System.String)
+  parent: DataLayer.HelperMethods.ChessMethods
+  langs:
+  - csharp
+  - vb
+  name: ConvertMoveToColRow(string)
+  nameWithType: ChessMethods.ConvertMoveToColRow(string)
+  fullName: DataLayer.HelperMethods.ChessMethods.ConvertMoveToColRow(string)
+  type: Method
+  source:
+    remote:
+      path: Server/DataLayer/HelperMethods/ChessMethods.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: ConvertMoveToColRow
+    path: DataLayer/HelperMethods/ChessMethods.cs
+    startLine: 138
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.HelperMethods
+  summary: Converts a move string in the format "e2,e4" into row and column indices for from and to squares.
+  example: []
+  syntax:
+    content: public static (int fromRow, int fromCol, int toRow, int toCol) ConvertMoveToColRow(string move)
+    parameters:
+    - id: move
+      type: System.String
+    return:
+      type: System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32}
+    content.vb: Public Shared Function ConvertMoveToColRow(move As String) As (fromRow As Integer, fromCol As Integer, toRow As Integer, toCol As Integer)
+  overload: DataLayer.HelperMethods.ChessMethods.ConvertMoveToColRow*
+  nameWithType.vb: ChessMethods.ConvertMoveToColRow(String)
+  fullName.vb: DataLayer.HelperMethods.ChessMethods.ConvertMoveToColRow(String)
+  name.vb: ConvertMoveToColRow(String)
+- uid: DataLayer.HelperMethods.ChessMethods.MakeMove(ChessInfo,DataLayer.Models.Chess.MoveModel)
+  commentId: M:DataLayer.HelperMethods.ChessMethods.MakeMove(ChessInfo,DataLayer.Models.Chess.MoveModel)
+  id: MakeMove(ChessInfo,DataLayer.Models.Chess.MoveModel)
+  parent: DataLayer.HelperMethods.ChessMethods
+  langs:
+  - csharp
+  - vb
+  name: MakeMove(ChessInfo, MoveModel)
+  nameWithType: ChessMethods.MakeMove(ChessInfo, MoveModel)
+  fullName: DataLayer.HelperMethods.ChessMethods.MakeMove(ChessInfo, DataLayer.Models.Chess.MoveModel)
+  type: Method
+  source:
+    remote:
+      path: Server/DataLayer/HelperMethods/ChessMethods.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: MakeMove
+    path: DataLayer/HelperMethods/ChessMethods.cs
+    startLine: 156
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.HelperMethods
+  summary: >-
+    Executes a move on the chessboard, updating the chessState accordingly.
+
+    Handles promotions, en passant, castling, and updating FEN related state.
+  example: []
+  syntax:
+    content: public static void MakeMove(ChessInfo chessState, MoveModel move)
+    parameters:
+    - id: chessState
+      type: ChessInfo
+    - id: move
+      type: DataLayer.Models.Chess.MoveModel
+    content.vb: Public Shared Sub MakeMove(chessState As ChessInfo, move As MoveModel)
+  overload: DataLayer.HelperMethods.ChessMethods.MakeMove*
+- uid: DataLayer.HelperMethods.ChessMethods.GenerateFEN(ChessInfo)
+  commentId: M:DataLayer.HelperMethods.ChessMethods.GenerateFEN(ChessInfo)
+  id: GenerateFEN(ChessInfo)
+  parent: DataLayer.HelperMethods.ChessMethods
+  langs:
+  - csharp
+  - vb
+  name: GenerateFEN(ChessInfo)
+  nameWithType: ChessMethods.GenerateFEN(ChessInfo)
+  fullName: DataLayer.HelperMethods.ChessMethods.GenerateFEN(ChessInfo)
+  type: Method
+  source:
+    remote:
+      path: Server/DataLayer/HelperMethods/ChessMethods.cs
+      branch: main
+      repo: https://github.com/Moosdorf/Chess-Website-FULLSTACK.git
+    id: GenerateFEN
+    path: DataLayer/HelperMethods/ChessMethods.cs
+    startLine: 276
+  assemblies:
+  - DataLayer
+  namespace: DataLayer.HelperMethods
+  summary: Generates the FEN string representation of the current chess position from the chessState.
+  example: []
+  syntax:
+    content: public static string GenerateFEN(ChessInfo chessState)
+    parameters:
+    - id: chessState
+      type: ChessInfo
+    return:
+      type: System.String
+    content.vb: Public Shared Function GenerateFEN(chessState As ChessInfo) As String
+  overload: DataLayer.HelperMethods.ChessMethods.GenerateFEN*
+references:
+- uid: DataLayer.HelperMethods
+  commentId: N:DataLayer.HelperMethods
+  href: DataLayer.html
+  name: DataLayer.HelperMethods
+  nameWithType: DataLayer.HelperMethods
+  fullName: DataLayer.HelperMethods
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.HelperMethods
+    name: HelperMethods
+    href: DataLayer.HelperMethods.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.HelperMethods
+    name: HelperMethods
+    href: DataLayer.HelperMethods.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: DataLayer.HelperMethods.ChessMethods.RowColToRankFile*
+  commentId: Overload:DataLayer.HelperMethods.ChessMethods.RowColToRankFile
+  href: DataLayer.HelperMethods.ChessMethods.html#DataLayer_HelperMethods_ChessMethods_RowColToRankFile_System_Int32_System_Int32_
+  name: RowColToRankFile
+  nameWithType: ChessMethods.RowColToRankFile
+  fullName: DataLayer.HelperMethods.ChessMethods.RowColToRankFile
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: DataLayer.HelperMethods.ChessMethods.RankFileToRowCol*
+  commentId: Overload:DataLayer.HelperMethods.ChessMethods.RankFileToRowCol
+  href: DataLayer.HelperMethods.ChessMethods.html#DataLayer_HelperMethods_ChessMethods_RankFileToRowCol_System_String_
+  name: RankFileToRowCol
+  nameWithType: ChessMethods.RankFileToRowCol
+  fullName: DataLayer.HelperMethods.ChessMethods.RankFileToRowCol
+- uid: System.ValueTuple{System.Int32,System.Int32}
+  commentId: T:System.ValueTuple{System.Int32,System.Int32}
+  parent: System
+  definition: System.ValueTuple`2
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: (int, int)
+  nameWithType: (int, int)
+  fullName: (int, int)
+  nameWithType.vb: (Integer, Integer)
+  fullName.vb: (Integer, Integer)
+  name.vb: (Integer, Integer)
+  spec.csharp:
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+  spec.vb:
+  - name: (
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.ValueTuple`2
+  commentId: T:System.ValueTuple`2
+  name: (T1, T2)
+  nameWithType: (T1, T2)
+  fullName: (T1, T2)
+  spec.csharp:
+  - name: (
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )
+  spec.vb:
+  - name: (
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: )
+- uid: DataLayer.HelperMethods.ChessMethods.FindCheckBlockers*
+  commentId: Overload:DataLayer.HelperMethods.ChessMethods.FindCheckBlockers
+  href: DataLayer.HelperMethods.ChessMethods.html#DataLayer_HelperMethods_ChessMethods_FindCheckBlockers_ChessInfo_King_Piece_
+  name: FindCheckBlockers
+  nameWithType: ChessMethods.FindCheckBlockers
+  fullName: DataLayer.HelperMethods.ChessMethods.FindCheckBlockers
+- uid: ChessInfo
+  commentId: T:ChessInfo
+  href: ChessInfo.html
+  name: ChessInfo
+  nameWithType: ChessInfo
+  fullName: ChessInfo
+- uid: King
+  commentId: T:King
+  href: King.html
+  name: King
+  nameWithType: King
+  fullName: King
+- uid: Piece
+  commentId: T:Piece
+  href: Piece.html
+  name: Piece
+  nameWithType: Piece
+  fullName: Piece
+- uid: DataLayer.HelperMethods.ChessMethods.ConvertMoveToColRow*
+  commentId: Overload:DataLayer.HelperMethods.ChessMethods.ConvertMoveToColRow
+  href: DataLayer.HelperMethods.ChessMethods.html#DataLayer_HelperMethods_ChessMethods_ConvertMoveToColRow_System_String_
+  name: ConvertMoveToColRow
+  nameWithType: ChessMethods.ConvertMoveToColRow
+  fullName: DataLayer.HelperMethods.ChessMethods.ConvertMoveToColRow
+- uid: System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32}
+  commentId: T:System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32}
+  parent: System
+  definition: System.ValueTuple`4
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: (int fromRow, int fromCol, int toRow, int toCol)
+  nameWithType: (int fromRow, int fromCol, int toRow, int toCol)
+  fullName: (int fromRow, int fromCol, int toRow, int toCol)
+  nameWithType.vb: (fromRow As Integer, fromCol As Integer, toRow As Integer, toCol As Integer)
+  fullName.vb: (fromRow As Integer, fromCol As Integer, toRow As Integer, toCol As Integer)
+  name.vb: (fromRow As Integer, fromCol As Integer, toRow As Integer, toCol As Integer)
+  spec.csharp:
+  - name: (
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: " "
+  - uid: System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32}.fromRow
+    name: fromRow
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.int32,system.int32,system.int32-.fromrow
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: " "
+  - uid: System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32}.fromCol
+    name: fromCol
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.int32,system.int32,system.int32-.fromcol
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: " "
+  - uid: System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32}.toRow
+    name: toRow
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.int32,system.int32,system.int32-.torow
+  - name: ','
+  - name: " "
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: " "
+  - uid: System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32}.toCol
+    name: toCol
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.int32,system.int32,system.int32-.tocol
+  - name: )
+  spec.vb:
+  - name: (
+  - uid: System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32}.fromRow
+    name: fromRow
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.int32,system.int32,system.int32-.fromrow
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32}.fromCol
+    name: fromCol
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.int32,system.int32,system.int32-.fromcol
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32}.toRow
+    name: toRow
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.int32,system.int32,system.int32-.torow
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: ','
+  - name: " "
+  - uid: System.ValueTuple{System.Int32,System.Int32,System.Int32,System.Int32}.toCol
+    name: toCol
+    href: https://learn.microsoft.com/dotnet/api/system.valuetuple-system.int32,system.int32,system.int32,system.int32-.tocol
+  - name: " "
+  - name: As
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System.ValueTuple`4
+  commentId: T:System.ValueTuple`4
+  name: (T1, T2, T3, T4)
+  nameWithType: (T1, T2, T3, T4)
+  fullName: (T1, T2, T3, T4)
+  spec.csharp:
+  - name: (
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: T3
+  - name: ','
+  - name: " "
+  - name: T4
+  - name: )
+  spec.vb:
+  - name: (
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: T3
+  - name: ','
+  - name: " "
+  - name: T4
+  - name: )
+- uid: DataLayer.HelperMethods.ChessMethods.MakeMove*
+  commentId: Overload:DataLayer.HelperMethods.ChessMethods.MakeMove
+  href: DataLayer.HelperMethods.ChessMethods.html#DataLayer_HelperMethods_ChessMethods_MakeMove_ChessInfo_DataLayer_Models_Chess_MoveModel_
+  name: MakeMove
+  nameWithType: ChessMethods.MakeMove
+  fullName: DataLayer.HelperMethods.ChessMethods.MakeMove
+- uid: DataLayer.Models.Chess.MoveModel
+  commentId: T:DataLayer.Models.Chess.MoveModel
+  parent: DataLayer.Models.Chess
+  href: DataLayer.Models.Chess.MoveModel.html
+  name: MoveModel
+  nameWithType: MoveModel
+  fullName: DataLayer.Models.Chess.MoveModel
+- uid: DataLayer.Models.Chess
+  commentId: N:DataLayer.Models.Chess
+  href: DataLayer.html
+  name: DataLayer.Models.Chess
+  nameWithType: DataLayer.Models.Chess
+  fullName: DataLayer.Models.Chess
+  spec.csharp:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Models
+    name: Models
+    href: DataLayer.Models.html
+  - name: .
+  - uid: DataLayer.Models.Chess
+    name: Chess
+    href: DataLayer.Models.Chess.html
+  spec.vb:
+  - uid: DataLayer
+    name: DataLayer
+    href: DataLayer.html
+  - name: .
+  - uid: DataLayer.Models
+    name: Models
+    href: DataLayer.Models.html
+  - name: .
+  - uid: DataLayer.Models.Chess
+    name: Chess
+    href: DataLayer.Models.Chess.html
+- uid: DataLayer.HelperMethods.ChessMethods.GenerateFEN*
+  commentId: Overload:DataLayer.HelperMethods.ChessMethods.GenerateFEN
+  href: DataLayer.HelperMethods.ChessMethods.html#DataLayer_HelperMethods_ChessMethods_GenerateFEN_ChessInfo_
+  name: GenerateFEN
+  nameWithType: ChessMethods.GenerateFEN
+  fullName: DataLayer.HelperMethods.ChessMethods.GenerateFEN

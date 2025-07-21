@@ -18,12 +18,6 @@ public class GameHub : Hub<IGameHub>
     private readonly IGameManager _gameManager;
     private readonly IChessDataService _chessDataService;
 
-
-    public async Task SendMessageToGroup(string user, string message, string sessionId)
-    {
-        await Clients.Group(sessionId).ReceiveMessage(user, message);
-    }
-
     public GameHub(IGameManager gameManager, IChessDataService chessDataService)
     {
         _gameManager = gameManager;
@@ -48,6 +42,22 @@ public class GameHub : Hub<IGameHub>
         await base.OnDisconnectedAsync(ex);
     }
 
+    public async Task SendMessageToGroup(string message, string sessionId)
+    {
+        var username = Context.User?.FindFirst(ClaimTypes.Name)?.Value;
+        if (username == null) return;
+        await Clients.Group(sessionId).ReceiveMessage(username, message);
+    }
+
+    public async Task LeaveGame(string sessionId)
+    {
+        Console.WriteLine("leave game: " + sessionId);
+        var username = Context.User?.FindFirst(ClaimTypes.Name)?.Value;
+        if (username != null) _gameManager.RemoveUserFromSession(username);
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, sessionId);
+        await Clients.Group(sessionId).ReceiveMessage("System", "Opponent has left");
+
+    }
     public async Task StopQueue()
     {
         var username = Context.User?.FindFirst(ClaimTypes.Name)?.Value;

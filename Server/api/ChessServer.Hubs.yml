@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: ChessServer.Hubs
+  commentId: N:ChessServer.Hubs
+  id: ChessServer.Hubs
+  children:
+  - ChessServer.Hubs.GameHub
+  langs:
+  - csharp
+  - vb
+  name: ChessServer.Hubs
+  nameWithType: ChessServer.Hubs
+  fullName: ChessServer.Hubs
+  type: Namespace
+  assemblies:
+  - ChessServer
+references:
+- uid: ChessServer.Hubs.GameHub
+  commentId: T:ChessServer.Hubs.GameHub
+  href: ChessServer.Hubs.GameHub.html
+  name: GameHub
+  nameWithType: GameHub
+  fullName: ChessServer.Hubs.GameHub
