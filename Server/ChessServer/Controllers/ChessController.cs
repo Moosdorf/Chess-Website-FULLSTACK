@@ -144,6 +144,7 @@ namespace ChessServer.Controllers
             return Ok(JsonSerializer.Serialize(db.CreateChessModel(chessState, game, "non")));
         }
 
+
         [HttpGet]
         [Route("stockfish")]
         public async Task<IActionResult> StartStocky()

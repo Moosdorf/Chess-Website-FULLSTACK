@@ -13,10 +13,12 @@ public class UserController : BaseController
 {
     readonly IConfiguration _configuration;
     IDataService db;
-    public UserController(IDataService dataService, IConfiguration configuration) : base()
+    IChessDataService _chessDataService;
+    public UserController(IDataService dataService, IChessDataService chessDataService, IConfiguration configuration) : base()
     {
         _configuration = configuration;
         db = dataService;
+        _chessDataService = chessDataService;
     }
 
     [HttpPost]
@@ -58,6 +60,19 @@ public class UserController : BaseController
             return Ok(new { message = "Signed out" });
         }
         return Unauthorized("No token cookie found");
+    }
+
+
+    [Authorize]
+    [HttpGet("match_history")]
+    public async Task<IActionResult> GetMatchHistory(string username)
+    {
+        var matchHistory = await _chessDataService.GetMatchHistory(username);
+
+        if (matchHistory == null) return BadRequest("Match History null");
+        if (matchHistory.Count <= 0) return Ok("No matches played");
+        
+        return Ok(matchHistory);
     }
 
 

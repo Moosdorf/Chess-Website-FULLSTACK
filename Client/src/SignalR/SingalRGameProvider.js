@@ -68,6 +68,7 @@ export function SignalRGameProvider({ children }) {
       setQueue(false);
       navigate("/chess_game");
     });
+    
     connection.on("ReceiveMove", handleSetChessBoard);
     connection.on("ReceiveMessage", (username, message) => {
       setMessages(prev => [...prev, { 
@@ -118,13 +119,11 @@ export function SignalRGameProvider({ children }) {
 
   // leave game
   const leaveGame = useCallback((sessionId) => {
-    console.log("try to leave", connection);
     if (connection && sessionId) {
-      console.log("inside")
       setMessages([{ id: 0, sender: 'System', text: 'Game started!', isOwn: false }]);
       connection.invoke("LeaveGame", sessionId);
     }
-  }, [connection]);
+  }, [connection]); 
 
   return (
     <SignalRGameContext.Provider value={{ chessState, messages, queue, leaveGame, joinGame, stopQueue, sendMessage, sendMove }}>

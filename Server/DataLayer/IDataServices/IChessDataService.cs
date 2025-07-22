@@ -14,7 +14,7 @@ namespace DataLayer.DataServices
         Task<(ChessGame, ChessInfo)> CreateGameAsync(string userName1, string userName2);
         Task<(ChessGame, ChessInfo)> CreateBotGameAsync(string userName1, bool white);
 
-
+        Task<List<ChessGame>> GetMatchHistory(string username);
         Task<bool> MoveAsync(int chessId, string move, string FEN);
 
         public ChessModel CreateChessModel(ChessInfo chessState, ChessGame game, string sessionId);

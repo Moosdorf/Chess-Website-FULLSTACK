@@ -1,37 +1,35 @@
 import 'bootstrap/dist/css/bootstrap.css';
-import { Col, Row, Container, Button} from 'react-bootstrap';
+import { Col, Row, Container, Button, CardHeader, Card, CardBody} from 'react-bootstrap';
 import { GetCookies } from '../Functions/HelperMethods'
+import { useEffect } from 'react';
+import { useAuth } from '../Data/AuthProvider.js';
 
 function Userpage() {
+    const { user } = useAuth();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const request = new Request(`http://localhost:5000/api/user/${user}/match_history`, {
+                    method: "GET",
+                    credentials: 'include',
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+                });
+
+                const res = await fetch(request);
+                const data = await res.json(); 
+                console.log(data);
+            } catch (e) {
+                console.log(e);
+            }
+        };
+
+        fetchData();
+    }, [user]);
     
-
-    var cookies = GetCookies();
-    console.log(cookies);
-    const test = async () => {
-        var cookies = GetCookies();
-        console.log(cookies);
-        const request = new Request(`http://localhost:5000/api/user/test`, {
-            method: "PUT",
-            credentials: 'include',
-            headers: {
-                "Content-Type": "application/json", // Correct Content-Type for JSON
-              },
-        });
-
-        await fetch(request)
-        .then(res => {
-            console.log(res)
-            return res.text()
-        })
-        .then(data => {
-            console.log(data);
-            return JSON.parse(data)
-        })
-        .then(results => {
-            console.log(results);
-        })
-        .catch(e => console.log(e));
-    }
+    if (!user) return (<div>no user</div>)
 
 
 
@@ -39,16 +37,49 @@ function Userpage() {
         <Container>
             <Row>
                 <Col>
-                    {cookies.user && <h1>User: {cookies.user}</h1>}
+                    {user && <h1>User: {user}</h1>}
                 </Col>
             </Row>
-            <Row>
-                <Col>
-                    gg
-                    <Button onClick={test}>
-                        test
-                    </Button>
+            <Row style={{border: "1px solid green"}}>
+                <Col style={{border: "1px solid red"}}>
+                <Card>
+                    <CardHeader>
+                        Match history
+                    </CardHeader>
+                    <CardBody>
+                        123
+                    </CardBody>
+                </Card>
                 </Col>
+                <Col style={{border: "1px solid red"}}>
+                    <Card>
+                        <CardHeader>
+                            Puzzle history
+                        </CardHeader>
+                        <CardBody>
+                            123
+                        </CardBody>
+                    </Card>
+                </Col>
+                <Col style={{border: "1px solid red"}}>
+                    <Card>
+                        <CardHeader>
+                            Learning history
+                        </CardHeader>
+                        <CardBody>
+                            123
+                        </CardBody>
+                    </Card>
+                </Col>
+            </Row>
+
+            <br/>
+            
+            <Row>
+                <Card>
+                    <CardHeader>STATS</CardHeader>
+                    <CardBody>123</CardBody>
+                </Card>
             </Row>
 
         </Container>)

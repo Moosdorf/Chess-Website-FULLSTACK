@@ -115,6 +115,21 @@ public class ChessDataService : IChessDataService
             { SessionId = sessionId, CurrentPlayer = currentPlayer, Players = [game.WhitePlayer.Username, game.BlackPlayer.Username] , LastMove = chessState.LastMove, Chessboard = chessState.GameBoard, FEN = ChessMethods.GenerateFEN(chessState), Id = game.Id, IsWhite = isWhite, Check = inCheck, CheckMate = gameDone, BlockCheckPositions = blockers };
     }
 
+    public async Task<List<ChessGame>> GetMatchHistory(string username)
+    {
+        Console.WriteLine("getting history");
+        var user = await _db.Users
+            .Include(u => u.WhiteGames)
+            .Include(u => u.BlackGames)
+            .FirstOrDefaultAsync(u => u.Username == username);
+
+        if (user == null) return new List<ChessGame>();
+        Console.WriteLine("conact");
+        ///        var games = user.WhiteGames.SelectMany(x => ).Concat(user.BlackGames.SelectMany(x => x.Moves));
+        //     var games = ;
+
+        return [];
+    }
 
     public ChessGame EndGame(int chessId)
     {
