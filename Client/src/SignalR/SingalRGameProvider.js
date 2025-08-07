@@ -52,7 +52,8 @@ export function SignalRGameProvider({ children }) {
       botGame,
       playerWhite,
       sessionId: apiBoard.sessionId,
-      lastMove: apiBoard.lastMove
+      lastMove: apiBoard.lastMove,
+      gameDone: apiBoard.gameDone
     });
   }, []);
 
@@ -60,14 +61,21 @@ export function SignalRGameProvider({ children }) {
   useEffect(() => {
     if (!connection || handlersRegistered.current) return;
 
+    connection.on("EndGame", (apiBoard) => {
+      console.log("ending game?");
+      handleSetChessBoard(apiBoard);
+    });
+
     connection.on("WaitingForOpponent", () => setQueue(true));
     connection.on("QueueStopped", () => setQueue(false));
     connection.on("GameReady", (apiBoard) => {
-      console.log(apiBoard);
       handleSetChessBoard(apiBoard);
       setQueue(false);
       navigate("/chess_game");
     });
+
+    connection.on("BadMove", (message) => console.log(message));
+
     
     connection.on("ReceiveMove", handleSetChessBoard);
     connection.on("ReceiveMessage", (username, message) => {
@@ -82,6 +90,8 @@ export function SignalRGameProvider({ children }) {
     handlersRegistered.current = true;
 
     return () => {
+      connection.off("BadMove");
+      connection.off("EndGame");
       connection.off("WaitingForOpponent");
       connection.off("QueueStopped");
       connection.off("GameReady");
@@ -97,6 +107,14 @@ export function SignalRGameProvider({ children }) {
   const joinGame = useCallback(() => {
     if (connection?.state === signalR.HubConnectionState.Connected) {
       connection.invoke("JoinGame", user);
+    }
+  }, [connection, user]);
+
+
+  // join bot game (start a botgame)
+  const joinBotGame = useCallback((isWhite) => {
+    if (connection?.state === signalR.HubConnectionState.Connected) {
+      connection.invoke("JoinBotGame", user, isWhite);
     }
   }, [connection, user]);
 
@@ -117,8 +135,15 @@ export function SignalRGameProvider({ children }) {
     if (connection) connection.invoke("MakeMove", gameId, sessionId, move);
   }, [connection]);
 
+  // send forfeit
+  const forfeitGame = useCallback((sessionId) => {
+    if (connection) connection.invoke("ForfeitGame", sessionId);
+    console.log("go forfeit : ", sessionId)
+  }, [connection]);
+
   // leave game
   const leaveGame = useCallback((sessionId) => {
+    console.log(sessionId);
     if (connection && sessionId) {
       setMessages([{ id: 0, sender: 'System', text: 'Game started!', isOwn: false }]);
       connection.invoke("LeaveGame", sessionId);
@@ -126,7 +151,7 @@ export function SignalRGameProvider({ children }) {
   }, [connection]); 
 
   return (
-    <SignalRGameContext.Provider value={{ chessState, messages, queue, leaveGame, joinGame, stopQueue, sendMessage, sendMove }}>
+    <SignalRGameContext.Provider value={{ chessState, messages, queue, leaveGame, forfeitGame, joinGame, joinBotGame, stopQueue, sendMessage, sendMove }}>
       {children}
     </SignalRGameContext.Provider>
   );

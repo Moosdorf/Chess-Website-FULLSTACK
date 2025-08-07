@@ -16,9 +16,10 @@ public class GameSession
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Player1 { get; set; } = null!;
     public string? Player2 { get; set; } = null;
-    public string WhitePlayer { get; private set; } = string.Empty;
-    public string BlackPlayer { get; private set; } = string.Empty;
+    public string WhitePlayer { get; set; } = string.Empty;
+    public string BlackPlayer { get; set; } = string.Empty;
     public bool IsReady => Player2 != null;
+    public int GameId = -1;
 
 
     public bool Initialize()

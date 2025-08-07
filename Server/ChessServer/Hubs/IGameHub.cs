@@ -6,7 +6,7 @@
 public interface IGameHub
 {
     /// <summary>
-    /// Called when a user sends a chat message to the group.
+    /// Called when a user or system sends a chat message to the group.
     /// </summary>
     /// <param name="user">The username of the sender.</param>
     /// <param name="message">The chat message.</param>
@@ -40,4 +40,10 @@ public interface IGameHub
     /// </summary>
     /// <param name="message">Queue stopped message.</param>
     Task QueueStopped(string message);
+
+    /// <summary>
+    /// Notifies the client that the game has ended.
+    /// </summary>
+    /// <param name="chessState">State of the last position.</param>
+    Task EndGame(ChessModel chessState);
 }

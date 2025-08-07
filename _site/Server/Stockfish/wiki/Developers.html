@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | bob </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | bob ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Moosdorf/Chess-Website-FULLSTACK/blob/main/Server/Stockfish/wiki/Developers.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="bob">
+            bob
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="stockfish-development-setup">Stockfish Development Setup</h2>
+<h3 id="windows">Windows</h3>
+<details>
+<summary>Show more</summary>
+<h4 id="installing-a-compiler">Installing a compiler</h4>
+<ol>
+<li><a href="https://www.msys2.org/">https://www.msys2.org/</a></li>
+<li>Download the installer</li>
+</ol>
+<p>In the MSYS2 Installer change the installation folder to:
+<code>C:\tools\msys64</code></p>
+<p>In the <code>URTC64</code> Shell run:
+<code>pacman -S --needed base-devel mingw-w64-ucrt-x86_64-toolchain</code></p>
+<h4 id="clang-format">clang-format</h4>
+<p>Download <a href="https://github.com/llvm/llvm-project/releases/download/llvmorg-18.1.8/LLVM-18.1.8-win64.exe">LLVM 18</a></p>
+<p>Run the executable and in the installer choose:
+<code>Add LLVM to the system PATH for current user</code></p>
+<h4 id="video-setup">Video Setup</h4>
+<p><em>There's a much higher quality version of this available on our <a href="https://discord.com/channels/435943710472011776/1032922913499783169/1191837643256901732">Discord</a>.</em></p>
+<p><a href="https://github.com/official-stockfish/Stockfish/assets/45608332/d0323339-21f1-4d1d-aa86-183a7e10ed06">https://github.com/official-stockfish/Stockfish/assets/45608332/d0323339-21f1-4d1d-aa86-183a7e10ed06</a></p>
+<p><em>More in depth information about various compilers can be found <a href="Compiling-from-source#windows">here</a>.</em></p>
+</details>
+<h3 id="ubuntu">Ubuntu</h3>
+<details>
+<summary>Show more</summary>
+<h4 id="installing-a-compiler-1">Installing a compiler</h4>
+<p>On Unix-like systems you will most likely have all the tools installed,<br>
+which are required to build Stockfish. Expect <code>clang-format</code> which we use to format our codebase.</p>
+<pre><code class="lang-bash">sudo apt install build-essential git
+</code></pre>
+<h4 id="clang-format-1">clang-format</h4>
+<pre><code class="lang-bash">sudo apt install clang-format-18
+</code></pre>
+</details>
+<h3 id="macos">MacOS</h3>
+<details>
+<summary>Show more</summary>
+<h4 id="installing-a-compiler-2">Installing a compiler</h4>
+<p>On MacOS you will need to install the Xcode Command Line Tools.<br>
+It is enough to run the following command in your terminal, instead of installing the full Xcode.</p>
+<pre><code class="lang-bash">sudo xcode-select --install
+</code></pre>
+<h4 id="clang-format-2">clang-format</h4>
+<pre><code class="lang-bash">brew install clang-format@17
+</code></pre>
+</details>
+<h2 id="participating-in-the-project">Participating in the project</h2>
+<p>Stockfish's improvement over the last decade has been a great community effort.
+Nowadays most development talk takes place on <a href="https://discord.gg/GWDRS3kU6R">Discord</a>.</p>
+<p>There are many ways to contribute to Stockfish:</p>
+<ul>
+<li><a href="#stockfish">Stockfish</a> (C++)</li>
+<li><a href="#fishtest">Fishtest</a> (Python)</li>
+<li><a href="#nnue-pytorch">nnue-pytorch</a> (C++ and Python)</li>
+<li><a href="#donating-hardware">Donating hardware</a></li>
+</ul>
+<h3 id="stockfish">Stockfish</h3>
+<p>If you want to contribute to Stockfish directly, you can do so in a couple of ways.<br>
+Follow the steps described in our <a href="https://github.com/official-stockfish/fishtest/wiki/Creating-my-first-test">Fishtest wiki</a> to create your first test.<br>
+It is advised to first follow the <a href="#stockfish-development-setup">development setup</a> steps for your platform.</p>
+<p>New commits to stockfish can mostly be categorised in 2 categories:</p>
+<h4 id="non-functional-changes">Non functional changes</h4>
+<p>These are changes that don't change the search behaviour and can be directly
+submitted as pull requests.</p>
+<h4 id="functional-changes">Functional changes</h4>
+<p>These change the search behaviour and lead to a different search tree.<br>
+Every functional patch (commit) has to be verified by
+<a href="https://tests.stockfishchess.org/tests">Fishtest</a>, our testing framework.</p>
+<h3 id="nnue-pytorch">NNUE Pytorch</h3>
+<p>NNUE Pytorch is the trainer for Stockfish's neural network.<br>
+Usually changes here are tested by training a new network and testing it against the current network via Fishtest.</p>
+<h3 id="donating-hardware">Donating hardware</h3>
+<p>Improving Stockfish requires a massive amount of testing.<br>
+You can donate your hardware resources by installing the <a href="https://github.com/official-stockfish/fishtest/wiki/Running-the-worker">Fishtest Worker</a> and view the current tests on <a href="https://tests.stockfishchess.org/tests">Fishtest</a>.</p>
+<h2 id="using-stockfish-in-your-own-project">Using Stockfish in your own project</h2>
+<p>First of all, you should <strong>read our <a href="#terms-of-use">Terms of Use</a></strong> and follow them carefully.</p>
+<p>Stockfish is a UCI chess engine, but what does that mean? It means that Stockfish follows the UCI protocol, which you find explained <a href="https://backscattering.de/chess/uci/">here</a> in great detail. This is the usual way of communicating with Stockfish, so you do not need to write any C++!</p>
+<p>Your next step is probably gonna be researching how you can open an executable in your programming language. You will need to write to <code>stdin</code> and listen to <code>stdout</code>, that is where Stockfish's output will end up.</p>
+<h3 id="examples">Examples</h3>
+<ul>
+<li>Python: <a href="https://python-chess.readthedocs.io/en/latest/engine.html">https://python-chess.readthedocs.io/en/latest/engine.html</a></li>
+<li>NodeJS: You can follow <a href="https://blog.logrocket.com/using-stdout-stdin-stderr-node-js/">this guide</a> on how to communicate with a program.</li>
+<li>C++: <a href="https://www.boost.org/doc/libs/1_64_0/doc/html/process.html">Boost.Process</a> can be used for easy process communication.</li>
+<li>Rust: Examine the documentation on <a href="https://doc.rust-lang.org/std/process/struct.Command.html">how to spawn a Command</a>.</li>
+</ul>
+<h3 id="limitations">Limitations</h3>
+<blockquote>
+<p>I want Stockfish to comment on the move it made, what do I need to do?</p>
+</blockquote>
+<p>That is not possible. You will have to write your own logic to create such a feature.</p>
+<blockquote>
+<p>I want to get an evaluation of the current position.</p>
+</blockquote>
+<p>While Stockfish has an <a href="UCI-&amp;-Commands#eval"><code>eval</code></a> command, it only statically evaluates positions without performing any search. A more precise evaluation is available after you use the <a href="UCI-&amp;-Commands#go"><code>go</code></a> command together with a specified limit.</p>
+<h3 id="other-resources">Other resources</h3>
+<ul>
+<li><a href="UCI-&amp;-Commands">Commands</a></li>
+<li><a href="Advanced-topics">Advanced topics</a></li>
+<li><a href="Useful-data">Useful data</a></li>
+</ul>
+<h3 id="terms-of-use">Terms of use</h3>
+<p>Stockfish is free and distributed under the <a href="https://github.com/official-stockfish/Stockfish/blob/master/Copying.txt"><strong>GNU General Public License version 3</strong></a> (GPL v3). Essentially, this means you are <strong>free to do almost exactly what you want</strong> with the program, including <strong>distributing it</strong> among your friends, <strong>making it available for download</strong> from your website, <strong>selling it</strong> (either by itself or as part of some bigger software package), or <strong>using it as the starting point</strong> for a software project of your own. This also means that you can distribute Stockfish <a href="https://www.gnu.org/licenses/gpl-faq.html#GPLInProprietarySystem">alongside your proprietary system</a>, but to do this validly, you must make sure that Stockfish and your program communicate at arm's length, that they are not combined in a way that would make them effectively a single program.</p>
+<p>The only real limitation is that whenever you distribute Stockfish in some way, <strong>you MUST always include the license and the full source code</strong> (or a pointer to where the source code can be found) to generate the exact binary you are distributing. If you make any changes to the source code, these changes must also be made available under GPL v3.</p>
+<h2 id="git-hooks">Git Hooks</h2>
+<details>
+<summary>Show more</summary>
+<p>Place the following file into <code>.git/hooks/pre-push</code> and make it executable.
+<code>chmod +x .git/hooks/pre-push</code>. This will prevent you from pushing commits that
+do not contain a Bench or 'No functional change' in the commit message.</p>
+<p>Only really useful for maintainers.</p>
+<pre><code class="lang-bash">#!/bin/bash
+
+if ! which clang-format-18 &gt;/dev/null; then
+    CLANG_FORMAT=clang-format
+else
+    CLANG_FORMAT=clang-format-18
+fi
+
+# Extracted from the Makefile
+SRCS=$(awk '/^SRCS = /{flag=1; sub(/^SRCS = /,&quot;&quot;); print} /^$/{flag=0} flag &amp;&amp; !/^SRCS = /{print}' ./src/Makefile | tr -d '\\' | xargs echo | tr ' ' '\n' | sed 's|^|./src/|')
+HEADERS=$(awk '/^HEADERS = /{flag=1; sub(/^HEADERS = /,&quot;&quot;); print} /^$/{flag=0} flag &amp;&amp; !/^HEADERS = /{print}' ./src/Makefile | tr -d '\\' | xargs echo | tr ' ' '\n' | sed 's|^|./src/|')
+
+while read local_ref local_sha remote_ref remote_sha; do
+    if [[ &quot;$remote_ref&quot; == &quot;refs/heads/master&quot; ]]; then
+        # Check open diffs
+        if [[ -n $(git status --porcelain) ]]; then
+            echo &quot;Please commit or stash your changes before pushing.&quot;
+            exit 1
+        fi
+
+        # Check formatting
+        if ! $CLANG_FORMAT --dry-run -Werror -style=file $SRCS $HEADERS; then
+            echo &quot;Please run 'make format' to fix formatting issues and rebase the last commit.&quot;
+            exit 1
+        fi
+
+        # Iterate through commits
+        for commit in $(git rev-list --no-merges $remote_sha..$local_sha); do
+            commit_msg=$(git log --format=%B -n 1 $commit)
+
+            # bench regex as defined in ci
+            # check for the existence of a bench in the commit message
+            bench_regex='\b[Bb]ench[ :]+[1-9][0-9]{5,7}\b'
+            if echo &quot;$commit_msg&quot; | grep -m 1 -o -x -E &quot;$bench_regex&quot; &gt;/dev/null; then
+                continue
+            fi
+
+            # check for the existence of &quot;No functional change&quot; in the commit message
+            no_functional_change_regex='\b[Nn]o[[:space:]][Ff]unctional[[:space:]][Cc]hange\b'
+            if echo &quot;$commit_msg&quot; | grep -o -x -E &quot;$no_functional_change_regex&quot; &gt;/dev/null; then
+                continue
+            fi
+
+            echo &quot;Commit $commit does not contain a Bench or 'No functional change'.&quot;
+            exit 1
+        done
+    fi
+done
+
+exit 0
+</code></pre>
+</details>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Moosdorf/Chess-Website-FULLSTACK/blob/main/Server/Stockfish/wiki/Developers.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

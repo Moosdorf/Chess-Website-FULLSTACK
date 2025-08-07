@@ -17,7 +17,7 @@ namespace DataLayer.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.6")
+                .HasAnnotation("ProductVersion", "9.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -33,6 +33,10 @@ namespace DataLayer.Migrations
                     b.Property<int>("BlackId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("BlackUsername")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -44,6 +48,10 @@ namespace DataLayer.Migrations
 
                     b.Property<int>("WhiteId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("WhiteUsername")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 

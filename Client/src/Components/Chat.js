@@ -1,6 +1,5 @@
 import { Button, Card, CardBody, Form, InputGroup } from "react-bootstrap";
 import {  useState } from "react";
-import { useAuth } from "../Data/AuthProvider";
 import { useSignalRGame } from "../SignalR/SingalRGameProvider";
 
 

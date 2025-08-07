@@ -2,25 +2,25 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Navbar, Nav, Container, Button, NavDropdown } from 'react-bootstrap';
 import { useAuth } from '../Data/AuthProvider';
 import ChessTypeSelection from './ChessTypeSelection';
-import { GetCookies } from '../Functions/HelperMethods';
 import { useState } from 'react';
 import { useSignalRGame } from '../SignalR/SingalRGameProvider';
 
 function ChessNavbar() {
-  const { joinGame, stopQueue, queue } = useSignalRGame(); 
+  const { joinGame, joinBotGame, stopQueue, queue } = useSignalRGame(); 
   
-  var cookies = GetCookies();
   const { user, signout } = useAuth();
   const navigate = useNavigate();
   const [showBotOptions, setShowBotOptions] = useState(false);
 
   const handleShow = () => setShowBotOptions(true);
+  
   const handleClose = () => {
       setShowBotOptions(false);
   }
+  
   const handleSelection = (playerWhite) => {
-      if (cookies.user) navigate("/chess_game", { state: { botGame: true, playerWhite: playerWhite} })
-        handleClose(true);
+    joinBotGame(playerWhite);
+    handleClose(true);
   }
 
   const handleSignOut = () => {

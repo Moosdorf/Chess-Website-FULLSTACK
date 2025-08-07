@@ -13,15 +13,15 @@ namespace DataLayer.DataServices
     {
         Task<(ChessGame, ChessInfo)> CreateGameAsync(string userName1, string userName2);
         Task<(ChessGame, ChessInfo)> CreateBotGameAsync(string userName1, bool white);
+        Task<ChessGame?> EndGame(int chessId, GameResult result);
 
-        Task<List<ChessGame>> GetMatchHistory(string username);
+        Task<(List<ChessGameHistoryDTO>, int)> GetMatchHistory(string username);
         Task<bool> MoveAsync(int chessId, string move, string FEN);
 
         public ChessModel CreateChessModel(ChessInfo chessState, ChessGame game, string sessionId);
 
         bool RemoveLastMove(int chessId);
 
-        ChessGame EndGame(int chessId);
 
 
         IList<ChessGame> GetGames();

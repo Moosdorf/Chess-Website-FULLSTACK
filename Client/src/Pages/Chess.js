@@ -54,7 +54,6 @@ function Chess() {
     var location = useLocation();
 
     const botGame = location.state?.botGame ?? false;
-    const playerWhite = location.state?.playerWhite ?? false;
 
     const [reversed, setReversed] = useState(false);
     const [chessBoardHistory, setChessBoardHistory] = useState([]); 
@@ -64,7 +63,6 @@ function Chess() {
         return () => {
             console.log("leave the game");
             leaveGame(chessState.sessionId); 
-            
         };
     }, []);
 

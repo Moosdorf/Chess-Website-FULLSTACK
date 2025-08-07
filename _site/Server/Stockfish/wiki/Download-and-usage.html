@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title> | bob </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content=" | bob ">
+      
+      
+      <link rel="icon" href="../../../favicon.ico">
+      <link rel="stylesheet" href="../../../public/docfx.min.css">
+      <link rel="stylesheet" href="../../../public/main.css">
+      <meta name="docfx:navrel" content="../../../toc.html">
+      <meta name="docfx:tocrel" content="../../toc.html">
+      
+      <meta name="docfx:rel" content="../../../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/Moosdorf/Chess-Website-FULLSTACK/blob/main/Server/Stockfish/wiki/Download-and-usage.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../../../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../../../index.html">
+            <img id="logo" class="svg" src="../../../logo.svg" alt="bob">
+            bob
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+
+<h2 id="download-stockfish">Download Stockfish</h2>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Stockfish is a <a href="Stockfish-FAQ#executing-stockfish-opens-a-cmd-window"><strong>command line program</strong></a>. You may want to use it in your own UCI-compatible <a href="#download-a-chess-gui">chess GUI</a>.<br>
+Developers should communicate with Stockfish via the <a href="UCI-&amp;-Commands#standard-commands">UCI protocol</a>.</p>
+</div>
+<h3 id="get-started">Get started</h3>
+<ol>
+<li>First <a href="#official-downloads">download</a> Stockfish. Stockfish itself is <em>completely free</em> with all its options.</li>
+<li>Next, <a href="#download-a-chess-gui">download a GUI</a> (Graphical User Interface) as it is needed to conveniently use Stockfish. There are multiple free and commercial GUIs available. Different GUI's have more or less advanced features, for example, an opening explorer or automatic game analysis.</li>
+<li>Now Stockfish must be made available to the GUI. <a href="#install-in-a-chess-gui">Install in a Chess GUI</a> explains how this can be done for some of them. If a different GUI is used, please read the GUI's manual.</li>
+<li>Ultimately, change the default <a href="#change-settings">settings</a> of Stockfish to get the <a href="Stockfish-FAQ#optimal-settings">best possible analysis</a>.</li>
+</ol>
+<hr>
+<h3 id="official-downloads">Official downloads</h3>
+<h4 id="latest-release">Latest release</h4>
+<ul>
+<li><a href="https://stockfishchess.org/download/">https://stockfishchess.org/download/</a></li>
+<li><a href="https://github.com/official-stockfish/Stockfish/releases/latest">https://github.com/official-stockfish/Stockfish/releases/latest</a></li>
+</ul>
+<h4 id="latest-development-build">Latest development build</h4>
+<ul>
+<li><a href="https://github.com/official-stockfish/Stockfish/releases?q=prerelease%3Atrue">https://github.com/official-stockfish/Stockfish/releases?q=prerelease%3Atrue</a></li>
+</ul>
+<div class="NOTE">
+<h5>Note</h5>
+<p>We <strong>only</strong> recommend downloading from the <a href="https://github.com/official-stockfish/Stockfish/releases?q=prerelease%3Atrue">official GitHub releases</a>.<br>
+Websites such as Abrok are third parties, so we cannot guarantee the safety, reliability, and availability of those binaries because we are not responsible for them.</p>
+</div>
+<h3 id="choose-a-binary">Choose a binary</h3>
+<p>In order of preference:</p>
+<ol>
+<li>x86-64-vnni512</li>
+<li>x86-64-vnni256</li>
+<li>x86-64-avx512
+<ul>
+<li>AMD Zen 4+</li>
+</ul>
+</li>
+<li>x86-64-bmi2
+<ul>
+<li>Intel (2013+) and AMD Zen 3+</li>
+</ul>
+</li>
+<li>x86-64-avx2
+<ul>
+<li>Intel (2013+) and AMD (2015+)</li>
+</ul>
+</li>
+<li>x86-64-sse41-popcnt
+<ul>
+<li>Intel (2008+) and AMD (2011+)</li>
+</ul>
+</li>
+<li>x86-64</li>
+</ol>
+<hr>
+<h2 id="download-a-chess-gui">Download a Chess GUI</h2>
+<p>A chess graphical user interface allows you to interact with the engine in a user-friendly way. Popular GUIs are:</p>
+<h3 id="free">Free</h3>
+<h4 id="computer">Computer</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong><a href="https://www.encroissant.org/">En Croissant</a></strong> (<a href="https://github.com/franciscoBSalgueiro/en-croissant">source code</a>)<br><a href="#en-croissant">How to install Stockfish</a><br><a href="#en-croissant-1">Change settings</a></th>
+<th style="text-align: left;"><strong><a href="https://github.com/rooklift/nibbler/releases/latest">Nibbler</a></strong> (<a href="https://github.com/rooklift/nibbler">source code</a>)<br><a href="#nibbler">How to install Stockfish</a><br><a href="#nibbler-1">Change settings</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/e7b46c8a-6d96-49c7-b3a3-885a7a450037"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/e7b46c8a-6d96-49c7-b3a3-885a7a450037" alt=""></a></td>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/06d67bf8-4ed8-466f-a79d-c185c6103d51"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/06d67bf8-4ed8-466f-a79d-c185c6103d51" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><a href="http://www.playwitharena.de/">Arena</a></strong><br><a href="#arena">How to install Stockfish</a><br><a href="#arena-1">Change settings</a></td>
+<td style="text-align: left;"><strong><a href="https://github.com/fitztrev/lichess-tauri/releases/latest">Lichess Local Engine</a></strong> (<a href="https://github.com/fitztrev/lichess-tauri">source code</a>) (<strong>WIP</strong>)<br><a href="#lichess-local-engine">How to install Stockfish</a><br><a href="#lichess">Change settings</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/c166fda2-2fd2-45e2-9239-d24222e5fb71"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/c166fda2-2fd2-45e2-9239-d24222e5fb71" alt=""></a></td>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/c5737058-befc-442f-8d65-75f151232269"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/c5737058-befc-442f-8d65-75f151232269" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><a href="https://banksiagui.com/download/">BanksiaGUI</a></strong></td>
+<td style="text-align: left;"><strong><a href="https://github.com/cutechess/cutechess/releases/latest">Cutechess</a></strong> (<a href="https://github.com/cutechess/cutechess">source code</a>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/8aae852c-31f7-4e47-998f-4086fb19681c"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/8aae852c-31f7-4e47-998f-4086fb19681c" alt=""></a></td>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/67b6a236-3c50-4808-ad41-51a6c6299453"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/67b6a236-3c50-4808-ad41-51a6c6299453" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><a href="https://chessx.sourceforge.io">ChessX</a></strong> (<a href="https://sourceforge.net/projects/chessx/">source code</a>)</td>
+<td style="text-align: left;"><strong><a href="https://github.com/ml-research/liground/releases/latest">LiGround</a></strong> (<a href="https://github.com/ml-research/liground">source code</a>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/e0b3df75-ad90-4edf-a70e-b7781db7eca7"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/e0b3df75-ad90-4edf-a70e-b7781db7eca7" alt=""></a></td>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/75692235-227a-415f-8e39-1d8f21c36d92"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/75692235-227a-415f-8e39-1d8f21c36d92" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><a href="https://lucaschess.pythonanywhere.com/downloads">Lucas Chess</a></strong> (<a href="https://github.com/lukasmonk/lucaschessR2">source code</a>)</td>
+<td style="text-align: left;"><strong><a href="https://scidvspc.sourceforge.net/#toc3">Scid vs. PC</a></strong> (<a href="https://sourceforge.net/projects/scidvspc/">source code</a>)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/f4cf7eed-b74f-4e04-b962-fa44a3f2cba5"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/f4cf7eed-b74f-4e04-b962-fa44a3f2cba5" alt=""></a></td>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/d3d9ad5d-29f7-4675-be68-306195e53ca3"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/d3d9ad5d-29f7-4675-be68-306195e53ca3" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><a href="https://www.gnu.org/software/xboard/#download">XBoard</a></strong> (<a href="https://ftp.gnu.org/gnu/xboard/">source code</a>)</td>
+<td style="text-align: left;"><strong><a href="https://bitbucket.org/hrimfaxi/jose">jose</a></strong> (<a href="https://bitbucket.org/hrimfaxi/jose/src/main">source code</a>) <br><a href="#jose">How to install Stockfish</a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/e336adf5-b5d7-47b4-81d2-5c276d174648"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/e336adf5-b5d7-47b4-81d2-5c276d174648" alt=""></a></td>
+<td style="text-align: left;"><img src="https://hrimfaxi.bitbucket.io/jose/images/shots/shot01.png" alt="jose"></td>
+</tr>
+</tbody>
+</table>
+<h4 id="mobile">Mobile</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong><a href="https://f-droid.org/packages/org.petero.droidfish/">DroidFish</a></strong> (<a href="https://github.com/peterosterlund2/droidfish">source code</a>)</th>
+<th style="text-align: left;"><strong><a href="https://apps.apple.com/us/app/smallfish-chess-for-stockfish/id675049147">SmallFish</a></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/f575a217-2153-45e3-be1d-223d4344fd44"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/f575a217-2153-45e3-be1d-223d4344fd44" alt=""></a></td>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/0ec44c5b-82de-4fb4-a662-63615a4a971a"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/0ec44c5b-82de-4fb4-a662-63615a4a971a" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><a href="https://play.google.com/store/apps/details?id=com.chessimprovement.chessis">Chessis</a></strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/fdcc0c02-5fe7-4b67-8fdf-ab3be4e7b4cd"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/fdcc0c02-5fe7-4b67-8fdf-ab3be4e7b4cd" alt=""></a></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="paid">Paid</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong><a href="https://shop.chessbase.com/en/categories/chessprogramms">Chessbase</a></strong></th>
+<th style="text-align: left;"><strong><a href="https://www.hiarcs.com/chess-explorer.html">Hiarcs</a></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/3fd2f64d-bb04-4b8e-b193-3aa53033d897"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/3fd2f64d-bb04-4b8e-b193-3aa53033d897" alt=""></a></td>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/a1e7a951-a743-4e04-9029-c97f2550a773"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/a1e7a951-a743-4e04-9029-c97f2550a773" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><a href="https://www.shredderchess.com/">Shredder</a></strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/66d0186c-9286-466e-95b5-8f88cbeb9214"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/66d0186c-9286-466e-95b5-8f88cbeb9214" alt=""></a></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<h3 id="online">Online</h3>
+<div class="NOTE">
+<h5>Note</h5>
+<p>If you don't want to download a GUI, you can also use some of the available online interfaces. Keep in mind that you might not get the latest version of Stockfish, settings might be limited and speed will be slower.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"><strong><a href="https://lichess.org/analysis">Lichess</a></strong><br><a href="#lichess">Change settings</a></th>
+<th style="text-align: left;"><strong><a href="https://www.chess.com/analysis">Chess.com</a></strong><br><a href="#chesscom">Change settings</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/cc6ea148-2a1a-4b61-a4fa-6af3b076e408"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/cc6ea148-2a1a-4b61-a4fa-6af3b076e408" alt=""></a></td>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/f5b31849-0429-45d0-8dbc-758959352f9b"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/f5b31849-0429-45d0-8dbc-758959352f9b" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><a href="https://www.chessmonitor.com/explorer">ChessMonitor</a></strong></td>
+<td style="text-align: left;"><strong><a href="https://chessify.me/analysis">Chessify</a></strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/d4f6d61b-3492-4c1f-998d-99d82252fd89"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/d4f6d61b-3492-4c1f-998d-99d82252fd89" alt=""></a></td>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/36cee80d-f63c-4ff9-97e9-5d51539589a8"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/36cee80d-f63c-4ff9-97e9-5d51539589a8" alt=""></a></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong><a href="https://app.decodechess.com/">DecodeChess</a></strong></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="https://github.com/official-stockfish/Stockfish/assets/63931154/20042d29-b50b-4d37-b8f7-e6fb65c18e6a"><img src="https://github.com/official-stockfish/Stockfish/assets/63931154/20042d29-b50b-4d37-b8f7-e6fb65c18e6a" alt=""></a></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="install-in-a-chess-gui">Install in a Chess GUI</h2>
+<h3 id="en-croissant">En Croissant</h3>
+<p>Engines tab &gt; Add new &gt; Install Stockfish</p>
+<p><img src="https://github.com/user-attachments/assets/4bf61e37-5a69-4059-ba3e-f7c2f5020aee" alt="encroissant_install"></p>
+<h3 id="arena">Arena</h3>
+<ol>
+<li><p>Engines &gt; Install New Engine...</p>
+<p><img src="https://user-images.githubusercontent.com/63931154/206901675-33341f5f-03c7-4ca1-aaa5-185a2a7f5b83.png" alt="arena_install_1"></p>
+</li>
+<li><p>Select and open the Stockfish executable</p>
+<p><img src="https://user-images.githubusercontent.com/63931154/206901703-a6538e9f-352b-4a6e-9c89-be804d57f010.png" alt="arena_install_2"></p>
+</li>
+</ol>
+<h3 id="nibbler">Nibbler</h3>
+<ol>
+<li><p>Engine &gt; Choose engine...</p>
+<p><img src="https://user-images.githubusercontent.com/63931154/206902163-8a92d15c-0793-4b1a-9f9c-c5d8a9dd294e.png" alt="nibbler_install_1"></p>
+</li>
+<li><p>Select and open the Stockfish executable</p>
+<p><img src="https://user-images.githubusercontent.com/63931154/206902197-0062badd-3d12-45dd-b19f-918edfbb22ca.png" alt="nibbler_install_2"></p>
+</li>
+</ol>
+<h3 id="lichess-local-engine">Lichess Local Engine</h3>
+<ol>
+<li><p>Log in with Lichess</p>
+<p><img src="https://user-images.githubusercontent.com/63931154/232722746-b85d345f-e455-4d62-ad33-98d29756d51c.png" alt="lichesslocalengine_install_1"></p>
+<p><img src="https://user-images.githubusercontent.com/63931154/232723150-5e51029a-b345-4789-b12d-beef91c7e835.png" alt="lichesslocalengine_install_2"></p>
+</li>
+<li><p>Click the Install Stockfish button</p>
+<p><img src="https://user-images.githubusercontent.com/63931154/232723405-8c15861d-578d-432b-a009-362d63bd69d0.png" alt="lichesslocalengine_install_3"></p>
+</li>
+<li><p>Go to the Lichess analysis page</p>
+<p><a href="https://lichess.org/analysis">https://lichess.org/analysis</a></p>
+</li>
+<li><p>Select the engine from the engine list</p>
+<p><img src="https://github.com/user-attachments/assets/9bcaccfb-9eb1-43a6-9379-c118f2ac77bf" alt="lichesslocalengine_install_4"></p>
+</li>
+</ol>
+<h3 id="jose">jose</h3>
+<p>Stockfish is already bundled with jose. To enable it for play and analysis do:</p>
+<ol>
+<li>Edit &gt; Options (F9)</li>
+<li>select the 'Engine' tab</li>
+<li>select Stockfish in the list of engines</li>
+<li>below, you can edit all the engine parameters</li>
+</ol>
+<hr>
+<h2 id="change-settings">Change settings</h2>
+<div class="NOTE">
+<h5>Note</h5>
+<p>Please check our <a href="Stockfish-FAQ#optimal-settings">FAQ guide</a> to set the optimal settings.</p>
+</div>
+<h3 id="arena-1">Arena</h3>
+<div class="NOTE">
+<h5>Note</h5>
+<p>First uncheck these two settings</p>
+<p><img src="https://github.com/user-attachments/assets/c33d0e80-611a-4044-8f3f-04b18268e098" alt="arena_settings_note"></p>
+</div>
+<p>Right click in the engine name &gt; Configure</p>
+<p><img src="https://user-images.githubusercontent.com/63931154/206901924-aad83991-dfde-4083-a29c-a565effca034.png" alt="arena_settings_1">
+<img src="https://user-images.githubusercontent.com/63931154/206913983-82b8cf42-2a03-4896-9511-3472b1185a7e.png" alt="arena_settings_2">
+<img src="https://github.com/user-attachments/assets/aa0ae3fa-1848-4c54-953c-090a860471e8" alt="arena_settings_3"></p>
+<h3 id="nibbler-1">Nibbler</h3>
+<p>Open the Engine menu</p>
+<p><img src="https://user-images.githubusercontent.com/63931154/206902419-4a2a5580-2d66-4ea1-97f2-93bc2ff846bd.png" alt="nibbler_settings_1"></p>
+<h3 id="en-croissant-1">En Croissant</h3>
+<p>Select Stockfish in the engines tab</p>
+<p><img src="https://github.com/user-attachments/assets/e6d8dec3-9a1e-4171-8b6e-ffac9bd51cea" alt="encroissant_settings_1"></p>
+<p>or open the engine settings in the Analysis board</p>
+<p><img src="https://github.com/user-attachments/assets/e20112a3-d627-46d1-8423-93c39b17f4b5" alt="encroissant_settings_2"></p>
+<h3 id="lichess">Lichess</h3>
+<p>Open the engine settings</p>
+<p><img src="https://github.com/user-attachments/assets/d2f48f41-1c68-4e14-902b-cb1f270618e6" alt="lichess_settings_1"></p>
+<h3 id="chesscom">Chess.com</h3>
+<p>Click the settings button in the <a href="https://www.chess.com/analysis?tab=analysis">analysis page</a></p>
+<p><img src="https://github.com/user-attachments/assets/c2be2d17-9be4-4e32-a17c-9bdb8e456944" alt="chesscom_settings_1">
+<img src="https://github.com/user-attachments/assets/3ee3ce21-fb11-4443-84fc-20c2d7e41166" alt="chesscom_settings_2"></p>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/Moosdorf/Chess-Website-FULLSTACK/blob/main/Server/Stockfish/wiki/Download-and-usage.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

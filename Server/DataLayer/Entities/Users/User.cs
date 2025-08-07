@@ -14,7 +14,7 @@ public class User
 
 
     // need both in order to link players
-    public List<ChessGame> WhiteGames { get; set; } = null!;
-    public List<ChessGame> BlackGames { get; set; } = null!;
+    public List<ChessGame> WhiteGames { get; set; } = [];
+    public List<ChessGame> BlackGames { get; set; } = [];
 
 }

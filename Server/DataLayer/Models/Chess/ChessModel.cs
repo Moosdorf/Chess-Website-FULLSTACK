@@ -15,5 +15,6 @@ public class ChessModel
     public List<string> BlockCheckPositions { get; set; } = [];
     public string FEN { get; set; } = "";
     public string LastMove { get; set; } = "";
+    public bool GameDone { get; set; } = false;
 
 }

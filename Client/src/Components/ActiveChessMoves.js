@@ -1,9 +1,11 @@
 import { Button, ButtonGroup, Card, CardBody, ListGroup } from "react-bootstrap";
 import { ChessContext } from '../Pages/Chess';
 import { useContext, useEffect, useRef } from "react";
+import { useSignalRGame } from "../SignalR/SingalRGameProvider";
 
 function ActiveChessMoves() {
     const { chessState, chessBoardHistory } = useContext(ChessContext);
+    const { forfeitGame } = useSignalRGame();
     
     const listEndRef = useRef(null);
 
@@ -40,7 +42,7 @@ function ActiveChessMoves() {
                 <ButtonGroup>
                     <Button className='move-nav-btn'>{"Abort"}</Button>
                     <Button className='move-nav-btn'>{"Draw"}</Button>
-                    <Button className='move-nav-btn'>{"Forfeit"}</Button>
+                    <Button onClick={() => forfeitGame(chessState.sessionId)} className='move-nav-btn'>{"Forfeit"}</Button>
                 </ButtonGroup>
             </Card>)
 

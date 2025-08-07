@@ -10,6 +10,7 @@ using System.IO.Pipelines;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace DataLayer.DataServices;
 
@@ -41,6 +42,8 @@ public class ChessDataService : IChessDataService
         var chessBoard = new ChessInfo();
         var dbEntryChessGame = new ChessGame()
         {
+            WhiteUsername = player1.Username,
+            BlackUsername = player2.Username,
             WhitePlayer = player1,
             BlackPlayer = player2,
             GameType = GameType.Multiplayer
@@ -60,10 +63,12 @@ public class ChessDataService : IChessDataService
         var chessBoard = new ChessInfo();
         var dbEntryChessGame = new ChessGame()
         {
-            WhiteId = (!white) ? player1.Id : botPlayer.Id,
+            WhiteId = (white) ? player1.Id : botPlayer.Id,
             WhitePlayer = (white) ? player1 : botPlayer,
             BlackId = (!white) ? player1.Id : botPlayer.Id,
             BlackPlayer = (!white) ? player1 : botPlayer,
+            WhiteUsername = (white) ? player1.Username : botPlayer.Username,
+            BlackUsername = (!white) ? player1.Username : botPlayer.Username,
 
             GameType = GameType.Bot
         };
@@ -86,7 +91,19 @@ public class ChessDataService : IChessDataService
         var result = await _db.SaveChangesAsync() > 0;
         return result;
     }
+    public async Task<ChessGame?> EndGame(int chessId, GameResult result)
+    {
+        ChessGame game = _db.ChessGames.FirstOrDefault(x => x.Id == chessId);
+        if (game == null) return null;
+        Console.WriteLine("chess id: " + chessId);
+        game.Result = result;
+        Console.WriteLine("game results: " + result);
+        var saved = await _db.SaveChangesAsync() > 0;
+        Console.WriteLine("saved");
 
+        if (saved) return game;
+        return null;
+    } 
     public ChessModel CreateChessModel(ChessInfo chessState, ChessGame game, string sessionId) 
     {
         var isWhite = chessState.Turn == "w";
@@ -98,44 +115,57 @@ public class ChessDataService : IChessDataService
 
         var pieces = (isWhite) ? chessState.WhitePieces : chessState.BlackPieces;
         // if game is done
-        gameDone = !pieces.Any(x => x.AvailableMoves.Count > 0 || x.AvailableCaptures.Count > 0);
+        bool availableMoves = !pieces.Any(x => x.AvailableMoves.Count > 0 || x.AvailableCaptures.Count > 0);
 
-        if (inCheck)
+
+        if (availableMoves)
         {
-            pieces.ForEach(x => Console.WriteLine(x));
+            gameDone = true;
+            // draw
         }
-        if (gameDone && inCheck)
+
+        if (!availableMoves && inCheck)
         {
-            // if game done and someone lost
+            gameDone = true;
+            // a player has won
         }
+
+        if (game.Result != GameResult.Ongoing) gameDone = true;
 
         var currentPlayer = (isWhite) ? game.WhitePlayer.Username : game.BlackPlayer.Username;
 
         return new ChessModel
-            { SessionId = sessionId, CurrentPlayer = currentPlayer, Players = [game.WhitePlayer.Username, game.BlackPlayer.Username] , LastMove = chessState.LastMove, Chessboard = chessState.GameBoard, FEN = ChessMethods.GenerateFEN(chessState), Id = game.Id, IsWhite = isWhite, Check = inCheck, CheckMate = gameDone, BlockCheckPositions = blockers };
+            { SessionId = sessionId, CurrentPlayer = currentPlayer, Players = [game.WhitePlayer.Username, game.BlackPlayer.Username] , LastMove = chessState.LastMove, Chessboard = chessState.GameBoard, FEN = ChessMethods.GenerateFEN(chessState), Id = game.Id, IsWhite = isWhite, Check = inCheck, CheckMate = gameDone, BlockCheckPositions = blockers, GameDone = gameDone };
     }
 
-    public async Task<List<ChessGame>> GetMatchHistory(string username)
+    public async Task<(List<ChessGameHistoryDTO>, int)> GetMatchHistory(string username)
     {
-        Console.WriteLine("getting history");
-        var user = await _db.Users
-            .Include(u => u.WhiteGames)
-            .Include(u => u.BlackGames)
-            .FirstOrDefaultAsync(u => u.Username == username);
+        var gamesCount = _db.ChessGames
+            .Where(g => g.WhitePlayer.Username == username || g.BlackPlayer.Username == username).Count();
 
-        if (user == null) return new List<ChessGame>();
-        Console.WriteLine("conact");
-        ///        var games = user.WhiteGames.SelectMany(x => ).Concat(user.BlackGames.SelectMany(x => x.Moves));
-        //     var games = ;
+        var games = await _db.ChessGames
+            .Where(g => g.WhitePlayer.Username == username || g.BlackPlayer.Username == username)
+            .OrderByDescending(g => g.Id)
+            .Skip(0)
+            .Take(5)
+            .Select(g => new ChessGameHistoryDTO
+            {
+                Id = g.Id,
+                WhitePlayer = g.WhitePlayer.Username ?? "Unknown",
+                BlackPlayer = g.BlackPlayer.Username ?? "Unknown",
+                Moves = g.Moves,
+                Winner = (g.Result == 0) ? g.WhitePlayer.Username : g.BlackPlayer.Username,
+                FEN = g.Moves.Count() > 0 ? g.Moves.OrderBy(m => m.Id).Last().FEN : "",
+            })
+            .OrderByDescending(g => g.Id)
+            .ToListAsync();
 
-        return [];
+
+        if (games.Count == 0 || games == null) return ([],0);
+
+
+        return (games, gamesCount);
     }
-
-    public ChessGame EndGame(int chessId)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<ChessGame?> GetGameAsync(int chessId)
     {
         var game = await _db.ChessGames

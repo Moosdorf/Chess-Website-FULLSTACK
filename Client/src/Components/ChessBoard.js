@@ -12,7 +12,7 @@ function ChessBoard() {
     const { reversed, chessState } = useContext(ChessContext);
     const chessBoardDisplay = reversed ? [...chessState.board].reverse() : chessState.board;
     var ourTurn = cookies.user === chessState.currentPlayer;
-
+    if (chessState.gameDone) return (<div>gamedone</div>)
     return (
         <ChessBoardContext.Provider value={{selectedPiece, setSelectedPiece, ourTurn}}>
             <div className='wrapper'>

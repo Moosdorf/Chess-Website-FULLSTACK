@@ -24,8 +24,10 @@ public class ChessGame
     public GameType GameType { get; set; }
 
     public int WhiteId { get; set; }
+    public string WhiteUsername { get; set; } 
     public User WhitePlayer { get; set; } = null!; // remove null when ready
     public int BlackId { get; set; }
+    public string BlackUsername { get; set; }
     public User BlackPlayer { get; set; } = null!;
 
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

@@ -1,7 +1,9 @@
 ﻿using DataLayer.DataServices;
 using DataLayer.Entities.Chess;
+using DataLayer.Entities.Users;
 using DataLayer.HelperMethods;
 using DataLayer.HubServices;
+using DataLayer.IDataServices;
 using DataLayer.Models.Chess;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,11 +19,13 @@ public class GameHub : Hub<IGameHub>
 {
     private readonly IGameManager _gameManager;
     private readonly IChessDataService _chessDataService;
+    IStockFishService stockFish;
 
-    public GameHub(IGameManager gameManager, IChessDataService chessDataService)
+    public GameHub(IGameManager gameManager, IChessDataService chessDataService, IStockFishService stockFishService)
     {
         _gameManager = gameManager;
         _chessDataService = chessDataService;
+        stockFish = stockFishService;
     }
 
     public override async Task OnDisconnectedAsync(Exception? ex)
@@ -51,13 +55,26 @@ public class GameHub : Hub<IGameHub>
 
     public async Task LeaveGame(string sessionId)
     {
-        Console.WriteLine("leave game: " + sessionId);
+        Console.WriteLine("leave game: ");
+
         var username = Context.User?.FindFirst(ClaimTypes.Name)?.Value;
-        if (username != null) _gameManager.RemoveUserFromSession(username);
+        if (username == null) return;
+        Console.WriteLine("user name: " + username);
+
+
+        var session = _gameManager.GetSession(username);
+        if (session == null) return;
+        Console.WriteLine("session " + session.Id);
+            
+
+        var result = (session.WhitePlayer == username) ? GameResult.BlackWin : GameResult.WhiteWin;
+        _gameManager.RemoveUserFromSession(username);
+
+        await _chessDataService.EndGame(session.GameId, result);
         await Groups.RemoveFromGroupAsync(Context.ConnectionId, sessionId);
         await Clients.Group(sessionId).ReceiveMessage("System", "Opponent has left");
-
     }
+
     public async Task StopQueue()
     {
         var username = Context.User?.FindFirst(ClaimTypes.Name)?.Value;
@@ -90,28 +107,128 @@ public class GameHub : Hub<IGameHub>
             Console.WriteLine("session not null!");
             // session found, add this user to the session and initialize the session (will set values like who is black).
 
-            _gameManager.JoinGame(session.Id, user);
+
+            (ChessGame game, ChessInfo chessState) = await _chessDataService.CreateGameAsync(session.WhitePlayer, session.BlackPlayer);
+            if (game == null) return;
+
+            _gameManager.JoinGame(session.Id, game, user);
             
             // add player 2 to the existing group
             await Groups.AddToGroupAsync(Context.ConnectionId, session.Id);
 
             // create the game (adding to database) and send the state to the users.
-            (ChessGame game, ChessInfo chessState) = await _chessDataService.CreateGameAsync(session.WhitePlayer, session.BlackPlayer);
             await Clients.Group(session.Id).GameReady(_chessDataService.CreateChessModel(chessState, game, session.Id));
         }
+    }
+    public async Task JoinBotGame(string user, bool isWhite)
+    {
+        Console.WriteLine("trying to join a bot game");
+        var session = _gameManager.CreateGame(user);
+
+
+        (ChessGame game, ChessInfo chessState) = await _chessDataService.CreateBotGameAsync(user, isWhite);
+
+
+        _gameManager.JoinBotGame(session.Id, game, "stockfish");
+
+        // create the game (adding to database) and send the state to the users.
+        await Clients.Caller.GameReady(_chessDataService.CreateChessModel(chessState, game, session.Id));
+
+        if (!isWhite) await MakeBotMove(game.Id, session.Id);
+    }
+
+
+    public async Task MakeBotMove(int gameId, string sessionId)
+    {
+        ChessGame? game = await _chessDataService.GetGameAsync(gameId);
+        if (game == null)
+        {
+            await Clients.Caller.BadMove("Game null");
+            return;
+        }
+
+        ChessInfo chessState;
+        // create chess state from moves
+        if (game.Moves.Count > 0)
+        {
+            chessState = new ChessInfo(game.Moves.Last().FEN); // find last moves FEN to create state from
+        }
+        else
+        {
+            chessState = new ChessInfo();
+        }
+
+
+        var lastFEN = ChessMethods.GenerateFEN(chessState);
+
+
+        Console.WriteLine(lastFEN);
+        var stockFishMove = stockFish.MoveFrom(lastFEN);
+
+        // validate if the move can be made
+        var canMove = chessState.Move(stockFishMove);
+        if (!canMove) await Clients.Caller.BadMove("Cannot make move - dataservice");
+
+        var FEN = ChessMethods.GenerateFEN(chessState);
+
+        // change in the database
+        var moveMade = await _chessDataService.MoveAsync(gameId, stockFishMove.Move, FEN);
+        if (!moveMade) await Clients.Caller.BadMove("Cannot make move - database");
+        await Clients.Caller.ReceiveMove(_chessDataService.CreateChessModel(chessState, game, sessionId));
+    }
+
+    public async Task ForfeitGame(string sessionId)
+    {
+        Console.WriteLine("forfeit game: ");
+
+        var username = Context.User?.FindFirst(ClaimTypes.Name)?.Value;
+        if (username == null) return;
+        Console.WriteLine("user name: " + username);
+
+
+        var session = _gameManager.GetSession(username);
+        if (session == null) return;
+        Console.WriteLine("session " + session.Id);
+
+        var result = (session.WhitePlayer == username) ? GameResult.BlackWin : GameResult.WhiteWin;
+        await _chessDataService.EndGame(session.GameId, result);
+
+        ChessInfo chessState;
+        ChessGame? game = await _chessDataService.GetGameAsync(session.GameId);
+
+        if (game != null && game.Moves.Count > 0)
+        {
+            chessState = new ChessInfo(game.Moves.Last().FEN); // find last moves FEN to create state from
+        }
+        else
+            chessState = new ChessInfo();
+
+        Console.WriteLine(game.Id);
+
+        await Clients.Group(sessionId).EndGame(_chessDataService.CreateChessModel(chessState, game, sessionId));
+        await Clients.Group(sessionId).ReceiveMessage("System", $"{username} has forfeit the game");
+        Console.WriteLine("sent messages to user");
     }
 
     public async Task MakeMove(int gameId, string sessionId, MoveModel move)
     {
         try
         {
-            Console.WriteLine("making move");
             ChessGame? game = await _chessDataService.GetGameAsync(gameId);
             // check if user is part of the game here if (game.player1 || game.player2 == moveModel.id???) return BadRequest("user not part of game");
-            if (game == null) await Clients.Caller.BadMove("Game null");
+            if (game == null)
+            {
+                await Clients.Caller.BadMove("Game null");
+                return;
+            }
+            if (game.Result != GameResult.Ongoing)
+            {
+                await Clients.Caller.BadMove("Game is already done");
+                return;
+            }
 
             ChessInfo chessState;
-            // create chess state from moves
+
             if (game.Moves.Count > 0)
             {
                 chessState = new ChessInfo(game.Moves.Last().FEN); // find last moves FEN to create state from
@@ -128,7 +245,14 @@ public class GameHub : Hub<IGameHub>
             // change in the database
             var moveMade = await _chessDataService.MoveAsync(gameId, move.Move, FEN);
             if (!moveMade) await Clients.Caller.BadMove("Database fail");
-            await Clients.Group(sessionId).ReceiveMove(_chessDataService.CreateChessModel(chessState, game, sessionId));
+
+
+            if (game.BlackPlayer.Username == "stockfish" || game.WhitePlayer.Username == "stockfish")
+            {
+                await Clients.Caller.ReceiveMove(_chessDataService.CreateChessModel(chessState, game, sessionId));
+                await MakeBotMove(game.Id, sessionId);
+            }
+            else await Clients.Group(sessionId).ReceiveMove(_chessDataService.CreateChessModel(chessState, game, sessionId));
         } catch (Exception ex)
         {
             Console.WriteLine($"MakeMove Exception: {ex}");

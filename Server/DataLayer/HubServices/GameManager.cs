@@ -8,8 +8,10 @@ public interface IGameManager
 {
     GameSession? FindWaitingGame();
     GameSession CreateGame(string player);
-    GameSession JoinGame(string gameId, string player);
+    GameSession JoinGame(string sessionId, ChessGame game, string player);
+    GameSession JoinBotGame(string sessionId, ChessGame game, string player);
     string? GetSessionId(string username);
+    GameSession? GetSession(string username);
     void RemoveUserFromSession(string username);
 
 }
@@ -28,12 +30,23 @@ public class GameManager : IGameManager
         return session;
     }
 
-    public GameSession JoinGame(string gameId, string player)
+    public GameSession JoinGame(string sessionId, ChessGame game, string player)
     {
-        var game = _games.First(g => g.Id == gameId);
-        game.Player2 = player;
-        game.Initialize();
-        return game;
+        var session = _games.First(g => g.Id == sessionId);
+        session.GameId = game.Id;
+        session.Player2 = player;
+        session.Initialize();
+        return session;
+    }
+
+    public GameSession JoinBotGame(string sessionId, ChessGame game, string player)
+    {
+        var session = _games.First(g => g.Id == sessionId);
+        session.GameId = game.Id;
+        session.Player2 = player;
+        session.WhitePlayer = game.WhiteUsername;
+        session.BlackPlayer = game.BlackUsername;
+        return session;
     }
 
     public string? GetSessionId(string username)
@@ -45,7 +58,7 @@ public class GameManager : IGameManager
         return null;
     }
 
-    private GameSession? GetSession(string username)
+    public GameSession? GetSession(string username)
     {
         var session = _games.FirstOrDefault(x => (x.Player1 == username || x.Player2 == username));
 
