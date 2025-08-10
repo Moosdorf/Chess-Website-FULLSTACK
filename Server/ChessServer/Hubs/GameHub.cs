@@ -107,11 +107,12 @@ public class GameHub : Hub<IGameHub>
             Console.WriteLine("session not null!");
             // session found, add this user to the session and initialize the session (will set values like who is black).
 
-
+            _gameManager.JoinGameSession(session.Id, user);
             (ChessGame game, ChessInfo chessState) = await _chessDataService.CreateGameAsync(session.WhitePlayer, session.BlackPlayer);
+            session.GameId = game.Id;
             if (game == null) return;
 
-            _gameManager.JoinGame(session.Id, game, user);
+            
             
             // add player 2 to the existing group
             await Groups.AddToGroupAsync(Context.ConnectionId, session.Id);
@@ -130,6 +131,7 @@ public class GameHub : Hub<IGameHub>
 
 
         _gameManager.JoinBotGame(session.Id, game, "stockfish");
+        await Groups.AddToGroupAsync(Context.ConnectionId, session.Id);
 
         // create the game (adding to database) and send the state to the users.
         await Clients.Caller.GameReady(_chessDataService.CreateChessModel(chessState, game, session.Id));
@@ -205,8 +207,77 @@ public class GameHub : Hub<IGameHub>
 
         Console.WriteLine(game.Id);
 
+
         await Clients.Group(sessionId).EndGame(_chessDataService.CreateChessModel(chessState, game, sessionId));
-        await Clients.Group(sessionId).ReceiveMessage("System", $"{username} has forfeit the game");
+        await Clients.Group(sessionId).ReceiveMessage("System", $"{username} has forfeit the game.");
+        Console.WriteLine("sent messages to user");
+    }
+
+    public async Task SendDrawResponse(string sessionId, bool response)
+    {
+        Console.WriteLine("draw response: ");
+
+        var username = Context.User?.FindFirst(ClaimTypes.Name)?.Value;
+        if (username == null) return;
+        Console.WriteLine("user name: " + username);
+
+        var session = _gameManager.GetSession(username);
+        if (session == null) return;
+        Console.WriteLine("session " + session.Id);
+
+        ChessInfo chessState;
+        ChessGame? game = await _chessDataService.GetGameAsync(session.GameId);
+
+        if (game != null && game.Moves.Count > 0)
+        {
+            chessState = new ChessInfo(game.Moves.Last().FEN); // find last moves FEN to create state from
+        }
+        else
+            chessState = new ChessInfo();
+
+
+        if (!response) // if declined
+        {
+            await Clients.Group(sessionId).ReceiveMessage("System", $"{username} has declined the draw request.");
+        } else
+        {
+            await _chessDataService.EndGame(session.GameId, GameResult.Draw);
+            await Clients.Group(sessionId).EndGame(_chessDataService.CreateChessModel(chessState, game, sessionId));
+            await Clients.Group(sessionId).ReceiveMessage("System", $"{username} has accepted the draw request.");
+        }
+        await Clients.Group(sessionId).ReceiveDrawResponse(response);
+
+        Console.WriteLine("sent messages to user");
+    }
+
+    public async Task RequestDraw(string sessionId)
+    {
+        Console.WriteLine("requesting draw: ");
+
+        var username = Context.User?.FindFirst(ClaimTypes.Name)?.Value;
+        if (username == null) return;
+        Console.WriteLine("user name: " + username);
+
+
+        var session = _gameManager.GetSession(username);
+        if (session == null) return;
+        Console.WriteLine("session " + session.Id);
+
+        ChessInfo chessState;
+        ChessGame? game = await _chessDataService.GetGameAsync(session.GameId);
+
+        if (game != null && game.Moves.Count > 0)
+        {
+            chessState = new ChessInfo(game.Moves.Last().FEN); // find last moves FEN to create state from
+        }
+        else
+            chessState = new ChessInfo();
+
+        Console.WriteLine(game.Id);
+
+
+        await Clients.Group(sessionId).ReceiveDrawRequest(username);
+        await Clients.Group(sessionId).ReceiveMessage("System", $"{username} has requested a draw.");
         Console.WriteLine("sent messages to user");
     }
 

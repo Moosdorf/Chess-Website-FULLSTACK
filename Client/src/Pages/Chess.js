@@ -61,21 +61,27 @@ function Chess() {
 
     useEffect(() => {
         return () => {
+            if (chessState && chessState.sessionId) leaveGame(chessState.sessionId); 
             console.log("leave the game");
-            leaveGame(chessState.sessionId); 
         };
     }, []);
 
     useEffect(() => {
-        if (chessState == null) return;
-        console.log("updating history" , chessBoardHistory);
-        console.log(chessState);
+        if (chessState === null) return;
+        if (chessBoardHistory.length > 0 && chessBoardHistory[chessBoardHistory.length-1].move === chessState.lastMove) return;
+
         setReversed(chessState.playerWhite === user);
         setChessBoardHistory(prevHistory => [
             ...prevHistory, 
             { move: chessState.lastMove, fen: chessState.fen }
         ]);
     }, [user, chessState]);
+
+
+    
+    useEffect(() => {
+        console.log("updated history", chessBoardHistory);
+    }, [chessBoardHistory]);
 
 
 

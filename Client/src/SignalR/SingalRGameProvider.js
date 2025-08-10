@@ -53,7 +53,8 @@ export function SignalRGameProvider({ children }) {
       playerWhite,
       sessionId: apiBoard.sessionId,
       lastMove: apiBoard.lastMove,
-      gameDone: apiBoard.gameDone
+      gameDone: apiBoard.gameDone,
+      drawRequest: false
     });
   }, []);
 
@@ -74,6 +75,15 @@ export function SignalRGameProvider({ children }) {
       navigate("/chess_game");
     });
 
+    connection.on("ReceiveDrawResponse", (message) => console.log("received draw response: " + message));
+
+    connection.on("ReceiveDrawRequest", (message) => {
+      setChessState(prevState => ({
+        ...prevState,
+        drawRequest: message
+      }));
+    });
+
     connection.on("BadMove", (message) => console.log(message));
 
     
@@ -91,6 +101,8 @@ export function SignalRGameProvider({ children }) {
 
     return () => {
       connection.off("BadMove");
+      connection.off("ReceiveDrawResponse");
+      connection.off("ReceiveDrawRequest");
       connection.off("EndGame");
       connection.off("WaitingForOpponent");
       connection.off("QueueStopped");
@@ -141,6 +153,19 @@ export function SignalRGameProvider({ children }) {
     console.log("go forfeit : ", sessionId)
   }, [connection]);
 
+  // send draw response
+  const sendDrawResponse = useCallback((sessionId, response) => {
+    if (connection) connection.invoke("SendDrawResponse", sessionId, response);
+    console.log("go send draw response: ", response)
+  }, [connection]);
+
+  // send draw request
+  const sendDrawRequest = useCallback((sessionId) => {
+    if (connection) connection.invoke("RequestDraw", sessionId);
+    console.log("go send draw : ", sessionId)
+  }, [connection]);
+
+
   // leave game
   const leaveGame = useCallback((sessionId) => {
     console.log(sessionId);
@@ -151,7 +176,7 @@ export function SignalRGameProvider({ children }) {
   }, [connection]); 
 
   return (
-    <SignalRGameContext.Provider value={{ chessState, messages, queue, leaveGame, forfeitGame, joinGame, joinBotGame, stopQueue, sendMessage, sendMove }}>
+    <SignalRGameContext.Provider value={{ chessState, messages, queue, leaveGame, forfeitGame, sendDrawResponse, sendDrawRequest, joinGame, joinBotGame, stopQueue, sendMessage, sendMove }}>
       {children}
     </SignalRGameContext.Provider>
   );

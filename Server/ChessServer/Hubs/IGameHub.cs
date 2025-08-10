@@ -46,4 +46,17 @@ public interface IGameHub
     /// </summary>
     /// <param name="chessState">State of the last position.</param>
     Task EndGame(ChessModel chessState);
+
+
+    /// <summary>
+    /// Sends a draw request to the group.
+    /// </summary>
+    /// <param name="username">Username of the sender.</param>
+    Task ReceiveDrawRequest(string username);
+
+    /// <summary>
+    /// Sends a draw request to the group.
+    /// </summary>
+    /// <param name="response">The response of the request, true for accepting.</param>
+    Task ReceiveDrawResponse(bool response);
 }

@@ -104,6 +104,7 @@ public class ChessDataService : IChessDataService
         if (saved) return game;
         return null;
     } 
+
     public ChessModel CreateChessModel(ChessInfo chessState, ChessGame game, string sessionId) 
     {
         var isWhite = chessState.Turn == "w";
@@ -114,23 +115,29 @@ public class ChessDataService : IChessDataService
         bool gameDone = false;
 
         var pieces = (isWhite) ? chessState.WhitePieces : chessState.BlackPieces;
-        // if game is done
-        bool availableMoves = !pieces.Any(x => x.AvailableMoves.Count > 0 || x.AvailableCaptures.Count > 0);
+
+        bool availableMoves = pieces.Any(x => x.AvailableMoves.Count > 0 || x.AvailableCaptures.Count > 0);
 
 
-        if (availableMoves)
+        if (!availableMoves)
         {
             gameDone = true;
+            Console.WriteLine("draw");
             // draw
         }
 
         if (!availableMoves && inCheck)
         {
+            Console.WriteLine("a player has won");
             gameDone = true;
             // a player has won
         }
 
-        if (game.Result != GameResult.Ongoing) gameDone = true;
+        if (game.Result != GameResult.Ongoing)
+        {
+            Console.WriteLine("game is already done");
+            gameDone = true;
+        }
 
         var currentPlayer = (isWhite) ? game.WhitePlayer.Username : game.BlackPlayer.Username;
 

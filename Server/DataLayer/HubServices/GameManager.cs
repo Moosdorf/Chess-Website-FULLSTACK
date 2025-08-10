@@ -8,7 +8,7 @@ public interface IGameManager
 {
     GameSession? FindWaitingGame();
     GameSession CreateGame(string player);
-    GameSession JoinGame(string sessionId, ChessGame game, string player);
+    GameSession JoinGameSession(string sessionId, string player);
     GameSession JoinBotGame(string sessionId, ChessGame game, string player);
     string? GetSessionId(string username);
     GameSession? GetSession(string username);
@@ -30,10 +30,9 @@ public class GameManager : IGameManager
         return session;
     }
 
-    public GameSession JoinGame(string sessionId, ChessGame game, string player)
+    public GameSession JoinGameSession(string sessionId, string player)
     {
         var session = _games.First(g => g.Id == sessionId);
-        session.GameId = game.Id;
         session.Player2 = player;
         session.Initialize();
         return session;

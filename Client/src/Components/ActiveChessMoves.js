@@ -1,13 +1,28 @@
 import { Button, ButtonGroup, Card, CardBody, ListGroup } from "react-bootstrap";
 import { ChessContext } from '../Pages/Chess';
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useSignalRGame } from "../SignalR/SingalRGameProvider";
+import { useAuth } from "../Data/AuthProvider";
+
 
 function ActiveChessMoves() {
+    const { forfeitGame, sendDrawResponse, sendDrawRequest } = useSignalRGame();
+    const { user } = useAuth();
     const { chessState, chessBoardHistory } = useContext(ChessContext);
-    const { forfeitGame } = useSignalRGame();
-    
+    const [showConfirm, setShowConfirm] = useState({
+                                                warning: false
+                                            });
     const listEndRef = useRef(null);
+
+    useEffect(() => {
+        if (chessState.drawRequest && chessState.drawRequest !== user) {
+            setShowConfirm({
+                            warning: true,
+                            message: "Accept draw?",
+                            type: "request"                                                                                   
+                            })
+        }
+    }, [chessState])
 
     useEffect(() => {
         if (listEndRef.current) {
@@ -32,18 +47,66 @@ function ActiveChessMoves() {
                                 )}
                                 <div ref={listEndRef} />
                             </ListGroup>
+                        {showConfirm.warning && <div className="text-center">{showConfirm.message}</div>}
                         </div>
+                    
                     </CardBody>
                 <ButtonGroup>
                     <Button className='move-nav-btn'>{"<"}</Button>
                     <Button className='move-nav-btn'>{"!!"}</Button>
                     <Button className='move-nav-btn'>{">"}</Button>
                 </ButtonGroup>
-                <ButtonGroup>
-                    <Button className='move-nav-btn'>{"Abort"}</Button>
-                    <Button className='move-nav-btn'>{"Draw"}</Button>
-                    <Button onClick={() => forfeitGame(chessState.sessionId)} className='move-nav-btn'>{"Forfeit"}</Button>
-                </ButtonGroup>
+                {!showConfirm.warning && <ButtonGroup>
+                            
+                    <Button disabled={chessState.gameDone} className='move-nav-btn' 
+                        onClick={() => setShowConfirm({
+                            warning: true,
+                            message: "Abort????"                                                                                   
+                    })}>
+                        Abort
+                    </Button>
+                    <Button disabled={chessState.gameDone} className='move-nav-btn' 
+                        onClick={() => setShowConfirm({
+                            warning: true,
+                            message: "Confirm request of sending draw",
+                            type: "draw"                                                                         
+                    })}>
+                        Draw
+                    </Button>
+                    <Button disabled={chessState.gameDone} className="move-nav-btn"
+                        onClick={() => setShowConfirm({
+                            warning: true,
+                            message: "Do you want to forfeit?",
+                            type: "forfeit"                                                                                 
+                    })}>
+                        Forfeit
+                    </Button>
+
+                </ButtonGroup>}
+                {showConfirm.warning && (
+                    <ButtonGroup>
+                            <Button
+                            size="sm"
+                            onClick={() => {
+                                if (showConfirm.type === "request") {sendDrawResponse(chessState.sessionId, true)}
+                                else showConfirm.type === "forfeit" ? forfeitGame(chessState.sessionId) : sendDrawRequest(chessState.sessionId);
+                                setShowConfirm(false);
+                            }}
+                            >
+                            Yes
+                            </Button>
+                            <Button
+                                size="sm"
+                                className="ms-2"
+                                onClick={() => {
+                                    if (showConfirm.type === "request") {sendDrawResponse(chessState.sessionId, false)}
+                                    setShowConfirm(false)
+                                }}
+                            >
+                            No
+                            </Button>
+                    </ButtonGroup>
+                )}
             </Card>)
 
 }
