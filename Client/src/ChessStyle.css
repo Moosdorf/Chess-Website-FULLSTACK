@@ -131,24 +131,13 @@ h1 {
   z-index: 1;
 }
 
-/* Outer Card Container */
-.move-list {
-    background: var(--chess-darkest);
-    border: 1px solid var(--chess-gold-dark);
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 2px;
-}
 
 /* Scrollable Content Inside */
 .move-list-content, .chess-chat-content {
-    flex: 1;
-    overflow-y: auto;
+    height: 400px;
     overflow-x: hidden;
-    height: clamp(200px, 40vh, 300px); /* Dynamic but constrained */
 }
+
 
 /* Optional: Better active highlighting */
 .list-group-item.active {
@@ -190,7 +179,6 @@ h1 {
 .card.move-list .list-group {
   flex-grow: 1;
   overflow-y: auto;
-  max-height: 240px; /* Explicit max height */
 }
 
 /* List Items - Tighter */

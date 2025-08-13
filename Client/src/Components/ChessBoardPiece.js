@@ -28,12 +28,24 @@ function ChessBoardPiece({piece, rowCol}) {
         s => s.position === piece.Position
     );
 
-    const className = `square ${piece.Position === from ? "movedFrom" : ""} ${piece.Position === to ? "movedTo" : ""} ${piece.Type} ${piece.IsWhite ? "white" : "black"} ${isSelected && 'selected'}`;
+    var from = chessState.lastMove.split(",")[0];
+    var to = chessState.lastMove.split(",")[1];
+    
+    if (!from) from = "none";
+    if (!to) to = "none";
+
+    let className = `square ${piece.Type} ${piece.IsWhite ? "white" : "black"} ${isSelected && 'selected'}`;
+    if (piece.Position === from) className += " movedFrom";
+    if (piece.Position === to) className += " movedTo";
+
     const color = ((rowCol[0] + rowCol[1]) % 2 === 0 ? darkBrown : lightBrown);
     const style = { backgroundColor: reversed ? (color === lightBrown ? darkBrown : lightBrown) : color };
     const image = `/images/${piece.IsWhite ? "white" : "black"}-${piece.Type}.png`;
 
     const pieceClass = `piece ${(ourTurn && piece.IsWhite === chessState.isWhitesTurn) ? "currentTurn" : ""}`;
+
+    if (chessState.checkMate && piece.Type == "king" && chessState.isWhitesTurn === piece.IsWhite) className += " checkmate"
+    else if (chessState.check && piece.Type == "king" && chessState.isWhitesTurn === piece.IsWhite) className += " check"
 
 
     const drag = (e, piece) => {
@@ -92,8 +104,8 @@ function ChessBoardPiece({piece, rowCol}) {
     const handleOnClick = (clickedPiece) => {
         console.log(clickedPiece);
         // If we're in promotion mode, don't process normal clicks
-        if (promotionInfo) return;
-
+        if (promotionInfo || chessState.gameDone) return;
+ 
         if (CheckForPromotion(clickedPiece)) return;
 
         if (selectedPiece === null) {
@@ -166,12 +178,7 @@ function ChessBoardPiece({piece, rowCol}) {
 
     
 
-    var from = chessState.lastMove.split(",")[0];
-    var to = chessState.lastMove.split(",")[1];
-    if (from === "") {
-        from = "none";
-        to = "none";
-    }
+
 
     return (<div 
             onDragOver={dragOver} 
@@ -186,7 +193,7 @@ function ChessBoardPiece({piece, rowCol}) {
                     className={pieceClass}
                     src={image}
                     alt=""
-                    draggable={ourTurn && piece.IsWhite === chessState.isWhitesTurn} 
+                    draggable={ourTurn && piece.IsWhite === chessState.isWhitesTurn && !chessState.gameDone} 
                     onDragStart={(e) => {
                         drag(e, piece);
                         addSelected(piece);

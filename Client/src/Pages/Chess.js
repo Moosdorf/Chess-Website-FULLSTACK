@@ -1,4 +1,4 @@
-import { Col, Row, Container, Button, Card } from 'react-bootstrap';
+import { Col, Row, Container, Button, Card, Modal, ModalHeader, ModalBody, ModalFooter, ModalTitle } from 'react-bootstrap';
 import { Title } from '../Components/Title';
 import { createContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -57,6 +57,7 @@ function Chess() {
 
     const [reversed, setReversed] = useState(false);
     const [chessBoardHistory, setChessBoardHistory] = useState([]); 
+    const [activeMoveIndex, setActiveMoveIndex] = useState("current"); 
 
 
     useEffect(() => {
@@ -75,12 +76,13 @@ function Chess() {
             ...prevHistory, 
             { move: chessState.lastMove, fen: chessState.fen }
         ]);
+        console.log(chessState);
     }, [user, chessState]);
 
 
     
     useEffect(() => {
-        console.log("updated history", chessBoardHistory);
+        // console.log("updated history", chessBoardHistory);
     }, [chessBoardHistory]);
 
 
@@ -103,9 +105,23 @@ function Chess() {
         sendMove(chessState.id, chessState.sessionId, move);
     };
 
+    const [showEnd, setShowEnd] = useState(null);
+
+    const handleClose = () => {
+        setShowEnd(false);
+    }
+
+    const handleShow = () => {
+        setShowEnd(true);
+    }
+
+    useEffect(() => {
+        if (chessState && showEnd === null && chessState.gameDone) handleShow();
+    }, [chessState])
+
     if (!chessState) return (<div>no chess</div>);
     return ( // give info if board is reveresed or not.
-        <ChessContext.Provider value={{reversed, chessState, chessBoardHistory, movePiece, movePieceBot}}> 
+        <ChessContext.Provider value={{reversed, chessState, chessBoardHistory, movePiece, movePieceBot, activeMoveIndex, setActiveMoveIndex}}> 
             <Container className=''>
                 <Row>
                     <Col>
@@ -160,7 +176,20 @@ function Chess() {
                         </Button>}
                     </Col>
                 </Row>
-                
+                {chessState.gameDone && showEnd && 
+                <Modal show={handleShow} handleClose={handleClose} centered>
+                    <ModalHeader>
+                        <ModalTitle>Game Done!</ModalTitle>
+                    </ModalHeader>
+                    <ModalBody>
+                        body
+                    </ModalBody>
+                    <ModalFooter>
+                        footer
+                        <Button onClick={() => handleClose()}>Close</Button>
+                    </ModalFooter>
+
+                </Modal>}
             </Container>
         </ChessContext.Provider>)
 }
