@@ -1,5 +1,6 @@
 ﻿using DataLayer.Entities;
 using DataLayer.Entities.Chess;
+using DataLayer.HelperMethods;
 using DataLayer.Models.Chess;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace DataLayer.DataServices
         Task<(ChessGame, ChessInfo)> CreateBotGameAsync(string userName1, bool white);
         Task<ChessGame?> EndGame(int chessId, GameResult result);
 
-        Task<(List<ChessGameHistoryDTO>, int)> GetMatchHistory(string username);
+        Task<PaginatedList<ChessGameHistoryDTO>> GetMatchHistory(string username, int pageIndex);
         Task<bool> MoveAsync(int chessId, string move, string FEN);
 
         public ChessModel CreateChessModel(ChessInfo chessState, ChessGame game, string sessionId);

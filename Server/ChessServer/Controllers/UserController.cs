@@ -65,14 +65,17 @@ public class UserController : BaseController
 
     [Authorize]
     [HttpGet("match_history/{username}")]
-    public async Task<IActionResult> GetMatchHistory(string username)
+    public async Task<IActionResult> GetMatchHistory(string username, [FromQuery] int page = 0)
     {
         Console.WriteLine("getting history");
-        var matchHistory = await _chessDataService.GetMatchHistory(username);
-        if (matchHistory.Item1 == null) return BadRequest("Match History null");
-        if (matchHistory.Item2 <= 0) return Ok("No matches played");
+        var matchHistory = await _chessDataService.GetMatchHistory(username, page);
         
-        return Ok(new { matches = matchHistory.Item1, totalMatches = matchHistory.Item2 });
+        return Ok(new { items = matchHistory,
+                        page = matchHistory.PageIndex,
+                        totalPages = matchHistory.TotalPages,
+                        amountOfGames = matchHistory.TotalItems,
+                        hasNext = matchHistory.HasNextPage,
+                        hasPrevious = matchHistory.HasPreviousPage});
     }
 
 

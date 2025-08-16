@@ -84,9 +84,9 @@ function ActiveChessMoves() {
                     <Button disabled={chessBoardHistory.length-1 === currentIndex} onClick={() => handleSetHistory(0)} className='move-nav-btn'>{"!!"}</Button>
                     <Button disabled={chessBoardHistory.length-1 === currentIndex} onClick={() => handleSetHistory(1)} className='move-nav-btn'>{">"}</Button>
                 </ButtonGroup>
-                {!showConfirm.warning && <ButtonGroup>
+                {!showConfirm.warning && !chessState.gameDone && <ButtonGroup>
 
-                    <Button disabled={chessState.gameDone} className='move-nav-btn' 
+                    <Button className='move-nav-btn' 
                         onClick={() => setShowConfirm({
                             warning: true,
                             message: "Confirm request of sending draw",
@@ -94,7 +94,7 @@ function ActiveChessMoves() {
                     })}>
                         Draw
                     </Button>
-                    <Button disabled={chessState.gameDone} className="move-nav-btn"
+                    <Button className="move-nav-btn"
                         onClick={() => setShowConfirm({
                             warning: true,
                             message: "Do you want to forfeit?",

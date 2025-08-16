@@ -7,6 +7,7 @@ const SignalRContext = createContext(null);
 export function SignalRProvider({ children }) {
   const { user } = useAuth();
   const [connection, setConnection] = useState(null);
+  const [connected, setConnected] = useState(false);
   const startedRef = useRef(false); // guard against double-start
 
   // Only build a connection when logged in; stop on logout.
@@ -39,15 +40,17 @@ export function SignalRProvider({ children }) {
       .start()
       .then(() => {
         console.log("SignalR connected.");
+        setConnected(true);
       })
       .catch((err) => {
         console.error("SignalR start error:", err);
+        setConnected(false);
         startedRef.current = false; 
       });
   }, [connection]);
 
   return (
-    <SignalRContext.Provider value={connection}>
+    <SignalRContext.Provider value={{connection, connected}}>
       {children}
     </SignalRContext.Provider>
   );

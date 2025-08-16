@@ -1,12 +1,13 @@
 import { Col, Row, Container, Button, Card, Modal, ModalHeader, ModalBody, ModalFooter, ModalTitle } from 'react-bootstrap';
 import { Title } from '../Components/Title';
 import { createContext, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import ChessBoard from '../Components/ChessBoard.js';
 import ActiveChessMoves from '../Components/ActiveChessMoves.js';
 import Chat from '../Components/Chat.js';
 import { useAuth } from '../Data/AuthProvider.js';
 import { useSignalRGame } from '../SignalR/SingalRGameProvider.js';
+import { useSignalRConnection } from '../SignalR/SignalRProvider.js';
 
 
 
@@ -49,8 +50,8 @@ const Stats = ({chessBoard}) => {
 
 function Chess() {
     const { user } = useAuth();
-    const { leaveGame, chessState, sendMove } = useSignalRGame();
-    
+    const { leaveGame, chessState, sendMove, getGame } = useSignalRGame();
+    const { connected } = useSignalRConnection();
     var location = useLocation();
 
     const botGame = location.state?.botGame ?? false;
@@ -58,11 +59,21 @@ function Chess() {
     const [reversed, setReversed] = useState(false);
     const [chessBoardHistory, setChessBoardHistory] = useState([]); 
     const [activeMoveIndex, setActiveMoveIndex] = useState("current"); 
+    var params = useParams();
 
+
+    useEffect(() => {
+        console.log("getting game: " + params.id);
+        if (connected) {
+            setShowEnd(false);
+            getGame(params.id);
+        }
+    }, [connected, params.id]);
 
     useEffect(() => {
         return () => {
             if (chessState && chessState.sessionId) leaveGame(chessState.sessionId); 
+            
             console.log("leave the game");
         };
     }, []);
@@ -116,7 +127,17 @@ function Chess() {
     }
 
     useEffect(() => {
-        if (chessState && showEnd === null && chessState.gameDone) handleShow();
+        if (chessState && chessState.previousMoves) {
+            var history = [{move: "", fen: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"}];
+            chessState.previousMoves.forEach(move => {
+                history.push(
+                    { move: move.moveString, fen: move.fen }
+                )
+            });
+
+            setChessBoardHistory(history);
+        }
+        if (chessState && showEnd === null && chessState.gameDone && !chessState.previousMoves) handleShow();
     }, [chessState])
 
     if (!chessState) return (<div>no chess</div>);
@@ -176,10 +197,10 @@ function Chess() {
                         </Button>}
                     </Col>
                 </Row>
-                {chessState.gameDone && showEnd && 
+                {showEnd && 
                 <Modal show={handleShow} handleClose={handleClose} centered>
                     <ModalHeader>
-                        <ModalTitle>Game Done!</ModalTitle>
+                        <ModalTitle> {chessState.isWhitesTurn ? "Black Wins!" : "White Wins!"} </ModalTitle>
                     </ModalHeader>
                     <ModalBody>
                         body

@@ -33,13 +33,8 @@ public class GameHub : Hub<IGameHub>
         var userId = Context.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value; 
         var username = Context.User?.FindFirst(ClaimTypes.Name)?.Value;
 
-        Console.WriteLine("userid: " + userId);  
-        Console.WriteLine("username: " + username);  
-
         if (username != null) _gameManager.RemoveUserFromSession(username);
 
-        Console.WriteLine("disconnecting signal r");
-        // do the logging here
         Trace.WriteLine(Context.ConnectionId + " - disconnected");
 
 
@@ -53,18 +48,40 @@ public class GameHub : Hub<IGameHub>
         await Clients.Group(sessionId).ReceiveMessage(username, message);
     }
 
+    public async Task GetChessGame(int id)
+    {
+        Console.WriteLine("getting game: " + id);
+        ChessGame? game = await _chessDataService.GetGameAsync(id);
+        if (game == null)
+        {
+            await Clients.Caller.BadMove("Game null");
+            Console.WriteLine("game null");
+            return;
+        }
+
+        ChessInfo chessState;
+        // create chess state from moves
+        if (game.Moves.Count > 0)
+        {
+            chessState = new ChessInfo(game.Moves.Last().FEN); // find last moves FEN to create state from
+        }
+        else
+        {
+            chessState = new ChessInfo();
+        }
+        Console.WriteLine(game.Moves.Count);
+        await Clients.Caller.ReceiveGame(_chessDataService.CreateChessModel(chessState, game, "nosession"), game.Moves);
+    }
+
     public async Task LeaveGame(string sessionId)
     {
-        Console.WriteLine("leave game: ");
 
         var username = Context.User?.FindFirst(ClaimTypes.Name)?.Value;
         if (username == null) return;
-        Console.WriteLine("user name: " + username);
 
 
         var session = _gameManager.GetSession(username);
         if (session == null) return;
-        Console.WriteLine("session " + session.Id);
             
 
         var result = (session.WhitePlayer == username) ? GameResult.BlackWin : GameResult.WhiteWin;
@@ -164,7 +181,6 @@ public class GameHub : Hub<IGameHub>
         var lastFEN = ChessMethods.GenerateFEN(chessState);
 
 
-        Console.WriteLine(lastFEN);
         var stockFishMove = stockFish.MoveFrom(lastFEN);
 
         // validate if the move can be made
@@ -190,7 +206,6 @@ public class GameHub : Hub<IGameHub>
 
         var session = _gameManager.GetSession(username);
         if (session == null) return;
-        Console.WriteLine("session " + session.Id);
 
         var result = (session.WhitePlayer == username) ? GameResult.BlackWin : GameResult.WhiteWin;
         await _chessDataService.EndGame(session.GameId, result);

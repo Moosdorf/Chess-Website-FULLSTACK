@@ -13,6 +13,7 @@ function ChessBoardPiece({piece, rowCol}) {
     const promotionTypes = ["queen", "rook", "bishop", "knight"];
 
     const { reversed, chessState, movePiece } = useContext(ChessContext);
+
     const { selectedPiece, setSelectedPiece, ourTurn } = useContext(ChessBoardContext);
 
     const lightBrown = "rgb(239, 222, 205)";
@@ -44,8 +45,8 @@ function ChessBoardPiece({piece, rowCol}) {
 
     const pieceClass = `piece ${(ourTurn && piece.IsWhite === chessState.isWhitesTurn) ? "currentTurn" : ""}`;
 
-    if (chessState.checkMate && piece.Type == "king" && chessState.isWhitesTurn === piece.IsWhite) className += " checkmate"
-    else if (chessState.check && piece.Type == "king" && chessState.isWhitesTurn === piece.IsWhite) className += " check"
+    if (chessState.checkMate && piece.Type === "king" && chessState.isWhitesTurn === piece.IsWhite) className += " checkmate"
+    else if (chessState.check && piece.Type === "king" && chessState.isWhitesTurn === piece.IsWhite) className += " check"
 
 
     const drag = (e, piece) => {

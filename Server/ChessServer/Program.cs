@@ -1,17 +1,19 @@
+using ChessServer.Hubs;
 using DataLayer;
+using DataLayer.csv_scripts;
 using DataLayer.DataServices;
 using DataLayer.IDataServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using ChessServer.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSignalR();
 builder.Services.AddTransient<IDataService, DataService>();
 builder.Services.AddSingleton<IStockFishService, StockFishService>();
 builder.Services.AddTransient<IChessDataService, ChessDataService>();
+builder.Services.AddTransient<IPuzzleDataService, PuzzleDataService>();
 
 builder.Services.AddSingleton<IGameManager, GameManager>();
 
@@ -21,9 +23,8 @@ var connectionString = Environment.GetEnvironmentVariable("CONNECTION_STRING")
 
 builder.Services.AddDbContext<ChessContext>(options =>
 {
-    options.EnableSensitiveDataLogging();
-    options.LogTo(Console.WriteLine, Microsoft.Extensions.Logging.LogLevel.Warning);
     options.UseNpgsql(connectionString);
+    options.LogTo(_ => { });
 });
 
 builder.Services.AddControllers();
@@ -92,5 +93,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 app.MapHub<GameHub>("/gameHub");
+
 
 app.Run();

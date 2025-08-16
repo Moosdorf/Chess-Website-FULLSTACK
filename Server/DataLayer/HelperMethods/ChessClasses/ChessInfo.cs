@@ -42,8 +42,6 @@ public class ChessInfo
     {
         CreateChessState(FEN);
         InitializeInfo();
-        // remove replay
-        // ReplayMoves(moves); // not first move, then replay the game to get to the current state
         FindAvailableMoves(); 
     }
 

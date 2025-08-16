@@ -1,6 +1,7 @@
 ﻿using DataLayer.Entities.Users;
 using DataLayer.Models.User;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -19,7 +20,7 @@ namespace ChessServer.Controllers
             // create claims
             var claims = new List<Claim>
             {
-                
+
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Name, user.Username)
             };
@@ -29,7 +30,7 @@ namespace ChessServer.Controllers
 
             // create a security key using the secret
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(secret));
-            
+
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var token = new JwtSecurityToken(

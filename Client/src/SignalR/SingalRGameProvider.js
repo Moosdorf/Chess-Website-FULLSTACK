@@ -9,7 +9,7 @@ const SignalRGameContext = createContext(null);
 
 export function SignalRGameProvider({ children }) {
   const { user } = useAuth();
-  const connection = useSignalRConnection();
+  const { connection } = useSignalRConnection();
   const navigate = useNavigate();
   const handlersRegistered = useRef(false);
 
@@ -18,7 +18,7 @@ export function SignalRGameProvider({ children }) {
   const [chessState, setChessState] = useState(null);
 
   // --- Event Handlers ---
-  const handleSetChessBoard = useCallback((apiBoard) => {
+  const handleSetChessBoard = useCallback((apiBoard, moves=null) => {
     let tempChessBoard = apiBoard.chessboard.map(row =>
       row.map(piece => new Piece(
         piece.type, 
@@ -33,7 +33,6 @@ export function SignalRGameProvider({ children }) {
         piece.attackers,
         piece.isAlive))
     );
-
     const botGame = apiBoard.players.includes("stockfish");
     const playerWhite = apiBoard.players[0];
     const fenSplit = apiBoard.fen.split(" ");
@@ -54,7 +53,8 @@ export function SignalRGameProvider({ children }) {
       sessionId: apiBoard.sessionId,
       lastMove: apiBoard.lastMove,
       gameDone: apiBoard.gameDone,
-      drawRequest: false
+      drawRequest: false,
+      previousMoves: moves
     });
   }, []);
 
@@ -67,12 +67,20 @@ export function SignalRGameProvider({ children }) {
       handleSetChessBoard(apiBoard);
     });
 
+    connection.on("ReceiveGame", (apiBoard, moves) => {
+      console.log("set gameboard");
+      console.log(apiBoard);
+      console.log(moves);
+      handleSetChessBoard(apiBoard, moves);
+    });
+
     connection.on("WaitingForOpponent", () => setQueue(true));
     connection.on("QueueStopped", () => setQueue(false));
+
     connection.on("GameReady", (apiBoard) => {
       handleSetChessBoard(apiBoard);
       setQueue(false);
-      navigate("/chess_game");
+      navigate(`/chess_game/${apiBoard.id}`);
     });
 
     connection.on("ReceiveDrawResponse", (message) => console.log("received draw response: " + message));
@@ -100,6 +108,7 @@ export function SignalRGameProvider({ children }) {
     handlersRegistered.current = true;
 
     return () => {
+      connection.off("ReceiveGame");
       connection.off("BadMove");
       connection.off("ReceiveDrawResponse");
       connection.off("ReceiveDrawRequest");
@@ -115,8 +124,16 @@ export function SignalRGameProvider({ children }) {
 
   // --- Actions ---
 
+  // get game
+  const getGame = useCallback((id) => {
+    if (connection?.state === signalR.HubConnectionState.Connected) {
+      console.log("calling connection")
+      connection.invoke("GetChessGame", Number(id));
+    }
+  }, [connection]);
+
   // join game (start matchmaking, join queue)
-  const joinGame = useCallback(() => {
+  const joinGame = useCallback((user) => {
     if (connection?.state === signalR.HubConnectionState.Connected) {
       connection.invoke("JoinGame", user);
     }
@@ -170,13 +187,15 @@ export function SignalRGameProvider({ children }) {
   const leaveGame = useCallback((sessionId) => {
     console.log(sessionId);
     if (connection && sessionId) {
-      setMessages([{ id: 0, sender: 'System', text: 'Game started!', isOwn: false }]);
       connection.invoke("LeaveGame", sessionId);
+      setMessages([]);
+      setChessState(null);
     }
   }, [connection]); 
 
+
   return (
-    <SignalRGameContext.Provider value={{ chessState, messages, queue, leaveGame, forfeitGame, sendDrawResponse, sendDrawRequest, joinGame, joinBotGame, stopQueue, sendMessage, sendMove }}>
+    <SignalRGameContext.Provider value={{ connection, chessState, messages, queue, getGame, leaveGame, forfeitGame, sendDrawResponse, sendDrawRequest, joinGame, joinBotGame, stopQueue, sendMessage, sendMove }}>
       {children}
     </SignalRGameContext.Provider>
   );

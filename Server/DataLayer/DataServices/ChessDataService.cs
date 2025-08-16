@@ -145,33 +145,37 @@ public class ChessDataService : IChessDataService
             { SessionId = sessionId, CurrentPlayer = currentPlayer, Players = [game.WhitePlayer.Username, game.BlackPlayer.Username] , LastMove = chessState.LastMove, Chessboard = chessState.GameBoard, FEN = ChessMethods.GenerateFEN(chessState), Id = game.Id, IsWhite = isWhite, Check = inCheck, CheckMate = gameDone, BlockCheckPositions = blockers, GameDone = gameDone };
     }
 
-    public async Task<(List<ChessGameHistoryDTO>, int)> GetMatchHistory(string username)
-    {
-        var gamesCount = _db.ChessGames
-            .Where(g => g.WhitePlayer.Username == username || g.BlackPlayer.Username == username).Count();
+   
 
-        var games = await _db.ChessGames
-            .Where(g => g.WhitePlayer.Username == username || g.BlackPlayer.Username == username)
+    const int pageSize = 5;
+    public async Task<PaginatedList<ChessGameHistoryDTO>> GetMatchHistory(string username, int pageIndex)
+    {
+        var query = _db.ChessGames
+            .AsNoTracking() // just reading
+            .Where(g => g.WhitePlayer.Username == username || g.BlackPlayer.Username == username);
+
+        var totalCount = await query.CountAsync();
+        Console.WriteLine("here");
+        Console.WriteLine(pageIndex);
+        Console.WriteLine(pageSize);
+        var games = query
             .OrderByDescending(g => g.Id)
-            .Skip(0)
-            .Take(5)
+            .Skip(pageIndex * pageSize)
+            .Take(pageSize)
             .Select(g => new ChessGameHistoryDTO
             {
                 Id = g.Id,
                 WhitePlayer = g.WhitePlayer.Username ?? "Unknown",
                 BlackPlayer = g.BlackPlayer.Username ?? "Unknown",
                 Moves = g.Moves,
-                Winner = (g.Result == 0) ? g.WhitePlayer.Username : g.BlackPlayer.Username,
-                FEN = g.Moves.Count() > 0 ? g.Moves.OrderBy(m => m.Id).Last().FEN : "",
-            })
-            .OrderByDescending(g => g.Id)
-            .ToListAsync();
+                Winner = (g.Result == GameResult.WhiteWin) ? g.WhitePlayer.Username : (g.Result == GameResult.BlackWin) ? g.BlackPlayer.Username : (g.Result == GameResult.Draw) ? "draw" : "ongoing",
+                FEN = g.Moves
+                    .OrderByDescending(m => m.Id)
+                    .Select(m => m.FEN)
+                    .FirstOrDefault() ?? "",
+            }).AsNoTracking();
 
-
-        if (games.Count == 0 || games == null) return ([],0);
-
-
-        return (games, gamesCount);
+        return await PaginatedList<ChessGameHistoryDTO>.CreateAsync(games, totalCount, pageIndex, pageSize);
     }
     public async Task<ChessGame?> GetGameAsync(int chessId)
     {

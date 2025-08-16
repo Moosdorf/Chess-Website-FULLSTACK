@@ -59,7 +59,7 @@ namespace DataLayer.Migrations
 
                     b.HasIndex("WhiteId");
 
-                    b.ToTable("ChessGames");
+                    b.ToTable("ChessGames", (string)null);
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Chess.Move", b =>
@@ -85,7 +85,81 @@ namespace DataLayer.Migrations
 
                     b.HasIndex("ChessGameId");
 
-                    b.ToTable("Moves");
+                    b.ToTable("Moves", (string)null);
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Chess.Puzzle", b =>
+                {
+                    b.Property<string>("PuzzleId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FEN")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("GameUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Moves")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("NbPlays")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("OpeningTags")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Popularity")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RatingDeviation")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Themes")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("PuzzleId");
+
+                    b.ToTable("Puzzles", (string)null);
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Chess.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags", (string)null);
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Relations.PuzzleTag", b =>
+                {
+                    b.Property<string>("PuzzleId")
+                        .HasColumnType("text");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("PuzzleId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("PuzzleTag", (string)null);
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Users.User", b =>
@@ -117,7 +191,7 @@ namespace DataLayer.Migrations
                     b.HasIndex("Username")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Chess.ChessGame", b =>
@@ -150,9 +224,38 @@ namespace DataLayer.Migrations
                     b.Navigation("ChessGame");
                 });
 
+            modelBuilder.Entity("DataLayer.Entities.Relations.PuzzleTag", b =>
+                {
+                    b.HasOne("DataLayer.Entities.Chess.Puzzle", "Puzzle")
+                        .WithMany("PuzzleTags")
+                        .HasForeignKey("PuzzleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DataLayer.Entities.Chess.Tag", "Tag")
+                        .WithMany("PuzzleTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Puzzle");
+
+                    b.Navigation("Tag");
+                });
+
             modelBuilder.Entity("DataLayer.Entities.Chess.ChessGame", b =>
                 {
                     b.Navigation("Moves");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Chess.Puzzle", b =>
+                {
+                    b.Navigation("PuzzleTags");
+                });
+
+            modelBuilder.Entity("DataLayer.Entities.Chess.Tag", b =>
+                {
+                    b.Navigation("PuzzleTags");
                 });
 
             modelBuilder.Entity("DataLayer.Entities.Users.User", b =>

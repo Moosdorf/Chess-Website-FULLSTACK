@@ -33,7 +33,7 @@ namespace DataLayer.HelperMethods
         {
             int row = fileRank[1] - 48 - 1; // '1' - 48 = 1. then to get index instead -1 again
 
-            int col =  fileRank[0] - 97; // same as the other file converstion in RowCol, just reversed
+            int col =  fileRank[0] - 97; // same as the other file conversion in RowCol, just reversed
 
             return (row, col);
         }

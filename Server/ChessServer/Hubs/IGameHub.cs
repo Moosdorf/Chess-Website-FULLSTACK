@@ -1,4 +1,5 @@
-﻿using DataLayer.Models.Chess;
+﻿using DataLayer.Entities.Chess;
+using DataLayer.Models.Chess;
 
 /// <summary>
 /// Interface defining SignalR hub methods for the chess game.
@@ -17,6 +18,14 @@ public interface IGameHub
     /// </summary>
     /// <param name="chessState">Current chess state object.</param>
     Task ReceiveMove(ChessModel chessState);
+
+
+    /// <summary>
+    /// Sends a chess game to a client.
+    /// </summary>
+    /// <param name="chessState">Current chess state object.</param>
+    /// <param name="moves">The moves of the game.</param>
+    Task ReceiveGame(ChessModel chessState, List<Move> moves);
 
     /// <summary>
     /// Notifies the client that the game is waiting for an opponent.

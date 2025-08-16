@@ -160,6 +160,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[33.1.0, )"
+            },
             "Mapster": {
               "target": "Package",
               "version": "[7.4.0, )"
