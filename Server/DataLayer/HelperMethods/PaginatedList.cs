@@ -27,9 +27,8 @@ namespace DataLayer.HelperMethods
 
         public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int totalItem, int pageIndex, int pageSize)
         {
-            var count = totalItem;
             var items = await source.ToListAsync();
-            return new PaginatedList<T>(items, count, pageIndex, pageSize);
+            return new PaginatedList<T>(items, totalItem, pageIndex, pageSize);
         }
     }
 

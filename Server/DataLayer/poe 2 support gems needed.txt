@@ -1,0 +1,23 @@
+DISENGAGE
+heft t3
+ 
+HERALD OF BLOOD
+deadly herald t3
+
+BLOOD HUNT
+Culmination t3
+
+BLOODHOUNDS MARK
+rupture t3
+physical mastery t3
+
+SPEAR 1
+tear t3
+
+SPEAR 2
+blind t2
+
+TIME OF NEED 
+fast forward t1
+
+COMPANION????

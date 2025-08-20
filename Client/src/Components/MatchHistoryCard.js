@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const MatchHistoryCard = () => {
   const { user } = useAuth();
   const [matchHistory, setMatchHistory] = useState(null);
-  const [pageNum, setPageNum] = useState(0);
+  const [pageNum, setPageNum] = useState(1);
 
   useEffect(() => {
       if (!user) return; 
@@ -54,9 +54,12 @@ const MatchHistoryCard = () => {
               const winner = game.winner;
 
               return (
-                <Link key={game.id} to={{
+                <Link key={game.id} 
+                to={{
                   pathname: `/chess_game/${game.id}`
-                }}>
+                }}
+                className={"remove-underline"}
+                >
                   <ListGroup.Item className="d-flex align-items-stretch">
                     <Row className="w-100">
                       <Col xs={3} className="d-flex justify-content-center align-items-center">

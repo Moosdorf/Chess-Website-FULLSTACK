@@ -65,17 +65,26 @@ public class UserController : BaseController
 
     [Authorize]
     [HttpGet("match_history/{username}")]
-    public async Task<IActionResult> GetMatchHistory(string username, [FromQuery] int page = 0)
+    public async Task<IActionResult> GetMatchHistory(string username, [FromQuery] int page = 1)
     {
+        int pageIndex = page - 1; // find index version of page
+
         Console.WriteLine("getting history");
-        var matchHistory = await _chessDataService.GetMatchHistory(username, page);
-        
-        return Ok(new { items = matchHistory,
-                        page = matchHistory.PageIndex,
-                        totalPages = matchHistory.TotalPages,
-                        amountOfGames = matchHistory.TotalItems,
-                        hasNext = matchHistory.HasNextPage,
-                        hasPrevious = matchHistory.HasPreviousPage});
+        var matchHistory = await _chessDataService.GetMatchHistory(username, pageIndex);
+
+        if (matchHistory.PageIndex + 1 > matchHistory.TotalPages) return BadRequest("Page does not exist");
+
+        return Ok(new
+        {
+            items = matchHistory,
+            page = matchHistory.PageIndex + 1, // +1 because we dont need the index anymore, and will not match totalPages
+            totalPages = matchHistory.TotalPages,
+            amountOfGames = matchHistory.TotalItems,
+            hasNext = matchHistory.HasNextPage,
+            hasPrevious = matchHistory.HasPreviousPage,
+            next = (matchHistory.HasNextPage) ? $"http://localhost:5000/api/user/match_history/{username}?page={page + 1}" : "",
+            previous = (matchHistory.HasPreviousPage) ? $"http://localhost:5000/api/user/match_history/{username}?page={page - 1}" : ""
+        });
     }
 
 

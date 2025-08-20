@@ -50,6 +50,10 @@ h1 {
   margin-bottom: 1.5rem;
 }
 
+.remove-underline {
+  text-decoration: none;
+}
+
 .display-1, .display-2, .display-3, .display-4 {
   font-weight: 600;
   letter-spacing: 1px;
